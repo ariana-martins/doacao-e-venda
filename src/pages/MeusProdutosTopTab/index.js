@@ -105,6 +105,7 @@ const ref = firebase.firestore().collection('produtos');
                                 {/*aqui vai o card de imagens, mas não está puxando do banco de dados*/}
                                 <Card.Image 
                                     style={styles.img}
+                                    //source={{ uri : 'gs://meus-pertences.appspot.com' }} 
                                     source={{ uri : 'gs://meus-pertences.appspot.com' }} 
                                 />
                                 <Card.Title>{item.titulo}</Card.Title>

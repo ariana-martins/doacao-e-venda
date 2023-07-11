@@ -1,0 +1,35 @@
+{
+    "userDataProfilesMigration": true,
+    "profileAssociations": {
+        "workspaces": {
+            "file:///root/projetos": "__default__profile__"
+        },
+        "emptyWindows": {
+            "1686771625226": "__default__profile__"
+        }
+    },
+    "profileAssociationsMigration": true,
+    "telemetry.machineId": "f12d7e7362367a956195336f19413a9255e18ca75a68744d1ba01c8470501c02",
+    "backupWorkspaces": {
+        "workspaces": [],
+        "folders": [],
+        "emptyWindows": [
+            {
+                "backupFolder": "1686771625226"
+            }
+        ]
+    },
+    "windowsState": {
+        "lastActiveWindow": {
+            "backupPath": "/root/projetos/ProjetoTeste/Backups/1686771625226",
+            "uiState": {
+                "mode": 0,
+                "x": 208,
+                "y": 88,
+                "width": 1024,
+                "height": 768
+            }
+        },
+        "openedWindows": []
+    }
+}

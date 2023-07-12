@@ -28,6 +28,8 @@ export default function AdicionarNovoProduto(){
     //para que a imagem seja puxada do mesmo local para carregar de volta no App.
     const filename = images.substring(images.lastIndexOf('/') + 1);
     const uri = images.replace('file://','');
+    //diretório onde está salvando a imagem
+
 
     //criando uma tarefa de teste para ver se a imagem está sendo armazenada no Storage do Firebase
     const task = storage().ref(filename).putFile(uri);
@@ -63,11 +65,11 @@ export default function AdicionarNovoProduto(){
             height: 400, 
             cropping: true
           }).then(images => {
-            console.log(images);
+            console.log("Selecione uma imagem", images);
             setImages(images.path);
           });
     }
-
+        
 
     return(
        

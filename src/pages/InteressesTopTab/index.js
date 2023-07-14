@@ -1,67 +1,60 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
-import ImagePicker from 'react-native-image-crop-picker';
+//import React from 'react';
+//import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+
+
+import React, { useState } from 'react';
+import { SafeAreaView, StyleSheet, TextInput, View, Button } from 'react-native';
+
+
+//Referência para preencher todos os dados (titulo, descrição, nome, email etc...) corretamente.
+//"Como Verificar se Uma Caixa de Texto foi Preenchida ao Usar TextInput no React Native:"
+// Link do exemplo: https://developerplus.com.br/como-verificar-se-uma-caixa-de-texto-foi-preenchida-ao-usar-textinput-no-react-native/
 
 
 export default function InteressesTopTab() {
 
+    const [textInputName, setTextInputName] = useState('');
+    const [textInputEmail, setTextInputEmail] = useState('');
 
-    const onSelectImage = async () => {
-        if (onSelectImage) {
-            Alert.alert(
-                'Para as imagens',
-                'Escolha uma Opção:',
-                [
-                    { text: 'Camera', onPress: onCamera },
-                   // { text: 'Galeria', onPress: onGallery },
-                    { text: '+ que 1 imagem', onPress: onGalleryVarias },
-                    { text: 'Cancelar', onPress: () => { } }
-                ]
-            )
+    const checkTextInput = () => {
+        if (!textInputName.trim()) {
+            alert('Digite o Nome');
+            return;
         }
-    }
 
-    const onCamera = () => {
-        ImagePicker.openCamera({
-            width: 300,
-            height: 400,
-            cropping: true,
-        }).then(image => {
-            console.log(image);
-        });
-    }
+        if (!textInputEmail.trim()) {
+            alert('Digite o E-mail');
+            return;
+        }
 
-    const onGallery = () => {
-        ImagePicker.openPicker({
-            width: 300,
-            height: 400,
-            cropping: true
-        }).then(image => {
-            console.log(image);
-        });
-    }
-
-    const onGalleryVarias = () => {
-        ImagePicker.openPicker({
-            multiple: true
-          }).then(images => {
-            console.log(images);
-          });
-    }
+        alert('Successo');
+    };
 
 
 
     return (
 
-        <View style={styles.container}>
-            <TouchableOpacity
-                style={styles.btnStyles}
-                activeOpacity={0.8}
-                onPress={onSelectImage}
-            >
-                <Text style={styles.txtStyles}>Upload Image</Text>
-            </TouchableOpacity>
-        </View>
+     
+            <View style={styles.container}>
+                <TextInput
+                    style={styles.textInputStyle}
+                    placeholder="Digite o Nome"
+                    value={textInputName}
+                    onChangeText={setTextInputName}
+                //onChangeText={(value) => setTextInputName(value)}
+                />
+                <TextInput
+                    style={styles.textInputStyle}
+                    placeholder="Digite o E-mail"
+                    onChangeText={(value) => setTextInputEmail(value)}
+                />
+                <View style={{ marginTop: 20 }}>
+                    <Button
+                        title="Enviar"
+                        onPress={checkTextInput}
+                    />
+                </View>
+            </View>
 
 
 
@@ -86,6 +79,7 @@ export default function InteressesTopTab() {
             </Text>
         </View>
     */
+
     );
 };
 
@@ -94,19 +88,14 @@ export default function InteressesTopTab() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        padding: 25,
+        backgroundColor: 'white',
     },
-    btnStyles: {
-        backgroundColor: 'blue',
-        height: 48,
-        borderRadius: 8,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    txtStyles: {
-        color: 'white',
-        fontWeight: 'bold',
-        paddingHorizontal: 16,
+    textInputStyle: {
+        width: '100%',
+        height: 40,
+        paddingHorizontal: 5,
+        borderWidth: 0.5,
+        marginTop: 20,
     },
 });

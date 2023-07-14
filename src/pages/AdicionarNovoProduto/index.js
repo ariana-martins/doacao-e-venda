@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert, Image} from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert, Image } from 'react-native';
 import { Button, Checkbox } from 'react-native-paper';
-import ImageCropPicker from 'react-native-image-crop-picker';
-import storage from '@react-native-firebase/storage';
-
+import ImagePicker from 'react-native-image-crop-picker';
 
 //import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import firestore from '@react-native-firebase/firestore'; 
+import firestore from '@react-native-firebase/firestore';
+import storage from '@react-native-firebase/storage';
+
 
 //[ok dia 21.06.23] falta testar um código de inserir algo no firestore a partir do aplicativo em execucao
 // exemplo do video: https://github.com/rodrigorgtic/helpdesk/blob/main/src/components/Forms/OrderForm/index.tsx
 
 
-export default function AdicionarNovoProduto(){
+export default function AdicionarNovoProduto() {
 
     const [isSelected, setSelection] = React.useState(false);
     const [titulo, setTitulo] = useState('');
@@ -23,11 +23,10 @@ export default function AdicionarNovoProduto(){
     const [isLoading, setIsLoading] = useState(false); //carregando os documentos sem aparecer aquela "configuração de carregando arquivo..."
     const [images, setImages] = useState('https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT%20-%20P&B.png');
 
-
     //configurando imagem para ser armazenada no firebase/storage, e depois, 
     //para que a imagem seja puxada do mesmo local para carregar de volta no App.
     const filename = images.substring(images.lastIndexOf('/') + 1);
-    const uri = images.replace('file://','');
+    const uri = images.replace('file://', '');
     //diretório onde está salvando a imagem
 
 
@@ -35,47 +34,86 @@ export default function AdicionarNovoProduto(){
     const task = storage().ref(filename).putFile(uri);
 
     //esse "e" quer dizer "else", que é a mesma coisa que "então"
-   // task.then((e) => {
-   // })
-    
+    // task.then((e) => {
+    // })
+
     function addNovoProduto() {
         task.then((e) => {
-        setIsLoading(true);
-    
-        firestore()
-            .collection('produtos')
-            .add({
-                images: 'gs://meus-pertences.appspot.com/', //url para deixar armazenada dentro do storage do Firebase
-                titulo,
-                descricao,
-                valor,
-                status: 'teste',
-                created_at: firestore.FieldValue.serverTimestamp()
-            })
-            .then(() => Alert.alert("Produto", "Produto cadastrado com sucesso!")) //then, para criar mensagem de alerta como desse exemplo
-            .catch((error) => console.log(error)) // para criar um log onde pode estar o erro/falha
-            .finally(() => setIsLoading(false));
+            setIsLoading(true);
+
+            firestore()
+                .collection('produtos')
+                .add({
+                    images: 'gs://meus-pertences.appspot.com/', //url para deixar armazenada dentro do storage do Firebase
+                    titulo,
+                    descricao,
+                    valor,
+                    status: 'teste',
+                    created_at: firestore.FieldValue.serverTimestamp()
+                })
+                .then(() => Alert.alert("Produto", "Produto cadastrado com sucesso!")) //then, para criar mensagem de alerta como desse exemplo
+                .catch((error) => console.log(error)) // para criar um log onde pode estar o erro/falha
+                .finally(() => setIsLoading(false));
         }) //finaliza task.then
     }
 
-    //carregando uma foto, escolhendo através da biblioteca de imagens que tem no celular.
-    const choosePhotoFromLibrary = () => {
-        ImageCropPicker.openPicker({
-            width: 300,
-            height: 400, 
-            cropping: true
-          }).then(images => {
-            console.log("Selecione uma imagem", images);
-            setImages(images.path);
-          });
+
+    //Selcionando imagem da camera ou da galeria do celular
+    const onSelectImage = async () => {
+        if (onSelectImage) {
+            Alert.alert(
+                'Para as imagens',
+                'Escolha uma Opção:',
+                [
+                    { text: 'Camera', onPress: onCamera },
+                    { text: 'Galeria', onPress: onGallery },
+                    // { text: '+ que 1 imagem', onPress: onGalleryVarias }, //Selecionar multiplas imagens
+                    { text: 'Cancelar', onPress: () => { } }
+                ]
+            )
+        }
     }
-        
 
-    return(
-       
-       <View style={{flex: 1, backgroundColor: '#FFFFFF'}}>
 
-{/*
+    //carregando uma foto, escolhendo através da biblioteca de imagens que tem no celular.
+    //const choosePhotoFromLibrary = () => {
+    const onCamera = () => {
+        ImagePicker.openCamera({
+            width: 300,
+            height: 400,
+            cropping: true
+        }).then(image => {
+            console.log("Tire uma imagem", image);
+            setImages(image.path); //visualiza a imagem no App, após tirar foto ou selecionou da galeria de imagens
+        });
+    }
+
+    const onGallery = () => {
+        ImagePicker.openPicker({
+            width: 300,
+            height: 400,
+            cropping: true
+        }).then(image => {
+            console.log("Selecione uma imagem", image);
+            setImages(image.path); //visualiza a imagem no App, após tirar foto ou selecionou da galeria de imagens
+        });
+    }
+
+    const onGalleryVarias = () => {
+        ImagePicker.openPicker({
+            multiple: true
+        }).then(images => { //cuidar aqui, que o nome é "images" e não "image" quando ativar essa configuração
+            console.log(images);
+            //setImages(image.path); //ativar essa linha quando ativar multiplas imagens, para visualizar a imagem no App antes de "Cadastrar produto" para ir p/ o banco de dados do firebase/storage
+        });
+    }
+
+
+    return (
+
+        <View style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
+
+            {/*
            <View>
                 <View style={styles.bordaAddFotos}>
                     <Button
@@ -89,21 +127,26 @@ export default function AdicionarNovoProduto(){
            </View>
 
 */}
-      
-        <View style={styles.container}>
-            <Image style={styles.img}
-                source={{uri: images}} 
-            />
-            {/* "onPress={() }" entre parenteses o onPress chama funcao anonima, que vai chamar o ImageCropPicker */}
-            <TouchableOpacity style={styles.button} onPress={choosePhotoFromLibrary}>         
-                <Text style={styles.buttonText}>Escolher imagem</Text>
-            </TouchableOpacity>
-        </View>
+
+            <View style={styles.container}>
+                    <Image style={styles.img}
+                        source={{ uri: images }}
+                    />
+                    {/* "onPress={() }" entre parenteses o onPress chama funcao anonima, que vai chamar o ImageCropPicker */}
+                    <TouchableOpacity
+                        style={styles.button}
+                        activeOpacity={0.8}
+                        onPress={onSelectImage}
+                    >
+                        <Text style={styles.buttonText}>Escolher imagem</Text>
+                    </TouchableOpacity>
+            </View>
 
 
 
-           <Text style={styles.texto}>Título do produto:</Text>
-           <View style={styles.botaoAdicionarMargem}> 
+
+            <Text style={styles.texto}>Título do produto:</Text>
+            <View style={styles.botaoAdicionarMargem}>
                 <View style={styles.inputArea}>
                     <TextInput
                         style={styles.input}
@@ -112,9 +155,9 @@ export default function AdicionarNovoProduto(){
                         onChangeText={setTitulo}
                     />
                 </View>
-            </View> 
+            </View>
             <Text style={styles.texto}>Descrição do produto:</Text>
-           <View style={styles.botaoAdicionarMargem}> 
+            <View style={styles.botaoAdicionarMargem}>
                 <View style={styles.inputAreaDetalhes}>
                     <TextInput
                         multiline={true}
@@ -125,20 +168,20 @@ export default function AdicionarNovoProduto(){
                         onChangeText={setDescricao}
                     />
                 </View>
-            </View> 
-            
+            </View>
+
             <Text style={styles.texto}>Selecione uma opção:</Text>
             <View>
                 <View style={styles.checkboxOpcoes}>
                     <Checkbox
-                        status={isSelected ? 'unchecked' : 'checked'} 
+                        status={isSelected ? 'unchecked' : 'checked'}
                         onPress={() => {
                             setSelection(!isSelected);
                         }}
                         color="#000000"
                     />
-                    <Text style={styles.label}>PARA DOAR</Text> 
-                    
+                    <Text style={styles.label}>PARA DOAR</Text>
+
                     <Checkbox
                         status={isSelected ? 'checked' : 'unchecked'}
                         onPress={() => {
@@ -147,11 +190,11 @@ export default function AdicionarNovoProduto(){
                         color="#000000"
                     />
                     <Text style={styles.label}>PARA VENDER
-                    {isSelected ? " acrescente um valor" : " "}</Text>
+                        {isSelected ? " acrescente um valor" : " "}</Text>
                 </View>
             </View>
 
-            <View style={styles.botaoAdicionarMargem}> 
+            <View style={styles.botaoAdicionarMargem}>
                 <View style={styles.inputArea}>
                     <Text>R$</Text>
                     <TextInput
@@ -162,17 +205,17 @@ export default function AdicionarNovoProduto(){
                     />
                 </View>
             </View>
-            <View style={styles.botaoAdicionarMargem}> 
-                <TouchableOpacity style={styles.btn} isLoading={isLoading} onPress={()=>addNovoProduto()}>
-                    <Text style={styles.textoBotao}>Cadastrar produto</Text>  
+            <View style={styles.botaoAdicionarMargem}>
+                <TouchableOpacity style={styles.btn} isLoading={isLoading} onPress={() => addNovoProduto()}>
+                    <Text style={styles.textoBotao}>Cadastrar produto</Text>
                 </TouchableOpacity>
             </View>
-            <View style={styles.botaoAdicionarMargem}> 
-                <TouchableOpacity style={styles.btn} onPress={()=>VoltarDeOndeParou()}>
-                    <Text style={styles.textoBotao}>Cancelar</Text>  
+            <View style={styles.botaoAdicionarMargem}>
+                <TouchableOpacity style={styles.btn} onPress={() => VoltarDeOndeParou()}>
+                    <Text style={styles.textoBotao}>Cancelar</Text>
                 </TouchableOpacity>
             </View>
-       </View>         
+        </View>
     );
 }
 
@@ -196,15 +239,15 @@ const styles = StyleSheet.create({
         lineHeight: 20,
         color: "#000000",
     },
-    botaoAdicionarMargem:{
-        paddingHorizontal: 15, 
+    botaoAdicionarMargem: {
+        paddingHorizontal: 15,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
         width: '100%',
         marginVertical: 10,
     },
-    inputArea:{
+    inputArea: {
         paddingHorizontal: 15,
         flexDirection: 'row',
         alignItems: 'center',
@@ -216,8 +259,8 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderWidth: 2,
         borderColor: '#000000',
-    }, 
-    inputAreaDetalhes:{
+    },
+    inputAreaDetalhes: {
         paddingHorizontal: 15,
         flexDirection: 'row',
         alignItems: 'flex-start',
@@ -229,25 +272,25 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderWidth: 2,
         borderColor: '#000000',
-    }, 
-   input:{
-       fontFamily: 'Roboto',
+    },
+    input: {
+        fontFamily: 'Roboto',
         paddingHorizontal: 10,
         fontSize: 15,
         width: '98%'
     },
-    inputDetalhes:{
-         fontFamily: 'Roboto',
-         fontSize: 15,
-         marginLeft: 1,
-         marginRight: 1,
-         marginTop: 1,
-         backgroundColor: '#FFFFFF',
-         padding: 10,
-         textAlignVertical: 'top',
-         color: '#000000',
-     },
-     checkboxOpcoes:{
+    inputDetalhes: {
+        fontFamily: 'Roboto',
+        fontSize: 15,
+        marginLeft: 1,
+        marginRight: 1,
+        marginTop: 1,
+        backgroundColor: '#FFFFFF',
+        padding: 10,
+        textAlignVertical: 'top',
+        color: '#000000',
+    },
+    checkboxOpcoes: {
         flexDirection: "row",
         marginBottom: 5,
     },
@@ -258,13 +301,13 @@ const styles = StyleSheet.create({
         margin: 8,
     },
 
-    textoBotao:{
+    textoBotao: {
         color: '#FFFFFF', //cor do texto
         fontWeight: 'bold', //texto em negrito
-        fontSize:20, //tamanho do texto
+        fontSize: 20, //tamanho do texto
         textAlign: 'center', // alinha texto dentro da borda, ao centro
     },
-    btn:{
+    btn: {
         width: 250, //largura
         height: 40, //altura 
         backgroundColor: '#000000', //cor dentro da borda, onde vai ser incluído o texto
@@ -282,7 +325,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         backgroundColor: '#191970',
         justifyContent: 'center', //justifica o texto dentro do botação "Escolher imagem"
-        alignItems: 'center' //justifica o texto dentro do botão "Escolher imagem"
+        alignItems: 'center', //justifica o texto dentro do botão "Escolher imagem"
     },
     buttonText: {
         color: '#fff',
@@ -294,6 +337,7 @@ const styles = StyleSheet.create({
         height: 100,
         borderRadius: 5, //essa numeração é para deixar a borda da imagem menos circular
         //borderRadius: 50, //essa numeração é para deixar a borda da imagem completamente circular
+        resizeMode: 'contain',
     },
 
 });

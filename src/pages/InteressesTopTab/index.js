@@ -3,58 +3,77 @@
 
 
 import React, { useState } from 'react';
-import { SafeAreaView, StyleSheet, TextInput, View, Button } from 'react-native';
+import { StyleSheet, TextInput, View, TouchableOpacity, Alert } from 'react-native';
+import { Text } from 'react-native-elements';
+import firestore from '@react-native-firebase/firestore';
 
-
-//Referência para preencher todos os dados (titulo, descrição, nome, email etc...) corretamente.
-//"Como Verificar se Uma Caixa de Texto foi Preenchida ao Usar TextInput no React Native:"
-// Link do exemplo: https://developerplus.com.br/como-verificar-se-uma-caixa-de-texto-foi-preenchida-ao-usar-textinput-no-react-native/
+//Referência para preencher todos os dados (titulo, descrição, nome, email etc...) corretamente 
+// + Enviando para Firebase/Firestore e limpando a tela após todos os dados cadastrados.
+//"React Native Firebase Todo App | React Native"
+// Link do exemplo: https://www.youtube.com/watch?v=ZixONsxTy0g&list=PLeOkQb0b3nPzXq_jKX70NRvXlbZ9p7ji5&index=13
+// Canal do Youtube: JAS ACADAMY
 
 
 export default function InteressesTopTab() {
 
     const [textInputName, setTextInputName] = useState('');
     const [textInputEmail, setTextInputEmail] = useState('');
+    const ref = firestore().collection('myInteresses');
 
-    const checkTextInput = () => {
-        if (!textInputName.trim()) {
-            alert('Digite o Nome');
-            return;
+
+    const onSubmitPress = async () => {
+        console.log(textInputName, "teste texto")
+        if (textInputName.length == 0) {
+            Alert.alert("Nome:","Por favor descreva um interesse")
+            return
         }
-
-        if (!textInputEmail.trim()) {
-            alert('Digite o E-mail');
-            return;
+        console.log(textInputEmail, "email texto")
+        if (textInputEmail.length == 0) {
+            Alert.alert("Email:","Por favor descreva um email")
+            return
         }
+        Alert.alert("Produto", "Produto cadastrado com sucesso!");
 
-        alert('Successo');
-    };
+        await ref.add({
+            title: textInputName,
+            email: textInputEmail,
+            complete: false
+        })
+        console.log(textInputName)
+        setTextInputName('') //para que não seja armazenada novamente e evitar a redundancia
+        console.log(textInputEmail)
+        setTextInputEmail('')
 
+    }
 
 
     return (
 
-     
-            <View style={styles.container}>
-                <TextInput
-                    style={styles.textInputStyle}
-                    placeholder="Digite o Nome"
-                    value={textInputName}
-                    onChangeText={setTextInputName}
-                //onChangeText={(value) => setTextInputName(value)}
-                />
-                <TextInput
-                    style={styles.textInputStyle}
-                    placeholder="Digite o E-mail"
-                    onChangeText={(value) => setTextInputEmail(value)}
-                />
-                <View style={{ marginTop: 20 }}>
-                    <Button
-                        title="Enviar"
-                        onPress={checkTextInput}
-                    />
-                </View>
+
+        <View style={styles.container}>
+            <TextInput style={styles.textInputStyle}
+                disable={textInputName.length === 0} //validação desativada, se textInputName não for preenchida/igual a zero(0), não vai ser pressionável o botão "Enviar"
+                placeholder="Digite o Nome"
+                value={textInputName}
+                onChangeText={setTextInputName}
+            />
+            <TextInput style={styles.textInputStyle}
+                disable={textInputEmail.length === 0} //validação desativada, se textInputName não for preenchida/igual a zero(0), não vai ser pressionável o botão "Enviar"
+                placeholder="Digite o Email"
+                value={textInputEmail}
+                onChangeText={setTextInputEmail}
+            />
+
+            <View style={{ marginTop: 20 }}>
+                <TouchableOpacity
+                    onPress={onSubmitPress}
+                    style={styles.button}
+                >
+                    <Text>Enviar</Text>
+                </TouchableOpacity>
             </View>
+
+        </View>
 
 
 
@@ -98,4 +117,13 @@ const styles = StyleSheet.create({
         borderWidth: 0.5,
         marginTop: 20,
     },
+    button: {
+        width: 150,
+        height: 50,
+        borderRadius: 10,
+        backgroundColor: '#191970',
+        justifyContent: 'center', //justifica o texto dentro do botão
+        alignItems: 'center', //justifica o texto dentro do botão 
+    },
 });
+

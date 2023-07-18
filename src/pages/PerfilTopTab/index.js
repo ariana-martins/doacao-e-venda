@@ -59,7 +59,7 @@ export default function PerfilTopTab() {
     //React Hook com useState para pegar a imagem selecionada e exibi-la em nosso aplicativo.
     const [image, setImage] = React.useState(null);
 
-
+ 
     //===========================================
     // Referência: https://dev.to/papemalick2015/react-native-firebase-storage-11kf
     // Agora vamos salvar a imagem no Firebase Storage

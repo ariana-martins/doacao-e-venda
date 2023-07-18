@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image, Alert } from 'react-native';
 // import { Button } from 'react-native-elements';
 
 import ImageCropPicker from 'react-native-image-crop-picker';
@@ -83,14 +83,19 @@ export default function PerfilTopTab() {
         try {
             await task;
             const url = await reference.getDownloadURL() //Baixando um arquivo com uma URL, e para obter uma URL de uma referência usando .getDownloadURL().
-            Alert.alert('Your image is saved! smile')
+            Alert.alert("Foto","Aqui salvei imagem")
             return url
         }
+        catch(error) {
+            // Handle any errors that occur
+            console.error(error);
+        }
+        /*
         catch (e) {
             console.log(e)
             return null
         }
-
+*/
     }
 
 

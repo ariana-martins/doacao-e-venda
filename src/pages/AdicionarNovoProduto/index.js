@@ -25,8 +25,10 @@ export default function AdicionarNovoProduto() {
 
     //configurando imagem para ser armazenada no firebase/storage, e depois, 
     //para que a imagem seja puxada do mesmo local para carregar de volta no App.
+
     const filename = images.substring(images.lastIndexOf('/') + 1);
     const uri = images.replace('file://', '');
+
     //diretório onde está salvando a imagem
 
 
@@ -37,25 +39,67 @@ export default function AdicionarNovoProduto() {
     // task.then((e) => {
     // })
 
-    function addNovoProduto() {
-        task.then((e) => {
-            setIsLoading(true);
+    /*
+        function addNovoProduto() {
+          task.then((e) => {        
+                setIsLoading(true);  
+    
+                firestore().collection('produtos')
+                    .add({
+                        images: 'gs://meus-pertences.appspot.com/', //url para deixar armazenada dentro do storage do Firebase
+                        titulo,
+                        descricao,
+                        valor,
+                        status: 'teste',
+                        created_at: firestore.FieldValue.serverTimestamp()
+                    })
+                    .then(() => Alert.alert("Produto", "Produto cadastrado com sucesso!")) //then, para criar mensagem de alerta como desse exemplo
+                    .catch((error) => console.log(error)) // para criar um log onde pode estar o erro/falha
+                    .finally(() => setIsLoading(false));
+            }) //finaliza task.then  
+        }
+    
+    */
 
-            firestore()
-                .collection('produtos')
-                .add({
-                    images: 'gs://meus-pertences.appspot.com/', //url para deixar armazenada dentro do storage do Firebase
-                    titulo,
-                    descricao,
-                    valor,
-                    status: 'teste',
-                    created_at: firestore.FieldValue.serverTimestamp()
-                })
-                .then(() => Alert.alert("Produto", "Produto cadastrado com sucesso!")) //then, para criar mensagem de alerta como desse exemplo
-                .catch((error) => console.log(error)) // para criar um log onde pode estar o erro/falha
-                .finally(() => setIsLoading(false));
-        }) //finaliza task.then
+    const ref = firestore().collection('produtos');
+
+    const onSubmitPress = async () => {
+
+        console.log(titulo, "Titulo aqui")
+        if (titulo.length == 0) {
+            Alert.alert("Nome do Produto:", "Por favor descreva um título para o produto")
+            return
+        }
+        console.log(descricao, "Descricao aqui")
+        if (descricao.length == 0) {
+            Alert.alert("Descrição:", "Por favor descreva uma descrição para o produto.")
+            return
+        }
+        console.log(valor, "Valor aqui")
+        if (valor.length == 0) {
+            Alert.alert("Valor:", "Para vender um produto, digite um valor.")
+            return
+        }
+        Alert.alert("Produto", "Produto cadastrado com sucesso!");
+
+        await ref.add({
+            images,
+            titulo,
+            descricao,
+            valor,
+            status: 'teste',
+            created_at: firestore.FieldValue.serverTimestamp()
+        })
+        console.log(titulo)
+        setTitulo('') //para que não seja armazenada novamente e evitar a redundancia
+        console.log(descricao)
+        setDescricao('')
+        console.log(valor)
+        setValor('')
+
     }
+
+
 
 
     //Selcionando imagem da camera ou da galeria do celular
@@ -76,7 +120,7 @@ export default function AdicionarNovoProduto() {
 
 
     //carregando uma foto, escolhendo através da biblioteca de imagens que tem no celular.
-    //const choosePhotoFromLibrary = () => {
+    //const choosePhotoFromLibrary = () => {'https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT%20-%20P&B.png'
     const onCamera = () => {
         ImagePicker.openCamera({
             width: 300,
@@ -84,7 +128,7 @@ export default function AdicionarNovoProduto() {
             cropping: true
         }).then(image => {
             console.log("Tire uma imagem", image);
-            setImages(image.path); //visualiza a imagem no App, após tirar foto ou selecionou da galeria de imagens
+            setImages(image.path); //visualiza a imagem no App, após tirar foto oPor favor descreva uma descrição para o produtou selecionou da galeria de imagens
         });
     }
 
@@ -129,17 +173,19 @@ export default function AdicionarNovoProduto() {
 */}
 
             <View style={styles.container}>
-                    <Image style={styles.img}
-                        source={{ uri: images }}
-                    />
-                    {/* "onPress={() }" entre parenteses o onPress chama funcao anonima, que vai chamar o ImageCropPicker */}
-                    <TouchableOpacity
-                        style={styles.button}
-                        activeOpacity={0.8}
-                        onPress={onSelectImage}
-                    >
-                        <Text style={styles.buttonText}>Escolher imagem</Text>
-                    </TouchableOpacity>
+                <Image style={styles.img}
+                    source={{ uri: images }}
+                />
+                {/* "onPress={() }" entre parenteses o onPress chama funcao anonima, que vai chamar o ImageCropPicker */}
+                <TouchableOpacity
+                    style={styles.button}
+                    activeOpacity={0.8}
+                    disable={images.length === 'https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT%20-%20P&B.png'} //validação desativada, se textInputName não for preenchida/igual a zero(0), não vai ser pressionável o botão "Enviar"
+                    value={images}
+                    onPress={onSelectImage}
+                >
+                    <Text style={styles.buttonText}>Escolher imagem</Text>
+                </TouchableOpacity>
             </View>
 
 
@@ -150,7 +196,9 @@ export default function AdicionarNovoProduto() {
                 <View style={styles.inputArea}>
                     <TextInput
                         style={styles.input}
+                        disable={titulo.length === 0} //validação desativada, se textInputName não for preenchida/igual a zero(0), não vai ser pressionável o botão "Enviar"
                         placeholder="Escreva aqui o nome do produto..."
+                        value={titulo}
                         keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
                         onChangeText={setTitulo}
                     />
@@ -163,7 +211,9 @@ export default function AdicionarNovoProduto() {
                         multiline={true}
                         autoCorrect={false}
                         style={styles.inputDetalhes}
+                        disable={descricao.length === 0} //validação desativada, se textInputName não for preenchida/igual a zero(0), não vai ser pressionável o botão "Enviar"
                         placeholder="Escreva aqui os detalhes do produto..."
+                        value={descricao}
                         keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
                         onChangeText={setDescricao}
                     />
@@ -199,14 +249,16 @@ export default function AdicionarNovoProduto() {
                     <Text>R$</Text>
                     <TextInput
                         style={styles.input}
+                        disable={valor.length === 0} //validação desativada, se textInputName não for preenchida/igual a zero(0), não vai ser pressionável o botão "Enviar"
                         placeholder="0,00"
+                        value={valor}
                         keyboardType="numeric" // Define esse teclado numérico quando deseja manipular dados de um TextInput com entrada somente números.
                         onChangeText={setValor}
                     />
                 </View>
             </View>
             <View style={styles.botaoAdicionarMargem}>
-                <TouchableOpacity style={styles.btn} isLoading={isLoading} onPress={() => addNovoProduto()}>
+                <TouchableOpacity style={styles.btn} isLoading={isLoading} onPress={() => onSubmitPress()}>
                     <Text style={styles.textoBotao}>Cadastrar produto</Text>
                 </TouchableOpacity>
             </View>

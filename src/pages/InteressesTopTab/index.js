@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
         width: 150,
         height: 50,
         borderRadius: 10,
-        backgroundColor: '#191970',
+        backgroundColor: '#7159c1',
         justifyContent: 'center', //justifica o texto dentro do botão
         alignItems: 'center', //justifica o texto dentro do botão 
     },

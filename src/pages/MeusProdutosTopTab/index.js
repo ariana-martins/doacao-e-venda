@@ -84,7 +84,7 @@ const ref = firebase.firestore().collection('produtos');
             const data = []
             querySnapshot.forEach(doc =>{
                 data.push({
-                    ...doc.data(),
+                     ...doc.data(),
                         key:doc.id
                 })
             })
@@ -105,13 +105,14 @@ const ref = firebase.firestore().collection('produtos');
                                 {/*aqui vai o card de imagens, mas não está puxando do banco de dados*/}
                                 <Card.Image 
                                     style={styles.img}
-                                    //source={{ uri : 'gs://meus-pertences.appspot.com' }} 
                                     source={{ uri : 'gs://meus-pertences.appspot.com' }} 
                                 />
                                 <Card.Title>{item.titulo}</Card.Title>
                                 <Card.Divider />
                                 <Text style={{ fontWeight: 'bold', fontSize: 16 }}>{item.valor}</Text> 
+                                
                                 <Text style={{ fontSize: 16, marginTop: 5 }}>{item.descricao}</Text>
+                                
                             </Card>
                         </View>
                     )}

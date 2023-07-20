@@ -9,12 +9,18 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
 
+import { useNavigation } from '@react-navigation/native';
+
+import PaginaInicial from '../PaginaInicial';
+
 
 //[ok dia 21.06.23] falta testar um código de inserir algo no firestore a partir do aplicativo em execucao
 // exemplo do video: https://github.com/rodrigorgtic/helpdesk/blob/main/src/components/Forms/OrderForm/index.tsx
 
 
 export default function AdicionarNovoProduto() {
+
+    const navigation = useNavigation();
 
     const [isSelected, setSelection] = React.useState(false);
     const [titulo, setTitulo] = useState('');
@@ -62,6 +68,10 @@ export default function AdicionarNovoProduto() {
     */
 
     const ref = firestore().collection('produtos');
+    //referencia deste conteudo do firebase
+    // Vídeo: React Native Firebase Todo App | React Native
+    // Link do video: https://www.youtube.com/watch?v=ZixONsxTy0g&list=PLeOkQb0b3nPzXq_jKX70NRvXlbZ9p7ji5
+    // Canal do Youtube: JAS ACADAMY
 
     const onSubmitPress = async () => {
 
@@ -81,6 +91,7 @@ export default function AdicionarNovoProduto() {
             return
         }
         Alert.alert("Produto", "Produto cadastrado com sucesso!");
+        //Falta arrumar para: Limpar toda a Página quando clicar em  "Ok" desse alerta (Produto cadastrado com sucesso) e ir para a tela "Pagina Inicial"
 
         await ref.add({
             images,
@@ -100,10 +111,29 @@ export default function AdicionarNovoProduto() {
     }
 
 
+    //Função enviar para tela inicial após "Cadastro com sucesso" ou quando clicar no botão "Cancelar"
+    const VoltarAoInicio = () => {
+        Alert.alert("Atenção!", "Tem certeza que deseja sair?", [
+          {
+            text: "Não",
+            onPress: () => null,
+            style: "cancel"
+          },
+          { 
+            text: "SIM", 
+            onPress: () => navigation.navigate(PaginaInicial) 
+            //Falta arrumar para: Limpar toda a Página quando clicar em  "Cancelar em Sim" e ir para a tela "Pagina Inicial" 
+          }
+        ]);
+        return true;
+      };
+
+
 
 
     //Selcionando imagem da camera ou da galeria do celular
     const onSelectImage = async () => {
+
         if (onSelectImage) {
             Alert.alert(
                 'Para as imagens',
@@ -153,6 +183,7 @@ export default function AdicionarNovoProduto() {
     }
 
 
+
     return (
 
         <View style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
@@ -175,13 +206,12 @@ export default function AdicionarNovoProduto() {
             <View style={styles.container}>
                 <Image style={styles.img}
                     source={{ uri: images }}
+                    
                 />
                 {/* "onPress={() }" entre parenteses o onPress chama funcao anonima, que vai chamar o ImageCropPicker */}
                 <TouchableOpacity
                     style={styles.button}
                     activeOpacity={0.8}
-                    disable={images.length === 'https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT%20-%20P&B.png'} //validação desativada, se textInputName não for preenchida/igual a zero(0), não vai ser pressionável o botão "Enviar"
-                    value={images}
                     onPress={onSelectImage}
                 >
                     <Text style={styles.buttonText}>Escolher imagem</Text>
@@ -263,7 +293,7 @@ export default function AdicionarNovoProduto() {
                 </TouchableOpacity>
             </View>
             <View style={styles.botaoAdicionarMargem}>
-                <TouchableOpacity style={styles.btn} onPress={() => VoltarDeOndeParou()}>
+                <TouchableOpacity style={styles.btn} onPress={() => VoltarAoInicio()}>
                     <Text style={styles.textoBotao}>Cancelar</Text>
                 </TouchableOpacity>
             </View>

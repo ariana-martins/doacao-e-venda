@@ -7,6 +7,7 @@ import { StyleSheet, TextInput, View, TouchableOpacity, Alert } from 'react-nati
 import { Text } from 'react-native-elements';
 import firestore from '@react-native-firebase/firestore';
 
+
 //Referência para preencher todos os dados (titulo, descrição, nome, email etc...) corretamente 
 // + Enviando para Firebase/Firestore e limpando a tela após todos os dados cadastrados.
 //"React Native Firebase Todo App | React Native"
@@ -45,6 +46,8 @@ export default function InteressesTopTab() {
         setTextInputEmail('')
 
     }
+   
+
 
 
     return (

@@ -92,6 +92,7 @@ export default function AdicionarNovoProduto() {
         }
         Alert.alert("Produto", "Produto cadastrado com sucesso!");
         //Falta arrumar para: Limpar toda a Página quando clicar em  "Ok" desse alerta (Produto cadastrado com sucesso) e ir para a tela "Pagina Inicial"
+        //Configurar botão: onPress: () => navigation.goBack() //para voltar na PaginaInicial após clicar em OK deste Alert.
 
         await ref.add({
             images,
@@ -121,8 +122,10 @@ export default function AdicionarNovoProduto() {
           },
           { 
             text: "SIM", 
-            onPress: () => navigation.navigate(PaginaInicial) 
-            //Falta arrumar para: Limpar toda a Página quando clicar em  "Cancelar em Sim" e ir para a tela "Pagina Inicial" 
+            onPress: () => navigation.goBack() //Navigation.goBack() volta para "PaginaInicial" pois as Tabs já estão configuradas como InitialHome para iniciar na "Pagina Inicial"
+            //Dicas nos links: https://www.tabnews.com.br/marcosveloso/template-de-rotas-react-native-com-native-stack-bottom-tabs-e-drawer-navigator
+            //Dicas nos link complementar com o código gitHub: https://github.com/MarcosVel/routes-template/commit/33e621df08b702225460437fd0b3fb58678b98d9
+            // ==>> Falta arrumar para: Limpar toda a Página quando clicar em  "Cancelar em Sim" e ir para a tela "Pagina Inicial" 
           }
         ]);
         return true;

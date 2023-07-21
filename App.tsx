@@ -184,9 +184,9 @@ import AdicionarNovoProduto from './src/pages/AdicionarNovoProduto';
 
 
 function PaginaInicialScreen() {
-	return (
+  return (
     <View style={styles.container}>
-	    <View>
+      <View>
         <Pesquisar/>
         <PaginaInicial/>
       </View>    
@@ -195,45 +195,45 @@ function PaginaInicialScreen() {
 }
 
 function PesquisarScreen() {
-	return (
-		<View style={styles.container}>
-			<Text>Pesquisar</Text>
+  return (
+    <View style={styles.container}>
+      <Text>Pesquisar</Text>
       <Pesquisar/>
-		</View>
-	);
+    </View>
+  );
 }
  
 function AdicionarNovoProdutoScreen() {
-	return (
-		<View style={styles.container}>
+  return (
+    <View style={styles.container}>
       <AdicionarNovoProduto/>
-		</View>
-	);
+    </View>
+  );
 }
 
 function ChatScreen() {
-	return (
-		<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-			<Text>Chat</Text>
-		</View>
-	);
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <Text>Chat</Text>
+    </View>
+  );
 }
 
 function PerfilScreen() {
-	return (
-		<View style={styles.container}>
-    	<Text>Perfil</Text>
-		</View>
-	);
+  return (
+    <View style={styles.container}>
+      <Text>Perfil</Text>
+    </View>
+  );
 }
 
 const Tab = createBottomTabNavigator(); //Cria a navegação da Tab
 
 export default function Projeto1() {
-	return (
-		<NavigationContainer>
+  return (
+    <NavigationContainer>
       <Tab.Navigator>
-				<Tab.Screen 
+        <Tab.Screen 
           name="Pagina Inicial, aqui vai filtrar por categoria" 
           component={PaginaInicialScreen} 
           options={{
@@ -260,7 +260,7 @@ export default function Projeto1() {
             tabBarLabel: "Pagina Inicial",
           }}
         />
-				<Tab.Screen 
+        <Tab.Screen 
           name="Pesquisar!" 
           component={PesquisarScreen} 
           options={{            
@@ -270,7 +270,7 @@ export default function Projeto1() {
             tabBarLabel: "Pesquisar",
           }}
         />
-				<Tab.Screen 
+        <Tab.Screen 
           name="Adicionar Novo Produto!" 
           component={AdicionarNovoProdutoScreen} 
           options={{
@@ -280,7 +280,7 @@ export default function Projeto1() {
             tabBarLabel: "Adicionar novo produto",
           }}
         />
-				<Tab.Screen 
+        <Tab.Screen 
           name="Chat!" 
           component={ChatScreen} 
           options={{
@@ -290,7 +290,7 @@ export default function Projeto1() {
             tabBarLabel: "Chat",
           }}
         />
-				<Tab.Screen
+        <Tab.Screen
           name="Perfil!" 
           component={PerfilScreen} 
           options={{
@@ -300,18 +300,18 @@ export default function Projeto1() {
             tabBarLabel: "Perfil",
           }}
         />
-			</Tab.Navigator>
-		</NavigationContainer>
-	);
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
 }
 
 //estilo de todas as páginas (fora a Tab e TabScreen)
 const styles = StyleSheet.create({
-	container: {
+  container: {
 //		flex: 1,
 //		justifyContent: 'center',
 //		alignItems: 'center',
-	},
+  },
 });
 */
 
@@ -344,60 +344,60 @@ const Tab = createBottomTabNavigator();
 
 function Tabs() {
   return (
-    <Tab.Navigator screenOptions={{ headerShown: false}}>
-      <Tab.Screen 
-      name='Página Inicial' 
-      component={PaginaInicial} 
-      options={{
-        tabBarIcon: ({ color }) => (
-          <Icon name="home-outline" size={20} color="#000000" />
+    <Tab.Navigator screenOptions={{ headerShown: false }}>
+      <Tab.Screen
+        name='Página Inicial'
+        component={PaginaInicial}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <Icon name="home-outline" size={20} color="#000000" />
           ),
           tabBarLabel: "Pagina Inicial",
-        
-      }}
-      />
-      <Tab.Screen 
-      name='Pesquisar - Tab' 
-      component={Pesquisar} 
-      options={{            
-        tabBarIcon: ({ color }) => (
-          <Icon name="search-outline" size={20} color="#000000" />
-        ),
-        tabBarLabel: "Pesquisar",
-      }}
-      />
-      <Tab.Screen 
-      name='Adicionar Novo Produto - Tab' 
-      component={AdicionarNovoProduto} 
-      options={{
-        tabBarIcon: ({ color }) => (
-        <Icon name="add-outline" size={30} color="#000000" />
-        ),
-        tabBarLabel: "Adicionar novo produto",
-      }}
+
+        }}
       />
       <Tab.Screen
-      name='Chat - Tab' 
-      component={Chat} 
-      options={{
-        headerShown: true, 
-        title: 'Chats',
-        headerTitleAlign: 'center',
-        tabBarIcon: ({ color }) => (
-        <Icon name="chatbubble-outline" size={20} color="#000000" />
-        ),
-        tabBarLabel: "Chat",
-      }}
+        name='Pesquisar - Tab'
+        component={Pesquisar}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <Icon name="search-outline" size={20} color="#000000" />
+          ),
+          tabBarLabel: "Pesquisar",
+        }}
       />
-      <Tab.Screen 
-      name='Perfil - Tab' 
-      component={TopBarNavigator} 
-      options={{
-        tabBarIcon: ({ color }) => (
-        <Icon name="person-outline" size={20} color="#000000" />            
-        ),
-        tabBarLabel: "Perfil",
-      }}
+      <Tab.Screen
+        name='Adicionar Novo Produto - Tab'
+        component={AdicionarNovoProduto}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <Icon name="add-outline" size={30} color="#000000" />
+          ),
+          tabBarLabel: "Adicionar novo produto",
+        }}
+      />
+      <Tab.Screen
+        name='Chat - Tab'
+        component={Chat}
+        options={{
+          headerShown: true,
+          title: 'Chats',
+          headerTitleAlign: 'center',
+          tabBarIcon: ({ color }) => (
+            <Icon name="chatbubble-outline" size={20} color="#000000" />
+          ),
+          tabBarLabel: "Chat",
+        }}
+      />
+      <Tab.Screen
+        name='Perfil - Tab'
+        component={TopBarNavigator}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <Icon name="person-outline" size={20} color="#000000" />
+          ),
+          tabBarLabel: "Perfil",
+        }}
       />
 
     </Tab.Navigator>
@@ -408,29 +408,30 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator >
-        <Stack.Screen name="Inicio!" component={Tabs} options={{headerShown: false}} />
-        
-        <Stack.Screen 
-        name="Detalhes" 
-        component={Detalhes} 
-        options={{
-          title: 'Detalhes',
-          headerTitleStyle:{
-            fontFamily: 'Roboto',
-            fontSize: 25,
-            color: '#000000',
-          },
-        }}
+        <Stack.Screen name="Inicio!" component={Tabs} options={{ headerShown: false }} />
+
+        <Stack.Screen
+          name="Detalhes"
+          component={Detalhes}
+          options={{
+            title: 'Detalhes',
+            headerTitleStyle: {
+              fontFamily: 'Roboto',
+              fontSize: 25,
+              color: '#000000',
+            },
+          }}
         />
-        
-        <Stack.Screen 
-        name="ChatMensagens" 
-        component={ChatMensagens} 
-        options={({route}) => ({
-          title: route.params.userDono,
-          headerTitleAlign: 'center',
+
+        <Stack.Screen
+          name="ChatMensagens"
+          component={ChatMensagens}
+          options={({ route }) => ({
+            title: route.params.userDono,
+            headerTitleAlign: 'center',
           })}
         />
+
 
       </Stack.Navigator>
     </NavigationContainer>
@@ -438,4 +439,9 @@ export default function App() {
 }
 
 
+//Para melhorar e organizar as rotas e navigations após incluir o Login, rever essas dicas abaixo:
+// =========================================================================================
+// Título "Melhorando a navegação do seu app com Stack, Tab e Drawer Navigator"
+// Link do Vídeo: https://www.youtube.com/watch?v=gH9Vvq6WbnA
+// Canal do Youtube: Rocketseat
 

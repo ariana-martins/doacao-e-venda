@@ -6,6 +6,7 @@ import Pesquisar from '../Pesquisar';
 
 import ProdutosList from '../../components/ProdutosList';
 
+
 //data temporário, para depois incluir o firebase
 
 export default function PaginaInicial(){
@@ -125,14 +126,17 @@ export default function PaginaInicial(){
   
   return(
     <SafeAreaView style={styles.container}>
+     
+     {/*Aqui vai Pesquisar a lista de produtos*/}
+     {/* Falta configurar para quando clicar em Pesquisar, ele vai direto para a Página "Pesqusiar" */}
       <Pesquisar/>
       
        {/*Aqui vai a lista de produtos*/}
        <FlatList 
         showsHorizontalScrollIndicator={false}
         columnWrapperStyle={{ justifyContent: 'space-around', padding: 10 }}
-        data={card}
-        keyExtractor={item=>item.id}
+        data={card} //data, da onde eu vou pegar os dados desta lista (nesse caso é o card com a lista de produtos)
+        keyExtractor={item=>item.id} //keyEstractor define uma chave para cada um dos elementos, aqui é um tipo que vou querer retornar um "item.id" 
         numColumns={3}
         renderItem={({item}) => (
           <View>
@@ -150,7 +154,6 @@ export default function PaginaInicial(){
           
         )}
         />
-        
     </SafeAreaView>
   );
 }

@@ -345,6 +345,7 @@ const Tab = createBottomTabNavigator();
 function Tabs() {
   return (
     <Tab.Navigator screenOptions={{ headerShown: false }}>
+      
       <Tab.Screen
         name='Página Inicial'
         component={PaginaInicial}
@@ -353,8 +354,9 @@ function Tabs() {
             <Icon name="home-outline" size={20} color="#000000" />
           ),
           tabBarLabel: "Pagina Inicial",
-
+          
         }}
+        
       />
       <Tab.Screen
         name='Pesquisar - Tab'
@@ -439,9 +441,17 @@ export default function App() {
 }
 
 
+//[=> UTILIZAR ESSE EXEMPLO PARA CONFIGURAR A LISTA DE USUÁRIOS DO CHAT, RENDERIZANDO DE ACORDO COM DATA ID ]
+//[=> UTILIZAR ESSE EXEMPLO PARA CONFIGURAR EDITAR UM ITEM/PRODUTO COM BOTÃO/ICONE "EDITAR" E "EXCLUIR", RENDERIZANDO DE ACORDO COM DATA ID ]
+// Explicação sobre os atributos dentro da Flatlist como por exemplo "Data" e "KeyExtractor" e renderizar os itens...
+// =========================================================================================
+// Título "Construa um Cadastro COMPLETO em React Native - Com Hooks e Context API"
+// Link do Vídeo: https://www.youtube.com/watch?v=V-uYjDnuXkU
+// Canal do Youtube: Cod3r Cursos
+
+
 //Para melhorar e organizar as rotas e navigations após incluir o Login, rever essas dicas abaixo:
 // =========================================================================================
 // Título "Melhorando a navegação do seu app com Stack, Tab e Drawer Navigator"
 // Link do Vídeo: https://www.youtube.com/watch?v=gH9Vvq6WbnA
 // Canal do Youtube: Rocketseat
-

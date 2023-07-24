@@ -11,15 +11,13 @@ import storage from '@react-native-firebase/storage';
 
 import { useNavigation } from '@react-navigation/native';
 
-import PaginaInicial from '../PaginaInicial';
-
 
 //[ok dia 21.06.23] falta testar um código de inserir algo no firestore a partir do aplicativo em execucao
 // exemplo do video: https://github.com/rodrigorgtic/helpdesk/blob/main/src/components/Forms/OrderForm/index.tsx
 
 
 export default function AdicionarNovoProduto() {
-
+    
     const navigation = useNavigation();
 
     const [isSelected, setSelection] = React.useState(false);
@@ -138,6 +136,7 @@ export default function AdicionarNovoProduto() {
     const onSelectImage = async () => {
 
         if (onSelectImage) {
+            
             Alert.alert(
                 'Para as imagens',
                 'Escolha uma Opção:',

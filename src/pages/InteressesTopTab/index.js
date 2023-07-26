@@ -16,7 +16,7 @@ import firestore from '@react-native-firebase/firestore';
 
 
 export default function InteressesTopTab() {
-
+ 
     const [textInputName, setTextInputName] = useState('');
     const [textInputEmail, setTextInputEmail] = useState('');
     const ref = firestore().collection('myInteresses');

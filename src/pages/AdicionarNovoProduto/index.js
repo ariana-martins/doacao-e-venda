@@ -144,7 +144,9 @@ export default function AdicionarNovoProduto() {
                     { text: 'Camera', onPress: onCamera },
                     { text: 'Galeria', onPress: onGallery },
                     // { text: '+ que 1 imagem', onPress: onGalleryVarias }, //Selecionar multiplas imagens
-                    { text: 'Cancelar', onPress: () => { } }
+                    { text: 'Cancelar', onPress: () => {
+                        Alert.alert('Você não selecionou nenhuma imagem');
+                     } }
                 ]
             )
         }
@@ -254,6 +256,8 @@ export default function AdicionarNovoProduto() {
 
             <Text style={styles.texto}>Selecione uma opção:</Text>
             <View>
+            
+            {/* ==>>> FAZER TESTE NA OUTRA TELA, TRANSFORMAR EM FUNÇÃO, COM IF <<====== */}
                 <View style={styles.checkboxOpcoes}>
                     <Checkbox
                         status={isSelected ? 'unchecked' : 'checked'}

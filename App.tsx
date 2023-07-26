@@ -441,6 +441,14 @@ export default function App() {
 }
 
 
+//[=> UTILIZAR ESSE EXEMPLO PARA CONFIGURAR A AUTENTICAÇÃO DO LOGIN SIMPLES, para depois implementar o código de Autenticação do Firebase] 
+// Explicação sobre Context API, que configura as rotas antes do Login, e para melhorar as "route"/"navigations" durante todo o Projeto do APP
+// =========================================================================================
+// Título "Entender Context API com React Native de uma vez por todas! "
+// Link do vídeo: https://www.youtube.com/watch?v=olSeMN70Vo4
+// Canal do Youtube: Sujeito Programador
+
+
 //[=> UTILIZAR ESSE EXEMPLO PARA CONFIGURAR A LISTA DE USUÁRIOS DO CHAT, RENDERIZANDO DE ACORDO COM DATA ID ]
 //[=> UTILIZAR ESSE EXEMPLO PARA CONFIGURAR EDITAR UM ITEM/PRODUTO COM BOTÃO/ICONE "EDITAR" E "EXCLUIR", RENDERIZANDO DE ACORDO COM DATA ID ]
 // Explicação sobre os atributos dentro da Flatlist como por exemplo "Data" e "KeyExtractor" e renderizar os itens...

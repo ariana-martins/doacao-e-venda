@@ -94,6 +94,20 @@ const ref = firebase.firestore().collection('produtos');
     }, [])
 
 
+    //==============================================================================================================
+    //CRIAR UMA CONST "<RenderCard/>" e renderizar ela com ({item}) =>
+    // e dentro do return e da <Flatlist/> + renderItem={({item})} ACRESCENTAR o "<RenderCard/>"
+    
+    // Exemplo a partir de 23:00min de vídeo a seguir:
+    // Conforme exemplo do link: "https://www.youtube.com/watch?v=g_nSRcjzivw&list=PLB97yPrFwo5ihgCoWXlEDHrAPQNshsfzP&index=11"
+    // Título do Canal do Youtube: #7 Showing all User on Home Screen | WhatsApp Clone using React Native and Firebase in Hindi
+    // Canal do Youtube: CODERS NEVER QUIT
+
+    //Também é necessário criar no firebase uma collection como User (uid/para usuário após autenticar, além dos produtos. Depois 
+    //tem que juntar os produtos de cada usuário/user/uid)
+    //==============================================================================================================
+
+
     return (
         <View style={{ padding: 18, backgroundColor: '#FFFFFF' }}>
             <Text style={{ fontWeight: 'bold', fontSize: 20 }}>Meus produtos para doar e vender!</Text>
@@ -105,10 +119,10 @@ const ref = firebase.firestore().collection('produtos');
                                 {/*aqui vai o card de imagens, mas não está puxando do banco de dados*/}
                                 <Card.Image 
                                     style={styles.img}
-                                    source={{ uri : 'gs://meus-pertences.appspot.com' }} 
+                                    source={{ uri : item.images }} 
                                 />
-                                <Card.Title>{item.titulo}</Card.Title>
                                 <Card.Divider />
+                                <Card.Title>{item.titulo}</Card.Title>
                                 <Text style={{ fontWeight: 'bold', fontSize: 16 }}>{item.valor}</Text> 
                                 
                                 <Text style={{ fontSize: 16, marginTop: 5 }}>{item.descricao}</Text>

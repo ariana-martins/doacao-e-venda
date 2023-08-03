@@ -9,7 +9,7 @@ const Cadastrar = () => {
        
     // a partir daqui, quando clica em cima do botão muda um pouco de cor, fica mais fraco
        <TouchableOpacity onPress={()=>cadastro()}>     
-            <Text style={estilos.textoCadastro}>Cadastra-se</Text>     
+            <Text style={estilos.textoCadastro}>Cadastra-se teste</Text>     
         </TouchableOpacity>
     );
 };

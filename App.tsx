@@ -139,7 +139,7 @@ export default function Projeto1(){
 //conteúdo de CSS
 const estilos = StyleSheet.create({
   conteiner:{
-    flex: 1,
+    flex: 1, //preenche toda a tela
     backgroundColor: '#46C227', //cor da tela
  //   alignItems: 'center', //centralizando todos os textos e imagens dentro do estilo conteiner
  //   justifyContent: 'center', //justifica todos os textos ao centro da tela
@@ -325,6 +325,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
+import Login from './src/pages/Login';
+
 import TopBarNavigator from './src/navigations/TopBarNavigator';
 
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -333,11 +335,31 @@ import PaginaInicial from './src/pages/PaginaInicial';
 import Pesquisar from './src/pages/Pesquisar';
 import AdicionarNovoProduto from './src/pages/AdicionarNovoProduto';
 import Chat from './src/pages/Chat';
-//import Perfil from './src/pages/Perfil'; //Nova pagina de perfil é PerfilTopTab
 import Detalhes from './src/pages/Detalhes';
 import ChatMensagens from './src/pages/ChatMensagens';
+import { StyleSheet, View } from 'react-native';
 
 
+
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+      <Login/>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container:{
+    flex:1, //preenche toda a tela
+    backgroundColor: "#FFFFFF",
+  },
+})
+
+
+
+/*
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -439,6 +461,8 @@ export default function App() {
     </NavigationContainer>
   );
 }
+
+*/
 
 
 //[=> UTILIZAR ESSE EXEMPLO PARA CONFIGURAR A AUTENTICAÇÃO DO LOGIN SIMPLES, para depois implementar o código de Autenticação do Firebase] 

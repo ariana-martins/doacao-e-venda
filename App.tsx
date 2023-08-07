@@ -326,6 +326,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 import Login from './src/pages/Login';
+import Cadastrar from './src/pages/Cadastrar';
 
 import TopBarNavigator from './src/navigations/TopBarNavigator';
 

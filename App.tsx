@@ -325,9 +325,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
-import Login from './src/pages/Login';
-import Cadastrar from './src/pages/Cadastrar';
-
 import TopBarNavigator from './src/navigations/TopBarNavigator';
 
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -338,15 +335,19 @@ import AdicionarNovoProduto from './src/pages/AdicionarNovoProduto';
 import Chat from './src/pages/Chat';
 import Detalhes from './src/pages/Detalhes';
 import ChatMensagens from './src/pages/ChatMensagens';
+
 import { StyleSheet, View } from 'react-native';
 
+import Login from './src/pages/Login';
+import Cadastrar from './src/pages/Cadastrar';
+import ScreenNavigator from './src/navigations/ScreenNavigator'; // Nova tela de navegação entre as páginas ("pages")
 
 
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Cadastrar />
+      <ScreenNavigator /> 
     </View>
   );
 }
@@ -357,6 +358,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
   },
 })
+
 
 
 
@@ -462,8 +464,8 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
 */
+
 
 
 //[=> UTILIZAR ESSE EXEMPLO PARA CONFIGURAR A AUTENTICAÇÃO DO LOGIN SIMPLES, para depois implementar o código de Autenticação do Firebase] 

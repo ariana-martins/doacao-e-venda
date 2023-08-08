@@ -53,7 +53,8 @@ const Login = () => {
                         value={senha}
                         mode="outlined"
                         secureTextEntry={true}
-                        onChangeText={text => setSenha(text)}
+                        //onChangeText={text => setSenha(text)} //ver a diferença entre essa linha e a debaixo do "onChanceText"
+                        onChangeText={setSenha} //ver a diferença entre essa linha e a de cima do "onChanceText"
                     />
                 </View>
                 {/*

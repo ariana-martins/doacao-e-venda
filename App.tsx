@@ -344,10 +344,26 @@ import ScreenNavigator from './src/navigations/ScreenNavigator'; // Nova tela de
 
 
 
+
+const Stack = createStackNavigator()
+const AuthNavigator = () => {
+
+}
+
+// CONTINUAR NO VÍDEO EM 1:19:00min 
+// Título do vídeo: Part 1/2 | OLX Clone using React Native & Firebase | React Native & Firebase for beginners in Hindi
+// Link do vídeo: https://www.youtube.com/watch?v=ntPQ-IPm3AM&list=PLB97yPrFwo5ihgCoWXlEDHrAPQNshsfzP&index=2
+
+
+
+
 export default function App() {
+
   return (
     <View style={styles.container}>
-      <ScreenNavigator /> 
+       <Login /> 
+      {/* <Cadastrar /> */}
+      {/* <ScreenNavigator /> */}
     </View>
   );
 }

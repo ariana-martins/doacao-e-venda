@@ -103,6 +103,17 @@ const ref = firebase.firestore().collection('produtos');
     // Título do Canal do Youtube: #7 Showing all User on Home Screen | WhatsApp Clone using React Native and Firebase in Hindi
     // Canal do Youtube: CODERS NEVER QUIT
 
+    //========================================
+    //CRIAR UMA CONST "<RenderCard/>" e renderizar ela com ({item}) =>
+    // e dentro do return e da <Flatlist/> + renderItem={({item})} ACRESCENTAR o "<RenderCard/>"
+    // e junto, cada card tem um botão abaixo, renderizando cada item
+
+    // Exemplo a partir de 1:09:00min de vídeo a seguir:
+    // Conforme exemplo do link: "https://www.youtube.com/watch?v=ntPQ-IPm3AM&list=PLB97yPrFwo5ihgCoWXlEDHrAPQNshsfzP&index=2"
+    // Título do Canal do Youtube: Part 1/2 | OLX Clone using React Native & Firebase | React Native & Firebase for beginners in Hindi
+    // Canal do Youtube: CODERS NEVER QUIT
+    //==========================================
+
     //Também é necessário criar no firebase uma collection como User (uid/para usuário após autenticar, além dos produtos. Depois 
     //tem que juntar os produtos de cada usuário/user/uid)
     //==============================================================================================================

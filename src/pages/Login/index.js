@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity  } from 'react-native';
 import { TextInput } from 'react-native-paper';
-import Cadastrar from '../../../src/pages/Cadastrar';
+import { useNavigation } from '@react-navigation/native';
 
-import auth from '@react-native-firebase/auth';
+
 //falta configurar a 'function' da autenticacao do firebase no codigo 
 //e falta criar uma parte de email e senha no console do firebase
 //Falta configurar "KeyboardAvoidingView" para preencher o e-mail, senha, para a tela ficar na mesma posição sem o teclado sobreescrever a tela de preenchimento do login.
@@ -12,7 +12,12 @@ import auth from '@react-native-firebase/auth';
 //Tudo o que um componente de função retorna é processado como um elemento React.
 // Exemplo, o Login componente renderizará um <Text> elemento.
 
-const Login = () => {
+
+export default function Login() {
+    const navigation = useNavigation();
+
+    
+
     //Aqui vai apontar para o Hooks (o useState já aponta na parte de cima com react native)
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
@@ -66,15 +71,15 @@ const Login = () => {
             </View>
 
             <View style={styles.bordaAreaBotoes}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate("EsqueciMinhaSenha")}>
                     <Text style={styles.textoEsqueciSenha}>Esqueci minha senha</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={() => login()}>
+                <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={() => navigation.navigate("ScreenNavigator")}>
                     <Text style={styles.txtEntrar_e_Cadastrar}>ENTRAR</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={() => cadastrar()}>
+                <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={() => navigation.navigate("Cadastrar")}>
                     <Text style={styles.txtEntrar_e_Cadastrar}>CADASTRAR</Text>
                 </TouchableOpacity>
             </View>
@@ -164,6 +169,3 @@ const styles = StyleSheet.create({
 
 });
 
-
-//exporta componente.
-export default Login;

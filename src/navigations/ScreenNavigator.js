@@ -8,6 +8,9 @@ import TopBarNavigator from './TopBarNavigator';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 
+import Login from '../pages/Login';
+import EsqueciMinhaSenha from '../pages/EsqueciMinhaSenha';
+import Cadastrar from '../pages/Cadastrar';
 import PaginaInicial from '../pages/PaginaInicial';
 import Pesquisar from '../pages/Pesquisar';
 import AdicionarNovoProduto from '../pages/AdicionarNovoProduto';
@@ -111,6 +114,22 @@ export default function ScreenNavigator() {
           })}
         />
 
+     {/*
+        <Stack.Screen 
+          name="login" 
+          component={Login}   
+        />
+
+        <Stack.Screen 
+          name="cadastrar" 
+          component={Cadastrar} 
+        />
+
+        <Stack.Screen 
+          name="esqueciMinhaSenha" 
+          component={EsqueciMinhaSenha} 
+        />
+ */}
 
       </Stack.Navigator>
     </NavigationContainer>

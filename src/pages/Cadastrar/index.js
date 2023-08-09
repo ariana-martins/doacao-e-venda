@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { TextInput } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
+
 //falta configurar a 'function' da autenticacao do firebase no codigo 
 //e falta criar uma parte de email e senha no console do firebase
 //Falta configurar "KeyboardAvoidingView" para preencher o e-mail, senha, para a tela ficar na mesma posição sem o teclado sobreescrever a tela de preenchimento do login.
 
 
-const Cadastrar = () => {
+export default function Cadastrar() {
+    const navigation = useNavigation();
+
     const [nomeCompleto, setNomeCompleto] = useState('');
     const [email, setEmail] = useState('');
     const [dataNascimento, setdataNascimento] = useState('');
@@ -73,7 +77,7 @@ const Cadastrar = () => {
             </View>
 
             <View style={styles.bordaAreaBotoes}>
-                <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={() => cadastrar()}>
+                <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={() => navigation.navigate("Login")}>
                     <Text style={styles.txtEntrar_e_Cadastrar}>CADASTRAR</Text>
                 </TouchableOpacity>
             </View>
@@ -163,5 +167,3 @@ const styles = StyleSheet.create({
 
 });
 
-//exporta componente.
-export default Cadastrar;

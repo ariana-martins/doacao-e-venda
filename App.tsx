@@ -346,21 +346,55 @@ import ScreenNavigator from './src/navigations/ScreenNavigator'; // Nova tela de
 
 
 
-const Stack = createStackNavigator()
+const Stack = createStackNavigator();
+//const Tab = createBottomTabNavigator();
+
 const AuthNavigator = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Login" component={Login} options={{headerShown:false}}/>
+      <Stack.Screen name="Cadastrar" component={Cadastrar} options={{headerShown:false}}/>
+      <Stack.Screen name="EsqueciMinhaSenha" component={EsqueciMinhaSenha} options={{headerShown:false}}/>
+      {/* Os "name" e "component" sempre precisam estar com os nomes iguais para funcionar o "navigation.navigate" */}
+    </Stack.Navigator>
+  )
+}
+
+
+const TabNavigator = () => {
+  return (
+/*
+  <Tab.Navigator>
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Settings" component={SettingsScreen} />
+    </Tab.Navigator>
+ */
+    <ScreenNavigator />
+  )
 
 }
 
+
+
+const Navigation = () => {
+  return (
+    <NavigationContainer>
+       <AuthNavigator />
+    </NavigationContainer>
+  )
+}
 
 
 export default function App() {
 
   return (
     <View style={styles.container}>
-      {/* <Login /> */}
+       {/* <Login />  */}
       {/* <Cadastrar /> */}
-      <EsqueciMinhaSenha />
+      {/* <EsqueciMinhaSenha /> */}
       {/* <ScreenNavigator /> */}
+       <Navigation /> 
+       {/*<TabNavigator />*/}
     </View>
   );
 }

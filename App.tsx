@@ -340,6 +340,7 @@ import { StyleSheet, View } from 'react-native';
 
 import Login from './src/pages/Login';
 import Cadastrar from './src/pages/Cadastrar';
+import EsqueciMinhaSenha from './src/pages/EsqueciMinhaSenha';
 import ScreenNavigator from './src/navigations/ScreenNavigator'; // Nova tela de navegação entre as páginas ("pages")
 
 
@@ -350,27 +351,23 @@ const AuthNavigator = () => {
 
 }
 
-// CONTINUAR NO VÍDEO EM 1:19:00min 
-// Título do vídeo: Part 1/2 | OLX Clone using React Native & Firebase | React Native & Firebase for beginners in Hindi
-// Link do vídeo: https://www.youtube.com/watch?v=ntPQ-IPm3AM&list=PLB97yPrFwo5ihgCoWXlEDHrAPQNshsfzP&index=2
-
-
 
 
 export default function App() {
 
   return (
     <View style={styles.container}>
-       <Login /> 
+      {/* <Login /> */}
       {/* <Cadastrar /> */}
+      <EsqueciMinhaSenha />
       {/* <ScreenNavigator /> */}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container:{
-    flex:1, //preenche toda a tela
+  container: {
+    flex: 1, //preenche toda a tela
     backgroundColor: "#FFFFFF",
   },
 })
@@ -386,7 +383,7 @@ const Tab = createBottomTabNavigator();
 function Tabs() {
   return (
     <Tab.Navigator screenOptions={{ headerShown: false }}>
-      
+
       <Tab.Screen
         name='Página Inicial'
         component={PaginaInicial}
@@ -395,9 +392,9 @@ function Tabs() {
             <Icon name="home-outline" size={20} color="#000000" />
           ),
           tabBarLabel: "Pagina Inicial",
-          
+
         }}
-        
+
       />
       <Tab.Screen
         name='Pesquisar - Tab'

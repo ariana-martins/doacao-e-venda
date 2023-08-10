@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { TextInput } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
 
 //falta configurar a 'function' da autenticacao do firebase no codigo 
 //e falta criar uma parte de email e senha no console do firebase
 //Falta configurar "KeyboardAvoidingView" para preencher o e-mail, senha, para a tela ficar na mesma posição sem o teclado sobreescrever a tela de preenchimento do login.
 
 
-export default function EsqueciMinhaSenha() {
-    const navigation = useNavigation();
+export default function EsqueciMinhaSenha({navigation}) {
 
     const [email, setEmail] = useState('');
     const [dataNascimento, setdataNascimento] = useState('');
@@ -67,7 +65,8 @@ export default function EsqueciMinhaSenha() {
             </View>
 
             <View style={styles.bordaAreaBotoes}>
-                <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={() => navigation.navigate("Login")}>
+                <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={() => navigation.goBack()}>
+                    {/* navigation.goBack está retornando para o Login após clicar em Cadastrar */}
                     <Text style={styles.txtEntrar_e_Cadastrar}>CADASTRAR</Text>
                 </TouchableOpacity>
             </View>

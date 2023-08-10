@@ -34,7 +34,6 @@ function Tabs() {
             <Icon name="home-outline" size={20} color="#000000" />
           ),
           tabBarLabel: "Pagina Inicial",
-          
         }}
         
       />

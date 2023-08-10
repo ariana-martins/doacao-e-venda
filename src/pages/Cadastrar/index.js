@@ -1,21 +1,30 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { TextInput } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
+import auth from '@react-native-firebase/auth';
+import { Button } from 'react-native-elements';
+
 
 //falta configurar a 'function' da autenticacao do firebase no codigo 
 //e falta criar uma parte de email e senha no console do firebase
 //Falta configurar "KeyboardAvoidingView" para preencher o e-mail, senha, para a tela ficar na mesma posição sem o teclado sobreescrever a tela de preenchimento do login.
 
 
-export default function Cadastrar() {
-    const navigation = useNavigation();
-
+export default function Cadastrar({navigation}) {
+  
     const [nomeCompleto, setNomeCompleto] = useState('');
     const [email, setEmail] = useState('');
     const [dataNascimento, setdataNascimento] = useState('');
     const [senha, setSenha] = useState('');
     const [confirmarSenha, setConfirmarSenha] = useState('');
+
+
+    //Autenticação do usuário com o firebase
+    const userCadastrar = async () => {
+        const result = await auth().createUserWithEmailAndPassword(email,senha)
+        console.log(result.user)
+    }
+
 
     return (
 
@@ -75,9 +84,12 @@ export default function Cadastrar() {
                     />
                 </View>
             </View>
-
+            <Button mode="contained" onPress={() => userCadastrar()} >
+                CadastrarTesteAuth
+            </Button>
             <View style={styles.bordaAreaBotoes}>
-                <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={() => navigation.navigate("Login")}>
+                <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={() => navigation.goBack()}> 
+                {/* navigation.goBack está retornando para o Login após clicar em Cadastrar */}
                     <Text style={styles.txtEntrar_e_Cadastrar}>CADASTRAR</Text>
                 </TouchableOpacity>
             </View>

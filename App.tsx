@@ -362,7 +362,9 @@ const AuthNavigator = () => {
 
 
 const TabNavigator = () => {
+  const user = "" //autenticação do usuário com firebase (está vazio, pois preenche os dados na tela Cadastrar)
   return (
+    
 /*
   <Tab.Navigator>
       <Tab.Screen name="Home" component={HomeScreen} />
@@ -377,6 +379,7 @@ const TabNavigator = () => {
 
 
 const Navigation = () => {
+  
   return (
     <NavigationContainer>
        <AuthNavigator />

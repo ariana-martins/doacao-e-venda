@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, Alert } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import auth from '@react-native-firebase/auth';
+
 import { Button } from 'react-native-elements';
 
 
@@ -10,8 +11,8 @@ import { Button } from 'react-native-elements';
 //Falta configurar "KeyboardAvoidingView" para preencher o e-mail, senha, para a tela ficar na mesma posição sem o teclado sobreescrever a tela de preenchimento do login.
 
 
-export default function Cadastrar({navigation}) {
-  
+export default function Cadastrar({ navigation }) {
+
     const [nomeCompleto, setNomeCompleto] = useState('');
     const [email, setEmail] = useState('');
     const [dataNascimento, setdataNascimento] = useState('');
@@ -21,10 +22,15 @@ export default function Cadastrar({navigation}) {
 
     //Autenticação do usuário com o firebase
     const userCadastrar = async () => {
-        const result = await auth().createUserWithEmailAndPassword(email,senha)
-        console.log(result.user)
+        if (!email || !senha) {
+            Alert.alert("Por favor preencha todos os dados")
+        }
+        try {
+            await auth().createUserWithEmailAndPassword(email, senha)
+        } catch (err) {
+            Alert.alert("Dados cadastrados")
+        }
     }
-
 
     return (
 
@@ -36,7 +42,7 @@ export default function Cadastrar({navigation}) {
                 </View>
             </View>
             <View>
-            <Text style={styles.txtEmail_e_Senha}>Nome Completo:</Text>
+                <Text style={styles.txtEmail_e_Senha}>Nome Completo:</Text>
                 <View style={styles.bordaTextInput}>
                     <TextInput
                         label="Nome Completo:"
@@ -88,8 +94,8 @@ export default function Cadastrar({navigation}) {
                 CadastrarTesteAuth
             </Button>
             <View style={styles.bordaAreaBotoes}>
-                <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={() => navigation.goBack()}> 
-                {/* navigation.goBack está retornando para o Login após clicar em Cadastrar */}
+                <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={() => navigation.goBack()}>
+                    {/* navigation.goBack está retornando para o Login após clicar em Cadastrar */}
                     <Text style={styles.txtEntrar_e_Cadastrar}>CADASTRAR</Text>
                 </TouchableOpacity>
             </View>

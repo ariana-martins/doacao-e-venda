@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity  } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, Alert } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
+import auth from '@react-native-firebase/auth';
+
+import { Button } from 'react-native-elements';
 
 
 //falta configurar a 'function' da autenticacao do firebase no codigo 
@@ -16,11 +19,26 @@ import { useNavigation } from '@react-navigation/native';
 export default function Login() {
     const navigation = useNavigation();
 
-    
-
     //Aqui vai apontar para o Hooks (o useState já aponta na parte de cima com react native)
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
+
+
+    //Autenticação do usuário com o firebase
+    const userLogin = async () => {
+        if (!email || !senha) {
+            Alert.alert("Por favor preencha todos os dados")
+        }
+        try {
+            const result = await auth().signInWithEmailAndPassword(email, senha)
+            console.log(result.user)
+        } catch (err) {
+            Alert.alert("Os dados não conferem, tente novamente")
+        }
+
+    }
+
+
 
     return (
 
@@ -75,9 +93,13 @@ export default function Login() {
                     <Text style={styles.textoEsqueciSenha}>Esqueci minha senha</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={() => navigation.navigate("ScreenNavigator")}>
+                <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={() => navigation.navigate("PaginaInicialTeste")}>
                     <Text style={styles.txtEntrar_e_Cadastrar}>ENTRAR</Text>
                 </TouchableOpacity>
+
+                <Button mode="contained" onPress={() => userLogin()} >
+                    LoginTesteAuth
+                </Button>
 
                 <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={() => navigation.navigate("Cadastrar")}>
                     <Text style={styles.txtEntrar_e_Cadastrar}>CADASTRAR</Text>

@@ -319,7 +319,7 @@ const styles = StyleSheet.create({
 // AQUI PARA BAIXO, É A PARTE NOVA DO CÓDIGO
 //===================================================
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -343,18 +343,21 @@ import Cadastrar from './src/pages/Cadastrar';
 import EsqueciMinhaSenha from './src/pages/EsqueciMinhaSenha';
 import ScreenNavigator from './src/navigations/ScreenNavigator'; // Nova tela de navegação entre as páginas ("pages")
 
+import PaginaInicialTeste from './src/pages/PaginaInicialTeste';
+import SettingScreenTeste from './src/pages/SettingsScreenTeste';
 
+import auth from '@react-native-firebase/auth';
 
 
 const Stack = createStackNavigator();
-//const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
 const AuthNavigator = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Login" component={Login} options={{headerShown:false}}/>
-      <Stack.Screen name="Cadastrar" component={Cadastrar} options={{headerShown:false}}/>
-      <Stack.Screen name="EsqueciMinhaSenha" component={EsqueciMinhaSenha} options={{headerShown:false}}/>
+      <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+      <Stack.Screen name="Cadastrar" component={Cadastrar} options={{ headerShown: false }} />
+      <Stack.Screen name="EsqueciMinhaSenha" component={EsqueciMinhaSenha} options={{ headerShown: false }} />
       {/* Os "name" e "component" sempre precisam estar com os nomes iguais para funcionar o "navigation.navigate" */}
     </Stack.Navigator>
   )
@@ -362,16 +365,17 @@ const AuthNavigator = () => {
 
 
 const TabNavigator = () => {
-  const user = "" //autenticação do usuário com firebase (está vazio, pois preenche os dados na tela Cadastrar)
   return (
-    
-/*
-  <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Settings" component={SettingsScreen} />
-    </Tab.Navigator>
- */
-    <ScreenNavigator />
+
+      <Tab.Navigator>
+          <Tab.Screen name="paginaInicialTeste" component={PaginaInicialTeste} options={{headerShown:false}}/>
+          <Tab.Screen name="Settings" component={SettingScreenTeste} options={{headerShown:false}}/>
+        </Tab.Navigator>
+
+    /*
+    <ScreenNavigator />  
+    */
+
   )
 
 }
@@ -379,10 +383,11 @@ const TabNavigator = () => {
 
 
 const Navigation = () => {
-  
+  const user = "" //autenticação do usuário com firebase (está vazio, pois preenche os dados na tela Cadastrar)
+
   return (
     <NavigationContainer>
-       <AuthNavigator />
+      <AuthNavigator />
     </NavigationContainer>
   )
 }
@@ -392,12 +397,12 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-       {/* <Login />  */}
+      {/* <Login />  */}
       {/* <Cadastrar /> */}
       {/* <EsqueciMinhaSenha /> */}
       {/* <ScreenNavigator /> */}
-       <Navigation /> 
-       {/*<TabNavigator />*/}
+      <Navigation />
+      {/* <TabNavigator /> */}
     </View>
   );
 }

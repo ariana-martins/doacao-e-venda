@@ -28,8 +28,9 @@ export default function Login() {
     const userLogin = async () => {
         if (!email || !senha) {
             Alert.alert("Por favor preencha todos os dados")
+            return
         }
-        try {
+        try { //acessa conta do usuário já criado na tela Cadastrar com mesmo email e senha
             const result = await auth().signInWithEmailAndPassword(email, senha)
             console.log(result.user)
         } catch (err) {
@@ -93,7 +94,7 @@ export default function Login() {
                     <Text style={styles.textoEsqueciSenha}>Esqueci minha senha</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={() => navigation.navigate("PaginaInicialTeste")}>
+                <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={() => navigation.navigate("SettingScreenTeste")}>
                     <Text style={styles.txtEntrar_e_Cadastrar}>ENTRAR</Text>
                 </TouchableOpacity>
 
@@ -123,6 +124,7 @@ const styles = StyleSheet.create({
         color: '#000000', //cor do texto
         fontWeight: 'bold', //texto em negrito
         fontSize: 40, //tamanho do texto
+        marginTop: 60,
     },
     bordaimgLogo: {
         borderRadius: 180,

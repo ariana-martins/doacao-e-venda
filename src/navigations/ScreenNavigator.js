@@ -18,8 +18,10 @@ import Chat from '../pages/Chat';
 import Detalhes from '../pages/Detalhes';
 import ChatMensagens from '../pages/ChatMensagens';
 
+
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+
 
 
 function Tabs() {

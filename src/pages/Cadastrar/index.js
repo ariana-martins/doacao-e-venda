@@ -24,8 +24,9 @@ export default function Cadastrar({ navigation }) {
     const userCadastrar = async () => {
         if (!email || !senha) {
             Alert.alert("Por favor preencha todos os dados")
+            return
         }
-        try {
+        try { //Criar usuário com email e senha no firebase
             await auth().createUserWithEmailAndPassword(email, senha)
         } catch (err) {
             Alert.alert("Dados cadastrados")

@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image, Alert } from 'react-native';
 // import { Button } from 'react-native-elements';
+import { Button } from 'react-native-paper';
+
+import auth from '@react-native-firebase/auth';
+
 
 import ImageCropPicker from 'react-native-image-crop-picker';
 //import ImagePicker from 'react-native-image-crop-picker';
@@ -59,7 +63,7 @@ export default function PerfilTopTab() {
     //React Hook com useState para pegar a imagem selecionada e exibi-la em nosso aplicativo.
     const [image, setImage] = React.useState(null);
 
- 
+
     //===========================================
     // Referência: https://dev.to/papemalick2015/react-native-firebase-storage-11kf
     // Agora vamos salvar a imagem no Firebase Storage
@@ -83,10 +87,10 @@ export default function PerfilTopTab() {
         try {
             await task;
             const url = await reference.getDownloadURL() //Baixando um arquivo com uma URL, e para obter uma URL de uma referência usando .getDownloadURL().
-            Alert.alert("Foto","Aqui salvei imagem")
+            Alert.alert("Foto", "Aqui salvei imagem")
             return url
         }
-        catch(error) {
+        catch (error) {
             // Handle any errors that occur
             console.error(error);
         }
@@ -100,7 +104,7 @@ export default function PerfilTopTab() {
 
 
 
-// Agora vamos criar o Button para escolher a imagem e exibi-la ("choose_photo")
+    // Agora vamos criar o Button para escolher a imagem e exibi-la ("choose_photo")
 
     return (
         <View style={styles.container}>
@@ -115,6 +119,29 @@ export default function PerfilTopTab() {
                 <TouchableOpacity style={styles.button}
                     onPress={savephoto}>
                     <Text>Salvar imagem</Text>
+                </TouchableOpacity>
+
+            </View>
+            {/* //====>>>> Falta configurar navegação do Login p/ as telas de páginas do usuário  */}
+            {/* O Logout deve funcionar como exemplo do vídeo: "Part 1/2 | OLX Clone using React Native & Firebase | React Native & Firebase for beginners in Hindi" */}
+            {/* Link do vídeo: https://www.youtube.com/watch?v=ntPQ-IPm3AM&list=PLB97yPrFwo5ihgCoWXlEDHrAPQNshsfzP&index=6 */}
+            <View>
+                <Text>Nome Usuário aqui</Text>
+                <Text>E-mail do usuário aqui</Text>
+               
+               {/*
+                <Text>{auth().currentUser.email}</Text>
+                <Button mode="contained" onPress={() => auth().signOut()} >
+                    LogoutTeste
+                </Button>
+                 */}
+            </View>
+
+            <View style={styles.bordaAreaBotoes}>
+                {/*Falta configurar a navigation goBack do NAVIGATE */}
+                <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={() => navigation.goBack()}>
+                    {/* navigation.goBack está retornando para o Login após clicar em Sair */}
+                    <Text style={styles.txtEntrar_e_Cadastrar}>SAIR</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -200,7 +227,26 @@ const styles = StyleSheet.create({
     container_images: {
         alignItems: 'center',
         //   marginTop: hp('1%')
-    }
+    },
+
+    bordaAreaBotoes: {
+        alignItems: "center", //justifica todos os botões e texto ao centro da tela
+        paddingVertical: 15,
+    },
+    btnEntrar_e_Cadastrar: {
+        width: 250, //largura
+        height: 40, //altura 
+        backgroundColor: '#000000', //cor dentro da borda, onde vai ser incluído o texto
+        borderRadius: 10, // circunferência da borda
+        alignItems: 'center', //centraliza o texto ao meio da borda
+    },
+    txtEntrar_e_Cadastrar: {
+        color: '#FFFFFF', //cor do texto
+        fontWeight: 'bold', //texto em negrito
+        fontSize: 20, //tamanho do texto
+        textAlign: 'center', // alinha texto dentro da borda, ao centro
+    },
+
 
 
 })

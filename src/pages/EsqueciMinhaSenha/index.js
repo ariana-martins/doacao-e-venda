@@ -97,8 +97,7 @@ const styles = StyleSheet.create({
         width: 250, //largura da imagem
         height: 250, //altura da imagem
         height: "100%", //espaço da pagina
-        justifyContent: "space-evenly",
-    },
+        justifyContent: "space-evenly",    },
     bordaEmail_e_Senha: {
         height: "30%",
         justifyContent: "space-evenly",

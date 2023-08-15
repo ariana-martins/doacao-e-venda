@@ -6,5 +6,5 @@ export default function SettingScreenTeste() {
         <View>
             <Text>Teste pagina com navegacao no login</Text>
         </View>
-    )
-}
+    );
+};

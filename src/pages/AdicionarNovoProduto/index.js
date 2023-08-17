@@ -17,7 +17,7 @@ import { useNavigation } from '@react-navigation/native';
 
 
 export default function AdicionarNovoProduto() {
-    
+
     const navigation = useNavigation();
 
     const [isSelected, setSelection] = React.useState(false);
@@ -113,30 +113,30 @@ export default function AdicionarNovoProduto() {
     //Função enviar para tela inicial após "Cadastro com sucesso" ou quando clicar no botão "Cancelar"
     const VoltarAoInicio = () => {
         Alert.alert("Atenção!", "Tem certeza que deseja sair?", [
-          {
-            text: "Não",
-            onPress: () => null,
-            style: "cancel"
-          },
-          { 
-            text: "SIM", 
-            onPress: () => navigation.goBack() //Navigation.goBack() volta para "PaginaInicial" pois as Tabs já estão configuradas como InitialHome para iniciar na "Pagina Inicial"
-            //Dicas nos links: https://www.tabnews.com.br/marcosveloso/template-de-rotas-react-native-com-native-stack-bottom-tabs-e-drawer-navigator
-            //Dicas nos link complementar com o código gitHub: https://github.com/MarcosVel/routes-template/commit/33e621df08b702225460437fd0b3fb58678b98d9
-            // ==>> Falta arrumar para: Limpar toda a Página quando clicar em  "Cancelar em Sim" e ir para a tela "Pagina Inicial" 
-          }
+            {
+                text: "Não",
+                onPress: () => null,
+                style: "cancel"
+            },
+            {
+                text: "SIM",
+                onPress: () => navigation.goBack() //Navigation.goBack() volta para "PaginaInicial" pois as Tabs já estão configuradas como InitialHome para iniciar na "Pagina Inicial"
+                //Dicas nos links: https://www.tabnews.com.br/marcosveloso/template-de-rotas-react-native-com-native-stack-bottom-tabs-e-drawer-navigator
+                //Dicas nos link complementar com o código gitHub: https://github.com/MarcosVel/routes-template/commit/33e621df08b702225460437fd0b3fb58678b98d9
+                // ==>> Falta arrumar para: Limpar toda a Página quando clicar em  "Cancelar em Sim" e ir para a tela "Pagina Inicial" 
+            }
         ]);
         return true;
-      };
+    };
 
 
 
 
     //Selcionando imagem da camera ou da galeria do celular
     const onSelectImage = async () => {
-        
+
         if (onSelectImage) {
-            
+
             Alert.alert(
                 'Para as imagens',
                 'Escolha uma Opção:',
@@ -144,9 +144,11 @@ export default function AdicionarNovoProduto() {
                     { text: 'Camera', onPress: onCamera },
                     { text: 'Galeria', onPress: onGallery },
                     // { text: '+ que 1 imagem', onPress: onGalleryVarias }, //Selecionar multiplas imagens
-                    { text: 'Cancelar', onPress: () => {
-                        Alert.alert('Você não selecionou nenhuma imagem');
-                     } }
+                    {
+                        text: 'Cancelar', onPress: () => {
+                            Alert.alert('Você não selecionou nenhuma imagem');
+                        }
+                    }
                 ]
             )
         }
@@ -210,15 +212,15 @@ export default function AdicionarNovoProduto() {
             <View style={styles.container}>
                 <Image style={styles.img}
                     source={{ uri: images }}
-                    
+
                 />
                 {/* "onPress={() }" entre parenteses o onPress chama funcao anonima, que vai chamar o ImageCropPicker */}
                 <TouchableOpacity
                     style={styles.button}
                     activeOpacity={0.8}
                     onPress={onSelectImage}
-                    // Verificar algum procedimento para o usuário selecionar de 1 até 4 imagens aqui, 
-                    // sem necessitar utilizar o "multiplas imagens" do Image Crop Picker
+                // Verificar algum procedimento para o usuário selecionar de 1 até 4 imagens aqui, 
+                // sem necessitar utilizar o "multiplas imagens" do Image Crop Picker
                 >
                     <Text style={styles.buttonText}>Escolher imagem</Text>
                 </TouchableOpacity>
@@ -258,8 +260,8 @@ export default function AdicionarNovoProduto() {
 
             <Text style={styles.texto}>Selecione uma opção:</Text>
             <View>
-            
-            {/* ==>>> FAZER TESTE NA OUTRA TELA, TRANSFORMAR EM FUNÇÃO, COM IF <<====== */}
+
+                {/* ==>>> FAZER TESTE NA OUTRA TELA, TRANSFORMAR EM FUNÇÃO, COM IF <<====== */}
                 <View style={styles.checkboxOpcoes}>
                     <Checkbox
                         status={isSelected ? 'unchecked' : 'checked'}
@@ -310,16 +312,43 @@ export default function AdicionarNovoProduto() {
 }
 
 const styles = StyleSheet.create({
-    bordaAddFotos: {
-        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
+    /*
+       bordaAddFotos: {
+           alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
+           justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
+           height: 200,
+           borderRadius: 5,
+           borderWidth: 3,
+           borderColor: "#000000",
+           borderStyle: 'dashed',
+           marginVertical: 10,
+           margin: 20,
+       },
+   */
+    container: {
+        flex: 1,
         justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
-        height: 200,
-        borderRadius: 5,
-        borderWidth: 3,
-        borderColor: "#000000",
-        borderStyle: 'dashed',
-        marginVertical: 10,
-        margin: 20,
+        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
+    },
+    img: {
+        width: 100,
+        height: 100,
+        borderRadius: 5, //essa numeração é para deixar a borda da imagem menos circular
+        //borderRadius: 50, //essa numeração é para deixar a borda da imagem completamente circular
+        resizeMode: 'contain',
+    },
+    button: {
+        width: 150,
+        height: 50,
+        borderRadius: 10,
+        backgroundColor: '#191970',
+        justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
+        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
+    },
+    buttonText: {
+        color: '#fff',
+        fontWeight: 'bold',
+        fontSize: 15,
     },
     texto: {
         paddingHorizontal: 15,
@@ -350,6 +379,12 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: '#000000',
     },
+    input: {
+        fontFamily: 'Roboto',
+        paddingHorizontal: 10,
+        fontSize: 15,
+        width: '98%'
+    },
     inputAreaDetalhes: {
         paddingHorizontal: 15,
         flexDirection: 'row',
@@ -362,12 +397,6 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderWidth: 2,
         borderColor: '#000000',
-    },
-    input: {
-        fontFamily: 'Roboto',
-        paddingHorizontal: 10,
-        fontSize: 15,
-        width: '98%'
     },
     inputDetalhes: {
         fontFamily: 'Roboto',
@@ -384,18 +413,13 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         marginBottom: 5,
     },
+    /*
     checkbox: {
         alignSelf: "center",
     },
+    */
     label: {
         margin: 8,
-    },
-
-    textoBotao: {
-        color: '#FFFFFF', //cor do texto
-        fontWeight: 'bold', //texto em negrito
-        fontSize: 20, //tamanho do texto
-        textAlign: 'center', // alinha texto dentro da borda, ao centro
     },
     btn: {
         width: 250, //largura
@@ -404,30 +428,11 @@ const styles = StyleSheet.create({
         borderRadius: 10, // circunferência da borda
         justifyContent: 'center', //centraliza o texto ao meio da borda
     },
-    container: {
-        flex: 1,
-        justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
-        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
-    },
-    button: {
-        width: 150,
-        height: 50,
-        borderRadius: 10,
-        backgroundColor: '#191970',
-        justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
-        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
-    },
-    buttonText: {
-        color: '#fff',
-        fontWeight: 'bold',
-        fontSize: 15,
-    },
-    img: {
-        width: 100,
-        height: 100,
-        borderRadius: 5, //essa numeração é para deixar a borda da imagem menos circular
-        //borderRadius: 50, //essa numeração é para deixar a borda da imagem completamente circular
-        resizeMode: 'contain',
+    textoBotao: {
+        color: '#FFFFFF', //cor do texto
+        fontWeight: 'bold', //texto em negrito
+        fontSize: 20, //tamanho do texto
+        textAlign: 'center', // alinha texto dentro da borda, ao centro
     },
 
 });

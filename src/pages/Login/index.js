@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, Alert } from 'react-native';
+
 import { TextInput } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
@@ -44,7 +45,7 @@ export default function Login() {
 
     return (
 
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, backgroundColor: "white" }}>
             <View style={styles.conteiner}>
                 <Text style={styles.txtLogin}>Login</Text>
                 <View style={styles.bordaimgLogo}>

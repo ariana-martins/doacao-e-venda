@@ -35,14 +35,14 @@ const styles = StyleSheet.create({
     botaoFiltrar: {
         paddingHorizontal: 10,
         flexDirection: 'row',
-        alignItems: 'center',
+        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
         width: '100%',
         marginVertical: 5,
     },
     filtrarArea: {
         paddingHorizontal: 15,
         flexDirection: 'row',
-        alignItems: 'center',
+        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
     },
     txtFiltrar: {
         fontFamily: 'Roboto',
@@ -52,15 +52,15 @@ const styles = StyleSheet.create({
     botaoPesquisar: {
         paddingHorizontal: 15,
         flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
+        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
+        justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
         width: '100%',
         marginVertical: 20,
     },
     inputArea: {
         paddingHorizontal: 15,
         flexDirection: 'row',
-        alignItems: 'center',
+        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
         width: '98%',
         backgroundColor: '#C4C4C4',
         elevation: 2,

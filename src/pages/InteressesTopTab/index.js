@@ -86,7 +86,7 @@ export default function InteressesTopTab() {
             style={{
                 flex: 1,
                 justifyContent: "center",
-                alignItems: "center",
+                alignItems: "center", //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
                 backgroundColor: "#FFFFFF",
             }}
         >
@@ -125,8 +125,8 @@ const styles = StyleSheet.create({
         height: 50,
         borderRadius: 10,
         backgroundColor: '#7159c1',
-        justifyContent: 'center', //justifica o texto dentro do botão
-        alignItems: 'center', //justifica o texto dentro do botão 
+        justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
+        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
     },
 });
 

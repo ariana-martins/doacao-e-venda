@@ -134,7 +134,7 @@ export default function AdicionarNovoProduto() {
 
     //Selcionando imagem da camera ou da galeria do celular
     const onSelectImage = async () => {
-
+        
         if (onSelectImage) {
             
             Alert.alert(
@@ -217,6 +217,8 @@ export default function AdicionarNovoProduto() {
                     style={styles.button}
                     activeOpacity={0.8}
                     onPress={onSelectImage}
+                    // Verificar algum procedimento para o usuário selecionar de 1 até 4 imagens aqui, 
+                    // sem necessitar utilizar o "multiplas imagens" do Image Crop Picker
                 >
                     <Text style={styles.buttonText}>Escolher imagem</Text>
                 </TouchableOpacity>
@@ -309,8 +311,8 @@ export default function AdicionarNovoProduto() {
 
 const styles = StyleSheet.create({
     bordaAddFotos: {
-        alignItems: 'center',
-        justifyContent: 'center',
+        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
+        justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
         height: 200,
         borderRadius: 5,
         borderWidth: 3,
@@ -330,15 +332,15 @@ const styles = StyleSheet.create({
     botaoAdicionarMargem: {
         paddingHorizontal: 15,
         flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
+        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
+        justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
         width: '100%',
         marginVertical: 10,
     },
     inputArea: {
         paddingHorizontal: 15,
         flexDirection: 'row',
-        alignItems: 'center',
+        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
         width: '98%',
         backgroundColor: '#FFFFFF',
         elevation: 2,
@@ -404,16 +406,16 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
+        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
     },
     button: {
         width: 150,
         height: 50,
         borderRadius: 10,
         backgroundColor: '#191970',
-        justifyContent: 'center', //justifica o texto dentro do botação "Escolher imagem"
-        alignItems: 'center', //justifica o texto dentro do botão "Escolher imagem"
+        justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
+        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
     },
     buttonText: {
         color: '#fff',

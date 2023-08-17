@@ -77,7 +77,11 @@ export default function MeusProdutos() {
 const [data, setData] = useState('');
 
 
-
+// Refazer o getDowload em "Adicionar novo produto" e aqui também incluir um "UseEffect + getDetail"
+// Conforme seguindo o manual do canal do Youtube: CODERS NEVER QUIT
+// Título do vídeo: Part 1/2 | OLX Clone using React Native & Firebase | React Native & Firebase for beginners in Hindi
+// Link canal do Youtube: https://www.youtube.com/watch?v=ntPQ-IPm3AM&list=PLB97yPrFwo5ihgCoWXlEDHrAPQNshsfzP&index=7
+// Observação: Nesse exemplo inicia desde o login com o usuário, e mostra o "produto c/ imagem" em um Card c/ getDowload do Firebase + Storage.
 const ref = firebase.firestore().collection('produtos');
     useEffect(()=>{
         ref.onSnapshot(querySnapshot =>{
@@ -188,7 +192,7 @@ export default function MeusProdutos() {
             style={{
                 flex: 1,
                 justifyContent: "center",
-                alignItems: "center",
+                alignItems: "center", //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
                 backgroundColor: "#FFFFFF",
             }}
         >

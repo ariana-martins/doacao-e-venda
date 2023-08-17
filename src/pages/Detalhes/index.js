@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     botaoAdicionarMargem:{
         paddingHorizontal: 15, 
         flexDirection: 'row',
-        alignItems: 'center',
+        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
         justifyContent: 'center',
         width: '100%',
         marginVertical: 10,

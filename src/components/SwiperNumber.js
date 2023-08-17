@@ -56,8 +56,8 @@ const styles = StyleSheet.create({
     },
     slide:{
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
+        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
         backgroundColor: '#FFFFFF',
     }
 });

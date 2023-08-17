@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingLeft: 20,
         paddingRight: 20,
-        alignItems: 'center',
+        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
         backgroundColor: "#FFFFFF",
     },
     card:{

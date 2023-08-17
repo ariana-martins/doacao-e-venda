@@ -55,15 +55,15 @@ export default function UploadImagem() {
     const styles = StyleSheet.create({
         container: {
             flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
+            justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
+            alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
         },
         btnStyles: {
             backgroundColor: 'blue',
             height: 48,
             borderRadius: 8,
-            alignItems: 'center',
-            justifyContent: 'center',
+            alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
+            justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
         },
         txtStyles: {
             color: 'white',
@@ -154,15 +154,15 @@ export default function InteressesTopTab() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
+        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
     },
     btnStyles: {
         backgroundColor: 'blue',
         height: 48,
         borderRadius: 8,
-        alignItems: 'center',
-        justifyContent: 'center',
+        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
+        justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
     },
     txtStyles: {
         color: 'white',
@@ -351,8 +351,8 @@ const styles = StyleSheet.create({
         height: 50,
         borderRadius: 10,
         backgroundColor: '#191970',
-        justifyContent: 'center', //justifica o texto dentro do botão
-        alignItems: 'center', //justifica o texto dentro do botão 
+        justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
+        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
     },
 });
 

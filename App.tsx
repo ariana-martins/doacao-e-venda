@@ -141,8 +141,8 @@ const estilos = StyleSheet.create({
   conteiner:{
     flex: 1, //preenche toda a tela
     backgroundColor: '#46C227', //cor da tela
- //   alignItems: 'center', //centralizando todos os textos e imagens dentro do estilo conteiner
- //   justifyContent: 'center', //justifica todos os textos ao centro da tela
+ //   alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
+ //   justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
   },
 });
 //Login está correto até aqui <<<<=====
@@ -309,8 +309,8 @@ export default function Projeto1() {
 const styles = StyleSheet.create({
   container: {
 //		flex: 1,
-//		justifyContent: 'center',
-//		alignItems: 'center',
+//		justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
+//		alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
   },
 });
 */

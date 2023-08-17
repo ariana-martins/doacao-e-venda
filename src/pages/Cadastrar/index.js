@@ -9,7 +9,7 @@ import { Button } from 'react-native-elements';
 //falta configurar a 'function' da autenticacao do firebase no codigo 
 //e falta criar uma parte de email e senha no console do firebase
 //Falta configurar "KeyboardAvoidingView" para preencher o e-mail, senha, para a tela ficar na mesma posição sem o teclado sobreescrever a tela de preenchimento do login.
-
+// Esse "KeyboardAvoidingView" não utilizei na pagina de "Adicionar novo produto" posso pegar os exemplos de lá.
 
 export default function Cadastrar({ navigation }) {
 
@@ -108,10 +108,9 @@ export default function Cadastrar({ navigation }) {
 //conteúdo de CSS
 const styles = StyleSheet.create({
     conteiner: {
-        alignItems: 'center', //centralizando todos os textos e imagens dentro do estilo conteiner
-        // padding: 20, //margem da área interna, tipo caixa de texto, quanto maior a margem, menos texto dá para digitar
+        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
         height: "25%", //espaço da pagina
-        justifyContent: "space-evenly",
+        justifyContent: "space-evenly", //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
     },
     txtLogin: {
         paddingTop: 15,
@@ -127,11 +126,11 @@ const styles = StyleSheet.create({
         width: 250, //largura da imagem
         height: 250, //altura da imagem
         height: "100%", //espaço da pagina
-        justifyContent: "space-evenly",
+        justifyContent: "space-evenly", //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
     },
     bordaEmail_e_Senha: {
         height: "30%",
-        justifyContent: "space-evenly",
+        justifyContent: "space-evenly", //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
     },
     txtEmail_e_Senha: {
         paddingHorizontal: 15,
@@ -161,7 +160,7 @@ const styles = StyleSheet.create({
         fontSize: 28, //tamanho do texto
     },
     bordaAreaBotoes: {
-        alignItems: "center", //justifica todos os botões e texto ao centro da tela
+        alignItems: "center", //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
         paddingVertical: 15,
     },
     textoEsqueciSenha: {
@@ -175,7 +174,7 @@ const styles = StyleSheet.create({
         height: 40, //altura 
         backgroundColor: '#000000', //cor dentro da borda, onde vai ser incluído o texto
         borderRadius: 10, // circunferência da borda
-        alignItems: 'center', //centraliza o texto ao meio da borda
+        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
     },
     txtEntrar_e_Cadastrar: {
         color: '#FFFFFF', //cor do texto

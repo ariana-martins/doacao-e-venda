@@ -137,16 +137,15 @@ export default function PerfilTopTab() {
                  */}
             </View>
 
-            <View style={styles.bordaAreaBotoes}>
+            <View style={styles.botaoAdicionarMargem}>
                 {/*Falta configurar a navigation goBack do NAVIGATE */}
-                <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={() => navigation.goBack()}>
+                <TouchableOpacity style={styles.btn} onPress={() => navigation.goBack()}>
                     {/* navigation.goBack está retornando para o Login após clicar em Sair */}
-                    <Text style={styles.txtEntrar_e_Cadastrar}>SAIR</Text>
+                    <Text style={styles.textoBotao}>SAIR</Text>
                 </TouchableOpacity>
             </View>
         </View>
     )
-
 
 
     //=================================================
@@ -190,8 +189,8 @@ const styles = StyleSheet.create({
     /*
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
+        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
         backgroundColor: "#FFFFFF",
     },
     */
@@ -200,8 +199,8 @@ const styles = StyleSheet.create({
         height: 50,
         borderRadius: 3,
         backgroundColor: '#7159c1',
-        justifyContent: 'center', //justifica o texto dentro do botação "Escolher imagem"
-        alignItems: 'center' //justifica o texto dentro do botão "Escolher imagem"
+        justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
+        alignItems: 'center' //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
     },
     /*
     buttonText: {
@@ -225,29 +224,31 @@ const styles = StyleSheet.create({
         borderRadius: 90
     },
     container_images: {
-        alignItems: 'center',
+        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
         //   marginTop: hp('1%')
     },
 
-    bordaAreaBotoes: {
-        alignItems: "center", //justifica todos os botões e texto ao centro da tela
-        paddingVertical: 15,
+    botaoAdicionarMargem: {
+        paddingHorizontal: 15,
+        flexDirection: 'row',
+        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
+        justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
+        width: '100%',
+        marginVertical: 10,
     },
-    btnEntrar_e_Cadastrar: {
+    btn: {
         width: 250, //largura
         height: 40, //altura 
         backgroundColor: '#000000', //cor dentro da borda, onde vai ser incluído o texto
         borderRadius: 10, // circunferência da borda
-        alignItems: 'center', //centraliza o texto ao meio da borda
+        justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
     },
-    txtEntrar_e_Cadastrar: {
+    textoBotao: {
         color: '#FFFFFF', //cor do texto
         fontWeight: 'bold', //texto em negrito
         fontSize: 20, //tamanho do texto
         textAlign: 'center', // alinha texto dentro da borda, ao centro
     },
-
-
 
 })
 
@@ -360,8 +361,8 @@ const styles = StyleSheet.create({
         backgroundColor: "#C4C4C4",
         //border: 5, 
         //solid: #222,
-        justifyContent: 'center',
-        alignItems: 'center',
+        justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
+        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
         overflow: 'hidden',
     },
     imgUser:{

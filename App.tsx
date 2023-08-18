@@ -359,7 +359,7 @@ const AuthNavigator = () => {
       <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
       <Stack.Screen name="Cadastrar" component={Cadastrar} options={{ headerShown: false }} />
       <Stack.Screen name="EsqueciMinhaSenha" component={EsqueciMinhaSenha} options={{ headerShown: false }} />
-      <Stack.Screen name="SettingScreenTeste" component={SettingScreenTeste} options={{ headerShown: false }}/>
+      <Stack.Screen name="SettingScreenTeste" component={SettingScreenTeste} options={{ headerShown: false }} />
 
       {/* Os "name" e "component" sempre precisam estar com os nomes iguais para funcionar o "navigation.navigate" */}
     </Stack.Navigator>
@@ -422,12 +422,14 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      {/* <Login />  */}
+      {/* <Login /> */}
       {/* <Cadastrar /> */}
       {/* <EsqueciMinhaSenha /> */}
       {/* <ScreenNavigator /> */}
       <Navigation />
-      {/* <TabNavigator /> */}
+      {/* <TabNavigator />  */}
+
+
     </View>
   );
 }
@@ -435,7 +437,9 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1, //preenche toda a tela
-    backgroundColor: "#FFFFFF",
+    //    backgroundColor: "#FFFFFF",
+    backgroundColor: "yellow",
+
   },
 })
 

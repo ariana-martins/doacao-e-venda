@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
 
 import { Button } from 'react-native-elements';
-
+import Icon from 'react-native-vector-icons/Ionicons';
 
 //falta configurar a 'function' da autenticacao do firebase no codigo 
 //e falta criar uma parte de email e senha no console do firebase
@@ -24,7 +24,7 @@ export default function Login() {
     //Aqui vai apontar para o Hooks (o useState já aponta na parte de cima com react native)
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
-
+    const [passwordVisibility, setPasswordVisibility] = useState(true);
 
     //Autenticação do usuário com o firebase
     const userLogin = async () => {
@@ -56,9 +56,9 @@ export default function Login() {
                     {/* //Colocar o texto Input assim dentro da view, quando utilizar o hooks */}
                     {/* //<TextInput style={styles.TextoInput} placeholder="Digite seu usuário:" onChangeText={Text=>setUsuario}/>  */}
                     {/* //<TextInput style={styles.TextoInput} placeholder="Digite sua senha:" secureTextEntry={true} onChangeText={Text=>setSenha}/> */}
-                   
+
                     <View style={styles.botaoAdicionarMargem}>
-                        <View style={styles.inputArea}>
+                        <View style={styles.inputAreaEmail}>
                             <TextInput
                                 style={styles.input}
                                 // disable={valor.length === 0} //validação desativada, se textInputName não for preenchida/igual a zero(0), não vai ser pressionável o botão "Enviar"
@@ -67,10 +67,12 @@ export default function Login() {
                                 keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
                                 onChangeText={setEmail}
                             />
+                            {/* (Observação: o ícone está abaixo do TextInput, então ele aparece na extrema direita, se estivesse acima do TextInput, ele apareceria à esquerda.) */}
+                            <Icon style={styles.iconEmail} name="person-outline" size={20} color="#000000" />
                         </View>
                     </View>
 
-         {/*           
+                    {/*           
                     <View style={styles.bordaTextInput}>
                         <TextInput
                             label="Endereço de e-mail:"
@@ -80,15 +82,34 @@ export default function Login() {
                         />
                     </View>
             */}
-            {/*                    
-            <TextInput style={styles.TextoInput}
-                placeholder="Endereço de e-mail:"
-                keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
 
-            />
-            */}
+
 
                     <Text style={styles.txtEmail_e_Senha}>Senha:</Text>
+                    <View style={styles.botaoAdicionarMargem}>
+                        <View style={styles.inputAreaSenha}>
+                            <TextInput
+                                style={styles.input}
+                                // disable={valor.length === 0} //validação desativada, se textInputName não for preenchida/igual a zero(0), não vai ser pressionável o botão "Enviar"
+                                placeholder="************"
+                                value={senha}
+                                keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
+                                onChangeText={setSenha}
+                                secureTextEntry={passwordVisibility}
+                            />
+                            <TouchableOpacity onPress={() => setPasswordVisibility(!passwordVisibility)} >
+                                {/* (Observação: o ícone está abaixo do TextInput, então ele aparece na extrema direita, se estivesse acima do TextInput, ele apareceria à esquerda.) */}
+                                <Icon style={styles.iconSenha} name={passwordVisibility ? "eye-off-outline" : "eye-outline"} size={20} color="#000000" />
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+
+
+
+
+                    {/*
+                    
+                    
                     <View style={styles.bordaTextInput}>
                         <TextInput
                             label="Senha:"
@@ -99,19 +120,14 @@ export default function Login() {
                             onChangeText={setSenha} //ver a diferença entre essa linha e a de cima do "onChanceText"
                         />
                     </View>
+             */}
+
                     {/*
             <TextInput style={styles.TextoInput}
                 placeholder="Trocar para asteriscos******" //ok
                 secureTextEntry={true}
             />
              */}
-
-
-
-
-
-
-
 
 
 
@@ -147,7 +163,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
         margin: 10,
-        backgroundColor: "blue",
+        //     backgroundColor: "pink",
     },
     txtLogin: {
         color: '#000000', //cor do texto
@@ -170,40 +186,46 @@ const styles = StyleSheet.create({
         color: "#000000",
         marginTop: 20,
     },
-    //parei de ver daqui pra baixo, no {TextInput}, fazer igual o que está no Figma
-    bordaTextInput: {
-        width: "100%",
-        backgroundColor: "maroon",
-    },
-
     botaoAdicionarMargem: {
-        paddingHorizontal: 15,
-        flexDirection: 'row',
-        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
-        justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
         width: '100%',
-        marginVertical: 10,
+        marginTop: 5,
     },
-    inputArea: {
-        paddingHorizontal: 15,
-        flexDirection: 'row',
+    inputAreaEmail: {
         alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
-        width: '98%',
-        backgroundColor: '#FFFFFF',
-        elevation: 2,
-        paddingHorizontal: 10,
-        height: 40,
+        width: '100%',
+        height: 50,
         borderRadius: 10,
         borderWidth: 2,
         borderColor: '#000000',
+        flexDirection: "row",
+    },
+    inputAreaSenha: {
+        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
+        width: '100%',
+        height: 50,
+        borderRadius: 10,
+        borderWidth: 2,
+        borderColor: '#000000',
+        flexDirection: "row",
     },
     input: {
+        flex: 1, //TextInput flex 1 para que ele ocupe toda a largura da exibição pai do View InputAreaEmail
         fontFamily: 'Roboto',
         paddingHorizontal: 10,
-        fontSize: 15,
-        width: '98%'
+        fontSize: 18,
+        width: '100%',
     },
+    iconEmail: {
+        padding: 10, //para alinhar da Erquerda p/ direita, na margem dentro do "FlexDirection: rom" do View InputAreaEmail
+    },
+    iconSenha: {
+        padding: 10, //para alinhar da Erquerda p/ direita, na margem dentro do "FlexDirection: rom" do View InputAreaEmail
+    },
+    //Exemplos TextInpu com Icones "https://stackoverflow.com/questions/40935381/how-can-i-put-an-icon-inside-a-textinput-in-react-native"
 
+
+    
+    //Continuar daqui pra baixo. "login" e "senha" ok
 
     /*
     TextoInput: {

@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Alert } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 //import { TextInput } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
 
 import { Button } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/Ionicons';
+
 
 //falta configurar a 'function' da autenticacao do firebase no codigo 
 //e falta criar uma parte de email e senha no console do firebase
@@ -49,7 +50,6 @@ export default function Login() {
             <View style={styles.container}>
                 <Text style={styles.txtLogin}>Login</Text>
                 <Image style={styles.imgLogo} source={require('../../../src/assets/logo_novo.jpg')} />
-
 
                 <View style={styles.bordaEmail_e_Senha}>
                     <Text style={styles.txtEmail_e_Senha}>E-mail:</Text>
@@ -152,7 +152,6 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
         margin: 20, // espaço da margem ao redor da tela, de fora para dentro da tela.
-      //  backgroundColor: "pink",
     },
     txtLogin: {
         color: '#000000', //cor do texto
@@ -168,6 +167,7 @@ const styles = StyleSheet.create({
     },
     bordaEmail_e_Senha: {
         width: "100%",
+        backgroundColor: "yellow",
     },
     txtEmail_e_Senha: {
         fontFamily: "Roboto",

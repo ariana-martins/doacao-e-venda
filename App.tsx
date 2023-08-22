@@ -437,9 +437,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1, //preenche toda a tela
-    //    backgroundColor: "#FFFFFF",
-    backgroundColor: "yellow",
-
   },
 })
 

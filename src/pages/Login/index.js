@@ -54,8 +54,8 @@ export default function Login() {
                 <View style={styles.bordaEmail_e_Senha}>
                     <Text style={styles.txtEmail_e_Senha}>E-mail:</Text>
                     {/* //Colocar o texto Input assim dentro da view, quando utilizar o hooks */}
-                    {/* //<TextInput style={styles.TextoInput} placeholder="Digite seu usuário:" onChangeText={Text=>setUsuario}/>  */}
-                    {/* //<TextInput style={styles.TextoInput} placeholder="Digite sua senha:" secureTextEntry={true} onChangeText={Text=>setSenha}/> */}
+                    {/* //<TextInput placeholder="Digite seu usuário:" onChangeText={Text=>setUsuario}/>  */}
+                    {/* //<TextInput placeholder="Digite sua senha:" secureTextEntry={true} onChangeText={Text=>setSenha}/> */}
 
                     <View style={styles.botaoAdicionarMargem}>
                         <View style={styles.inputAreaEmail}>
@@ -99,17 +99,14 @@ export default function Login() {
                             />
                             <TouchableOpacity onPress={() => setPasswordVisibility(!passwordVisibility)} >
                                 {/* (Observação: o ícone está abaixo do TextInput, então ele aparece na extrema direita, se estivesse acima do TextInput, ele apareceria à esquerda.) */}
+                                {/* Exemplo de mostrar e ocultar senha no TextInput no react native: https://stackoverflow.com/questions/74760150/hide-and-show-password-in-react-native-with-vector-icon */}
                                 <Icon style={styles.iconSenha} name={passwordVisibility ? "eye-off-outline" : "eye-outline"} size={20} color="#000000" />
                             </TouchableOpacity>
                         </View>
                     </View>
 
 
-
-
-                    {/*
-                    
-                    
+                    {/*         
                     <View style={styles.bordaTextInput}>
                         <TextInput
                             label="Senha:"
@@ -121,14 +118,6 @@ export default function Login() {
                         />
                     </View>
              */}
-
-                    {/*
-            <TextInput style={styles.TextoInput}
-                placeholder="Trocar para asteriscos******" //ok
-                secureTextEntry={true}
-            />
-             */}
-
 
 
 
@@ -142,11 +131,11 @@ export default function Login() {
                     <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={() => navigation.navigate("SettingScreenTeste")}>
                         <Text style={styles.txtEntrar_e_Cadastrar}>ENTRAR</Text>
                     </TouchableOpacity>
-
+                    {/*
                     <Button mode="contained" onPress={() => userLogin()} >
                         LoginTesteAuth
                     </Button>
-
+ */}
                     <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={() => navigation.navigate("Cadastrar")}>
                         <Text style={styles.txtEntrar_e_Cadastrar}>CADASTRAR</Text>
                     </TouchableOpacity>
@@ -162,8 +151,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
-        margin: 10,
-        //     backgroundColor: "pink",
+        margin: 20, // espaço da margem ao redor da tela, de fora para dentro da tela.
+      //  backgroundColor: "pink",
     },
     txtLogin: {
         color: '#000000', //cor do texto
@@ -223,60 +212,33 @@ const styles = StyleSheet.create({
     },
     //Exemplos TextInpu com Icones "https://stackoverflow.com/questions/40935381/how-can-i-put-an-icon-inside-a-textinput-in-react-native"
 
+    bordaAreaBotoes: {
+        alignItems: "center", //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
+        height: "40%", // altura 
+        width: "100%", // largura do espaço da página na parte "bordaAreaBotoes"
+        justifyContent: "center", //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
+    },
+    textoEsqueciSenha: {
+        color: '#000000', //cor do texto
+        fontWeight: 'bold', //texto em negrito
+        fontSize: 20, //tamanho do texto
+        textDecorationLine: 'underline', //texto sublinhado
+        marginVertical: 50,
+    },
+    btnEntrar_e_Cadastrar: {
+        height: 50, //altura dos botões
+        width: "100%", // largura 100% da tela dos botões, os botões vão até na margem da "bordaAreaBotoes"
+        backgroundColor: '#000000', //cor dentro da borda, onde vai ser incluído o texto
+        borderRadius: 10, // circunferência da borda
+        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
+        marginVertical: 15,
+        justifyContent: "center", //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
+    },
+    txtEntrar_e_Cadastrar: {
+        color: '#FFFFFF', //cor do texto 
+        fontWeight: 'bold', //texto em negrito
+        fontSize: 20, //tamanho do texto
+    },
 
-    
-    //Continuar daqui pra baixo. "login" e "senha" ok
-
-    /*
-    TextoInput: {
-                width: "100%",
-            textAlign: "right",
-            width: 250, //largura
-            height: 40, //altura
-            backgroundColor: '#FFFFFF', //cor dentro da borda, onde vai ser incluído o texto
-            borderRadius: 10, // circunferência da borda
-            paddingLeft: 10, // a partir de onde inicia digitar o texto, à esquerda, dentro da borda
-            marginBottom: 10, // margem do botão input, entre as duas bordas de input
-     // paddingHorizontal: 15, //tamanho da borda do textInput do espaço na lateral esquerda e direita da tela.
-    }, */
-
-    /*
-    textoUser: {
-                color: '#000000', //cor do texto
-            fontWeight: 'bold', //texto em negrito
-            fontSize: 28, //tamanho do texto
-    },
-            textoSenha: {
-                color: '#000000', //cor do texto
-            fontWeight: 'bold', //texto em negrito
-            fontSize: 28, //tamanho do texto
-    },
-            bordaAreaBotoes: {
-                alignItems: "center", //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
-            paddingVertical: 15,
-            //  height: "30%",
-            justifyContent: "space-evenly", //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
-            backgroundColor: "cyan"
-    },
-            textoEsqueciSenha: {
-                color: '#000000', //cor do texto
-            fontWeight: 'bold', //texto em negrito
-            fontSize: 20, //tamanho do texto
-            textDecorationLine: 'underline', //texto sublinhado
-    },
-            btnEntrar_e_Cadastrar: {
-                width: 250, //largura
-            height: 40, //altura
-            backgroundColor: '#000000', //cor dentro da borda, onde vai ser incluído o texto
-            borderRadius: 10, // circunferência da borda
-            alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
-    },
-            txtEntrar_e_Cadastrar: {
-                color: '#FFFFFF', //cor do texto
-            fontWeight: 'bold', //texto em negrito
-            fontSize: 20, //tamanho do texto
-            textAlign: 'center', // alinha texto dentro da borda, ao centro
-    },
-            */
 });
 

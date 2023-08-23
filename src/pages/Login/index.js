@@ -163,11 +163,10 @@ const styles = StyleSheet.create({
         width: 120, //largura
         height: 120, //altura
         borderRadius: 180,
-        marginTop: 10,
+        marginTop: 5,
     },
     bordaEmail_e_Senha: {
         width: "100%",
-        backgroundColor: "yellow",
     },
     txtEmail_e_Senha: {
         fontFamily: "Roboto",
@@ -211,8 +210,8 @@ const styles = StyleSheet.create({
         padding: 10, //para alinhar da Erquerda p/ direita, na margem dentro do "FlexDirection: rom" do View InputAreaEmail
     },
     //Exemplos TextInpu com Icones "https://stackoverflow.com/questions/40935381/how-can-i-put-an-icon-inside-a-textinput-in-react-native"
-
     bordaAreaBotoes: {
+        flex: 1,
         alignItems: "center", //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
         height: "40%", // altura 
         width: "100%", // largura do espaço da página na parte "bordaAreaBotoes"
@@ -226,6 +225,7 @@ const styles = StyleSheet.create({
         marginVertical: 50,
     },
     btnEntrar_e_Cadastrar: {
+        flex: 1,
         height: 50, //altura dos botões
         width: "100%", // largura 100% da tela dos botões, os botões vão até na margem da "bordaAreaBotoes"
         backgroundColor: '#000000', //cor dentro da borda, onde vai ser incluído o texto

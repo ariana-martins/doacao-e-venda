@@ -213,9 +213,9 @@ const styles = StyleSheet.create({
     bordaAreaBotoes: {
         flex: 1,
         alignItems: "center", //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
-        height: "40%", // altura 
         width: "100%", // largura do espaço da página na parte "bordaAreaBotoes"
-        justifyContent: "center", //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
+        justifyContent: "center", //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)      
+        marginTop: 10,
     },
     textoEsqueciSenha: {
         color: '#000000', //cor do texto
@@ -231,8 +231,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#000000', //cor dentro da borda, onde vai ser incluído o texto
         borderRadius: 10, // circunferência da borda
         alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
-        marginVertical: 15,
         justifyContent: "center", //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
+        marginTop: 15,
     },
     txtEntrar_e_Cadastrar: {
         color: '#FFFFFF', //cor do texto 

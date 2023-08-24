@@ -152,9 +152,9 @@ export default function Cadastrar({ navigation }) {
                                 style={styles.input}
                                 // disable={valor.length === 0} //validação desativada, se textInputName não for preenchida/igual a zero(0), não vai ser pressionável o botão "Enviar"
                                 placeholder="************"
-                                value={confirmarSenha}
+                                value={senha}
                                 keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
-                                onChangeText={setConfirmarSenha}
+                                onChangeText={setSenha}
                                 secureTextEntry={passwordVisibility}
                             />
                             <TouchableOpacity onPress={() => setPasswordVisibility(!passwordVisibility)} >
@@ -185,9 +185,9 @@ export default function Cadastrar({ navigation }) {
                                 style={styles.input}
                                 // disable={valor.length === 0} //validação desativada, se textInputName não for preenchida/igual a zero(0), não vai ser pressionável o botão "Enviar"
                                 placeholder="************"
-                                value={senha}
+                                value={confirmarSenha}
                                 keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
-                                onChangeText={setSenha}
+                                onChangeText={setConfirmarSenha}
                                 secureTextEntry={passwordVisibility}
                             />
                             <TouchableOpacity onPress={() => setPasswordVisibility(!passwordVisibility)} >

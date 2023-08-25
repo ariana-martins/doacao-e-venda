@@ -22,12 +22,12 @@ import ChatMensagens from '../pages/ChatMensagens';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-
+//Navegações entre as páginas, e Sair do App voltando p/ o Login
 
 function Tabs() {
   return (
     <Tab.Navigator screenOptions={{ headerShown: false }}>
-      
+
       <Tab.Screen
         name='Página Inicial'
         component={PaginaInicial}
@@ -37,7 +37,7 @@ function Tabs() {
           ),
           tabBarLabel: "Pagina Inicial",
         }}
-        
+
       />
       <Tab.Screen
         name='Pesquisar - Tab'
@@ -89,50 +89,41 @@ function Tabs() {
 
 export default function ScreenNavigator() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator >
-        <Stack.Screen name="Inicio!" component={Tabs} options={{ headerShown: false }} />
 
-        <Stack.Screen
-          name="Detalhes"
-          component={Detalhes}
-          options={{
-            title: 'Detalhes',
-            headerTitleStyle: {
-              fontFamily: 'Roboto',
-              fontSize: 25,
-              color: '#000000',
-            },
-          }}
-        />
+    <Stack.Navigator >
+      <Stack.Screen name="Inicio!" component={Tabs} options={{ headerShown: false }} />
 
-        <Stack.Screen
-          name="ChatMensagens"
-          component={ChatMensagens}
-          options={({ route }) => ({
-            title: route.params.userDono,
-            headerTitleAlign: 'center',
-          })}
-        />
+      <Stack.Screen
+        name="Detalhes"
+        component={Detalhes}
+        options={{
+          title: 'Detalhes',
+          headerTitleStyle: {
+            fontFamily: 'Roboto',
+            fontSize: 25,
+            color: '#000000',
+          },
+        }}
+      />
 
-     {/*
-        <Stack.Screen 
-          name="login" 
-          component={Login}   
-        />
+      <Stack.Screen
+        name="ChatMensagens"
+        component={ChatMensagens}
+        options={({ route }) => ({
+          title: route.params.userDono,
+          headerTitleAlign: 'center',
+        })}
+      />
 
-        <Stack.Screen 
-          name="cadastrar" 
-          component={Cadastrar} 
-        />
+      <Stack.Screen
+        name="Login"
+        component={Login}
+        options={{
+          headerShown: false
+        }}
+      />
 
-        <Stack.Screen 
-          name="esqueciMinhaSenha" 
-          component={EsqueciMinhaSenha} 
-        />
- */}
+    </Stack.Navigator>
 
-      </Stack.Navigator>
-    </NavigationContainer>
   );
 }

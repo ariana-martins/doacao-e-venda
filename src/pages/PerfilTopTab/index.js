@@ -3,6 +3,8 @@ import { View, Text, TouchableOpacity, StyleSheet, Image, Alert } from 'react-na
 // import { Button } from 'react-native-elements';
 import { Button } from 'react-native-paper';
 
+import { useNavigation } from '@react-navigation/native';
+
 import auth from '@react-native-firebase/auth';
 
 
@@ -24,6 +26,7 @@ import storage from '@react-native-firebase/storage';
 
 
 export default function PerfilTopTab() {
+    const navigation = useNavigation();
 
     //    const [images, setImages] = useState('https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT%20-%20P&B.png');
 
@@ -137,10 +140,8 @@ export default function PerfilTopTab() {
                  */}
             </View>
 
-            <View style={styles.botaoAdicionarMargem}>
-                {/*Falta configurar a navigation goBack do NAVIGATE */}
-                <TouchableOpacity style={styles.btn} onPress={() => navigation.goBack()}>
-                    {/* navigation.goBack está retornando para o Login após clicar em Sair */}
+            <View style={styles.botaoAdicionarMargem}>              
+                <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate("Login")}>
                     <Text style={styles.textoBotao}>SAIR</Text>
                 </TouchableOpacity>
             </View>

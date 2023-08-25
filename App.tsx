@@ -342,7 +342,7 @@ import Login from './src/pages/Login';
 import Cadastrar from './src/pages/Cadastrar';
 import EsqueciMinhaSenha from './src/pages/EsqueciMinhaSenha';
 import ScreenNavigator from './src/navigations/ScreenNavigator'; // Nova tela de navegação entre as páginas ("pages")
-
+import PerfilTopTab from './src/pages/PerfilTopTab';
 
 import PaginaInicialTeste from './src/pages/PaginaInicialTeste';
 import SettingScreenTeste from './src/pages/SettingsScreenTeste';
@@ -353,15 +353,20 @@ import auth from '@react-native-firebase/auth';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
+
+
 const AuthNavigator = () => {
+
+//Navegações das Páginas do Login (Entrar, Cadastrar e Sair no App)
+
   return (
     <Stack.Navigator>
+      {/* Os "name" e "component" sempre precisam estar com os nomes iguais para funcionar o "navigation.navigate" */}
       <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
       <Stack.Screen name="Cadastrar" component={Cadastrar} options={{ headerShown: false }} />
       <Stack.Screen name="EsqueciMinhaSenha" component={EsqueciMinhaSenha} options={{ headerShown: false }} />
-      <Stack.Screen name="SettingScreenTeste" component={SettingScreenTeste} options={{ headerShown: false }} />
-
-      {/* Os "name" e "component" sempre precisam estar com os nomes iguais para funcionar o "navigation.navigate" */}
+      <Stack.Screen name="ScreenNavigator" component={ScreenNavigator} options={{ headerShown: false }} />
+      <Stack.Screen name="PerfilTopTab" component={PerfilTopTab} options={{ headerShown: false }} />
     </Stack.Navigator>
   )
 }

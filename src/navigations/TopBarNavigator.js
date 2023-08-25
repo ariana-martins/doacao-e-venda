@@ -6,6 +6,9 @@ import PerfilTopTab from '../pages/PerfilTopTab';
 import InteressesTopTab from '../pages/InteressesTopTab';
 import MeusProdutosTopTab from '../pages/MeusProdutosTopTab';
 
+
+//Navegações entre as páginas "do Perfil", navegações das Telas TopTab
+
 function Perfil() {
     return (
         <PerfilTopTab/>

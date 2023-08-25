@@ -44,8 +44,10 @@ export default function Detalhes() {
             </View>
             
             <View style={styles.botaoAdicionarMargem}> 
-                <Pressable style={styles.btn} onPress={() => navigation.navigate('ChatMensagens', 
-                {userDono: item.messageText})}>
+                <Pressable style={styles.btn} 
+                    onPress={() => navigation.navigate('ChatMensagens')}
+                   // onPress={() => navigation.navigate('ChatMensagens', {userDono: item.messageText})}
+                >
                     <Text style={styles.textoBotao}>Chat</Text>  
                 </Pressable>
             </View>

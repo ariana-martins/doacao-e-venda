@@ -28,6 +28,10 @@ import storage from '@react-native-firebase/storage';
 export default function PerfilTopTab() {
     const navigation = useNavigation();
 
+    const [nomeCompleto, setNomeCompleto] = useState('');
+    const [email, setEmail] = useState('');
+
+
     //    const [images, setImages] = useState('https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT%20-%20P&B.png');
 
 

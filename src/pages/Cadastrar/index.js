@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Alert, KeyboardAvoidingView } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 //import { TextInput } from 'react-native-paper';
@@ -59,178 +59,126 @@ export default function Cadastrar({ navigation }) {
 */}
 
     return (
-
         <View style={{ flex: 1, backgroundColor: "white" }}>
             <View style={styles.container}>
-                <Text style={styles.txtCadastro}>Cadastro</Text>
-                <Image style={styles.imgLogo} source={require('../../../src/assets/logo_novo.jpg')} />
 
-                <View style={styles.bordaEmail_e_Senha_e_outros_dados}>
-                    <Text style={styles.txtEmail_e_Senha}>Nome Completo:</Text>
+                <KeyboardAvoidingView behavior='position' style={{ flex: 1, width: "100%" }}>
 
-                    <View style={styles.botaoAdicionarMargem}>
-                        <View style={styles.inputAreaEmail}>
-                            <TextInput
-                                style={styles.input}
-                                // disable={valor.length === 0} //validação desativada, se textInputName não for preenchida/igual a zero(0), não vai ser pressionável o botão "Enviar"
-                                placeholder="Nome completo:"
-                                value={nomeCompleto}
-                                keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
-                                onChangeText={setNomeCompleto}
-                            />
-                            {/* (Observação: o ícone está abaixo do TextInput, então ele aparece na extrema direita, se estivesse acima do TextInput, ele apareceria à esquerda.) */}
-                            <Icon style={styles.iconEmail} name="person-outline" size={20} color="#000000" />
-                        </View>
-                    </View>
-                    {/*
-                    <View style={styles.bordaTextInput}>
-                        <TextInput
-                            label="Nome Completo:"
-                            value={nomeCompleto}
-                            mode="outlined"
-                            onChangeText={text => setNomeCompleto(text)}
-                        />
-                    </View>
-  */}
-                    <Text style={styles.txtEmail_e_Senha}>E-mail:</Text>
-                    <View style={styles.botaoAdicionarMargem}>
-                        <View style={styles.inputAreaEmail}>
-                            <TextInput
-                                style={styles.input}
-                                // disable={valor.length === 0} //validação desativada, se textInputName não for preenchida/igual a zero(0), não vai ser pressionável o botão "Enviar"
-                                placeholder="Endereço de e-mail:"
-                                value={email}
-                                keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
-                                onChangeText={setEmail}
-                            />
-                            {/* (Observação: o ícone está abaixo do TextInput, então ele aparece na extrema direita, se estivesse acima do TextInput, ele apareceria à esquerda.) */}
-                            <Icon style={styles.iconEmail} name="person-outline" size={20} color="#000000" />
-                        </View>
+                    <View style={styles.bordaTxtLogo}>
+                        <Text style={styles.txtCadastro}>Cadastro</Text>
+                        <Image style={styles.imgLogo} source={require('../../../src/assets/logo_novo.jpg')} />
                     </View>
 
-                    {/* 
-                    <View style={styles.bordaTextInput}>
-                        <TextInput
-                            label="Endereço de e-mail:"
-                            value={email}
-                            mode="outlined"
-                            onChangeText={text => setEmail(text)}
-                        />
-                    </View>
-    */}
+                    <View style={styles.bordaEmail_e_Senha_e_outros_dados}>
 
-                    <Text style={styles.txtEmail_e_Senha}>Data de Nascimento:</Text>
-                    <View style={styles.botaoAdicionarMargem}>
-                        <View style={styles.inputAreaEmail}>
-                            <TextInput
-                                style={styles.input}
-                                // disable={valor.length === 0} //validação desativada, se textInputName não for preenchida/igual a zero(0), não vai ser pressionável o botão "Enviar"
-                                placeholder={"dd/mm/aaaa"}
-                                value={dataNascimento}
-                                keyboardType="numeric" // Define esse teclado básico quando deseja manipular dados de um TextInput.
-                                onChangeText={setdataNascimento}
-                            />
-                        </View>
-                    </View>
+                        <Text style={styles.txtEmail_e_Senha}>Nome Completo:</Text>
 
-                    {/*          
-                    <View style={styles.bordaTextInput}>
-                        <TextInput
-                            label="dd/mm/aaaa:"
-                            value={dataNascimento}
-                            mode="outlined"
-                            onChangeText={text => setdataNascimento(text)}
-                        />
-                    </View>
-            
-    */}
-
-                    <Text style={styles.txtEmail_e_Senha}>Senha:</Text>
-                    <View style={styles.botaoAdicionarMargem}>
-                        <View style={styles.inputAreaSenha}>
-                            <TextInput
-                                style={styles.input}
-                                // disable={valor.length === 0} //validação desativada, se textInputName não for preenchida/igual a zero(0), não vai ser pressionável o botão "Enviar"
-                                placeholder="************"
-                                value={senha}
-                                keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
-                                onChangeText={setSenha}
-                                secureTextEntry={passwordVisibility}
-                            />
-                            <TouchableOpacity onPress={() => setPasswordVisibility(!passwordVisibility)} >
+                        <View style={styles.botaoAdicionarMargem}>
+                            <View style={styles.inputAreaEmail}>
+                                <TextInput
+                                    style={styles.input}
+                                    // disable={valor.length === 0} //validação desativada, se textInputName não for preenchida/igual a zero(0), não vai ser pressionável o botão "Enviar"
+                                    placeholder="Nome completo:"
+                                    value={nomeCompleto}
+                                    keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
+                                    onChangeText={setNomeCompleto}
+                                />
                                 {/* (Observação: o ícone está abaixo do TextInput, então ele aparece na extrema direita, se estivesse acima do TextInput, ele apareceria à esquerda.) */}
-                                {/* Exemplo de mostrar e ocultar senha no TextInput no react native: https://stackoverflow.com/questions/74760150/hide-and-show-password-in-react-native-with-vector-icon */}
-                                <Icon style={styles.iconSenha} name={passwordVisibility ? "eye-off-outline" : "eye-outline"} size={20} color="#000000" />
-                            </TouchableOpacity>
+                                <Icon style={styles.iconEmail} name="person-outline" size={20} color="#000000" />
+                            </View>
                         </View>
-                    </View>
 
-                    {/* 
-                    <View style={styles.bordaTextInput}>
-                        <TextInput
-                            label="Senha:"
-                            value={senha}
-                            mode="outlined"
-                            secureTextEntry={true}
-                            onChangeText={text => setSenha(text)}
-                        />
-                    </View>
-    */}
-
-
-                    <Text style={styles.txtEmail_e_Senha}>Confirmar Senha:</Text>
-                    <View style={styles.botaoAdicionarMargem}>
-                        <View style={styles.inputAreaSenha}>
-                            <TextInput
-                                style={styles.input}
-                                // disable={valor.length === 0} //validação desativada, se textInputName não for preenchida/igual a zero(0), não vai ser pressionável o botão "Enviar"
-                                placeholder="************"
-                                value={confirmarSenha}
-                                keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
-                                onChangeText={setConfirmarSenha}
-                                secureTextEntry={passwordVisibility}
-                            />
-                            <TouchableOpacity onPress={() => setPasswordVisibility(!passwordVisibility)} >
+                        <Text style={styles.txtEmail_e_Senha}>E-mail:</Text>
+                        <View style={styles.botaoAdicionarMargem}>
+                            <View style={styles.inputAreaEmail}>
+                                <TextInput
+                                    style={styles.input}
+                                    // disable={valor.length === 0} //validação desativada, se textInputName não for preenchida/igual a zero(0), não vai ser pressionável o botão "Enviar"
+                                    placeholder="Endereço de e-mail:"
+                                    value={email}
+                                    keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
+                                    onChangeText={setEmail}
+                                />
                                 {/* (Observação: o ícone está abaixo do TextInput, então ele aparece na extrema direita, se estivesse acima do TextInput, ele apareceria à esquerda.) */}
-                                {/* Exemplo de mostrar e ocultar senha no TextInput no react native: https://stackoverflow.com/questions/74760150/hide-and-show-password-in-react-native-with-vector-icon */}
-                                <Icon style={styles.iconSenha} name={passwordVisibility ? "eye-off-outline" : "eye-outline"} size={20} color="#000000" />
-                            </TouchableOpacity>
+                                <Icon style={styles.iconEmail} name="person-outline" size={20} color="#000000" />
+                            </View>
                         </View>
-                    </View>
 
-                    {/*                 
-                    <View style={styles.bordaTextInput}>
-                        <TextInput
-                            label="Confirmar Senha:"
-                            value={confirmarSenha}
-                            mode="outlined"
-                            secureTextEntry={true}
-                            onChangeText={text => setConfirmarSenha(text)}
-                        />
-                    </View>
-    */}
+                        <Text style={styles.txtEmail_e_Senha}>Data de Nascimento:</Text>
+                        <View style={styles.botaoAdicionarMargem}>
+                            <View style={styles.inputAreaEmail}>
+                                <TextInput
+                                    style={styles.input}
+                                    // disable={valor.length === 0} //validação desativada, se textInputName não for preenchida/igual a zero(0), não vai ser pressionável o botão "Enviar"
+                                    placeholder={"dd/mm/aaaa"}
+                                    value={dataNascimento}
+                                    keyboardType="numeric" // Define esse teclado básico quando deseja manipular dados de um TextInput.
+                                    onChangeText={setdataNascimento}
+                                />
+                            </View>
+                        </View>
+
+                        <Text style={styles.txtEmail_e_Senha}>Senha:</Text>
+                        <View style={styles.botaoAdicionarMargem}>
+                            <View style={styles.inputAreaSenha}>
+                                <TextInput
+                                    style={styles.input}
+                                    // disable={valor.length === 0} //validação desativada, se textInputName não for preenchida/igual a zero(0), não vai ser pressionável o botão "Enviar"
+                                    placeholder="************"
+                                    value={senha}
+                                    keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
+                                    onChangeText={setSenha}
+                                    secureTextEntry={passwordVisibility}
+                                />
+                                <TouchableOpacity onPress={() => setPasswordVisibility(!passwordVisibility)} >
+                                    {/* (Observação: o ícone está abaixo do TextInput, então ele aparece na extrema direita, se estivesse acima do TextInput, ele apareceria à esquerda.) */}
+                                    {/* Exemplo de mostrar e ocultar senha no TextInput no react native: https://stackoverflow.com/questions/74760150/hide-and-show-password-in-react-native-with-vector-icon */}
+                                    <Icon style={styles.iconSenha} name={passwordVisibility ? "eye-off-outline" : "eye-outline"} size={20} color="#000000" />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+
+                        <Text style={styles.txtEmail_e_Senha}>Confirmar Senha:</Text>
+                        <View style={styles.botaoAdicionarMargem}>
+                            <View style={styles.inputAreaSenha}>
+                                <TextInput
+                                    style={styles.input}
+                                    // disable={valor.length === 0} //validação desativada, se textInputName não for preenchida/igual a zero(0), não vai ser pressionável o botão "Enviar"
+                                    placeholder="************"
+                                    value={confirmarSenha}
+                                    keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
+                                    onChangeText={setConfirmarSenha}
+                                    secureTextEntry={passwordVisibility}
+                                />
+                                <TouchableOpacity onPress={() => setPasswordVisibility(!passwordVisibility)} >
+                                    {/* (Observação: o ícone está abaixo do TextInput, então ele aparece na extrema direita, se estivesse acima do TextInput, ele apareceria à esquerda.) */}
+                                    {/* Exemplo de mostrar e ocultar senha no TextInput no react native: https://stackoverflow.com/questions/74760150/hide-and-show-password-in-react-native-with-vector-icon */}
+                                    <Icon style={styles.iconSenha} name={passwordVisibility ? "eye-off-outline" : "eye-outline"} size={20} color="#000000" />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
 
 
 
-                </View>
-
-
-                {/* 
+                        {/* 
         => Essa parte aqui é o teste de fazer a autenticação de "Cadastrar" com firebase
 
                 <Button mode="contained" onPress={() => userCadastrar()} >
                     CadastrarTesteAuth
                 </Button>
  */}
-                <View style={styles.bordaAreaBotoes}>
-                    <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={() => navigation.goBack()}>
-                        {/* navigation.goBack está retornando para o Login após clicar em Cadastrar */}
-                        <Text style={styles.txtEntrar_e_Cadastrar}>CADASTRAR</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
-        </View>
+                        <View style={styles.bordaAreaBotoes}>
+                            <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={() => navigation.goBack()}>
+                                {/* navigation.goBack está retornando para o Login após clicar em Cadastrar */}
+                                <Text style={styles.txtEntrar_e_Cadastrar}>CADASTRAR</Text>
+                            </TouchableOpacity>
+                        </View>
 
+                    </View>
+
+                </KeyboardAvoidingView>
+            </View>
+        </View >
     );
 };
 
@@ -238,8 +186,11 @@ export default function Cadastrar({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
         margin: 20,
+    },
+    bordaTxtLogo: {
+        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
+        justifyContent: "center",
     },
     txtCadastro: {
         color: '#000000', //cor do texto
@@ -297,13 +248,6 @@ const styles = StyleSheet.create({
         padding: 10, //para alinhar da Erquerda p/ direita, na margem dentro do "FlexDirection: rom" do View InputAreaEmail
     },
     //Exemplos TextInpu com Icones "https://stackoverflow.com/questions/40935381/how-can-i-put-an-icon-inside-a-textinput-in-react-native"
-    bordaAreaBotoes: {
-        flex: 1,
-        alignItems: "center", //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
-        width: "100%", // largura do espaço da página na parte "bordaAreaBotoes"
-        justifyContent: "center", //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)      
-        marginTop: 10,
-    },
     btnEntrar_e_Cadastrar: {
         height: 50, //altura dos botões
         width: "100%", // largura 100% da tela dos botões, os botões vão até na margem da "bordaAreaBotoes"
@@ -311,6 +255,7 @@ const styles = StyleSheet.create({
         borderRadius: 10, // circunferência da borda
         alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
         justifyContent: "center", //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
+        marginTop: 20,
     },
     txtEntrar_e_Cadastrar: {
         color: '#FFFFFF', //cor do texto 

@@ -4,6 +4,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 //import { TextInput } from 'react-native-paper';
 import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+
 
 //import { Button } from 'react-native-elements';
 
@@ -28,15 +30,27 @@ export default function Cadastrar({ navigation }) {
 
     //Autenticação do usuário com o firebase
     const userCadastrar = async () => {
-        if (!email || !senha) {
+        if (!email || !senha || !nomeCompleto) {
             Alert.alert("Por favor preencha todos os dados")
             return
         }
-        try { //Criar usuário com email e senha no firebase
+        try {
+            const result = await auth().createUserWithEmailAndPassword(email, senha)
+            firestore().collection('users').doc(result.user.uid).set({
+                nomeCompleto: nomeCompleto,
+                email: result.user.email,
+                uid: result.user.uid,
+            })
+        }catch(err){
+            Alert("algo deu errado")
+        }
+      /*
+          try { //Criar usuário com email e senha no firebase
             await auth().createUserWithEmailAndPassword(email, senha)
         } catch (err) {
             Alert.alert("Dados cadastrados")
         }
+        */
     }
 
     //Falta formatar a data dd/mm/aaaa (dia, mês, ano) no cadastro do TextInput
@@ -168,7 +182,8 @@ export default function Cadastrar({ navigation }) {
                 </Button>
  */}
                         <View style={styles.bordaAreaBotoes}>
-                            <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={() => navigation.goBack()}>
+                            <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={()=>userCadastrar()}>
+                                {/* onPress={() => navigation.goBack()}  */}
                                 {/* navigation.goBack está retornando para o Login após clicar em Cadastrar */}
                                 <Text style={styles.txtEntrar_e_Cadastrar}>CADASTRAR</Text>
                             </TouchableOpacity>

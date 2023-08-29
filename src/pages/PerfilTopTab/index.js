@@ -133,8 +133,8 @@ export default function PerfilTopTab() {
             {/* O Logout deve funcionar como exemplo do vídeo: "Part 1/2 | OLX Clone using React Native & Firebase | React Native & Firebase for beginners in Hindi" */}
             {/* Link do vídeo: https://www.youtube.com/watch?v=ntPQ-IPm3AM&list=PLB97yPrFwo5ihgCoWXlEDHrAPQNshsfzP&index=6 */}
             <View>
-                <Text>Nome Usuário aqui</Text>
-                <Text>E-mail do usuário aqui</Text>
+                <Text style={styles.txtEmail_e_Senha}>Nome Usuário aqui</Text>
+                <Text style={styles.txtEmail_e_Senha}>E-mail do usuário aqui</Text>
                
                {/*
                 <Text>{auth().currentUser.email}</Text>
@@ -253,6 +253,13 @@ const styles = StyleSheet.create({
         fontWeight: 'bold', //texto em negrito
         fontSize: 20, //tamanho do texto
         textAlign: 'center', // alinha texto dentro da borda, ao centro
+    },
+
+    txtEmail_e_Senha: {
+        fontFamily: "Roboto",
+        fontSize: 20,
+        color: "#000000",
+        marginTop: 5,
     },
 
 })

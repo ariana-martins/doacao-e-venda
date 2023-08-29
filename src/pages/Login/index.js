@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
 
+
 import { Button } from 'react-native-elements';
 
 
@@ -27,6 +28,7 @@ export default function Login() {
     const [senha, setSenha] = useState('');
     const [passwordVisibility, setPasswordVisibility] = useState(true);
 
+
     //Autenticação do usuário com o firebase
     const userLogin = async () => {
         if (!email || !senha) {
@@ -35,44 +37,51 @@ export default function Login() {
         }
         try { //acessa conta do usuário já criado na tela Cadastrar com mesmo email e senha
             const result = await auth().signInWithEmailAndPassword(email, senha)
-            console.log(result.user)
+            
         } catch (err) {
-            Alert.alert("Os dados não conferem, tente novamente")
+            Alert("algo deu errado")
         }
-
+        /*
+            try { //Criar usuário com email e senha no firebase
+              await auth().createUserWithEmailAndPassword(email, senha)
+          } catch (err) {
+              Alert.alert("Dados cadastrados")
+          }
+          */
     }
+
 
 
 
     return (
         // backgroundColor: "red" // cor para teste aqui da tela toda
-            <View style={{ flex: 1, backgroundColor: "white" }}>
-                <View style={styles.container}>
-                    <Text style={styles.txtLogin}>Login</Text>
-                    <Image style={styles.imgLogo} source={require('../../../src/assets/logo_novo.jpg')} />
+        <View style={{ flex: 1, backgroundColor: "white" }}>
+            <View style={styles.container}>
+                <Text style={styles.txtLogin}>Login</Text>
+                <Image style={styles.imgLogo} source={require('../../../src/assets/logo_novo.jpg')} />
 
-                    <View style={styles.bordaEmail_e_Senha}>
-                        <Text style={styles.txtEmail_e_Senha}>E-mail:</Text>
-                        {/* //Colocar o texto Input assim dentro da view, quando utilizar o hooks */}
-                        {/* //<TextInput placeholder="Digite seu usuário:" onChangeText={Text=>setUsuario}/>  */}
-                        {/* //<TextInput placeholder="Digite sua senha:" secureTextEntry={true} onChangeText={Text=>setSenha}/> */}
+                <View style={styles.bordaEmail_e_Senha}>
+                    <Text style={styles.txtEmail_e_Senha}>E-mail:</Text>
+                    {/* //Colocar o texto Input assim dentro da view, quando utilizar o hooks */}
+                    {/* //<TextInput placeholder="Digite seu usuário:" onChangeText={Text=>setUsuario}/>  */}
+                    {/* //<TextInput placeholder="Digite sua senha:" secureTextEntry={true} onChangeText={Text=>setSenha}/> */}
 
-                        <View style={styles.botaoAdicionarMargem}>
-                            <View style={styles.inputAreaEmail}>
-                                <TextInput
-                                    style={styles.input}
-                                    // disable={valor.length === 0} //validação desativada, se textInputName não for preenchida/igual a zero(0), não vai ser pressionável o botão "Enviar"
-                                    placeholder="Endereço de e-mail:"
-                                    value={email}
-                                    keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
-                                    onChangeText={setEmail}
-                                />
-                                {/* (Observação: o ícone está abaixo do TextInput, então ele aparece na extrema direita, se estivesse acima do TextInput, ele apareceria à esquerda.) */}
-                                <Icon style={styles.iconEmail} name="person-outline" size={20} color="#000000" />
-                            </View>
+                    <View style={styles.botaoAdicionarMargem}>
+                        <View style={styles.inputAreaEmail}>
+                            <TextInput
+                                style={styles.input}
+                                // disable={valor.length === 0} //validação desativada, se textInputName não for preenchida/igual a zero(0), não vai ser pressionável o botão "Enviar"
+                                placeholder="Endereço de e-mail:"
+                                value={email}
+                                keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
+                                onChangeText={setEmail}
+                            />
+                            {/* (Observação: o ícone está abaixo do TextInput, então ele aparece na extrema direita, se estivesse acima do TextInput, ele apareceria à esquerda.) */}
+                            <Icon style={styles.iconEmail} name="person-outline" size={20} color="#000000" />
                         </View>
+                    </View>
 
-                        {/*           
+                    {/*           
                     <View style={styles.bordaTextInput}>
                         <TextInput
                             label="Endereço de e-mail:"
@@ -85,28 +94,28 @@ export default function Login() {
 
 
 
-                        <Text style={styles.txtEmail_e_Senha}>Senha:</Text>
-                        <View style={styles.botaoAdicionarMargem}>
-                            <View style={styles.inputAreaSenha}>
-                                <TextInput
-                                    style={styles.input}
-                                    // disable={valor.length === 0} //validação desativada, se textInputName não for preenchida/igual a zero(0), não vai ser pressionável o botão "Enviar"
-                                    placeholder="************"
-                                    value={senha}
-                                    keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
-                                    onChangeText={setSenha}
-                                    secureTextEntry={passwordVisibility}
-                                />
-                                <TouchableOpacity onPress={() => setPasswordVisibility(!passwordVisibility)} >
-                                    {/* (Observação: o ícone está abaixo do TextInput, então ele aparece na extrema direita, se estivesse acima do TextInput, ele apareceria à esquerda.) */}
-                                    {/* Exemplo de mostrar e ocultar senha no TextInput no react native: https://stackoverflow.com/questions/74760150/hide-and-show-password-in-react-native-with-vector-icon */}
-                                    <Icon style={styles.iconSenha} name={passwordVisibility ? "eye-off-outline" : "eye-outline"} size={20} color="#000000" />
-                                </TouchableOpacity>
-                            </View>
+                    <Text style={styles.txtEmail_e_Senha}>Senha:</Text>
+                    <View style={styles.botaoAdicionarMargem}>
+                        <View style={styles.inputAreaSenha}>
+                            <TextInput
+                                style={styles.input}
+                                // disable={valor.length === 0} //validação desativada, se textInputName não for preenchida/igual a zero(0), não vai ser pressionável o botão "Enviar"
+                                placeholder="************"
+                                value={senha}
+                                keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
+                                onChangeText={setSenha}
+                                secureTextEntry={passwordVisibility}
+                            />
+                            <TouchableOpacity onPress={() => setPasswordVisibility(!passwordVisibility)} >
+                                {/* (Observação: o ícone está abaixo do TextInput, então ele aparece na extrema direita, se estivesse acima do TextInput, ele apareceria à esquerda.) */}
+                                {/* Exemplo de mostrar e ocultar senha no TextInput no react native: https://stackoverflow.com/questions/74760150/hide-and-show-password-in-react-native-with-vector-icon */}
+                                <Icon style={styles.iconSenha} name={passwordVisibility ? "eye-off-outline" : "eye-outline"} size={20} color="#000000" />
+                            </TouchableOpacity>
                         </View>
+                    </View>
 
 
-                        {/*         
+                    {/*         
                     <View style={styles.bordaTextInput}>
                         <TextInput
                             label="Senha:"
@@ -121,28 +130,29 @@ export default function Login() {
 
 
 
-                    </View>
+                </View>
 
-                    <View style={styles.bordaAreaBotoes}>
-                        <TouchableOpacity onPress={() => navigation.navigate("EsqueciMinhaSenha")}>
-                            <Text style={styles.textoEsqueciSenha}>Esqueci minha senha</Text>
-                        </TouchableOpacity>
+                <View style={styles.bordaAreaBotoes}>
+                    <TouchableOpacity onPress={() => navigation.navigate("EsqueciMinhaSenha")}>
+                        <Text style={styles.textoEsqueciSenha}>Esqueci minha senha</Text>
+                    </TouchableOpacity>
 
-                        <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={() => navigation.navigate("ScreenNavigator")}>
-                            <Text style={styles.txtEntrar_e_Cadastrar}>ENTRAR</Text>
-                        </TouchableOpacity>
-                        {/*
+                    <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={() => userLogin()}>
+                        {/* onPress={() => navigation.navigate("ScreenNavigator")}> */}
+                        <Text style={styles.txtEntrar_e_Cadastrar}>ENTRAR</Text>
+                    </TouchableOpacity>
+                    {/*
                     <Button mode="contained" onPress={() => userLogin()} >
                         LoginTesteAuth
                     </Button>
  */}
-                        <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={() => navigation.navigate("Cadastrar")}>
-                            <Text style={styles.txtEntrar_e_Cadastrar}>CADASTRAR</Text>
-                        </TouchableOpacity>
-                    </View>
+                    <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={() => navigation.navigate("Cadastrar")}>
+                        <Text style={styles.txtEntrar_e_Cadastrar}>CADASTRAR</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
-        
+        </View>
+
     );
 };
 

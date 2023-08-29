@@ -8,6 +8,7 @@ import { Text } from 'react-native-elements';
 import firestore from '@react-native-firebase/firestore';
 
 
+
 //Referência para preencher todos os dados (titulo, descrição, nome, email etc...) corretamente 
 // + Enviando para Firebase/Firestore e limpando a tela após todos os dados cadastrados.
 //"React Native Firebase Todo App | React Native"
@@ -19,6 +20,9 @@ export default function InteressesTopTab() {
  
     const [textInputName, setTextInputName] = useState('');
     const [textInputEmail, setTextInputEmail] = useState('');
+
+    
+
     const ref = firestore().collection('myInteresses');
 
 
@@ -54,6 +58,7 @@ export default function InteressesTopTab() {
 
 
         <View style={styles.container}>
+           
             <TextInput style={styles.textInputStyle}
                 disable={textInputName.length === 0} //validação desativada, se textInputName não for preenchida/igual a zero(0), não vai ser pressionável o botão "Enviar"
                 placeholder="Digite o Nome"
@@ -75,6 +80,7 @@ export default function InteressesTopTab() {
                     <Text>Enviar</Text>
                 </TouchableOpacity>
             </View>
+    
 
         </View>
 

@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image, Alert } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Image, Alert, FlatList } from 'react-native';
 // import { Button } from 'react-native-elements';
 import { Button } from 'react-native-paper';
 
 import { useNavigation } from '@react-navigation/native';
 
 import auth from '@react-native-firebase/auth';
-
+import firestore from '@react-native-firebase/firestore';
 
 import ImageCropPicker from 'react-native-image-crop-picker';
 //import ImagePicker from 'react-native-image-crop-picker';
@@ -30,6 +30,23 @@ export default function PerfilTopTab() {
 
     const [nomeCompleto, setNomeCompleto] = useState('');
     const [email, setEmail] = useState('');
+
+    const [users,setUsers] = useState(null);
+
+    const getUsers = async () => {
+        const querySanp = await firestore().collection('users').get()
+        const allusers = querySanp.docs.map(docSnap => docSnap.data())
+        console.log(allusers)
+        setUsers(allusers)
+    }
+
+    useEffect(() => {
+        getUsers()
+    },[])
+
+
+
+
 
 
     //    const [images, setImages] = useState('https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT%20-%20P&B.png');
@@ -111,6 +128,24 @@ export default function PerfilTopTab() {
 
 
 
+    const RenderCard = ({item}) => {
+        return (
+            <View style={styles.myCard}>
+                {/* "pic" é a "identificação da imagem" no firestore junto com "nomeCompleto" "uid" "email"...  */}
+                {/* <Image source={{uri:item.pic}} style={{width:60, height: 60, borderRadius:30, backgroundColor: "green" }} /> */}
+                <Image source={require('../../../src/assets/logo_novo.jpg')} style={{width:60, height: 60, borderRadius:30, backgroundColor: "green" }}/>
+                <View>
+                <Text style={styles.txtEmail_e_Senha}>{item.nomeCompleto}</Text>
+                <Text style={styles.txtEmail_e_Senha}>{item.email}</Text>
+                </View>
+            </View>
+        )
+    }
+
+
+
+
+
     // Agora vamos criar o Button para escolher a imagem e exibi-la ("choose_photo")
 
     return (
@@ -133,19 +168,31 @@ export default function PerfilTopTab() {
             {/* O Logout deve funcionar como exemplo do vídeo: "Part 1/2 | OLX Clone using React Native & Firebase | React Native & Firebase for beginners in Hindi" */}
             {/* Link do vídeo: https://www.youtube.com/watch?v=ntPQ-IPm3AM&list=PLB97yPrFwo5ihgCoWXlEDHrAPQNshsfzP&index=6 */}
             <View>
-                <Text style={styles.txtEmail_e_Senha}>Nome Usuário aqui</Text>
-                <Text style={styles.txtEmail_e_Senha}>E-mail do usuário aqui</Text>
-               
+                {/*
+                <Text style={styles.txtEmail_e_Senha}>{nomeCompleto}Nome Usuário aqui</Text>
+                <Text style={styles.txtEmail_e_Senha}>{email}E-mail do usuário aqui</Text>
+                */}
+
                {/*
                 <Text>{auth().currentUser.email}</Text>
                 <Button mode="contained" onPress={() => auth().signOut()} >
                     LogoutTeste
                 </Button>
                  */}
+                 <FlatList
+                    data={users}
+                    renderItem={({item}) => {
+                        return <RenderCard item={item} />}
+                    }
+                    keyExtractor={(item) => item.uid}
+                 >
+
+                 </FlatList>
             </View>
 
             <View style={styles.botaoAdicionarMargem}>              
-                <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate("Login")}>
+                <TouchableOpacity style={styles.btn} onPress={() => auth().signOut()} >
+                    {/* onPress={() => navigation.navigate("Login")}> */}
                     <Text style={styles.textoBotao}>SAIR</Text>
                 </TouchableOpacity>
             </View>
@@ -260,6 +307,16 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: "#000000",
         marginTop: 5,
+        marginLeft: 15,
+    },
+
+    myCard: {
+        flexDirection: "row", //direciona o texto que estava abaixo da imagem, para ao lado da imagem.
+        margin: 3, // dá espaço na margem de cada item (imagem + texto: "nome" e "email") 
+        padding: 4, // dá espaço à esquerda da margem da tela p/ cada item
+        backgroundColor: "mistyrose",
+        borderBottomWidth: 10,
+        borderBottomColor: 'blue',
     },
 
 })

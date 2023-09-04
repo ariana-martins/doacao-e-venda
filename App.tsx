@@ -357,7 +357,7 @@ const Tab = createBottomTabNavigator();
 
 const AuthNavigator = () => {
 
-//Navegações das Páginas do Login (Entrar, Cadastrar e Sair no App)
+  //Navegações das Páginas do Login (Entrar, Cadastrar e Sair no App)
 
   return (
     <Stack.Navigator>
@@ -365,62 +365,166 @@ const AuthNavigator = () => {
       <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
       <Stack.Screen name="Cadastrar" component={Cadastrar} options={{ headerShown: false }} />
       <Stack.Screen name="EsqueciMinhaSenha" component={EsqueciMinhaSenha} options={{ headerShown: false }} />
+      <Stack.Screen name="SettingScreenTeste" component={SettingScreenTeste} options={{ headerShown: false }} />
+
+      {/* Os "name" e "component" sempre precisam estar com os nomes iguais para funcionar o "navigation.navigate" */}
       <Stack.Screen name="ScreenNavigator" component={ScreenNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="PerfilTopTab" component={PerfilTopTab} options={{ headerShown: false }} />
     </Stack.Navigator>
   )
 }
 
-
 const TabNavigator = () => {
   return (
-    /*
-          <Tab.Navigator>
-              <Tab.Screen name="paginaInicialTeste" component={PaginaInicialTeste} options={{headerShown:false}}/>
-              <Tab.Screen name="Settings" component={SettingScreenTeste} options={{headerShown:false}}/>
-            </Tab.Navigator>
-    
-            */
-
     <ScreenNavigator />
-
-
   )
-
 }
-
 
 
 const Navigation = () => {
   // const user = "" //autenticação do usuário com firebase (está vazio, pois preenche os dados na tela Cadastrar)
 
+  
   // autenticação do usuário com firebase
-  const [user, setUser] = useState('')
+  const [user, setuser] = useState('');
 
-  /*
+
   useEffect(()=>{
     auth().onAuthStateChanged((userExist)=>{
       if(userExist){
-        setUser(userExist)
+        setuser(userExist)
       }else{
-        setUser("")
+        setuser("")
       }
     })
   },[])
-*/
+
+
   /*
+  // Essa parte não funciona com o Login primeiro, entra direto nas páginas do "ScreenNavigator"
     return (
       <NavigationContainer>
         {user?<TabNavigator />:<AuthNavigator />}
       </NavigationContainer>
     )
-    */
+*/
+
+
+// Essa parte funciona com o Login primeiro
+return (
+  <NavigationContainer>
+    {! user?<AuthNavigator />:<TabNavigator />}
+  </NavigationContainer>
+)
+
+
+/*
   return (
     <NavigationContainer>
       <AuthNavigator />
     </NavigationContainer>
   )
+  */
+
+  //==================================================
+
+  /*
+    //Autenticação do usuário no Firebase
+    useEffect(() => {
+      const unsregister = auth().onAuthStateChanged((userExist) => {
+        if (userExist) {
+          setuser(userExist)
+        } else {
+          setuser('')
+        }
+  
+      })
+  
+      return () => {
+        unsregister()
+      }
+  
+    }, [])
+  */
+
+
+  //Navegações das Páginas do Login (Entrar, Cadastrar e Sair no App)
+  //  return (
+  //  <NavigationContainer>
+  //     <Stack.Navigator>
+  //       {user ?
+
+  //        <Stack.Screen name="ScreenNavigator" component={ScreenNavigator} options={{ headerShown: false }} />
+
+  //        :
+  //        <>
+  {/* Os "name" e "component" sempre precisam estar com os nomes iguais para funcionar o "navigation.navigate" */ }
+  //          <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+  //          <Stack.Screen name="Cadastrar" component={Cadastrar} options={{ headerShown: false }} />
+  //          <Stack.Screen name="EsqueciMinhaSenha" component={EsqueciMinhaSenha} options={{ headerShown: false }} />
+  {/*<Stack.Screen name="ScreenNavigator" component={ScreenNavigator} options={{ headerShown: false }} /> */ }
+  {/* <Stack.Screen name="PerfilTopTab" component={PerfilTopTab} options={{ headerShown: false }} />  */ }
+  //         </>
+  //      }
+
+
+  //     </Stack.Navigator>
+  //   </NavigationContainer>
+  //  );
+
+
+
 }
+
+
+//const TabNavigator = () => {
+//  return (
+/*
+      <Tab.Navigator>
+          <Tab.Screen name="paginaInicialTeste" component={PaginaInicialTeste} options={{headerShown:false}}/>
+          <Tab.Screen name="Settings" component={SettingScreenTeste} options={{headerShown:false}}/>
+        </Tab.Navigator>
+ 
+        */
+
+//    <ScreenNavigator />
+
+//  )
+
+// }
+
+
+
+//const Navigation = () => {
+// const user = "" //autenticação do usuário com firebase (está vazio, pois preenche os dados na tela Cadastrar)
+
+// autenticação do usuário com firebase
+//const [user, setUser] = useState('')
+
+/*
+useEffect(()=>{
+  auth().onAuthStateChanged((userExist)=>{
+    if(userExist){
+      setUser(userExist)
+    }else{
+      setUser("")
+    }
+  })
+},[])
+*/
+/*
+  return (
+    <NavigationContainer>
+      {user?<TabNavigator />:<AuthNavigator />}
+    </NavigationContainer>
+  )
+  */
+//  return (
+//    <NavigationContainer>
+//      <AuthNavigator />
+//    </NavigationContainer>
+//  )
+// }
 
 
 export default function App() {
@@ -437,7 +541,7 @@ export default function App() {
 
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

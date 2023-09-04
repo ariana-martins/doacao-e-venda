@@ -72,6 +72,11 @@ export default function Cadastrar({ navigation }) {
       }, []);
 */}
 
+
+    // Outro exemplo de tela de cadastro com data de nascimento (porém um pouco incompleto) no Link a seguir:
+    // https://pt.stackoverflow.com/questions/493069/como-pegar-id-dos-dados-criados-em-firebase
+
+
     return (
         <View style={{ flex: 1, backgroundColor: "white" }}>
             <View style={styles.container}>

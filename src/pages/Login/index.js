@@ -33,13 +33,15 @@ export default function Login() {
     const userLogin = async () => {
         if (!email || !senha) {
             Alert.alert("Por favor preencha todos os dados")
-            return
+            return;
         }
+        
         try { //acessa conta do usuário já criado na tela Cadastrar com mesmo email e senha
             const result = await auth().signInWithEmailAndPassword(email, senha)
             
-        } catch (err) {
-            Alert("algo deu errado")
+        } catch (error) { //error.code mostra se o endereço de e-mail ou a senha foi digitado errado, e mostra através do log
+            //console.log(error.code)
+            Alert.alert("Algo está errado", "Digite novamente")
         }
         /*
             try { //Criar usuário com email e senha no firebase
@@ -74,7 +76,8 @@ export default function Login() {
                                 placeholder="Endereço de e-mail:"
                                 value={email}
                                 keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
-                                onChangeText={setEmail}
+                                //onChangeText={setEmail}
+                                onChangeText={value => setEmail(value)}
                             />
                             {/* (Observação: o ícone está abaixo do TextInput, então ele aparece na extrema direita, se estivesse acima do TextInput, ele apareceria à esquerda.) */}
                             <Icon style={styles.iconEmail} name="person-outline" size={20} color="#000000" />
@@ -103,7 +106,8 @@ export default function Login() {
                                 placeholder="************"
                                 value={senha}
                                 keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
-                                onChangeText={setSenha}
+                                //onChangeText={setSenha}
+                                onChangeText={value=> setSenha(value)}
                                 secureTextEntry={passwordVisibility}
                             />
                             <TouchableOpacity onPress={() => setPasswordVisibility(!passwordVisibility)} >

@@ -398,25 +398,25 @@ const Navigation = () => {
       }
     })
   },[])
+  
 
-
-  /*
+  
   // Essa parte não funciona com o Login primeiro, entra direto nas páginas do "ScreenNavigator"
     return (
       <NavigationContainer>
         {user?<TabNavigator />:<AuthNavigator />}
       </NavigationContainer>
     )
-*/
 
 
+/*
 // Essa parte funciona com o Login primeiro
 return (
   <NavigationContainer>
     {! user?<AuthNavigator />:<TabNavigator />}
   </NavigationContainer>
 )
-
+*/
 
 /*
   return (

@@ -1,169 +1,4 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
 
-/*import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
-
-function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Ariana teste">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="outro teste">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
-
-export default App;
-*/
-//===================== Projeto acima é o original do React Native ================================
-//==================================================================================================
-
-
-/*import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import Login from './src/pages/Login/index';
-
-
-//Login está correto aqui <<<<=====
-export default function Projeto1(){
-  return (
-    <View style={estilos.conteiner}>
-      <Login/>
-    </View>
-  );
-};
-
-
-//conteúdo de CSS
-const estilos = StyleSheet.create({
-  conteiner:{
-    flex: 1, //preenche toda a tela
-    backgroundColor: '#46C227', //cor da tela
- //   alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
- //   justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
-  },
-});
-//Login está correto até aqui <<<<=====
-*/
-
-
-/*
-import React from 'react';
-import { View, Text} from 'react-native';
-import PaginaInicial from './src/pages/PaginaInicial';
-
-export default function Projeto1(){
-  return (
-    <View>
-      <View>
-       <PaginaInicial/>
-      </View>
-    </View>
-  );
-};
-*/
 
 //===================================================================
 //TAB SCREEN FUNCIONANDO NESSA PARTE DEBAIXO
@@ -323,35 +158,35 @@ import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-
-import TopBarNavigator from './src/navigations/TopBarNavigator';
-
-import Icon from 'react-native-vector-icons/Ionicons';
-
-import PaginaInicial from './src/pages/PaginaInicial';
-import Pesquisar from './src/pages/Pesquisar';
-import AdicionarNovoProduto from './src/pages/AdicionarNovoProduto';
-import Chat from './src/pages/Chat';
-import Detalhes from './src/pages/Detalhes';
-import ChatMensagens from './src/pages/ChatMensagens';
-
 import { StyleSheet, View } from 'react-native';
 
 import Login from './src/pages/Login';
 import Cadastrar from './src/pages/Cadastrar';
 import EsqueciMinhaSenha from './src/pages/EsqueciMinhaSenha';
 import ScreenNavigator from './src/navigations/ScreenNavigator'; // Nova tela de navegação entre as páginas ("pages")
-import PerfilTopTab from './src/pages/PerfilTopTab';
+
+import auth from '@react-native-firebase/auth';
+
+//import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+//import TopBarNavigator from './src/navigations/TopBarNavigator';
+// import Icon from 'react-native-vector-icons/Ionicons';
+// import PaginaInicial from './src/pages/PaginaInicial';
+// import Pesquisar from './src/pages/Pesquisar';
+// import AdicionarNovoProduto from './src/pages/AdicionarNovoProduto';
+// import Chat from './src/pages/Chat';
+// import Detalhes from './src/pages/Detalhes';
+// import ChatMensagens from './src/pages/ChatMensagens';
+// import PerfilTopTab from './src/pages/PerfilTopTab';
+
 
 import PaginaInicialTeste from './src/pages/PaginaInicialTeste';
 import SettingScreenTeste from './src/pages/SettingsScreenTeste';
 
-import auth from '@react-native-firebase/auth';
+
 
 
 const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
+//const Tab = createBottomTabNavigator();
 
 
 
@@ -365,14 +200,13 @@ const AuthNavigator = () => {
       <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
       <Stack.Screen name="Cadastrar" component={Cadastrar} options={{ headerShown: false }} />
       <Stack.Screen name="EsqueciMinhaSenha" component={EsqueciMinhaSenha} options={{ headerShown: false }} />
-      <Stack.Screen name="SettingScreenTeste" component={SettingScreenTeste} options={{ headerShown: false }} />
-
-      {/* Os "name" e "component" sempre precisam estar com os nomes iguais para funcionar o "navigation.navigate" */}
-      <Stack.Screen name="ScreenNavigator" component={ScreenNavigator} options={{ headerShown: false }} />
-      <Stack.Screen name="PerfilTopTab" component={PerfilTopTab} options={{ headerShown: false }} />
+      {/* <Stack.Screen name="SettingScreenTeste" component={SettingScreenTeste} options={{ headerShown: false }} /> */}
+      {/*<Stack.Screen name="ScreenNavigator" component={ScreenNavigator} options={{ headerShown: false }} />*/}
+      {/* <Stack.Screen name="PerfilTopTab" component={PerfilTopTab} options={{ headerShown: false }} /> */}
     </Stack.Navigator>
   )
 }
+
 
 const TabNavigator = () => {
   return (
@@ -384,160 +218,66 @@ const TabNavigator = () => {
 const Navigation = () => {
   // const user = "" //autenticação do usuário com firebase (está vazio, pois preenche os dados na tela Cadastrar)
 
-  
   // autenticação do usuário com firebase
   const [user, setuser] = useState('');
+  const [initializing, setInitializing] = useState(true);
 
 
-  useEffect(()=>{
-    auth().onAuthStateChanged((userExist)=>{
-      if(userExist){
-        setuser(userExist)
-      }else{
-        setuser("")
-      }
-    })
-  },[])
-  
+  // ======= Exemplo 1 ============
+  // Título do video no Youtube: #03 - Criando tela Login & Autenticação com Firebase - Projeto Tasks - React Native + Firebase 2022
+  // Link do Youtube: https://youtu.be/QUsOzWIFHE8?si=TluslHX4GRE00Dz6
+  // Canal do Youtube: Pervious Modz
+  function onAuthStateChanged(user) {
+    setuser(user);
+    if (initializing) setInitializing(false);
+  }
 
-  
-  // Essa parte não funciona com o Login primeiro, entra direto nas páginas do "ScreenNavigator"
-    return (
-      <NavigationContainer>
-        {user?<TabNavigator />:<AuthNavigator />}
-      </NavigationContainer>
-    )
+  useEffect(() => {
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
+  }, []);
+
+  if (initializing) return null;
+  // ======== Exemplo 1 =============
 
 
-/*
-// Essa parte funciona com o Login primeiro
-return (
-  <NavigationContainer>
-    {! user?<AuthNavigator />:<TabNavigator />}
-  </NavigationContainer>
-)
-*/
 
-/*
-  return (
-    <NavigationContainer>
-      <AuthNavigator />
-    </NavigationContainer>
-  )
-  */
+  // ========== Exemplo 2 =================
+  /* //Autenticação do usuário no Firebase
 
-  //==================================================
-
-  /*
-    //Autenticação do usuário no Firebase
-    useEffect(() => {
-      const unsregister = auth().onAuthStateChanged((userExist) => {
-        if (userExist) {
+    useEffect(()=>{
+      const unsregister = auth().onAuthStateChanged((userExist)=>{
+        if(userExist){
           setuser(userExist)
-        } else {
+        }else{
           setuser('')
         }
-  
       })
   
       return () => {
         unsregister()
       }
   
-    }, [])
-  */
+    },[])
+    */
+  // ========== Exemplo 2 =================
 
-
-  //Navegações das Páginas do Login (Entrar, Cadastrar e Sair no App)
-  //  return (
-  //  <NavigationContainer>
-  //     <Stack.Navigator>
-  //       {user ?
-
-  //        <Stack.Screen name="ScreenNavigator" component={ScreenNavigator} options={{ headerShown: false }} />
-
-  //        :
-  //        <>
-  {/* Os "name" e "component" sempre precisam estar com os nomes iguais para funcionar o "navigation.navigate" */ }
-  //          <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-  //          <Stack.Screen name="Cadastrar" component={Cadastrar} options={{ headerShown: false }} />
-  //          <Stack.Screen name="EsqueciMinhaSenha" component={EsqueciMinhaSenha} options={{ headerShown: false }} />
-  {/*<Stack.Screen name="ScreenNavigator" component={ScreenNavigator} options={{ headerShown: false }} /> */ }
-  {/* <Stack.Screen name="PerfilTopTab" component={PerfilTopTab} options={{ headerShown: false }} />  */ }
-  //         </>
-  //      }
-
-
-  //     </Stack.Navigator>
-  //   </NavigationContainer>
-  //  );
-
+  return (
+    <NavigationContainer>
+      {user ? <TabNavigator /> : <AuthNavigator />}
+    </NavigationContainer>
+  )
 
 
 }
-
-
-//const TabNavigator = () => {
-//  return (
-/*
-      <Tab.Navigator>
-          <Tab.Screen name="paginaInicialTeste" component={PaginaInicialTeste} options={{headerShown:false}}/>
-          <Tab.Screen name="Settings" component={SettingScreenTeste} options={{headerShown:false}}/>
-        </Tab.Navigator>
- 
-        */
-
-//    <ScreenNavigator />
-
-//  )
-
-// }
-
-
-
-//const Navigation = () => {
-// const user = "" //autenticação do usuário com firebase (está vazio, pois preenche os dados na tela Cadastrar)
-
-// autenticação do usuário com firebase
-//const [user, setUser] = useState('')
-
-/*
-useEffect(()=>{
-  auth().onAuthStateChanged((userExist)=>{
-    if(userExist){
-      setUser(userExist)
-    }else{
-      setUser("")
-    }
-  })
-},[])
-*/
-/*
-  return (
-    <NavigationContainer>
-      {user?<TabNavigator />:<AuthNavigator />}
-    </NavigationContainer>
-  )
-  */
-//  return (
-//    <NavigationContainer>
-//      <AuthNavigator />
-//    </NavigationContainer>
-//  )
-// }
 
 
 export default function App() {
 
   return (
     <View style={styles.container}>
-      {/* <Login /> */}
-      {/* <Cadastrar /> */}
-      {/* <EsqueciMinhaSenha /> */}
-      {/* <ScreenNavigator /> */}
-      <Navigation />
-      {/* <TabNavigator />  */}
 
+      <Navigation />
 
     </View>
   );
@@ -551,76 +291,12 @@ const styles = StyleSheet.create({
 
 
 
+//==================================================================
+
+// Exemplo de início do <NavigationContainer />
+// Só posso usar 1 vez ele em todo o código, pois vai chamar a navegação em todas as telas que eu configurar o navigation.navite e etc...
 
 /*
-const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
-
-
-function Tabs() {
-  return (
-    <Tab.Navigator screenOptions={{ headerShown: false }}>
-
-      <Tab.Screen
-        name='Página Inicial'
-        component={PaginaInicial}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <Icon name="home-outline" size={20} color="#000000" />
-          ),
-          tabBarLabel: "Pagina Inicial",
-
-        }}
-
-      />
-      <Tab.Screen
-        name='Pesquisar - Tab'
-        component={Pesquisar}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <Icon name="search-outline" size={20} color="#000000" />
-          ),
-          tabBarLabel: "Pesquisar",
-        }}
-      />
-      <Tab.Screen
-        name='Adicionar Novo Produto - Tab'
-        component={AdicionarNovoProduto}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <Icon name="add-outline" size={30} color="#000000" />
-          ),
-          tabBarLabel: "Adicionar novo produto",
-        }}
-      />
-      <Tab.Screen
-        name='Chat - Tab'
-        component={Chat}
-        options={{
-          headerShown: true,
-          title: 'Chats',
-          headerTitleAlign: 'center',
-          tabBarIcon: ({ color }) => (
-            <Icon name="chatbubble-outline" size={20} color="#000000" />
-          ),
-          tabBarLabel: "Chat",
-        }}
-      />
-      <Tab.Screen
-        name='Perfil - Tab'
-        component={TopBarNavigator}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <Icon name="person-outline" size={20} color="#000000" />
-          ),
-          tabBarLabel: "Perfil",
-        }}
-      />
-
-    </Tab.Navigator>
-  );
-}
-
 export default function App() {
   return (
     <NavigationContainer>
@@ -656,7 +332,9 @@ export default function App() {
 }
 */
 
+//=========================================================================================
 
+// ======= [REVER LINKS ABAIXO ???] ==============
 
 //[=> UTILIZAR ESSE EXEMPLO PARA CONFIGURAR A AUTENTICAÇÃO DO LOGIN SIMPLES, para depois implementar o código de Autenticação do Firebase] 
 // Explicação sobre Context API, que configura as rotas antes do Login, e para melhorar as "route"/"navigations" durante todo o Projeto do APP

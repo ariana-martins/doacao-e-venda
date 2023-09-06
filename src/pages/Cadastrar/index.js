@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Alert, KeyboardAvoidingView } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
+import { useNavigation } from '@react-navigation/native';
+
 //import { TextInput } from 'react-native-paper';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
@@ -19,7 +21,8 @@ import firestore from '@react-native-firebase/firestore';
 //Falta configurar "KeyboardAvoidingView" para preencher o e-mail, senha, para a tela ficar na mesma posição sem o teclado sobreescrever a tela de preenchimento do login.
 // Esse "KeyboardAvoidingView" não utilizei na pagina de "Adicionar novo produto" posso pegar os exemplos de lá.
 
-export default function Cadastrar({ navigation }) {
+export default function Cadastrar() {
+    const navigation = useNavigation();
 
     const [nomeCompleto, setNomeCompleto] = useState('');
     const [email, setEmail] = useState('');
@@ -187,7 +190,7 @@ export default function Cadastrar({ navigation }) {
                 </Button>
  */}
                         <View style={styles.bordaAreaBotoes}>
-                            <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={()=>userCadastrar()}>
+                            <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={() => userCadastrar()}>
                                 {/* onPress={() => navigation.goBack()}  */}
                                 {/* navigation.goBack está retornando para o Login após clicar em Cadastrar */}
                                 <Text style={styles.txtEntrar_e_Cadastrar}>CADASTRAR</Text>

@@ -2,18 +2,11 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-//import { TextInput } from 'react-native-paper';
+
 import { useNavigation } from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
 
 
-import { Button } from 'react-native-elements';
-
-
-//falta configurar a 'function' da autenticacao do firebase no codigo 
-//e falta criar uma parte de email e senha no console do firebase
-//Falta configurar "KeyboardAvoidingView" para preencher o e-mail, senha, para a tela ficar na mesma posição sem o teclado sobreescrever a tela de preenchimento do login.
-// Esse "KeyboardAvoidingView" não utilizei na pagina de "Adicionar novo produto" posso pegar os exemplos de lá.
 
 //Função Login
 //Tudo o que um componente de função retorna é processado como um elemento React.
@@ -30,33 +23,34 @@ export default function Login() {
 
 
     //Autenticação do usuário com o firebase
-    const userLogin = async () => {
+    
+    // Vai Entrar direto nas páginas clicando em "Entrar" c/ => "userLogin" pois na Página inicial o usuário ele está autenticado no "<AuthNavigator/>" e então acessa o "<TabNavigator/>".
+ //   return (
+  //      <NavigationContainer>
+  //        {user ? <TabNavigator /> : <AuthNavigator />}
+  //      </NavigationContainer>
+ //    )
+       
+   const userLogin = async () => {
         if (!email || !senha) {
             Alert.alert("Por favor preencha todos os dados")
             return;
         }
-        
+
         try { //acessa conta do usuário já criado na tela Cadastrar com mesmo email e senha
             const result = await auth().signInWithEmailAndPassword(email, senha)
-            
-        } catch (error) { //error.code mostra se o endereço de e-mail ou a senha foi digitado errado, e mostra através do log
-            //console.log(error.code)
+
+        } catch (error) {
+            //console.log(error.code) //error.code mostra se o endereço de e-mail ou a senha foi digitado errado, e mostra através do log
             Alert.alert("Algo está errado", "Digite novamente")
         }
-        /*
-            try { //Criar usuário com email e senha no firebase
-              await auth().createUserWithEmailAndPassword(email, senha)
-          } catch (err) {
-              Alert.alert("Dados cadastrados")
-          }
-          */
+
     }
 
 
 
 
     return (
-        // backgroundColor: "red" // cor para teste aqui da tela toda
         <View style={{ flex: 1, backgroundColor: "white" }}>
             <View style={styles.container}>
                 <Text style={styles.txtLogin}>Login</Text>
@@ -72,7 +66,6 @@ export default function Login() {
                         <View style={styles.inputAreaEmail}>
                             <TextInput
                                 style={styles.input}
-                                // disable={valor.length === 0} //validação desativada, se textInputName não for preenchida/igual a zero(0), não vai ser pressionável o botão "Enviar"
                                 placeholder="Endereço de e-mail:"
                                 value={email}
                                 keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
@@ -84,30 +77,17 @@ export default function Login() {
                         </View>
                     </View>
 
-                    {/*           
-                    <View style={styles.bordaTextInput}>
-                        <TextInput
-                            label="Endereço de e-mail:"
-                            value={email}
-                            mode="outlined"
-                            onChangeText={text => setEmail(text)}
-                        />
-                    </View>
-            */}
-
-
 
                     <Text style={styles.txtEmail_e_Senha}>Senha:</Text>
                     <View style={styles.botaoAdicionarMargem}>
                         <View style={styles.inputAreaSenha}>
                             <TextInput
                                 style={styles.input}
-                                // disable={valor.length === 0} //validação desativada, se textInputName não for preenchida/igual a zero(0), não vai ser pressionável o botão "Enviar"
                                 placeholder="************"
                                 value={senha}
                                 keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
                                 //onChangeText={setSenha}
-                                onChangeText={value=> setSenha(value)}
+                                onChangeText={value => setSenha(value)}
                                 secureTextEntry={passwordVisibility}
                             />
                             <TouchableOpacity onPress={() => setPasswordVisibility(!passwordVisibility)} >
@@ -145,11 +125,7 @@ export default function Login() {
                         {/* onPress={() => navigation.navigate("ScreenNavigator")}> */}
                         <Text style={styles.txtEntrar_e_Cadastrar}>ENTRAR</Text>
                     </TouchableOpacity>
-                    {/*
-                    <Button mode="contained" onPress={() => userLogin()} >
-                        LoginTesteAuth
-                    </Button>
- */}
+ 
                     <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={() => navigation.navigate("Cadastrar")}>
                         <Text style={styles.txtEntrar_e_Cadastrar}>CADASTRAR</Text>
                     </TouchableOpacity>

@@ -185,6 +185,7 @@ import SettingScreenTeste from './src/pages/SettingsScreenTeste';
 
 
 
+
 const Stack = createStackNavigator();
 //const Tab = createBottomTabNavigator();
 
@@ -200,9 +201,7 @@ const AuthNavigator = () => {
       <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
       <Stack.Screen name="Cadastrar" component={Cadastrar} options={{ headerShown: false }} />
       <Stack.Screen name="EsqueciMinhaSenha" component={EsqueciMinhaSenha} options={{ headerShown: false }} />
-      {/* <Stack.Screen name="SettingScreenTeste" component={SettingScreenTeste} options={{ headerShown: false }} /> */}
-      {/*<Stack.Screen name="ScreenNavigator" component={ScreenNavigator} options={{ headerShown: false }} />*/}
-      {/* <Stack.Screen name="PerfilTopTab" component={PerfilTopTab} options={{ headerShown: false }} /> */}
+
     </Stack.Navigator>
   )
 }

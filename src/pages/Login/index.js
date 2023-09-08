@@ -23,15 +23,15 @@ export default function Login() {
 
 
     //Autenticação do usuário com o firebase
-    
+
     // Vai Entrar direto nas páginas clicando em "Entrar" c/ => "userLogin" pois na Página inicial o usuário ele está autenticado no "<AuthNavigator/>" e então acessa o "<TabNavigator/>".
- //   return (
-  //      <NavigationContainer>
-  //        {user ? <TabNavigator /> : <AuthNavigator />}
-  //      </NavigationContainer>
- //    )
-       
-   const userLogin = async () => {
+    //   return (
+    //      <NavigationContainer>
+    //        {user ? <TabNavigator /> : <AuthNavigator />}
+    //      </NavigationContainer>
+    //    )
+
+    const userLogin = async () => {
         if (!email || !senha) {
             Alert.alert("Por favor preencha todos os dados")
             return;
@@ -99,19 +99,6 @@ export default function Login() {
                     </View>
 
 
-                    {/*         
-                    <View style={styles.bordaTextInput}>
-                        <TextInput
-                            label="Senha:"
-                            value={senha}
-                            mode="outlined"
-                            secureTextEntry={true}
-                            //onChangeText={text => setSenha(text)} //ver a diferença entre essa linha e a debaixo do "onChanceText"
-                            onChangeText={setSenha} //ver a diferença entre essa linha e a de cima do "onChanceText"
-                        />
-                    </View>
-             */}
-
 
 
                 </View>
@@ -125,7 +112,7 @@ export default function Login() {
                         {/* onPress={() => navigation.navigate("ScreenNavigator")}> */}
                         <Text style={styles.txtEntrar_e_Cadastrar}>ENTRAR</Text>
                     </TouchableOpacity>
- 
+
                     <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={() => navigation.navigate("Cadastrar")}>
                         <Text style={styles.txtEntrar_e_Cadastrar}>CADASTRAR</Text>
                     </TouchableOpacity>

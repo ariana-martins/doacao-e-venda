@@ -1,11 +1,13 @@
 import React from 'react';
-import { View, Text, StyleSheet, TextInput, SafeAreaView } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { View, Text, StyleSheet, TextInput, SafeAreaView, TouchableOpacity } from 'react-native';
+
 
 import Icon from 'react-native-vector-icons/Ionicons';
 
 
 export default function Pesquisar() {
+    
+
     return (
 
         <SafeAreaView style={{ backgroundColor: '#FFFFFF' }}>

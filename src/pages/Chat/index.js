@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, Text, FlatList, Pressable, StyleSheet } from 'react-native';
+import { View, Image, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -47,7 +47,7 @@ export default function Chat() {
                 keyExtractor={item=>item.id}
                 renderItem={({item}) => (
                     <View style={styles.card}>
-                        <Pressable onPress={() => navigation.navigate('ChatMensagens',
+                        <TouchableOpacity onPress={() => navigation.navigate('ChatMensagens',
                         {userDono: item.messageText})}>
                         <View style={styles.userInfo}>
                             <View style={styles.userImgWrapper}>
@@ -66,7 +66,7 @@ export default function Chat() {
                                 <Text>{item.messageUser}</Text>
                             </View>
                         </View>
-                        </Pressable>
+                        </TouchableOpacity>
                     </View>
                 )}
             />

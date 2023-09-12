@@ -1,9 +1,55 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, Button } from 'react-native';
+import { GiftedChat } from 'react-native-gifted-chat';
+
 import EnviarReceberMensagens from '../../components/EnviarReceberMensagens';
 import { Input } from '@rneui/base';
 
+
+//Continuar olhando e testando o vídeo
+// Título do video do Canal do Youtube: #8 Gifted chat UI & one to one chat using firestore | React Native & Firebase tutorial in Hindi
+// Link do video do Canal do Youtube: https://www.youtube.com/watch?v=flAFZC-xNwk&list=PLB97yPrFwo5ihgCoWXlEDHrAPQNshsfzP&index=21
+
 export default function ChatMensagens() {
+    const [messages, setMessages] = useState([]);
+
+    useEffect(() => {
+       
+        setMessages([
+            {
+                _id: 1,
+                text: 'Hello developer',
+                createdAt: new Date(),
+                user: {
+                    _id: 2,
+                    name: 'React Native',
+                    avatar: 'https://placeimg.com/140/140/any',
+                },
+            },
+        ])
+    }, [])
+
+
+    const onSend = (messages = []) => {
+        setMessages(previousMessages =>
+            GiftedChat.append(previousMessages, messages),
+        )
+    }
+
+
+    return (
+        <View style={{ flex: 1 }}>
+            <GiftedChat
+                messages={messages}
+                onSend={messages => onSend(messages)}
+                user={{
+                    _id: 1,
+                }}
+            />
+        </View>
+    )
+
+    /*
     return (
         <View style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
             <ScrollView>
@@ -30,6 +76,8 @@ export default function ChatMensagens() {
         </View>
 
     )
+        */
+
 }
 
 //=============================================================

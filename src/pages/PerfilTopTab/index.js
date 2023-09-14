@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image, Alert, FlatList } from 'react-native';
 // import { Button } from 'react-native-elements';
 import { Button } from 'react-native-paper';
@@ -12,6 +12,8 @@ import ImageCropPicker from 'react-native-image-crop-picker';
 //import ImagePicker from 'react-native-image-crop-picker';
 
 import storage from '@react-native-firebase/storage';
+
+import { AuthContext } from '../../contexts/auth';
 
 
 //import {  launchCamera, launchImageLibrary, CameraOptions, ImageLibraryOptions } from 'react-native-image-picker';
@@ -28,11 +30,15 @@ import storage from '@react-native-firebase/storage';
 export default function PerfilTopTab() {
     const navigation = useNavigation();
 
+    const { nome, user } = useContext(AuthContext)
+
+
     const [nomeCompleto, setNomeCompleto] = useState('');
     const [email, setEmail] = useState('');
 
     const [users,setUsers] = useState(null);
 
+    
     const getUsers = async () => {
         const querySanp = await firestore().collection('users').get()
         const allusers = querySanp.docs.map(docSnap => docSnap.data())
@@ -195,6 +201,12 @@ export default function PerfilTopTab() {
                     {/* onPress={() => navigation.navigate("Login")}> */}
                     <Text style={styles.textoBotao}>SAIR</Text>
                 </TouchableOpacity>
+            </View>
+
+            <View>
+                <Text>Nome: {nome}</Text>
+                <Text>Email logado: {user.email}</Text>
+                <Text>Status: {user.status}</Text>
             </View>
         </View>
     )

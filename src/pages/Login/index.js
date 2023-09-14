@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
 
+import { AuthContext } from '../../contexts/auth';
 
 
 //Função Login
@@ -22,6 +23,9 @@ export default function Login() {
     const [passwordVisibility, setPasswordVisibility] = useState(true);
 
 
+    const { signInWithEmailAndPassword } = useContext(AuthContext);
+
+
     //Autenticação do usuário com o firebase
 
     // Vai Entrar direto nas páginas clicando em "Entrar" c/ => "userLogin" pois na Página inicial o usuário ele está autenticado no "<AuthNavigator/>" e então acessa o "<TabNavigator/>".
@@ -31,6 +35,13 @@ export default function Login() {
     //      </NavigationContainer>
     //    )
 
+/*
+    function userLogin() {
+        signInWithEmailAndPassword(email, senha)
+    }
+*/
+
+   
     const userLogin = async () => {
         if (!email || !senha) {
             Alert.alert("Por favor preencha todos os dados")
@@ -39,7 +50,9 @@ export default function Login() {
 
         try { //acessa conta do usuário já criado na tela Cadastrar com mesmo email e senha
             const result = await auth().signInWithEmailAndPassword(email, senha)
-
+            Alert.alert("Feito login")
+            return;
+            
         } catch (error) {
             //console.log(error.code) //error.code mostra se o endereço de e-mail ou a senha foi digitado errado, e mostra através do log
             Alert.alert("Algo está errado", "Digite novamente")

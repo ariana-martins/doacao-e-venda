@@ -160,12 +160,16 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StyleSheet, View } from 'react-native';
 
+import AuthProvider from './src/contexts/auth';
+
+import auth from '@react-native-firebase/auth';
+
 import Login from './src/pages/Login';
 import Cadastrar from './src/pages/Cadastrar';
 import EsqueciMinhaSenha from './src/pages/EsqueciMinhaSenha';
 import ScreenNavigator from './src/navigations/ScreenNavigator'; // Nova tela de navegação entre as páginas ("pages")
 
-import auth from '@react-native-firebase/auth';
+
 
 //import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 //import TopBarNavigator from './src/navigations/TopBarNavigator';
@@ -263,7 +267,9 @@ const Navigation = () => {
 
   return (
     <NavigationContainer>
-      {user ? <TabNavigator /> : <AuthNavigator />}
+      <AuthProvider>
+        {user ? <TabNavigator /> : <AuthNavigator />}
+      </AuthProvider>
     </NavigationContainer>
   )
 

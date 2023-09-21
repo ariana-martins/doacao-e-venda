@@ -27,6 +27,9 @@ import { AuthContext } from '../../contexts/auth';
 //openPicker -> //abrir o seletor de imagens
 
 
+
+
+
 export default function PerfilTopTab() {
     const navigation = useNavigation();
 

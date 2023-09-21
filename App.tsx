@@ -170,19 +170,6 @@ import EsqueciMinhaSenha from './src/pages/EsqueciMinhaSenha';
 import ScreenNavigator from './src/navigations/ScreenNavigator'; // Nova tela de navegação entre as páginas ("pages")
 
 
-
-//import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-//import TopBarNavigator from './src/navigations/TopBarNavigator';
-// import Icon from 'react-native-vector-icons/Ionicons';
-// import PaginaInicial from './src/pages/PaginaInicial';
-// import Pesquisar from './src/pages/Pesquisar';
-// import AdicionarNovoProduto from './src/pages/AdicionarNovoProduto';
-// import Chat from './src/pages/Chat';
-// import Detalhes from './src/pages/Detalhes';
-// import ChatMensagens from './src/pages/ChatMensagens';
-// import PerfilTopTab from './src/pages/PerfilTopTab';
-
-
 import PaginaInicialTeste from './src/pages/PaginaInicialTeste';
 import SettingScreenTeste from './src/pages/SettingsScreenTeste';
 
@@ -211,12 +198,13 @@ const AuthNavigator = () => {
 }
 
 
+/*
 const TabNavigator = () => {
   return (
     <ScreenNavigator />
   )
 }
-
+*/
 
 const Navigation = () => {
   // const user = "" //autenticação do usuário com firebase (está vazio, pois preenche os dados na tela Cadastrar)
@@ -226,7 +214,7 @@ const Navigation = () => {
   const [initializing, setInitializing] = useState(true);
 
 
-  // ======= Exemplo 1 ============
+  // ======= Exemplo ============
   // Título do video no Youtube: #03 - Criando tela Login & Autenticação com Firebase - Projeto Tasks - React Native + Firebase 2022
   // Link do Youtube: https://youtu.be/QUsOzWIFHE8?si=TluslHX4GRE00Dz6
   // Canal do Youtube: Pervious Modz
@@ -241,38 +229,20 @@ const Navigation = () => {
   }, []);
 
   if (initializing) return null;
-  // ======== Exemplo 1 =============
+  // ======== Exemplo =============
 
 
-
-  // ========== Exemplo 2 =================
-  /* //Autenticação do usuário no Firebase
-
-    useEffect(()=>{
-      const unsregister = auth().onAuthStateChanged((userExist)=>{
-        if(userExist){
-          setuser(userExist)
-        }else{
-          setuser('')
-        }
-      })
-  
-      return () => {
-        unsregister()
-      }
-  
-    },[])
-    */
-  // ========== Exemplo 2 =================
-
+  // Se o usuário estiver feito login, então acessa a página geral "ScreenNavigator",
+  // Se não, o usuário deverá realizar a autenticação e/ou cadastro p/ se autenticar "AuthNavigator".
   return (
     <NavigationContainer>
       <AuthProvider>
-        {user ? <TabNavigator /> : <AuthNavigator />}
+        {user ? <ScreenNavigator /> : <AuthNavigator />}
       </AuthProvider>
     </NavigationContainer>
   )
-
+// Início do <NavigationContainer />
+// Só posso usar 1 vez ele em todo o código, pois vai chamar a navegação em todas as telas que eu configurar o navigation.navite e etc...
 
 }
 
@@ -301,41 +271,6 @@ const styles = StyleSheet.create({
 // Exemplo de início do <NavigationContainer />
 // Só posso usar 1 vez ele em todo o código, pois vai chamar a navegação em todas as telas que eu configurar o navigation.navite e etc...
 
-/*
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator >
-        <Stack.Screen name="Inicio!" component={Tabs} options={{ headerShown: false }} />
-
-        <Stack.Screen
-          name="Detalhes"
-          component={Detalhes}
-          options={{
-            title: 'Detalhes',
-            headerTitleStyle: {
-              fontFamily: 'Roboto',
-              fontSize: 25,
-              color: '#000000',
-            },
-          }}
-        />
-
-        <Stack.Screen
-          name="ChatMensagens"
-          component={ChatMensagens}
-          options={({ route }) => ({
-            title: route.params.userDono,
-            headerTitleAlign: 'center',
-          })}
-        />
-
-
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
-*/
 
 //=========================================================================================
 

@@ -1,6 +1,51 @@
 
 // [PAGINA NÃO ATIVA NO APP, Página apenas afins de testes e console.log]
 
+
+//=======================================================================
+// PARA TELA INICIAL DE NAVEGAÇÃO EXEMPLO, ERA DO INICIO DO APLICATIVO:
+
+// Exemplo de início do <NavigationContainer />
+// Só posso usar 1 vez ele em todo o código, pois vai chamar a navegação em todas as telas que eu configurar o navigation.navite e etc...
+
+/*
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator >
+        <Stack.Screen name="Inicio!" component={Tabs} options={{ headerShown: false }} />
+
+        <Stack.Screen
+          name="Detalhes"
+          component={Detalhes}
+          options={{
+            title: 'Detalhes',
+            headerTitleStyle: {
+              fontFamily: 'Roboto',
+              fontSize: 25,
+              color: '#000000',
+            },
+          }}
+        />
+
+        <Stack.Screen
+          name="ChatMensagens"
+          component={ChatMensagens}
+          options={({ route }) => ({
+            title: route.params.userDono,
+            headerTitleAlign: 'center',
+          })}
+        />
+
+
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+*/
+
+
+
 //=======================================================================
 
 // Para "UPLOAD DE IMAGEM - IMAGE CROP PICKER", console.log para ver se está selecionando a imagem no local certo...

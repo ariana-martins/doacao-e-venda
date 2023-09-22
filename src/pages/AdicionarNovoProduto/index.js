@@ -17,7 +17,6 @@ import { useNavigation } from '@react-navigation/native';
 
 
 export default function AdicionarNovoProduto() {
-
     const navigation = useNavigation();
 
     const [isSelected, setSelection] = React.useState(false);
@@ -71,6 +70,8 @@ export default function AdicionarNovoProduto() {
     // Link do video: https://www.youtube.com/watch?v=ZixONsxTy0g&list=PLeOkQb0b3nPzXq_jKX70NRvXlbZ9p7ji5
     // Canal do Youtube: JAS ACADAMY
 
+
+    {/* =>Botão Inserir Produto<= */}
     const onSubmitPress = async () => {
 
         console.log(titulo, "Titulo aqui")
@@ -132,7 +133,7 @@ export default function AdicionarNovoProduto() {
 
 
 
-    //Selcionando imagem da camera ou da galeria do celular
+    //Selecionando imagem da camera ou da galeria do celular
     const onSelectImage = async () => {
 
         if (onSelectImage) {
@@ -261,6 +262,8 @@ export default function AdicionarNovoProduto() {
             <Text style={styles.texto}>Selecione uma opção:</Text>
             <View>
 
+
+
                 {/* ==>>> FAZER TESTE NA OUTRA TELA, TRANSFORMAR EM FUNÇÃO, COM IF <<====== */}
                 <View style={styles.checkboxOpcoes}>
                     <Checkbox
@@ -298,6 +301,7 @@ export default function AdicionarNovoProduto() {
                 </View>
             </View>
             <View style={styles.botaoAdicionarMargem}>
+                {/* =>Botão Inserir Produto<= */}
                 <TouchableOpacity style={styles.btn} isLoading={isLoading} onPress={() => onSubmitPress()}>
                     <Text style={styles.textoBotao}>Cadastrar produto</Text>
                 </TouchableOpacity>

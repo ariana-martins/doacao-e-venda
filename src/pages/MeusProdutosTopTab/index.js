@@ -126,8 +126,11 @@ const ref = firebase.firestore().collection('produtos');
                     data={data}
                     renderItem={({item}) => (
                         <View style={{ marginTop: 14 }}>
-                            <Card containerStyle={{ marginTop: 15 }}>
-                                {/*aqui vai o card de imagens, mas não está puxando do banco de dados*/}
+                            <Card containerStyle={{ marginTop: 15 }}
+                               
+                               key={item.id} //uma id para cada produto
+                            >
+                                {/*aqui vai o card de imagens, mas não está puxando do banco de dados todas as imagens*/}
                                 <Card.Image 
                                     style={styles.img}
                                     source={{ uri : item.images }} 

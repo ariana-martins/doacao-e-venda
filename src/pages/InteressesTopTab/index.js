@@ -9,6 +9,7 @@ import firestore from '@react-native-firebase/firestore';
 
 
 
+
 //Referência para preencher todos os dados (titulo, descrição, nome, email etc...) corretamente 
 // + Enviando para Firebase/Firestore e limpando a tela após todos os dados cadastrados.
 //"React Native Firebase Todo App | React Native"
@@ -22,7 +23,7 @@ export default function InteressesTopTab() {
     const [textInputEmail, setTextInputEmail] = useState('');
 
     
-
+    //Chamar uma constante ref = "referência"
     const ref = firestore().collection('myInteresses');
 
 
@@ -53,7 +54,6 @@ export default function InteressesTopTab() {
    
 
 
-
     return (
 
 
@@ -80,7 +80,7 @@ export default function InteressesTopTab() {
                     <Text>Enviar</Text>
                 </TouchableOpacity>
             </View>
-    
+
 
         </View>
 

@@ -41,7 +41,7 @@ export default function PerfilTopTab() {
 
     const [users,setUsers] = useState(null);
 
-    
+   
     const getUsers = async () => {
         const querySanp = await firestore().collection('users').get()
         const allusers = querySanp.docs.map(docSnap => docSnap.data())

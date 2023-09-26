@@ -7,11 +7,6 @@ import { Card, Button, Icon} from 'react-native-elements';
 import firestore, { firebase } from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
 
-import { Item } from 'react-native-paper/lib/typescript/src/components/Drawer/Drawer';
-
-
-//para mais exemplos de card "https://reactnativeelements.com/docs/components/card"
-
 
 /*
 //EXEMPLO DO CÓDIGO QUE TEM ORDER PROPS...
@@ -66,9 +61,10 @@ type Props = {
   */
 //============================================================================
 
-//Exemplo do código abaixo do banco de dados do vídeo do Youtube "React-Native, Renderizar no App Itens do banco | Criando App do Zero"
+//Exemplo do código abaixo do banco de dados do vídeo do Youtube: "React-Native, Renderizar no App Itens do banco | Criando App do Zero"
+// Link do vídeo do Youtube: https://www.youtube.com/watch?v=y5SiIiQkp0M
 //Canal do Youtube: Guilherme Fernando - Developer
-//puxa os dados do banco de dados/firebase/firestore em tempo real... 
+//puxa os dados do banco de dados/firebase/firestore em tempo real... Explica certinho para que serve cada linha do código "UseEffect"
 
 
 export default function MeusProdutos() {

@@ -109,10 +109,10 @@ export default function ScreenNavigator() {
       <Stack.Screen
         name="ChatMensagens"
         component={ChatMensagens}
-           options={({ route }) => ({
-             title: route.params.userDono,
-             headerTitleAlign: 'center',
-           })}
+        options={({ route }) => ({
+          title: route.params.userDono,
+          headerTitleAlign: 'center',
+        })}
       />
 
       <Stack.Screen

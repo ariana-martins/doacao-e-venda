@@ -6,7 +6,8 @@ import { Button } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
 import auth from '@react-native-firebase/auth';
-import firestore from '@react-native-firebase/firestore';
+//import firestore from '@react-native-firebase/firestore';
+import firestore, { firebase } from '@react-native-firebase/firestore';
 
 import ImageCropPicker from 'react-native-image-crop-picker';
 //import ImagePicker from 'react-native-image-crop-picker';
@@ -33,15 +34,17 @@ import { AuthContext } from '../../contexts/auth';
 export default function PerfilTopTab() {
     const navigation = useNavigation();
 
-    const { nome, user } = useContext(AuthContext)
+    const { nome, user } = useContext(AuthContext);
 
 
     const [nomeCompleto, setNomeCompleto] = useState('');
     const [email, setEmail] = useState('');
 
-    const [users,setUsers] = useState(null);
+    const [users, setUsers] = useState(null);
 
-   
+    const [userData, setUserData] = useState(null);
+
+
     const getUsers = async () => {
         const querySanp = await firestore().collection('users').get()
         const allusers = querySanp.docs.map(docSnap => docSnap.data())
@@ -51,11 +54,26 @@ export default function PerfilTopTab() {
 
     useEffect(() => {
         getUsers()
-    },[])
+    }, [])
 
 
+    //especifica o usuário logado corretamente. Nosso usuário atual
+    const getUser = async () => {
+        await firestore()
+            .collection('users')
+            .doc(user.uid)
+            .get()
+            .then((documentSnapshot) => {
+                if (documentSnapshot.exists) {
+                    console.log('User Data', documentSnapshot.data());
+                    setUserData(documentSnapshot.data());
+                }
+            })
+    }
 
-
+    useEffect(() => {
+        getUser()
+    }, [])
 
 
     //    const [images, setImages] = useState('https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT%20-%20P&B.png');
@@ -70,7 +88,7 @@ export default function PerfilTopTab() {
     
             ImageCropPicker.openPicker({
                 width: 300,
-                height: 400,
+                height: 400,const currentUser = 
                 cropping: true
             }).then(images => {
                 console.log(images);
@@ -137,22 +155,27 @@ export default function PerfilTopTab() {
 
 
 
-    const RenderCard = ({item}) => {
+    const RenderCard = ({ item }) => {
         return (
             <View style={styles.myCard}>
                 {/* "pic" é a "identificação da imagem" no firestore junto com "nomeCompleto" "uid" "email"...  */}
                 {/* <Image source={{uri:item.pic}} style={{width:60, height: 60, borderRadius:30, backgroundColor: "green" }} /> */}
-                <Image source={require('../../../src/assets/logo_novo.jpg')} style={{width:60, height: 60, borderRadius:30, backgroundColor: "green" }}/>
+                <Image source={require('../../../src/assets/logo_novo.jpg')} style={{ width: 60, height: 60, borderRadius: 30, backgroundColor: "green" }} />
                 <View>
-                <Text style={styles.txtEmail_e_Senha}>{item.nomeCompleto}</Text>
-                <Text style={styles.txtEmail_e_Senha}>{item.email}</Text>
+                    <Text style={styles.txtEmail_e_Senha}>{item.nomeCompleto}</Text>
+                    <Text style={styles.txtEmail_e_Senha}>{item.email}</Text>
                 </View>
             </View>
         )
     }
 
 
+    // Ou seja, vai fazer um filtro para filtrar somente o usuário "conectado".
+    const user_id = firebase.auth().currentUser.uid; 
+//  const user_id = firebase.auth().currentUser.email; [OK também]
 
+
+    
 
 
     // Agora vamos criar o Button para escolher a imagem e exibi-la ("choose_photo")
@@ -182,35 +205,37 @@ export default function PerfilTopTab() {
                 <Text style={styles.txtEmail_e_Senha}>{email}E-mail do usuário aqui</Text>
                 */}
 
-               {/*
+                {/*
                 <Text>{auth().currentUser.email}</Text>
                 <Button mode="contained" onPress={() => auth().signOut()} >
                     LogoutTeste
                 </Button>
                  */}
-                 <FlatList
+
+                <FlatList
                     data={users}
-                    renderItem={({item}) => {
-                        return <RenderCard item={item} />}
+                    renderItem={({ item }) => {
+                        return <RenderCard item={item} />
+                    }
                     }
                     keyExtractor={(item) => item.uid}
-                 >
+                >
 
-                 </FlatList>
+                </FlatList>
             </View>
 
-            <View style={styles.botaoAdicionarMargem}>              
+            <View>
+                <Text>User ID conectado: {user_id}</Text>
+            </View>
+
+            <View style={styles.botaoAdicionarMargem}>
                 <TouchableOpacity style={styles.btn} onPress={() => auth().signOut()} >
                     {/* onPress={() => navigation.navigate("Login")}> */}
                     <Text style={styles.textoBotao}>SAIR</Text>
                 </TouchableOpacity>
             </View>
 
-            <View>
-                <Text>Nome: {nome}</Text>
-                <Text>Email logado: {user.email}</Text>
-                <Text>Status: {user.status}</Text>
-            </View>
+
         </View>
     )
 

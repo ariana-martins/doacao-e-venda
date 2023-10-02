@@ -3,9 +3,14 @@ import { View, Text, SafeAreaView, ScrollView, StyleSheet, Image} from 'react-na
 import { FlatList } from 'react-native-gesture-handler';
 //import { Card } from '@rneui/base';
 import { Card, Button, Icon} from 'react-native-elements';
+import { useNavigation } from '@react-navigation/native';
 
+//import firebase from '@react-native-firebase/firestore';
 import firestore, { firebase } from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
+import auth from '@react-native-firebase/auth';
+import InteressesTopTab from '../InteressesTopTab';
+
 
 
 /*
@@ -68,10 +73,10 @@ type Props = {
 
 
 export default function MeusProdutos() {
+    const navigation = useNavigation();
 
 //const [data, setData] = useState(false);
-const [data, setData] = useState('');
-
+    const [data, setData] = useState('');
 
 // Refazer o getDowload em "Adicionar novo produto" e aqui também incluir um "UseEffect + getDetail"
 // Conforme seguindo o manual do canal do Youtube: CODERS NEVER QUIT
@@ -90,10 +95,10 @@ const ref = firebase.firestore().collection('produtos');
             })
                 setData(data)
         })
-        return () => ref()
+      //  return () => ref()
     }, [])
 
-
+    
     //==============================================================================================================
     //CRIAR UMA CONST "<RenderCard/>" e renderizar ela com ({item}) =>
     // e dentro do return e da <Flatlist/> + renderItem={({item})} ACRESCENTAR o "<RenderCard/>"
@@ -119,17 +124,27 @@ const ref = firebase.firestore().collection('produtos');
     //==============================================================================================================
 
 
+    //Para deletar e/ou editar apenas os produtos que um usuário adicionou, e não deletar todos os produtos de todos os usuários
+    // Ou seja, vai fazer um filtro para filtrar somente os produtos do usuário "x".
+    const user_id = firebase.auth().currentUser.uid;
+
+
     return (
         <View style={{ padding: 18, backgroundColor: '#FFFFFF' }}>
             <Text style={{ fontWeight: 'bold', fontSize: 20 }}>Meus produtos para doar e vender!</Text>
+            <Button
+                title="Meus Produtos"
+                onPress={() => navigation.navigate("InteressesTopTab")}
+            />
                 <FlatList
                     data={data}
                     renderItem={({item}) => (
                         <View style={{ marginTop: 14 }}>
                             <Card containerStyle={{ marginTop: 15 }}
                                
-                               key={item.id} //uma id para cada produto
+                            //   key={item.id} //uma id para cada produto
                             >
+                                <Text style={{ fontWeight: 'bold', fontSize: 16 }}>{user_id}</Text> 
                                 {/*aqui vai o card de imagens, mas não está puxando do banco de dados todas as imagens*/}
                                 <Card.Image 
                                     style={styles.img}

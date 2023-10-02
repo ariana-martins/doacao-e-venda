@@ -61,8 +61,6 @@ export default function Login() {
     }
 
 
-
-
     return (
         <View style={{ flex: 1, backgroundColor: "white" }}>
             <View style={styles.container}>

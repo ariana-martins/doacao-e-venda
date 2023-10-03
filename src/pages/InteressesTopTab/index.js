@@ -5,7 +5,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, TextInput, View, TouchableOpacity, Alert, FlatList } from 'react-native';
 import { Text } from 'react-native-elements';
-import firestore from '@react-native-firebase/firestore';
+import firestore, { firebase } from '@react-native-firebase/firestore';
 
 
 
@@ -124,10 +124,11 @@ export default function InteressesTopTab() {
                                 <Text style={{ fontSize: 16, marginTop: 5 }}>{item.descricao}</Text>
 
                             </Card>
+                           
                         </View>
                     )}
                 />
-        </View>
+            </View>
 
         </View >
 

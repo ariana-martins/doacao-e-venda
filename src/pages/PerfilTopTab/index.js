@@ -57,26 +57,6 @@ export default function PerfilTopTab() {
     }, [])
 
 
-    //especifica o usuário logado corretamente. Nosso usuário atual
-    const getUser = async () => {
-        await firestore()
-            .collection('users')
-            .doc(user.uid)
-            .get()
-            .then((documentSnapshot) => {
-                if (documentSnapshot.exists) {
-                    console.log('User Data', documentSnapshot.data());
-                    setUserData(documentSnapshot.data());
-                }
-            })
-    }
-
-    useEffect(() => {
-        getUser()
-    }, [])
-
-
-    //    const [images, setImages] = useState('https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT%20-%20P&B.png');
 
 
     //Ref of our image

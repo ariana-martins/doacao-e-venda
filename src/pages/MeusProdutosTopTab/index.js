@@ -9,7 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 import firestore, { firebase } from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
 import auth from '@react-native-firebase/auth';
-import InteressesTopTab from '../InteressesTopTab';
+
 
 
 
@@ -132,10 +132,7 @@ const ref = firebase.firestore().collection('produtos');
     return (
         <View style={{ padding: 18, backgroundColor: '#FFFFFF' }}>
             <Text style={{ fontWeight: 'bold', fontSize: 20 }}>Meus produtos para doar e vender!</Text>
-            <Button
-                title="Meus Produtos"
-                onPress={() => navigation.navigate("InteressesTopTab")}
-            />
+       
                 <FlatList
                     data={data}
                     renderItem={({item}) => (

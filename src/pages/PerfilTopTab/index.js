@@ -14,7 +14,6 @@ import ImageCropPicker from 'react-native-image-crop-picker';
 
 import storage from '@react-native-firebase/storage';
 
-import { AuthContext } from '../../contexts/auth';
 
 
 //import {  launchCamera, launchImageLibrary, CameraOptions, ImageLibraryOptions } from 'react-native-image-picker';
@@ -33,9 +32,6 @@ import { AuthContext } from '../../contexts/auth';
 
 export default function PerfilTopTab() {
     const navigation = useNavigation();
-
-    const { nome, user } = useContext(AuthContext);
-
 
     const [nomeCompleto, setNomeCompleto] = useState('');
     const [email, setEmail] = useState('');
@@ -292,9 +288,9 @@ const styles = StyleSheet.create({
     },
 
     image_picker: {
-        width: 180,
-        height: 180,
-        borderRadius: 90
+        width: 100,
+        height: 100,
+        borderRadius: 50, //essa numeração é para deixar a borda da imagem completamente circular
     },
     container_images: {
         alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)

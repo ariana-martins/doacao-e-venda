@@ -298,7 +298,7 @@ const styles = StyleSheet.create({
 //=======================================================================
 
 /*
-//[PREENCHER TODOS OS DADOS (titulo, descrição, nome, email etc...) CORRETAMENTE, dentro do TextInput.
+//[PREENCHER TODOS OS DADOS (titulo, descrição, nome, email etc...) CORRETAMENTE, dentro do TextInput.]
 // + ENVIANDO PARA FIREBASE/FIRESTORE E LIMPANDO A TELA APÓS PREENCHIMENTO DE TODOS OS CADASTROS COM TextInput
 
 import React, { useState } from 'react';
@@ -317,6 +317,9 @@ export default function InteressesTopTab() {
 
     const [textInputName, setTextInputName] = useState('');
     const [textInputEmail, setTextInputEmail] = useState('');
+    
+
+    //Chamar uma constante ref = "referência"
     const ref = firestore().collection('myInteresses');
 
 

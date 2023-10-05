@@ -6,7 +6,6 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
 
-import { AuthContext } from '../../contexts/auth';
 
 
 //Função Login
@@ -23,7 +22,7 @@ export default function Login() {
     const [passwordVisibility, setPasswordVisibility] = useState(true);
 
 
-    const { signInWithEmailAndPassword } = useContext(AuthContext);
+    
 
 
     //Autenticação do usuário com o firebase

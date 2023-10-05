@@ -236,9 +236,7 @@ const Navigation = () => {
   // Se não, o usuário deverá realizar a autenticação e/ou cadastro p/ se autenticar "AuthNavigator".
   return (
     <NavigationContainer>
-      <AuthProvider>
         {user ? <ScreenNavigator /> : <AuthNavigator />}
-      </AuthProvider>
     </NavigationContainer>
   )
 // Início do <NavigationContainer />

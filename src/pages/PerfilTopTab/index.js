@@ -147,8 +147,8 @@ export default function PerfilTopTab() {
 
 
     // Ou seja, vai fazer um filtro para filtrar somente o usuário "conectado".
-    const user_id = firebase.auth().currentUser.uid; 
-//  const user_id = firebase.auth().currentUser.email; [OK também]
+    //const user_id = firebase.auth().currentUser.uid; //[OK também, aqui mostra o Uid do usuário ao invés do email] 
+     const user_id = firebase.auth().currentUser.email; 
 
 
     
@@ -201,7 +201,7 @@ export default function PerfilTopTab() {
             </View>
 
             <View>
-                <Text>User ID conectado: {user_id}</Text>
+                <Text style={{ fontSize: 20, color: 'black', fontWeight: 'bold'}}>Usuário conectado: {user_id}</Text>
             </View>
 
             <View style={styles.botaoAdicionarMargem}>

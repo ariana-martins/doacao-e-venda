@@ -6,7 +6,7 @@ import ImagePicker from 'react-native-image-crop-picker';
 //import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import firestore from '@react-native-firebase/firestore';
+import firestore, { firebase } from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
 
 import { useNavigation } from '@react-navigation/native';
@@ -63,7 +63,9 @@ export default function AdicionarNovoProduto() {
         }
     
     */
-
+    
+    const user_id = firebase.auth().currentUser.uid;
+    
     const ref = firestore().collection('produtos');
     //referencia deste conteudo do firebase
     // Vídeo: React Native Firebase Todo App | React Native
@@ -99,7 +101,9 @@ export default function AdicionarNovoProduto() {
             descricao,
             valor,
             status: 'teste',
+            user_id,
             created_at: firestore.FieldValue.serverTimestamp()
+            
         })
         console.log(titulo)
         setTitulo('') //para que não seja armazenada novamente e evitar a redundancia

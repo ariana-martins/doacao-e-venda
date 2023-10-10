@@ -73,7 +73,7 @@ type Props = {
 
 
 export default function MeusProdutos() {
-    const navigation = useNavigation();
+   // const navigation = useNavigation();
 
 //const [data, setData] = useState(false);
     const [data, setData] = useState('');

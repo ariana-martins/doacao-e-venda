@@ -148,10 +148,10 @@ export default function PerfilTopTab() {
 
     // Ou seja, vai fazer um filtro para filtrar somente o usuário "conectado".
     //const user_id = firebase.auth().currentUser.uid; //[OK também, aqui mostra o Uid do usuário ao invés do email] 
-     const user_id = firebase.auth().currentUser.email; 
+    const user_id = firebase.auth().currentUser.email;
 
 
-    
+
 
 
     // Agora vamos criar o Button para escolher a imagem e exibi-la ("choose_photo")
@@ -192,8 +192,7 @@ export default function PerfilTopTab() {
                     data={users}
                     renderItem={({ item }) => {
                         return <RenderCard item={item} />
-                    }
-                    }
+                    }}
                     keyExtractor={(item) => item.uid}
                 >
 
@@ -201,7 +200,7 @@ export default function PerfilTopTab() {
             </View>
 
             <View>
-                <Text style={{ fontSize: 20, color: 'black', fontWeight: 'bold'}}>Usuário conectado: {user_id}</Text>
+                <Text style={{ fontSize: 20, color: 'black', fontWeight: 'bold' }}>Usuário conectado: {user_id}</Text>
             </View>
 
             <View style={styles.botaoAdicionarMargem}>

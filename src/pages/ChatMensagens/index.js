@@ -23,7 +23,7 @@ export default function ChatMensagens() {
                 user: {
                     _id: 2,
                     name: 'React Native',
-                    avatar: 'https://placeimg.com/140/140/any',
+                    avatar: 'https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT.png',
                 },
             },
         ])

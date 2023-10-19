@@ -40,20 +40,21 @@ export default function Cadastrar() {
         try {
             const result = await auth().createUserWithEmailAndPassword(email, senha)
             firestore().collection('users').doc(result.user.uid).set({
+                // nomeCompleto: result.user.displayName, //Preciso utilizar essa linha para acrescentar o displayName, mas ele está retornando como "null" no firebase em "nomeCompleto".
                 nomeCompleto: nomeCompleto,
                 email: result.user.email,
                 uid: result.user.uid,
             })
-        }catch(err){
+        } catch (err) {
             Alert("algo deu errado")
         }
-      /*
-          try { //Criar usuário com email e senha no firebase
-            await auth().createUserWithEmailAndPassword(email, senha)
-        } catch (err) {
-            Alert.alert("Dados cadastrados")
-        }
-        */
+        /*
+            try { //Criar usuário com email e senha no firebase
+              await auth().createUserWithEmailAndPassword(email, senha)
+          } catch (err) {
+              Alert.alert("Dados cadastrados")
+          }
+          */
     }
 
     //Falta formatar a data dd/mm/aaaa (dia, mês, ano) no cadastro do TextInput

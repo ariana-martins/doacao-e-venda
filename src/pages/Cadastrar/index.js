@@ -80,6 +80,8 @@ export default function Cadastrar() {
     // Outro exemplo de tela de cadastro com data de nascimento (porém um pouco incompleto) no Link a seguir:
     // https://pt.stackoverflow.com/questions/493069/como-pegar-id-dos-dados-criados-em-firebase
 
+    // Um exemplo em JavaScrip da data de Nascimento:
+    // https://pt.stackoverflow.com/questions/5160/como-calcular-a-idade-de-uma-pessoa-com-js-a-partir-da-data-de-nascimento
 
     return (
         <View style={{ flex: 1, backgroundColor: "white" }}>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image, Alert, FlatList } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 // import { Button } from 'react-native-elements';
 import { Button } from 'react-native-paper';
 
@@ -137,6 +138,7 @@ export default function PerfilTopTab() {
                 {/* "pic" é a "identificação da imagem" no firestore junto com "nomeCompleto" "uid" "email"...  */}
                 {/* <Image source={{uri:item.pic}} style={{width:60, height: 60, borderRadius:30, backgroundColor: "green" }} /> */}
                 <Image source={require('../../../src/assets/logo_novo.jpg')} style={{ width: 60, height: 60, borderRadius: 30, backgroundColor: "green" }} />
+               {/*<Image source={require('../../../src/assets/logo_novo.jpg')} style={{ width: 100, height: 100, borderRadius: 50, borderWidth: 1, borderColor: "black" }} /> */}
                 <View>
                     <Text style={styles.txtEmail_e_Senha}>{item.nomeCompleto}</Text>
                     <Text style={styles.txtEmail_e_Senha}>{item.email}</Text>
@@ -200,8 +202,14 @@ export default function PerfilTopTab() {
                 </FlatList>
             </View>
 
-            <View>
-                <Text style={{ fontSize: 20, color: 'black', fontWeight: 'bold' }}>Usuário conectado: {user_id}</Text>
+            <View style={{flexDirection: "row", fontWeight: 'bold'}}>
+                {/* (Observação: o ícone está acima do Text (do usuário conectado, user_id), então ele aparece na extrema esquerda, se estivesse abaixo do Text, ele apareceria à direita.) */}
+                <Icon style={styles.iconEmail} name="person-outline" size={20} color="#000000"/>
+                <Text style={{ fontSize: 20, color: 'black', fontWeight: 'bold' }}>Usuário: falta sincrozinar nomeCompleto</Text>
+            </View>
+            <View style={{flexDirection: "row", fontWeight: 'bold'}}>
+                <Icon style={styles.iconEmail} name="mail-outline" size={20} color="#000000"/>
+                <Text style={{ fontSize: 20, color: 'black', fontWeight: 'bold' }}>Email: {user_id}</Text>
             </View>
 
             <View style={styles.botaoAdicionarMargem}>
@@ -284,7 +292,9 @@ const styles = StyleSheet.create({
     */
     container: {
         flex: 1,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        // alignItems: "center"
+
     },
 
     image_picker: {
@@ -334,6 +344,9 @@ const styles = StyleSheet.create({
         backgroundColor: "mistyrose",
         borderBottomWidth: 10,
         borderBottomColor: 'blue',
+    },
+    iconEmail: {
+        padding: 5, //para alinhar da Erquerda p/ direita, na margem dentro do "FlexDirection: rom" do View area do Text do "Email"
     },
 
 })

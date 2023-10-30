@@ -29,13 +29,14 @@ function Tabs() {
     <Tab.Navigator screenOptions={{ headerShown: false }}>
 
       <Tab.Screen
-        name='Página Inicial'
+        name='Página Inicial - Pesquisar/ Filtrar'
         component={PaginaInicial}
         options={{
           tabBarIcon: ({ color }) => (
             <Icon name="home-outline" size={20} color="#000000" />
           ),
           tabBarLabel: "Pagina Inicial",
+          headerShown: true
         }}
 
       />

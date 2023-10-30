@@ -129,7 +129,7 @@ export default function PaginaInicial(){
      
      {/*Aqui vai Pesquisar a lista de produtos*/}
      {/* Falta configurar para quando clicar em Pesquisar, ele vai direto para a Página "Pesqusiar" */}
-      <Pesquisar/>
+      {/*<Pesquisar/>*/}
       
        {/*Aqui vai a lista de produtos*/}
        <FlatList 

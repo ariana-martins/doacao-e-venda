@@ -13,7 +13,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 //Já está configurado em App.js em ChatMensagens e aparece o nome do UserDono
 
 
-export default function Detalhes() {
+export default function Detalhes({userDono}) {
     const navigation = useNavigation();
 
     return (
@@ -45,7 +45,7 @@ export default function Detalhes() {
             
             <View style={styles.botaoAdicionarMargem}> 
                 <Pressable style={styles.btn} 
-                    onPress={() => navigation.navigate('ChatMensagens')}
+                    onPress={() => navigation.navigate('ChatMensagens',{userDono})}
                    // onPress={() => navigation.navigate('ChatMensagens', {userDono: item.messageText})}
                 >
                     <Text style={styles.textoBotao}>Chat</Text>  

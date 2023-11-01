@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity, Pressable, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -13,108 +13,128 @@ import Icon from 'react-native-vector-icons/Ionicons';
 //Já está configurado em App.js em ChatMensagens e aparece o nome do UserDono
 
 
-export default function Detalhes({userDono}) {
+export default function Detalhes({ userDono }) {
     const navigation = useNavigation();
+
+    const [registrarInteresse, setRegistrarInteresse] = useState(true);
+
 
     return (
         <View style={styles.container}>
             <View style={styles.swiperNumberContent}>
-                <SwiperNumberComponent/>
+                <SwiperNumberComponent />
             </View>
 
             <Text style={styles.txtTitle}>
-            Calçado marrom novo.            
-            </Text>                
+                Calçado marrom novo.
+            </Text>
 
             <Text style={styles.txtValor}>
                 R$ 120,00
             </Text>
-            
+
             <Text style={styles.txtDetalhes}>
-            Detalhes: calçado marrom novo. /
-            Genero: Masculino /
-            Marca: Coturno /
-            Tamanho: 42 / 
+                Detalhes: calçado marrom novo. /
+                Genero: Masculino /
+                Marca: Coturno /
+                Tamanho: 42 /
             </Text>
-            
-            <View style={styles.botaoAdicionarMargem}> 
-                <TouchableOpacity style={styles.btn} >
-                    <Text style={styles.textoBotao}>Registrar Interesse</Text>  
+
+            <View style={styles.botaoAdicionarMargem}>
+                {/*<TouchableOpacity style={styles.btnInteresse} */}
+                <TouchableOpacity style={{ backgroundColor: registrarInteresse ? '#000000' : '#191970', width: 250, height: 40, borderRadius: 10, justifyContent: 'center'}}
+                
+                onPress={() => setRegistrarInteresse(!registrarInteresse)}>
+                    {/*<Text style={styles.textoBotao}>Registrar Interesse</Text>*/}
+                    <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 20, textAlign: 'center' }}>
+                        {registrarInteresse ? 'Registrar Interesse' : 'Cancelar Interesse'}
+                    </Text>
                 </TouchableOpacity>
+
+
             </View>
-            
-            <View style={styles.botaoAdicionarMargem}> 
-                <Pressable style={styles.btn} 
-                    onPress={() => navigation.navigate('ChatMensagens',{userDono})}
-                   // onPress={() => navigation.navigate('ChatMensagens', {userDono: item.messageText})}
+
+            <View style={styles.botaoAdicionarMargem}>
+                <Pressable style={styles.btnChat}
+                    onPress={() => navigation.navigate('ChatMensagens', { userDono })}
+                // onPress={() => navigation.navigate('ChatMensagens', {userDono: item.messageText})}
                 >
-                    <Text style={styles.textoBotao}>Chat</Text>  
+                    <Text style={styles.textoBotao}>Chat</Text>
                 </Pressable>
             </View>
-            
-            
+
+
         </View>
-    
+
     );
 }
 
 const styles = StyleSheet.create({
-    container:{
+    container: {
         flex: 1,
         backgroundColor: '#FFFFFF',
     },
-    swiperNumberContent:{
+    swiperNumberContent: {
         flexDirection: 'row',
         height: 340,
         width: '100%',
     },
-    txtTitle:{
+    txtTitle: {
         paddingHorizontal: 20,
-        fontFamily: 'Inter', 
+        fontFamily: 'Inter',
         fontStyle: 'normal',
         fontSize: 20,
         color: '#000000',
         marginTop: 10,
     },
-    txtValor:{
+    txtValor: {
         paddingHorizontal: 20,
-        fontFamily: 'Inter', 
+        fontFamily: 'Inter',
         fontStyle: 'normal',
         fontSize: 20,
         color: '#000000',
         marginTop: 10,
     },
-    txtDetalhes:{
+    txtDetalhes: {
         paddingHorizontal: 20,
-        fontFamily: 'Inter', 
+        fontFamily: 'Inter',
         fontStyle: 'normal',
         fontSize: 20,
         color: '#000000',
         lineHeight: 25,
         marginTop: 10,
-//        marginVertical: 60,
+        //        marginVertical: 60,
     },
 
-    botaoAdicionarMargem:{
-        paddingHorizontal: 15, 
+    botaoAdicionarMargem: {
+        paddingHorizontal: 15,
         flexDirection: 'row',
         alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
         justifyContent: 'center',
         width: '100%',
         marginVertical: 10,
     },
-    textoBotao:{
+    textoBotao: {
         color: '#FFFFFF', //cor do texto
         fontWeight: 'bold', //texto em negrito
-        fontSize:20, //tamanho do texto
+        fontSize: 20, //tamanho do texto
         textAlign: 'center', // alinha texto dentro da borda, ao centro
     },
-    btn:{
+    btnInteresse: {
+        width: 250, //largura
+        height: 40, //altura 
+        //backgroundColor: '#000000', //cor dentro da borda, onde vai ser incluído o texto
+        borderRadius: 10, // circunferência da borda
+        justifyContent: 'center', //centraliza o texto ao meio da borda
+        backgroundColor: '#191970',
+    },
+    btnChat: {
         width: 250, //largura
         height: 40, //altura 
         backgroundColor: '#000000', //cor dentro da borda, onde vai ser incluído o texto
         borderRadius: 10, // circunferência da borda
         justifyContent: 'center', //centraliza o texto ao meio da borda
-    }
+        //backgroundColor: '#191970',
+    },
 
 });

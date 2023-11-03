@@ -18,7 +18,7 @@ export default function ChatMensagens() {
         setMessages([
             {
                 _id: 1,
-                text: 'Hello developer',
+                text: 'Olá Mundo',
                 createdAt: new Date(),
                 user: {
                     _id: 2,

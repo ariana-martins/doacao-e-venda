@@ -160,7 +160,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StyleSheet, View } from 'react-native';
 
-import AuthProvider from './src/contexts/auth';
+//import AuthProvider from './src/contexts/auth';
 
 import auth from '@react-native-firebase/auth';
 

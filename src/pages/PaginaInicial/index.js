@@ -136,7 +136,8 @@ export default function PaginaInicial(){
         showsHorizontalScrollIndicator={false}
         columnWrapperStyle={{ justifyContent: 'space-around', padding: 10 }}
         data={card} //data, da onde eu vou pegar os dados desta lista (nesse caso é o card com a lista de produtos)
-        keyExtractor={item=>item.id} //keyEstractor define uma chave para cada um dos elementos, aqui é um tipo que vou querer retornar um "item.id" 
+        //keyExtractor={item=>item.id} //keyEstractor define uma chave para cada um dos elementos, aqui é um tipo que vou querer retornar um "item.id" 
+        keyExtractor={item=>item} //nesse caso o item pode ficar sem o ".id" pois já aparece a lista (dos produtos) do "card" na página Inicial, qual a diferença com .id?
         numColumns={3}
         renderItem={({item}) => (
           <View>

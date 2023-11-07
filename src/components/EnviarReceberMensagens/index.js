@@ -2,29 +2,6 @@ import React from 'react';
 import { View, Text } from 'react-native';
 
 
-//  const [currentDate, setCurrentDate] = useState('');
-
-
-{/*
-    //Configuração Data = Dia, Mês, Ano. + Horário (sem precisar baixar biblioteca de terceiros)
-    // Exemplo no link: "React Native Get Current Date Time" - https://aboutreact.com/react-native-get-current-date-time/
-    useEffect(() => {
-        var date = new Date().getDate(); //Current Date
-        var month = new Date().getMonth() + 1; //Current Month
-        var year = new Date().getFullYear(); //Current Year
-       // var hours = new Date().getHours(); //Current Hours
-       // var min = new Date().getMinutes(); //Current Minutes
-       // var sec = new Date().getSeconds(); //Current Seconds
-        setCurrentDate(
-          date + '/' + month + '/' + year 
-          + ' ' + hours + ':' + min + ':' + sec
-        );
-      }, []);
-*/}  
-
-
-
-
 export default function EnviarReceberMensagens(props) {
     return (
         

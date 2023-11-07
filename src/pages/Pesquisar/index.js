@@ -6,11 +6,11 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 
 export default function Pesquisar() {
-    
+
 
     return (
 
-        <SafeAreaView style={{ backgroundColor: '#FFFFFF' }}>
+        <SafeAreaView style={{ backgroundColor: '#FFFFFF', flex: 1 }}>
             <View style={styles.botaoFiltrar}>
                 <View style={styles.filtrarArea}>
                     <TouchableOpacity>
@@ -29,6 +29,19 @@ export default function Pesquisar() {
                     />
                 </View>
             </View>
+
+
+
+            <View>
+                <Text style={{ marginBottom: 10, paddingHorizontal: 20, }}>
+                    Aqui vai os produtos pesquisados e filtrados...
+                </Text>
+
+            </View>
+
+
+
+
         </SafeAreaView>
     );
 }

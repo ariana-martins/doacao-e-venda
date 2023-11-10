@@ -66,7 +66,7 @@ export default function AdicionarNovoProduto() {
             [{ onPress: () => navigation.goBack() }]
         );
         //Falta arrumar para: Limpar toda a Página quando clicar em  "Ok" desse alerta (Produto cadastrado com sucesso) e ir para a tela "Pagina Inicial"
-        //Configurar botão: onPress: () => navigation.goBack() //para voltar na PaginaInicial após clicar em OK deste Alert.
+        //[OK]Configurar botão: onPress: () => navigation.goBack() //para voltar na PaginaInicial após clicar em OK deste Alert.
 
         await ref.add({
             images,

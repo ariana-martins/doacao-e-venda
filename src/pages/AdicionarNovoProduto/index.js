@@ -12,10 +12,6 @@ import storage from '@react-native-firebase/storage';
 import { useNavigation } from '@react-navigation/native';
 
 
-//[ok dia 21.06.23] falta testar um código de inserir algo no firestore a partir do aplicativo em execucao
-// exemplo do video: https://github.com/rodrigorgtic/helpdesk/blob/main/src/components/Forms/OrderForm/index.tsx
-
-
 export default function AdicionarNovoProduto() {
     const navigation = useNavigation();
 
@@ -38,31 +34,6 @@ export default function AdicionarNovoProduto() {
     //criando uma tarefa de teste para ver se a imagem está sendo armazenada no Storage do Firebase
     const task = storage().ref(filename).putFile(uri);
 
-    //esse "e" quer dizer "else", que é a mesma coisa que "então"
-    // task.then((e) => {
-    // })
-
-    /*
-        function addNovoProduto() {
-          task.then((e) => {        
-                setIsLoading(true);  
-    
-                firestore().collection('produtos')
-                    .add({
-                        images: 'gs://meus-pertences.appspot.com/', //url para deixar armazenada dentro do storage do Firebase
-                        titulo,
-                        descricao,
-                        valor,
-                        status: 'teste',
-                        created_at: firestore.FieldValue.serverTimestamp()
-                    })
-                    .then(() => Alert.alert("Produto", "Produto cadastrado com sucesso!")) //then, para criar mensagem de alerta como desse exemplo
-                    .catch((error) => console.log(error)) // para criar um log onde pode estar o erro/falha
-                    .finally(() => setIsLoading(false));
-            }) //finaliza task.then  
-        }
-    
-    */
     
     const user_id = firebase.auth().currentUser.uid;
     

@@ -62,7 +62,9 @@ export default function AdicionarNovoProduto() {
             Alert.alert("Valor:", "Para vender um produto, digite um valor.")
             return
         }
-        Alert.alert("Produto", "Produto cadastrado com sucesso!");
+        Alert.alert("Produto", "Produto cadastrado com sucesso!",
+            [{ onPress: () => navigation.goBack() }]
+        );
         //Falta arrumar para: Limpar toda a Página quando clicar em  "Ok" desse alerta (Produto cadastrado com sucesso) e ir para a tela "Pagina Inicial"
         //Configurar botão: onPress: () => navigation.goBack() //para voltar na PaginaInicial após clicar em OK deste Alert.
 

@@ -256,11 +256,16 @@ export default function AdicionarNovoProduto() {
                         status={isSelected ? 'checked' : 'unchecked'}
                         onPress={() => {
                             setSelection(!isSelected);
+                            Alert.alert('PARA VENDER', 'Acrescente um valor para o produto!')
                         }}
                         color="#000000"
                     />
                     <Text style={styles.label}>PARA VENDER
-                        {isSelected ? " acrescente um valor" : " "}</Text>
+                        {isSelected 
+                        //? " acrescente um valor" : " "
+                        }
+                        
+                        </Text>
                 </View>
             </View>
 

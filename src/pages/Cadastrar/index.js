@@ -152,14 +152,6 @@ export default function Cadastrar() {
                         </View>
 
 
-
-                        {/* 
-        => Essa parte aqui é o teste de fazer a autenticação de "Cadastrar" com firebase
-
-                <Button mode="contained" onPress={() => userCadastrar()} >
-                    CadastrarTesteAuth
-                </Button>
- */}
                         <View style={styles.bordaAreaBotoes}>
                             <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={() => userCadastrar()}>
                                 {/* onPress={() => navigation.goBack()}  */}

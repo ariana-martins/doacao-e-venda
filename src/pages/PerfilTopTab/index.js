@@ -28,7 +28,14 @@ import storage from '@react-native-firebase/storage';
 //openPicker -> //abrir o seletor de imagens
 
 
+//================================================================================================
+// Falta acrescentar displayName == NomeCompleto para o usuário, exemplo do link:
+// https://stackoverflow.com/questions/71525271/react-native-firebase-authentication-displayname-null
+// Link verificado dia 13/11/2023.
 
+// console.log(auth().currentUser) // Linha já acrescentado no Login, para ver dados de login no console.log
+// Esse console.log mostra todos os dados de login do usuário, mesmo não configurado o displayName.
+//================================================================================================
 
 
 export default function PerfilTopTab() {

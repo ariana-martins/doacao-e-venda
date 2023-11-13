@@ -50,6 +50,9 @@ export default function Login() {
         try { //acessa conta do usuário já criado na tela Cadastrar com mesmo email e senha
             const result = await auth().signInWithEmailAndPassword(email, senha)
             Alert.alert("Feito login")
+            
+           // console.log(auth().currentUser) //Esse console.log mostra todos os dados de login do usuário, mesmo não configurado o displayName.
+
             return;
             
         } catch (error) {

@@ -4,22 +4,14 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import { useNavigation } from '@react-navigation/native';
 
-//import { TextInput } from 'react-native-paper';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 
 
-//import { Button } from 'react-native-elements';
+// Falta acrescentar displayName == NomeCompleto para o usuário, exemplo do link:
+// https://stackoverflow.com/questions/71525271/react-native-firebase-authentication-displayname-null
+// Link verificado dia 13/11/2023.
 
-
-//falta configurar a 'function' da autenticacao do firebase no codigo 
-//e falta criar uma parte de email e senha no console do firebase
-
-
-//Como estou utilizando o "flex: 1" que preenche toda a tela, o teclado fica sobre o formulário do cadastro
-// Então é necessário configurar o "KeyboardAvoidingView"
-//Falta configurar "KeyboardAvoidingView" para preencher o e-mail, senha, para a tela ficar na mesma posição sem o teclado sobreescrever a tela de preenchimento do login.
-// Esse "KeyboardAvoidingView" não utilizei na pagina de "Adicionar novo produto" posso pegar os exemplos de lá.
 
 export default function Cadastrar() {
     const navigation = useNavigation();
@@ -37,7 +29,7 @@ export default function Cadastrar() {
             Alert.alert("Por favor preencha todos os dados")
             return
         }
-        try {
+        try { //Criar usuário com email e senha no firebase
             const result = await auth().createUserWithEmailAndPassword(email, senha)
             firestore().collection('users').doc(result.user.uid).set({
                 // nomeCompleto: result.user.displayName, //Preciso utilizar essa linha para acrescentar o displayName, mas ele está retornando como "null" no firebase em "nomeCompleto".
@@ -48,33 +40,9 @@ export default function Cadastrar() {
         } catch (err) {
             Alert("algo deu errado")
         }
-        /*
-            try { //Criar usuário com email e senha no firebase
-              await auth().createUserWithEmailAndPassword(email, senha)
-          } catch (err) {
-              Alert.alert("Dados cadastrados")
-          }
-          */
     }
 
     //Falta formatar a data dd/mm/aaaa (dia, mês, ano) no cadastro do TextInput
-
-    {/*
-    //Configuração Data = Dia, Mês, Ano. + Horário (sem precisar baixar biblioteca de terceiros)
-    // Exemplo no link: "React Native Get Current Date Time" - https://aboutreact.com/react-native-get-current-date-time/
-    useEffect(() => {
-        var date = new Date().getDate(); //Current Date
-        var month = new Date().getMonth() + 1; //Current Month
-        var year = new Date().getFullYear(); //Current Year
-       // var hours = new Date().getHours(); //Current Hours
-       // var min = new Date().getMinutes(); //Current Minutes
-       // var sec = new Date().getSeconds(); //Current Seconds
-        setdataNascimento(
-          date + '/' + month + '/' + year 
-          + ' ' + hours + ':' + min + ':' + sec
-        );
-      }, []);
-*/}
 
 
     // Outro exemplo de tela de cadastro com data de nascimento (porém um pouco incompleto) no Link a seguir:

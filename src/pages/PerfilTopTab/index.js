@@ -159,7 +159,7 @@ export default function PerfilTopTab() {
     //const user_id = firebase.auth().currentUser.uid; //[OK também, aqui mostra o Uid do usuário ao invés do email] 
     //const user_id = firebase.auth().currentUser.displayName; //Para incluir o nomeCompleto no Perfil do Usuário, tenho que fazer o displayName do firebase ficar igual o nome Completo.
     const user_id = firebase.auth().currentUser.email;
-    
+    console.log(auth().currentUser)
 
 
 

@@ -147,7 +147,7 @@ export default function PaginaInicial(){
                   source={item.image}              
               />
               <Text style={styles.txt}>{item.title}</Text>
-              <Text style={styles.val}>{item.valor}</Text>
+              <Text style={styles.vlr}>{item.valor}</Text>
             </View>
 
           </Pressable>
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     color: "#000000",
   },
-  val: {
+  vlr: {
     width: 96,
     fontFamily: "Inter", 
     fontStyle: "normal",
@@ -187,27 +187,3 @@ const styles = StyleSheet.create({
   }
 
 })
-
-
-
-/*
-
-  return (   
-    
-    <SafeAreaView style={{flex: 1}}>
-      <Pesquisar/>
-      <View style={{flex: 1, flexDirection: 'row', backgroundColor: "#FFFFFF"}}>
-        <FlatList 
-        columnWrapperStyle={{ justifyContent: 'space-around', padding: 10 }}
-        data={card}
-        numColumns={3}
-        renderItem={_renderItem} 
-        />
-      </View>
-    </SafeAreaView>
-      );
-    };
-
-
-export default PaginaInicial;
-*/

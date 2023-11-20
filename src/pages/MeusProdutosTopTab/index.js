@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, SafeAreaView, ScrollView, StyleSheet, Image} from 'react-native';
+import { View, Text, StyleSheet, Image} from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
-//import { Card } from '@rneui/base';
-import { Card, Button, Icon} from 'react-native-elements';
-import { useNavigation } from '@react-navigation/native';
+import { Card } from 'react-native-elements';
+
 
 //import firebase from '@react-native-firebase/firestore';
 import firestore, { firebase } from '@react-native-firebase/firestore';
@@ -12,58 +11,6 @@ import auth from '@react-native-firebase/auth';
 
 
 
-
-/*
-//EXEMPLO DO CÓDIGO QUE TEM ORDER PROPS...
-https://github.com/rodrigorgtic/helpdesk/blob/main/src/components/Controllers/Order/index.tsx
-
-...
-export type OrderProps = OrderStyleProps & {
-  id: string;
-  patrimony: string;
-  equipment: string;
-  description: string;
-}
-
-type Props = {
-  data: OrderProps;
-};
-
-...
-
-*/
-
-
-//export default function MeusProdutos() {
-//  const [titulo, setTitulo] = useState('');
-// const [descricao, setDescricao] = useState('');
-
-/*
-        const [status, setStatus] = useState('open');
-        const [isLoading, setIsLoading] = useState(false);
-        const [orders, setOrders] = useState<OrderProps[]>([]);
-      
-        useEffect(() => {
-          setIsLoading(true);
-
-
-          const subscribe = firestore()
-          .collection('produtos')
-          .onSnapshot(querySnapshot => {
-            const data = querySnapshot.docs.map(doc => {
-                return {
-                    id: doc.id,
-                    ...doc.data()
-                }
-            }) as OrderProps[];
-            setOrders(data);
-            setIsLoading(false);
-
-        });
-
-          return () => subscribe(); 
-        }, []);
-  */
 //============================================================================
 
 //Exemplo do código abaixo do banco de dados do vídeo do Youtube: "React-Native, Renderizar no App Itens do banco | Criando App do Zero"
@@ -73,9 +20,7 @@ type Props = {
 
 
 export default function MeusProdutos() {
-   // const navigation = useNavigation();
-
-//const [data, setData] = useState(false);
+   
     const [data, setData] = useState('');
 
 // Refazer o getDowload em "Adicionar novo produto" e aqui também incluir um "UseEffect + getDetail"
@@ -161,30 +106,9 @@ const ref = firebase.firestore().collection('produtos');
         </View>
     );
 
-
-
-
-
-/*
-    return (
-        
-        
-                <Card.Image
-                    style={{ padding: 0 }}
-                    source={require('../../../src/assets/img1.png')}
-                />
-                <Text style={{ marginBottom: 10 }}>
-                    Um dos destinos mais procurados onde boa parte da arquitetura do país data dos séculos XVI a XIX.
-                </Text>
-            </Card>
-        </View>
-    );
-
-*/
-
- 
-
 }
+
+
 
 const styles = StyleSheet.create({
     img: {   
@@ -193,30 +117,3 @@ const styles = StyleSheet.create({
     },
 });
 
-
-/*
-//Exemplo de tela simples
-
-export default function MeusProdutos() {
-    return (
-        <View
-            style={{
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center", //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
-                backgroundColor: "#FFFFFF",
-            }}
-        >
-            <Text
-                style={{
-                    fontSize: 20,
-                    color: "#000000",
-                    fontWeight: "800"
-                }}
-            >
-                Meus produtos está aqui
-            </Text>
-        </View>
-    );
-}
-*/

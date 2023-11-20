@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image, Alert, FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-// import { Button } from 'react-native-elements';
-import { Button } from 'react-native-paper';
 
 import { useNavigation } from '@react-navigation/native';
 
@@ -11,21 +9,9 @@ import auth from '@react-native-firebase/auth';
 import firestore, { firebase } from '@react-native-firebase/firestore';
 
 import ImageCropPicker from 'react-native-image-crop-picker';
-//import ImagePicker from 'react-native-image-crop-picker';
 
 import storage from '@react-native-firebase/storage';
 
-
-
-//import {  launchCamera, launchImageLibrary, CameraOptions, ImageLibraryOptions } from 'react-native-image-picker';
-
-//launchCamera -> Para Inicializar a camera do usuário,
-//launchImageLibrary -> Para inicializar a galeria, para o usuario escolher uma imagem da galeria de imagens dele,
-//showImagePicker -> É a opção que dá esse direto de escolha para o usuário, escolher imagem da galeria ou tirar uma foto.
-
-//openCamera ->
-//openCropper ->
-//openPicker -> //abrir o seletor de imagens
 
 
 //================================================================================================
@@ -230,54 +216,25 @@ export default function PerfilTopTab() {
         </View>
     )
 
-
-
-    //=================================================
-
-    /* //Um exemplo para Selecionar a foto ou escolher da galeria
-            
-   const options = {
-
-        title: 'Mudar foto de perfil',
-        takePhotoButtonTitle: 'Tirar nova foto',
-        chooseFromLibraryButtonTitle: 'Escolha nova foto da galeria',
-      
-      }
-    
-    */ //até aqui
-    // =============================================
-
-
-
-
-
-    //  return (
-    //       <View style={styles.container}>
-    //          <Image style={styles.avatar} source={{ uri: images }} />
-    //        {/* "onPress={() }" entre parenteses o onPress chama funcao anonima, que vai chamar o ImageCropPicker */}
-    //        <TouchableOpacity style={styles.button} onPress={choosePhotoFromLibrary}>
-    //             <Text style={styles.buttonText}>Escolher imagem</Text>
-    //         </TouchableOpacity>
-    //      </View>
-    //   )
-
-
-
-
-
-
 }
 
 
 const styles = StyleSheet.create({
-    /*
+
     container: {
         flex: 1,
-        justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
-        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
-        backgroundColor: "#FFFFFF",
+        backgroundColor: 'white',
+        // alignItems: "center"
     },
-    */
+    container_images: {
+        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
+        //   marginTop: hp('1%')
+    },
+    image_picker: {
+        width: 100,
+        height: 100,
+        borderRadius: 50, //essa numeração é para deixar a borda da imagem completamente circular
+    },
     button: {
         width: 150,
         height: 50,
@@ -286,34 +243,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
         alignItems: 'center' //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
     },
-    /*
-    buttonText: {
-        color: '#fff',
-    },
-    avatar: {
-        width: 100,
-        height: 100,
-        borderRadius: 50, //essa numeração é para deixar a borda da imagem completamente circular
-    },
-   
-    */
-    container: {
-        flex: 1,
-        backgroundColor: 'white',
-        // alignItems: "center"
-
-    },
-
-    image_picker: {
-        width: 100,
-        height: 100,
-        borderRadius: 50, //essa numeração é para deixar a borda da imagem completamente circular
-    },
-    container_images: {
-        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
-        //   marginTop: hp('1%')
-    },
-
     botaoAdicionarMargem: {
         paddingHorizontal: 15,
         flexDirection: 'row',
@@ -335,7 +264,6 @@ const styles = StyleSheet.create({
         fontSize: 20, //tamanho do texto
         textAlign: 'center', // alinha texto dentro da borda, ao centro
     },
-
     txtEmail_e_Senha: {
         fontFamily: "Roboto",
         fontSize: 20,
@@ -343,7 +271,6 @@ const styles = StyleSheet.create({
         marginTop: 5,
         marginLeft: 15,
     },
-
     myCard: {
         flexDirection: "row", //direciona o texto que estava abaixo da imagem, para ao lado da imagem.
         margin: 3, // dá espaço na margem de cada item (imagem + texto: "nome" e "email") 
@@ -358,125 +285,3 @@ const styles = StyleSheet.create({
 
 })
 
-
-/*
-export default function PerfilTopTab() {
-
-    const [imageUser, setImageUser] = React.useState('https://i.pinimg.com/originals/7c/e6/f9/7ce6f9bdc75bc7dd98f51a1ae2b4ce19.jpg')
-    
-    // função vai deixar o usuário selecionar uma foto da câmera ou galeria
-
-    const handleImageUser = () => {
-        Alert.alert(
-            "Selecione", 
-            "Informe de onde você quer pegar a foto", 
-            [ 
-                {
-                    text: "Galeria",
-                    onPress: () => pickImageFromGalery(),
-                    style: "default"
-                },
-                {
-                    text: "Camera",
-                    onPress: () => pickImageFromCamera(),
-                    style: "default"
-                },
-                {
-                    cancelable: true,
-                    onDismiss: () => console.log('tratar depois...')
-                }
-            ]
-        )
-    }
-
-    const pickImageFromGalery = async () => {
-        
-        console.log("chamou a galeria");
-        const options: ImageLibraryOptions = {
-            mediaType: 'photo'
-        }
-
-        const result = await launchImageLibrary(options);
-
-        console.log("depois de chamar a galeria");
-        console.log(result);
-    }
-
-
-    const pickImageFromCamera = async () => {
-        const options: CameraOptions = {
-            mediaType: 'photo',
-            saveToPhoto: false,
-            cameraType: 'front',
-            quality: 1,
-        }
-
-        const result = await launchCamera(options);
-        
-        if (result?.assets) {
-            setImageUser(result.assets[0].uri)
-            return 
-        }
-    }
-
-
-    return (
-        <View style={styles.container}>
-            <Text style={styles.texto}>React Native Image Crop Picker</Text> 
-
-            <ImageBackground style={{ width: 100, height: 100}}
-                source={require('../../assets/logo.png')}
-                //blurRadius={5}
-            />
-           
-            <View style={styles.profileImage}>
-                <TouchableOpacity style={styles.contentImg}
-                    onPress={() => handleImageUser ()}
-                >
-                        
-                    <Image style={styles.imgUser}
-                        source={{
-                            uri: imageUser
-                        }}
-                        resizeMode={"cover"}
-                    />
-                </TouchableOpacity>
-            </View>
-        
-        </View>
-    );
-}
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "#FFFFFF",
-    },
-    texto: {
-        fontSize: 20,
-        color: "#000000",
-        fontWeight: "800",
-    },
-    profileImage: {
-
-    },
-    contentImg: {
-        width: 150,
-        borderRadius: 500,
-        height: 150,
-        backgroundColor: "#C4C4C4",
-        //border: 5, 
-        //solid: #222,
-        justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
-        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
-        overflow: 'hidden',
-    },
-    imgUser:{
-        width: 145,
-        height: 145,
-        borderRadius: 500,
-    },
-
-});
-
-*/

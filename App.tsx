@@ -61,7 +61,8 @@ const Navigation = () => {
   // autenticação do usuário com firebase
   const [user, setuser] = useState('');
   const [initializing, setInitializing] = useState(true); //"configuração de carregando página, fazendo o "reload" antes de acessar o login
-
+  //Crio então um novo estado, usando useState chamado "loading/inicializing":
+  //E depois de carregar, defino o valor false, sempre que ele iniciar começo com valor true, carregou altero o estado de loading/inicializing para false.
 
   // ======= Exemplo ============
   // Título do video no Youtube: #03 - Criando tela Login & Autenticação com Firebase - Projeto Tasks - React Native + Firebase 2022
@@ -80,6 +81,7 @@ const Navigation = () => {
   // Página fazendo "reload"
   //"configuração de carregando página, fazendo o "reload" antes de acessar o login
   if (initializing) {
+  //return null;
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <ActivityIndicator size="large" color="#blue" />
@@ -87,7 +89,7 @@ const Navigation = () => {
     );
   }
     
-  //return null;
+  
 
 
   // ======== Exemplo =============

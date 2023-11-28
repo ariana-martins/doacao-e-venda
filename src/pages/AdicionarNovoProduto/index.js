@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert, Image } from 'react-native';
 import { Button, Checkbox } from 'react-native-paper';
-import ImagePicker from 'react-native-image-crop-picker';
+import ImageCropPicker from 'react-native-image-crop-picker';
 
 //import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -136,7 +136,7 @@ export default function AdicionarNovoProduto() {
     //carregando uma foto, escolhendo através da biblioteca de imagens que tem no celular.
     //const choosePhotoFromLibrary = () => {'https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT%20-%20P&B.png'
     const onCamera = () => {
-        ImagePicker.openCamera({
+        ImageCropPicker.openCamera({
             width: 300,
             height: 400,
             cropping: true
@@ -147,7 +147,7 @@ export default function AdicionarNovoProduto() {
     }
 
     const onGallery = () => {
-        ImagePicker.openPicker({
+        ImageCropPicker.openPicker({
             width: 300,
             height: 400,
             cropping: true
@@ -158,7 +158,7 @@ export default function AdicionarNovoProduto() {
     }
 
     const onGalleryVarias = () => {
-        ImagePicker.openPicker({
+        ImageCropPicker.openPicker({
             multiple: true
         }).then(images => { //cuidar aqui, que o nome é "images" e não "image" quando ativar essa configuração
             console.log(images);

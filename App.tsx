@@ -7,7 +7,7 @@ import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, ActivityIndicator } from 'react-native';
 
 //import AuthProvider from './src/contexts/auth';
 
@@ -60,7 +60,7 @@ const Navigation = () => {
 
   // autenticação do usuário com firebase
   const [user, setuser] = useState('');
-  const [initializing, setInitializing] = useState(true);
+  const [initializing, setInitializing] = useState(true); //"configuração de carregando página, fazendo o "reload" antes de acessar o login
 
 
   // ======= Exemplo ============
@@ -69,7 +69,7 @@ const Navigation = () => {
   // Canal do Youtube: Pervious Modz
   function onAuthStateChanged(user) {
     setuser(user);
-    if (initializing) setInitializing(false);
+    if (initializing) setInitializing(false); //"configuração de carregando página, fazendo o "reload" antes de acessar o login
   }
 
   useEffect(() => {
@@ -77,7 +77,19 @@ const Navigation = () => {
     return subscriber; // unsubscribe on unmount
   }, []);
 
-  if (initializing) return null;
+  // Página fazendo "reload"
+  //"configuração de carregando página, fazendo o "reload" antes de acessar o login
+  if (initializing) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" color="#blue" />
+      </View>
+    );
+  }
+    
+  //return null;
+
+
   // ======== Exemplo =============
 
 

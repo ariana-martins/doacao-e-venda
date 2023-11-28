@@ -19,7 +19,6 @@ export default function AdicionarNovoProduto() {
     const [titulo, setTitulo] = useState('');
     const [descricao, setDescricao] = useState('');
     const [valor, setValor] = useState('');
-    const [isLoading, setIsLoading] = useState(false); //carregando os documentos sem aparecer aquela "configuração de carregando arquivo..."
     const [images, setImages] = useState('https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT%20-%20P&B.png');
 
     //configurando imagem para ser armazenada no firebase/storage, e depois, 
@@ -167,7 +166,6 @@ export default function AdicionarNovoProduto() {
     }
 
 
-
     return (
 
         <View style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
@@ -284,7 +282,7 @@ export default function AdicionarNovoProduto() {
             </View>
             <View style={styles.botaoAdicionarMargem}>
                 {/* =>Botão Inserir Produto<= */}
-                <TouchableOpacity style={styles.btn} isLoading={isLoading} onPress={() => onSubmitPress()}>
+                <TouchableOpacity style={styles.btn} onPress={() => onSubmitPress()}>
                     <Text style={styles.textoBotao}>Cadastrar produto</Text>
                 </TouchableOpacity>
             </View>

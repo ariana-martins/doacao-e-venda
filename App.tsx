@@ -73,7 +73,7 @@ const Navigation = () => {
     if (initializing) setInitializing(false); //"configuração de carregando página, fazendo o "reload" antes de acessar o login
   }
 
-  useEffect(() => {
+  useEffect(() => { // onAuthStateChanged retorna o usuário atual que fez login
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
     return subscriber; // unsubscribe on unmount
   }, []);

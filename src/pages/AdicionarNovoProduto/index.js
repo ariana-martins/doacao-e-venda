@@ -19,6 +19,7 @@ export default function AdicionarNovoProduto() {
     const [titulo, setTitulo] = useState('');
     const [descricao, setDescricao] = useState('');
     const [valor, setValor] = useState('');
+    const [doacao, setDoacao] = useState('0,00'); //ou acrescentar "valor null" para não inserir nenhum valor
     const [images, setImages] = useState('https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT%20-%20P&B.png');
 
     //configurando imagem para ser armazenada no firebase/storage, e depois, 
@@ -72,6 +73,7 @@ export default function AdicionarNovoProduto() {
             titulo,
             descricao,
             valor,
+            doacao,
             status: 'teste',
             user_id,
             created_at: firestore.FieldValue.serverTimestamp()
@@ -255,6 +257,7 @@ export default function AdicionarNovoProduto() {
                         onPress={() => {
                             setSelection(!isSelected);
                             Alert.alert('PARA VENDER', 'Acrescente um valor para o produto!')
+                            
                         }}
                         color="#000000"
                     />
@@ -262,7 +265,7 @@ export default function AdicionarNovoProduto() {
                         {isSelected 
                         //? " acrescente um valor" : " "
                         }
-                        
+                        {/* value={doacao} */}
                         </Text>
                 </View>
             </View>

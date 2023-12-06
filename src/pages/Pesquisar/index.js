@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, Text, StyleSheet, TextInput, SafeAreaView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, SafeAreaView } from 'react-native';
 
 
 import Icon from 'react-native-vector-icons/Ionicons';
+import SearchForm from '../../components/SearchForm';
 
 
 export default function Pesquisar() {
@@ -10,7 +11,12 @@ export default function Pesquisar() {
 
     return (
 
-        <SafeAreaView style={{ backgroundColor: '#FFFFFF', flex: 1 }}>
+        <View style={styles.container}>
+
+            {/* //Formulário de pesquisa "SearchForm" é renderizado dentro da visualização da área segura "SafeAreaView"*/}
+            <SafeAreaView>
+
+        {/*
             <View style={styles.botaoFiltrar}>
                 <View style={styles.filtrarArea}>
                     <TouchableOpacity>
@@ -31,22 +37,25 @@ export default function Pesquisar() {
             </View>
 
 
-
             <View>
                 <Text style={{ marginBottom: 10, paddingHorizontal: 20, }}>
                     Aqui vai os produtos pesquisados e filtrados...
                 </Text>
-
             </View>
+    */}
 
+                <SearchForm/>
 
-
-
-        </SafeAreaView>
+            </SafeAreaView>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1, //para ficar tudo no meio da tela
+        backgroundColor: '#FFFFFF',
+    },
     botaoFiltrar: {
         paddingHorizontal: 10,
         flexDirection: 'row',
@@ -63,6 +72,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Roboto',
         paddingHorizontal: 10,
         fontSize: 20,
+        color: 'black',
     },
     botaoPesquisar: {
         paddingHorizontal: 15,

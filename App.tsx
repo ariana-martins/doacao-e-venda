@@ -3,6 +3,7 @@
 // AQUI PARA BAIXO, É A PARTE NOVA DO CÓDIGO
 //===================================================
 
+import 'react-native-gesture-handler'; //gesture-handler deve estar sempre na primeira linha do código para fazer as movimentações das telas (gestos e toques no react native).
 import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';

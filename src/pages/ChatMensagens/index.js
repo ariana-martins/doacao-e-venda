@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, Button } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
 
+import firestore from '@react-native-firebase/firestore';
+
 import EnviarReceberMensagens from '../../components/EnviarReceberMensagens';
 import { Input } from '@rneui/base';
 
@@ -44,6 +46,9 @@ export default function ChatMensagens() {
                 onSend={messages => onSend(messages)}
                 user={{
                     _id: 1,
+                   // created_at: firestore.FieldValue.serverTimestamp() 
+                   /*incluir essa linha "created_at: ..." para que seja criado e vinculado no firebase a data 
+                   e horário que o usuário digitou no chat, como por exemplo, quando o usuário acrescentou um produto e aparece "nesse caso só no firebase" */
                 }}
             />
         </View>

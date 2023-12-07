@@ -19,8 +19,10 @@ export default function AdicionarNovoProduto() {
     const [titulo, setTitulo] = useState('');
     const [descricao, setDescricao] = useState('');
     const [valor, setValor] = useState('');
+    const [vender, setVender] = useState('');
     const [doacao, setDoacao] = useState('0,00'); //ou acrescentar "valor null" para não inserir nenhum valor
     const [images, setImages] = useState('https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT%20-%20P&B.png');
+
 
     //configurando imagem para ser armazenada no firebase/storage, e depois, 
     //para que a imagem seja puxada do mesmo local para carregar de volta no App.
@@ -34,9 +36,9 @@ export default function AdicionarNovoProduto() {
     //criando uma tarefa de teste para ver se a imagem está sendo armazenada no Storage do Firebase
     const task = storage().ref(filename).putFile(uri);
 
-    
+
     const user_id = firebase.auth().currentUser.uid;
-    
+
     const ref = firestore().collection('produtos');
     //referencia deste conteudo do firebase
     // Vídeo: React Native Firebase Todo App | React Native
@@ -44,7 +46,7 @@ export default function AdicionarNovoProduto() {
     // Canal do Youtube: JAS ACADAMY
 
 
-    {/* =>Botão Inserir Produto<= */}
+    {/* =>Botão Inserir Produto<= */ }
     const onSubmitPress = async () => {
 
         console.log(titulo, "Titulo aqui")
@@ -77,7 +79,7 @@ export default function AdicionarNovoProduto() {
             status: 'teste',
             user_id,
             created_at: firestore.FieldValue.serverTimestamp()
-            
+
         })
         console.log(titulo)
         setTitulo('') //para que não seja armazenada novamente e evitar a redundancia
@@ -168,6 +170,7 @@ export default function AdicionarNovoProduto() {
     }
 
 
+
     return (
 
         <View style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
@@ -237,10 +240,8 @@ export default function AdicionarNovoProduto() {
             </View>
 
             <Text style={styles.texto}>Selecione uma opção:</Text>
+
             <View>
-
-
-
                 {/* ==>>> FAZER TESTE NA OUTRA TELA, TRANSFORMAR EM FUNÇÃO, COM IF <<====== */}
                 <View style={styles.checkboxOpcoes}>
                     <Checkbox
@@ -249,6 +250,7 @@ export default function AdicionarNovoProduto() {
                             setSelection(!isSelected);
                         }}
                         color="#000000"
+                        backgroundColor='yellow'
                     />
                     <Text style={styles.label}>PARA DOAR</Text>
 
@@ -257,16 +259,16 @@ export default function AdicionarNovoProduto() {
                         onPress={() => {
                             setSelection(!isSelected);
                             Alert.alert('PARA VENDER', 'Acrescente um valor para o produto!')
-                            
+
                         }}
                         color="#000000"
                     />
                     <Text style={styles.label}>PARA VENDER
-                        {isSelected 
-                        //? " acrescente um valor" : " "
+                        {isSelected
+                            //? " acrescente um valor" : " "
                         }
                         {/* value={doacao} */}
-                        </Text>
+                    </Text>
                 </View>
             </View>
 

@@ -10,7 +10,7 @@ const [to, setTo] = useState('default');
 
 //função pressionar botão pesquisar
    const onSearchPress = () => {
-    console.log('Procurar/pesquisar: ');
+    console.log(from, to);
    };
    
    
@@ -20,10 +20,16 @@ const [to, setTo] = useState('default');
                 Pesquisar / Pesquise aqui
             </Text>
 
-            <TextInput placeholder="From" style={styles.input}/>
+            <TextInput 
+                value={from} /*value sempre defini o valor padrão de estado */
+                onChangeText={setFrom} /*onChangeText faz a chamada e defini um novo valor de estado.*/
+                placeholder="From" 
+                style={styles.input}
+            />
+            
             <TextInput 
                 value={to} /*value sempre defini o valor padrão de estado */
-                onChangeText={(newVal) => setTo(newVal)} /*onChangeText faz a chamada e defini um novo valor de estado */ 
+                onChangeText={setTo} /*onChangeText faz a chamada e defini um novo valor de estado.*/
                 placeholder="To" 
                 style={styles.input}
             />

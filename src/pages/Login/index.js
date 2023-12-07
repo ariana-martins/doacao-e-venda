@@ -71,10 +71,7 @@ export default function Login() {
 
                 <View style={styles.bordaEmail_e_Senha}>
                     <Text style={styles.txtEmail_e_Senha}>E-mail:</Text>
-                    {/* //Colocar o texto Input assim dentro da view, quando utilizar o hooks */}
-                    {/* //<TextInput placeholder="Digite seu usuário:" onChangeText={Text=>setUsuario}/>  */}
-                    {/* //<TextInput placeholder="Digite sua senha:" secureTextEntry={true} onChangeText={Text=>setSenha}/> */}
-
+                    
                     <View style={styles.botaoAdicionarMargem}>
                         <View style={styles.inputAreaEmail}>
                             <TextInput
@@ -82,8 +79,7 @@ export default function Login() {
                                 placeholder="Endereço de e-mail:"
                                 value={email}
                                 keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
-                                //onChangeText={setEmail}
-                                onChangeText={value => setEmail(value)}
+                                onChangeText={setEmail}
                             />
                             {/* (Observação: o ícone está abaixo do TextInput, então ele aparece na extrema direita, se estivesse acima do TextInput, ele apareceria à esquerda.) */}
                             <Icon style={styles.iconEmail} name="person-outline" size={20} color="#000000" />
@@ -99,8 +95,7 @@ export default function Login() {
                                 placeholder="************"
                                 value={senha}
                                 keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
-                                //onChangeText={setSenha}
-                                onChangeText={value => setSenha(value)}
+                                onChangeText={setSenha}
                                 secureTextEntry={passwordVisibility}
                             />
                             <TouchableOpacity onPress={() => setPasswordVisibility(!passwordVisibility)} >

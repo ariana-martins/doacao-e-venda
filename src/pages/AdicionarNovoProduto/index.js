@@ -24,6 +24,13 @@ export default function AdicionarNovoProduto() {
     const [images, setImages] = useState('https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT%20-%20P&B.png');
 
 
+    //função pressionar botão pesquisar
+    const onSelectAddProduto = () => {
+        console.log(isSelected);
+        //isSelect = false (Doacao), true (Para Vender)
+    };
+
+
     //configurando imagem para ser armazenada no firebase/storage, e depois, 
     //para que a imagem seja puxada do mesmo local para carregar de volta no App.
 
@@ -250,7 +257,6 @@ export default function AdicionarNovoProduto() {
                             setSelection(!isSelected);
                         }}
                         color="#000000"
-                        backgroundColor='yellow'
                     />
                     <Text style={styles.label}>PARA DOAR</Text>
 
@@ -287,6 +293,7 @@ export default function AdicionarNovoProduto() {
             </View>
             <View style={styles.botaoAdicionarMargem}>
                 {/* =>Botão Inserir Produto<= */}
+                {/*<TouchableOpacity style={styles.btn} onPress={() => onSelectAddProduto()}>*/}
                 <TouchableOpacity style={styles.btn} onPress={() => onSubmitPress()}>
                     <Text style={styles.textoBotao}>Cadastrar produto</Text>
                 </TouchableOpacity>

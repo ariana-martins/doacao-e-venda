@@ -12,7 +12,8 @@ import ImageCropPicker from 'react-native-image-crop-picker';
 
 import storage from '@react-native-firebase/storage';
 
-
+import FormButton from '../../components/FormButton';
+import { AuthContext } from '../../navigations/AuthProvider';
 
 //================================================================================================
 // Falta acrescentar displayName == NomeCompleto para o usuário, exemplo do link:
@@ -26,6 +27,8 @@ import storage from '@react-native-firebase/storage';
 
 export default function PerfilTopTab() {
     const navigation = useNavigation();
+
+    const { user, logout } = useContext(AuthContext);
 
     const [nomeCompleto, setNomeCompleto] = useState('');
     const [email, setEmail] = useState('');
@@ -131,7 +134,7 @@ export default function PerfilTopTab() {
                 {/* "pic" é a "identificação da imagem" no firestore junto com "nomeCompleto" "uid" "email"...  */}
                 {/* <Image source={{uri:item.pic}} style={{width:60, height: 60, borderRadius:30, backgroundColor: "green" }} /> */}
                 <Image source={require('../../../src/assets/logo_novo.jpg')} style={{ width: 60, height: 60, borderRadius: 30, backgroundColor: "green" }} />
-               {/*<Image source={require('../../../src/assets/logo_novo.jpg')} style={{ width: 100, height: 100, borderRadius: 50, borderWidth: 1, borderColor: "black" }} /> */}
+                {/*<Image source={require('../../../src/assets/logo_novo.jpg')} style={{ width: 100, height: 100, borderRadius: 50, borderWidth: 1, borderColor: "black" }} /> */}
                 <View>
                     <Text style={styles.txtEmail_e_Senha}>{item.nomeCompleto}</Text>
                     <Text style={styles.txtEmail_e_Senha}>{item.email}</Text>
@@ -154,6 +157,7 @@ export default function PerfilTopTab() {
 
     return (
         <View style={styles.container}>
+            
             <View style={styles.container_images}>
                 <TouchableOpacity onPress={() => choose_photo()}>
                     {image && <Image source={{ uri: image }}
@@ -168,6 +172,7 @@ export default function PerfilTopTab() {
                 </TouchableOpacity>
 
             </View>
+    
             {/* //====>>>> Falta configurar navegação do Login p/ as telas de páginas do usuário  */}
             {/* O Logout deve funcionar como exemplo do vídeo: "Part 1/2 | OLX Clone using React Native & Firebase | React Native & Firebase for beginners in Hindi" */}
             {/* Link do vídeo: https://www.youtube.com/watch?v=ntPQ-IPm3AM&list=PLB97yPrFwo5ihgCoWXlEDHrAPQNshsfzP&index=6 */}
@@ -195,16 +200,23 @@ export default function PerfilTopTab() {
                 </FlatList>
             </View>
 
-            <View style={{flexDirection: "row", fontWeight: 'bold'}}>
+            <View style={{ flexDirection: "row", fontWeight: 'bold' }}>
                 {/* (Observação: o ícone está acima do Text (do usuário conectado, user_id), então ele aparece na extrema esquerda, se estivesse abaixo do Text, ele apareceria à direita.) */}
-                <Icon style={styles.iconEmail} name="person-outline" size={20} color="#000000"/>
+                <Icon style={styles.iconEmail} name="person-outline" size={20} color="#000000" />
                 <Text style={{ fontSize: 20, color: 'black', fontWeight: 'bold' }}>Usuário: falta sincrozinar nomeCompleto</Text>
             </View>
-            <View style={{flexDirection: "row", fontWeight: 'bold'}}>
-                <Icon style={styles.iconEmail} name="mail-outline" size={20} color="#000000"/>
+            <View style={{ flexDirection: "row", fontWeight: 'bold' }}>
+                <Icon style={styles.iconEmail} name="mail-outline" size={20} color="#000000" />
                 <Text style={{ fontSize: 20, color: 'black', fontWeight: 'bold' }}>Email: {user_id}</Text>
             </View>
-
+{/*
+ 
+ 
+            <View style={styles.containerTeste}>
+                <Text style={styles.textBemVindoUser}>Bem vindo user: {user.uid}</Text>
+                <FormButton buttonTitle='Logout' onPress={() => logout()} />
+            </View>
+*/}
             <View style={styles.botaoAdicionarMargem}>
                 <TouchableOpacity style={styles.btn} onPress={() => auth().signOut()} >
                     {/* onPress={() => navigation.navigate("Login")}> */}
@@ -225,6 +237,16 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'white',
         // alignItems: "center"
+    },
+    containerTeste: {
+      //  flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#f5f5f5',
+    },
+    textBemVindoUser: {
+        fontSize: 20,
+        color: '#333333',
     },
     container_images: {
         alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)

@@ -1,8 +1,26 @@
+import React from 'react';
+import Providers from './src/navigations';
+
+
+export default function App() {
+  return <Providers />;
+}
+
+//==========================
+// DAQUI PRA CIMA, FUNCIONA O LOGIN E LOGOUT PARA DIVERSOS USUÁRIOS SEM O "RELOAD" DO APLICATIVO
+// Link de Referência: https://github.com/amandeepmittal/react-native-examples/tree/19aab47910428628770b17998d1818805b6c0edf/rnEmailAuthFirebase
+// Login e Logou corrigido dia 18/12/2023
+// =========================
+
+
+
+
+
 
 //=================================================
-// AQUI PARA BAIXO, É A PARTE NOVA DO CÓDIGO
+// AQUI PARA BAIXO, ERA A PARTE NOVA DO CÓDIGO
 //===================================================
-
+/*
 import 'react-native-gesture-handler'; //gesture-handler deve estar sempre na primeira linha do código para fazer as movimentações das telas (gestos e toques no react native).
 import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
@@ -23,9 +41,9 @@ import ScreenNavigator from './src/navigations/ScreenNavigator'; // Nova tela de
 import PaginaInicialTeste from './src/pages/PaginaInicialTeste';
 import SettingScreenTeste from './src/pages/SettingsScreenTeste';
 
+*/
 
-
-
+/*
 
 const Stack = createStackNavigator();
 //const Tab = createBottomTabNavigator();
@@ -38,14 +56,18 @@ const AuthNavigator = () => {
 
   return (
     <Stack.Navigator>
-      {/* Os "name" e "component" sempre precisam estar com os nomes iguais para funcionar o "navigation.navigate" */}
-      <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-      <Stack.Screen name="Cadastrar" component={Cadastrar} options={{ headerShown: false }} />
-      <Stack.Screen name="EsqueciMinhaSenha" component={EsqueciMinhaSenha} options={{ headerShown: false }} />
+      // Os "name" e "component" sempre precisam estar com os nomes iguais para funcionar o "navigation.navigate" 
+      {/*<Stack.Screen name="Login" component={Login} options={{ headerShown: false }} /> 
+      {/*<Stack.Screen name="Cadastrar" component={Cadastrar} options={{ headerShown: false }} /> 
+      {/*<Stack.Screen name="EsqueciMinhaSenha" component={EsqueciMinhaSenha} options={{ headerShown: false }} /> 
 
-    </Stack.Navigator>
-  )
+    {/*</Stack.Navigator>
+ /* )
 }
+
+
+
+*/
 
 
 /*
@@ -55,7 +77,7 @@ const TabNavigator = () => {
   )
 }
 */
-
+/*
 const Navigation = () => {
   // const user = "" //autenticação do usuário com firebase (está vazio, pois preenche os dados na tela Cadastrar)
 
@@ -90,12 +112,12 @@ const Navigation = () => {
     );
   }
     
-  
+  */
 
 
   // ======== Exemplo =============
 
-
+/*
   // Se o usuário estiver feito login, então acessa a página geral "ScreenNavigator",
   // Se não, o usuário deverá realizar a autenticação e/ou cadastro p/ se autenticar "AuthNavigator".
   return (
@@ -107,8 +129,8 @@ const Navigation = () => {
 // Só posso usar 1 vez ele em todo o código, pois vai chamar a navegação em todas as telas que eu configurar o navigation.navite e etc...
 
 }
-
-
+*/
+/*
 export default function App() {
 
   return (
@@ -124,7 +146,7 @@ const styles = StyleSheet.create({
   },
 })
 
-
+*/
 
 //==================================================================
 

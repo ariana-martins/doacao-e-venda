@@ -112,6 +112,7 @@ export default function PerfilTopTab() {
             await task;
             const url = await reference.getDownloadURL() //Baixando um arquivo com uma URL, e para obter uma URL de uma referência usando .getDownloadURL().
             Alert.alert("Foto", "Aqui salvei imagem")
+            console.log('Download URL:', url);
             return url
         }
         catch (error) {

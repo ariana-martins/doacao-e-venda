@@ -12,6 +12,10 @@ import storage from '@react-native-firebase/storage';
 import { useNavigation } from '@react-navigation/native';
 
 
+
+
+
+
 export default function AdicionarNovoProduto() {
     const navigation = useNavigation();
 
@@ -36,9 +40,9 @@ export default function AdicionarNovoProduto() {
 
     const filename = images.substring(images.lastIndexOf('/') + 1);
     const uri = images.replace('file://', '');
+   
 
     //diretório onde está salvando a imagem
-
 
     //criando uma tarefa de teste para ver se a imagem está sendo armazenada no Storage do Firebase
     const task = storage().ref(filename).putFile(uri);
@@ -51,6 +55,36 @@ export default function AdicionarNovoProduto() {
     // Vídeo: React Native Firebase Todo App | React Native
     // Link do video: https://www.youtube.com/watch?v=ZixONsxTy0g&list=PLeOkQb0b3nPzXq_jKX70NRvXlbZ9p7ji5
     // Canal do Youtube: JAS ACADAMY
+
+
+    //-----------------------------------------
+ /*
+    // ==>> Referência: https://medium.com/@expertapplicationdeveloper/how-to-use-firebase-storage-in-react-native-56de50bd4c7f    
+//7. You can also download files from Firebase Storage using the getDownloadURL() method:
+
+
+// Create a reference to the file in Firebase Storage
+//const fileRef = storage().ref('path/to/storage/images.jpg');
+const fileRef = storage().ref(filename);
+
+
+
+// Get the download URL for the file
+fileRef.getDownloadURL()
+    .then((url) => {
+        // Use the download URL to display or download the file
+        console.log('Download URL:', url);
+    })
+    .catch((error) => {
+        // Handle any errors
+        console.error('Download error:', error);
+    });
+    //
+
+// ==>> Referência: https://medium.com/@expertapplicationdeveloper/how-to-use-firebase-storage-in-react-native-56de50bd4c7f    
+*/
+//-----------------------------------------
+
 
 
     {/* =>Botão Inserir Produto<= */ }

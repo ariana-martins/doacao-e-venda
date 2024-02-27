@@ -16,7 +16,7 @@ export default function Pesquisar() {
             {/* //Formulário de pesquisa "SearchForm" é renderizado dentro da visualização da área segura "SafeAreaView"*/}
             <SafeAreaView>
 
-        {/*
+        
             <View style={styles.botaoFiltrar}>
                 <View style={styles.filtrarArea}>
                     <TouchableOpacity>
@@ -42,9 +42,9 @@ export default function Pesquisar() {
                     Aqui vai os produtos pesquisados e filtrados...
                 </Text>
             </View>
-    */}
+    
 
-                <SearchForm/>
+            {/*    <SearchForm/>*/}
 
             </SafeAreaView>
         </View>

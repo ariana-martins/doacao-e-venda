@@ -100,11 +100,18 @@ fileRef.getDownloadURL()
             Alert.alert("Descrição:", "Por favor descreva uma descrição para o produto.")
             return
         }
+        /*
+        console.log(doacao, "Doacao aqui")
+        if (doacao.length == 0) {
+            Alert.alert("Doacao:", "Valor nulo")
+            return
+        } 
         console.log(valor, "Valor aqui")
         if (valor.length == 0) {
             Alert.alert("Valor:", "Para vender um produto, digite um valor.")
             return
         }
+        */
         Alert.alert("Produto", "Produto cadastrado com sucesso!",
             [{ onPress: () => navigation.goBack() }]
         );
@@ -126,6 +133,8 @@ fileRef.getDownloadURL()
         setTitulo('') //para que não seja armazenada novamente e evitar a redundancia
         console.log(descricao)
         setDescricao('')
+        console.log(doacao)
+        setDoacao('')
         console.log(valor)
         setValor('')
 
@@ -282,18 +291,24 @@ fileRef.getDownloadURL()
 
             <Text style={styles.texto}>Selecione uma opção:</Text>
 
+            
+
             <View>
                 {/* ==>>> FAZER TESTE NA OUTRA TELA, TRANSFORMAR EM FUNÇÃO, COM IF <<====== */}
                 <View style={styles.checkboxOpcoes}>
+
+
                     <Checkbox
                         status={isSelected ? 'unchecked' : 'checked'}
                         onPress={() => {
                             setSelection(!isSelected);
+                            Alert.alert('DOACAO', 'Valor nulo!')
                         }}
                         color="#000000"
                     />
                     <Text style={styles.label}>PARA DOAR</Text>
 
+                    
                     <Checkbox
                         status={isSelected ? 'checked' : 'unchecked'}
                         onPress={() => {
@@ -304,6 +319,7 @@ fileRef.getDownloadURL()
                         color="#000000"
                     />
                     <Text style={styles.label}>PARA VENDER
+                        
                         {isSelected
                             //? " acrescente um valor" : " "
                         }
@@ -413,7 +429,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Roboto',
         paddingHorizontal: 10,
         fontSize: 15,
-        width: '98%'
+        width: '98%', 
     },
     inputAreaDetalhes: {
         paddingHorizontal: 15,

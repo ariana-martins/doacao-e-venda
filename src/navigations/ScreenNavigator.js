@@ -26,14 +26,18 @@ const Tab = createBottomTabNavigator();
 
 function Tabs() {
   return (
-    <Tab.Navigator screenOptions={{ headerShown: false }}>
+    <Tab.Navigator screenOptions={{ 
+      headerShown: false,
+      tabBarInactiveTintColor: 'black',
+      tabBarActiveTintColor: 'blue',      
+      }}>
 
       <Tab.Screen
         name='Página Inicial - Pesquisar/ Filtrar'
         component={PaginaInicial}
         options={{
-          tabBarIcon: ({ color }) => (
-            <Icon name="home-outline" size={20} color="#000000" />
+          tabBarIcon: ({ focused , color }) => (
+            <Icon name="home-outline" size={20} color={focused ? "blue" : "black" } />
           ),
           tabBarLabel: "Pagina Inicial",
           headerShown: true
@@ -44,8 +48,8 @@ function Tabs() {
         name='Pesquisar - Tab'
         component={Pesquisar}
         options={{
-          tabBarIcon: ({ color }) => (
-            <Icon name="search-outline" size={20} color="#000000" />
+          tabBarIcon: ({ focused, color }) => (
+            <Icon name="search-outline" size={20} color={focused ? "blue" : "black" } />
           ),
           tabBarLabel: "Pesquisar",
         }}
@@ -54,8 +58,8 @@ function Tabs() {
         name='Adicionar Novo Produto - Tab'
         component={AdicionarNovoProduto}
         options={{
-          tabBarIcon: ({ color }) => (
-            <Icon name="add-outline" size={30} color="#000000" />
+          tabBarIcon: ({ focused, color }) => (
+            <Icon name="add-outline" size={30} color={focused ? "blue" : "black" } />
           ),
           tabBarLabel: "Adicionar novo produto",
         }}
@@ -67,8 +71,8 @@ function Tabs() {
           headerShown: true,
           title: 'Chats',
           headerTitleAlign: 'center',
-          tabBarIcon: ({ color }) => (
-            <Icon name="chatbubble-outline" size={20} color="#000000" />
+          tabBarIcon: ({ focused, color }) => (
+            <Icon name="chatbubble-outline" size={20} color={focused ? "blue" : "black" } />
           ),
           tabBarLabel: "Chat",
         }}
@@ -77,8 +81,8 @@ function Tabs() {
         name='Perfil - Tab'
         component={TopBarNavigator}
         options={{
-          tabBarIcon: ({ color }) => (
-            <Icon name="person-outline" size={20} color="#000000" />
+          tabBarIcon: ({ focused, color }) => (
+            <Icon name="person-outline" size={20} color={focused ? "blue" : "black" } />
           ),
           tabBarLabel: "Perfil",
         }}

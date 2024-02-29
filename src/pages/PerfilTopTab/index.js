@@ -38,6 +38,27 @@ export default function PerfilTopTab() {
     const [userData, setUserData] = useState(null);
 
 
+
+//Função voltar ao Inicio do aplicativo, para fazer outro login.
+    const Logout = () => {
+        Alert.alert("SAIR", "Tem certeza que deseja SAIR?", [
+            {
+                text: "Não",
+                onPress: () => null,
+                style: "cancel"
+            },
+            {
+                text: "SIM",
+                onPress: () => auth().signOut() //Navigation.goBack() volta para "PaginaInicial" pois as Tabs já estão configuradas como InitialHome para iniciar na "Pagina Inicial"
+                //Dicas nos links: https://www.tabnews.com.br/marcosveloso/template-de-rotas-react-native-com-native-stack-bottom-tabs-e-drawer-navigator
+                //Dicas nos link complementar com o código gitHub: https://github.com/MarcosVel/routes-template/commit/33e621df08b702225460437fd0b3fb58678b98d9
+                // ==>> Falta arrumar para: Limpar toda a Página quando clicar em  "Cancelar em Sim" e ir para a tela "Pagina Inicial" 
+            }
+        ]);
+        return true;
+    };
+
+
     const getUsers = async () => {
         const querySanp = await firestore().collection('users').get()
         const allusers = querySanp.docs.map(docSnap => docSnap.data())
@@ -219,12 +240,11 @@ export default function PerfilTopTab() {
             </View>
 */}
             <View style={styles.botaoAdicionarMargem}>
-                <TouchableOpacity style={styles.btn} onPress={() => auth().signOut()} >
+                <TouchableOpacity style={styles.btn} onPress={() => Logout()} >
                     {/* onPress={() => navigation.navigate("Login")}> */}
                     <Text style={styles.textoBotao}>SAIR</Text>
                 </TouchableOpacity>
             </View>
-
 
         </View>
     )

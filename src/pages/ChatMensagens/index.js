@@ -12,27 +12,12 @@ import Icon from 'react-native-vector-icons/Ionicons';
 export default function ChatMensagens() {
 
 
-    const [messages, setMessages] = useState([]);
-    const [text, setText] = useState('');
-
-    useEffect(() => {
-        const unsubscribe = subscribeToMessages((newMessages) => {
-            setMessages(newMessages);
-        });
-        return () => unsubscribe();
-    }, []);
-   
-    const handleSend = () => {
-        sendMessage(text, 'User');
-        setText('');
-    };
-
-
-
+//Step 1: Create a Firestore Collection
 // Create a reference to the "messages" collection
 const messagesRef = firestore().collection('messages');
 
 
+//Step 2: Add Messages to Firestore
 const sendMessage = async (text, sender) => {
     try {
         // Add a new document to the "messages" collection
@@ -46,7 +31,7 @@ const sendMessage = async (text, sender) => {
     }
 };
 
-
+//Step 3: Real-Time Data Syncing
 const subscribeToMessages = (callback) => {
     const unsubscribe = messagesRef
         .orderBy('timestamp')
@@ -60,6 +45,22 @@ const subscribeToMessages = (callback) => {
     return unsubscribe;
 };
 
+
+    //Step 4: Displaying Messages
+    const [messages, setMessages] = useState([]);
+    const [text, setText] = useState('');
+
+    useEffect(() => {
+        const unsubscribe = subscribeToMessages((newMessages) => {
+            setMessages(newMessages);
+        });
+        return () => unsubscribe();
+    }, []);
+
+    const handleSend = () => {
+        sendMessage(text, 'User');
+        setText('');
+    };
 
 
     return (

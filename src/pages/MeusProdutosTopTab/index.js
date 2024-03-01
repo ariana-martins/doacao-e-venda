@@ -9,6 +9,7 @@ import firestore, { firebase } from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
 import auth from '@react-native-firebase/auth';
 
+import Icon from 'react-native-vector-icons/Ionicons';
 
 
 //============================================================================
@@ -52,8 +53,12 @@ useEffect(()=>{
 return (
 
     <View style={{ padding: 18, backgroundColor: '#FFFFFF' }}>
-    <Text style={{ fontWeight: 'bold', fontSize: 20 }}>Meus produtos para doar e vender!</Text>
-
+    <Icon name="notifications-outline" size={20} color="#000000" />    
+    <Text style={{ 
+            fontWeight: 'bold', fontSize: 15,
+            borderBottomColor: 'black', borderBottomWidth: StyleSheet.hairlineWidth, textAlign: 'center', justifyContent: 'center',
+        }}>Clique aqui para verificar todas noticações</Text>
+    
   
             <FlatList
                 data={data}

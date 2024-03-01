@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, Button, FlatList, SafeAreaView } from 'react-native';
+import { View, Text, TextInput, Button, FlatList, TouchableOpacity, SafeAreaView, Alert } from 'react-native';
 import EnviarReceberMensagens from '../../components/EnviarReceberMensagens';
 
 import firestore from '@react-native-firebase/firestore';
@@ -12,38 +12,70 @@ import Icon from 'react-native-vector-icons/Ionicons';
 export default function ChatMensagens() {
 
 
-//Step 1: Create a Firestore Collection
-// Create a reference to the "messages" collection
-const messagesRef = firestore().collection('messages');
+    //substituir por Modal e falta fazer o upload da imagem.
+    //Função carregar imagem.
+    const gerarFoto = () => {
+        if (gerarFoto) {
 
+            Alert.alert(
+                'Para as imagens',
+                'Escolha uma Opção:',
+                [
+                    {
+                        text: 'Camera', onPress: () => {
+                            Alert.alert('Clicou na camera');
+                        }
+                    },
 
-//Step 2: Add Messages to Firestore
-const sendMessage = async (text, sender) => {
-    try {
-        // Add a new document to the "messages" collection
-        await messagesRef.add({
-            text,
-            sender,
-            timestamp: firestore.FieldValue.serverTimestamp(),
-        });
-    } catch (error) {
-        console.error('Error sending message: ', error);
+                    {
+                        text: 'Galeria', onPress: () => {
+                            Alert.alert('clicou na Galeria');
+                        }
+                    },
+
+                    {
+                        text: 'Cancelar', onPress: () => {
+                            Alert.alert('Você não selecionou nenhuma imagem');
+                        }
+                    }
+                ]
+            )
+        }
     }
-};
 
-//Step 3: Real-Time Data Syncing
-const subscribeToMessages = (callback) => {
-    const unsubscribe = messagesRef
-        .orderBy('timestamp')
-        .onSnapshot((snapshot) => {
-            const messages = [];
-            snapshot.forEach((doc) => {
-                messages.push({ id: doc.id, ...doc.data() });
+
+    //Step 1: Create a Firestore Collection
+    // Create a reference to the "messages" collection
+    const messagesRef = firestore().collection('messages');
+
+
+    //Step 2: Add Messages to Firestore
+    const sendMessage = async (text, sender) => {
+        try {
+            // Add a new document to the "messages" collection
+            await messagesRef.add({
+                text,
+                sender,
+                timestamp: firestore.FieldValue.serverTimestamp(),
             });
-            callback(messages);
-        });
-    return unsubscribe;
-};
+        } catch (error) {
+            console.error('Error sending message: ', error);
+        }
+    };
+
+    //Step 3: Real-Time Data Syncing
+    const subscribeToMessages = (callback) => {
+        const unsubscribe = messagesRef
+            .orderBy('timestamp')
+            .onSnapshot((snapshot) => {
+                const messages = [];
+                snapshot.forEach((doc) => {
+                    messages.push({ id: doc.id, ...doc.data() });
+                });
+                callback(messages);
+            });
+        return unsubscribe;
+    };
 
 
     //Step 4: Displaying Messages
@@ -64,7 +96,7 @@ const subscribeToMessages = (callback) => {
 
 
     return (
-        
+
         <View style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
             <FlatList
                 data={messages}
@@ -81,8 +113,8 @@ const subscribeToMessages = (callback) => {
                     </View>
                 )}
             />
-            
-          {/*
+
+            {/*
             <ScrollView>
                 <View style={{ marginTop: 8, display: 'flex', flex: 1, overflow: 'scroll' }}>
                     <EnviarReceberMensagens />
@@ -91,34 +123,37 @@ const subscribeToMessages = (callback) => {
                 </View>
             </ScrollView>
  */}
-            <View style={{ display: 'flex', flexDirection: 'row', marginTop: 10, backgroundColor:'white', paddingHorizontal: 10, alignItems: 'center', justifyContent: 'flex-end', }}>
+            <View style={{ display: 'flex', flexDirection: 'row', marginTop: 10, backgroundColor: 'white', paddingHorizontal: 10, alignItems: 'center', justifyContent: 'flex-end', }}>
                 {/*<View style={{ paddingHorizontal: 10, flexDirection: 'row', alignItems: 'center' }} >*/}
-                    <Icon name="camera-outline" size={20} color="#000000" />
-                    <TextInput
-                        style={{ flex: 1,
-                            minHeight: 40,
-                            maxHeight: 90,
-                            paddingHorizontal: 12,
-                            fontSize: 17,
-                            paddingTop: 8,
-                            marginHorizontal: 5,
-                         //   borderColor: 'black',
+                <TouchableOpacity>
+                    <Icon name="camera-outline" size={20} color="#000000" onPress={gerarFoto} />
+                </TouchableOpacity>
+                <TextInput
+                    style={{
+                        flex: 1,
+                        minHeight: 40,
+                        maxHeight: 90,
+                        paddingHorizontal: 12,
+                        fontSize: 17,
+                        paddingTop: 8,
+                        marginHorizontal: 5,
+                        //   borderColor: 'black',
                         //    borderWidth: 1,
                         //    backgroundColor: 'yellow',
-                            borderRadius: 5,
-                        }}
-                        value={text}
-                        onChangeText={setText}
-                        placeholder="Escreva sua mensagem aqui..."
+                        borderRadius: 5,
+                    }}
+                    value={text}
+                    onChangeText={setText}
+                    placeholder="Escreva sua mensagem aqui..."
+                />
+                <TouchableOpacity>
+                    <Icon name="send-outline" size={20} color="#000000" onPress={handleSend} />
+                </TouchableOpacity>
 
-                    />
-                <Button title="Enviar" onPress={handleSend} />
-                {/*</View>*/}
-                
             </View>
-            
+
         </View>
-        
+
     );
 };
 

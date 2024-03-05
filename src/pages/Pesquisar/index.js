@@ -44,7 +44,7 @@ export default function Pesquisar() {
             </View>
     
 
-            {/*    <SearchForm/>*/}
+            {/*  <SearchForm/> */}
 
             </SafeAreaView>
         </View>

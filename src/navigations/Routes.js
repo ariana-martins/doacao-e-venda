@@ -10,9 +10,10 @@ import Loading from '../components/Loading';
 
 
 export default function Routes() {
+    const [initializing, setInitializing] = useState(true);    
     const { user, setUser } = useContext(AuthContext);
     const [loading, setLoading] = useState(true);
-    const [initializing, setInitializing] = useState(true);
+    
 
 
     // Handle user state changes / Lida com alterações de estado do usuário
@@ -20,12 +21,15 @@ export default function Routes() {
         setUser(user);
         if (initializing) setInitializing(false);
         setLoading(false);
+        console.log(user);
     }
 
     useEffect(() => { // onAuthStateChanged retorna o usuário atual que fez login
         const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
         return subscriber; // unsubscribe on unmount
       }, []);
+
+//     if (initializing) return null;
 
     if (loading) {
         return <Loading />;

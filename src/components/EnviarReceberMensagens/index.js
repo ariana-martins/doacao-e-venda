@@ -1,15 +1,20 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export default function EnviarReceberMensagens(props) {
     return (
         
-            <View style={{ width: 180, margin: 10, display: 'flex', alignSelf: props.direita ? 'flex-end' : 'flex-start' }}>
-                <View style={{ backgroundColor: '#cdcdcd', borderRadius: 8 }}>
-                    <Text style={{ padding: 8, color: 'black' }}>Chat Mensagens enviadas e recebidas</Text>
+        <View style={{ width: 180, margin: 10, display: 'flex', alignSelf: props.direita ? 'flex-end' : 'flex-start' }}>
+            <View style={{ backgroundColor: '#cdcdcd', borderRadius: 8 }}>
+                <Text style={{ padding: 8, color: 'black' }}>Chat Mensagens enviadas e recebidas</Text>
+                <View style={{ flexDirection: 'row', alignSelf: 'flex-end' }}>
+                    <Text>20:10</Text>
+                    <Icon name="checkmark-done-outline" size={20} color="#000000" />
                 </View>
-                <Text>Pessoa - 10:20</Text>
+            </View>
+
             </View>   
     )
 }

@@ -6,6 +6,7 @@ import ImageCropPicker from 'react-native-image-crop-picker';
 //import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
 
+
 import firestore, { firebase } from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
 
@@ -18,23 +19,17 @@ import { useNavigation } from '@react-navigation/native';
 
 export default function AdicionarNovoProduto() {
     const navigation = useNavigation();
-
     const [isSelected, setSelection] = React.useState(false);
     const [titulo, setTitulo] = useState('');
     const [descricao, setDescricao] = useState('');
-    const [valor, setValor] = useState('');
-    const [vender, setVender] = useState('');
-    const [doacao, setDoacao] = useState('0,00'); //ou acrescentar "valor null" para não inserir nenhum valor
+    const [valor, setValor] = useState('0,00');
+    //const [vender, setVender] = useState('');
+    //const [doacao, setDoacao] = useState('0,00'); //ou acrescentar "valor null" para não inserir nenhum valor
     const [images, setImages] = useState('https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT%20-%20P&B.png');
 
 
-    //função pressionar botão pesquisar
-    const onSelectAddProduto = () => {
-        console.log(isSelected);
-        //isSelect = false (Doacao), true (Para Vender)
-    };
-
-
+    
+    
     //configurando imagem para ser armazenada no firebase/storage, e depois, 
     //para que a imagem seja puxada do mesmo local para carregar de volta no App.
 
@@ -123,7 +118,7 @@ fileRef.getDownloadURL()
             titulo,
             descricao,
             valor,
-            doacao,
+       //     doacao,
             status: 'teste',
             user_id,
             created_at: firestore.FieldValue.serverTimestamp()
@@ -133,10 +128,10 @@ fileRef.getDownloadURL()
         setTitulo('') //para que não seja armazenada novamente e evitar a redundancia
         console.log(descricao)
         setDescricao('')
-        console.log(doacao)
-        setDoacao('')
+     //   console.log(doacao)
+      //  setDoacao('')
         console.log(valor)
-        setValor('')
+        //setValor('') //
 
     }
 
@@ -218,6 +213,20 @@ fileRef.getDownloadURL()
             //setImages(image.path); //ativar essa linha quando ativar multiplas imagens, para visualizar a imagem no App antes de "Cadastrar produto" para ir p/ o banco de dados do firebase/storage
         });
     }
+
+    //funcao Selecionar Doar e Vender Produto. [OK - dia 25.03.24]
+    // Exemplo de funcao no exemplo do Youtube: Renderização Condicional em React Native - Curso de React Native - Aula 10
+    // Link: https://www.youtube.com/watch?v=veB-CF6ugSY
+    // Canal do Youtube: CFBCursos
+
+    let DoarVender=!isSelected; // !isSelect = true (Doacao), !isSelect = false (Para Vender)
+    {/* Falta configurar para o valor ficar nulo (R$ 0,00) quando retornar selecionado PARA DOAR, 
+        após preencher e/ou se enganar de selecionar o produto PARA VENDER e preencher qualquer valor.
+     */}
+     console.log(DoarVender);
+     
+     
+    
 
 
 
@@ -303,6 +312,7 @@ fileRef.getDownloadURL()
                         onPress={() => {
                             setSelection(!isSelected);
                             Alert.alert('DOACAO', 'Valor nulo!')
+                            
                         }}
                         color="#000000"
                     />
@@ -318,19 +328,35 @@ fileRef.getDownloadURL()
                         }}
                         color="#000000"
                     />
-                    <Text style={styles.label}>PARA VENDER
-                        
-                        {isSelected
-                            //? " acrescente um valor" : " "
-                        }
-                        {/* value={doacao} */}
-                    </Text>
+                    <Text style={styles.label}>PARA VENDER </Text>
+             
                 </View>
             </View>
+
+
 
             <View style={styles.botaoAdicionarMargem}>
                 <View style={styles.inputArea}>
                     <Text>R$</Text>
+                    
+
+
+                    {/*Se valor é igual isSelected = true, o valor vai ficar nulo 0,00  (para doar) */}
+                    {/*Se valor é igual !isSelected = false, o valor vai ser preenchido (para vender) */}
+
+                    {DoarVender ?
+                    <TextInput
+                    style={styles.input}
+                 //   disable={valor.length === 0} //validação desativada, se textInputName não for preenchida/igual a zero(0), não vai ser pressionável o botão "Enviar"
+                    placeholder="0,00"
+                    value={valor}
+                    keyboardType="numeric" // Define esse teclado numérico quando deseja manipular dados de um TextInput com entrada somente números.
+                    //  onChangeText={setValor}
+                    // para doação ficar igual valor nulo, o onChangeText={setDoacao} não deve existir, 
+                    // pois irá apenas ficar o value{doacao} que irá aparecer o valor 0,00 na tela sem o usuário poder preencher o valor.
+                    // Falta fazer o if, se marcar Doacao, valor igual a nulo, se marcar Para Vender, é obrigatório preencher um valor.
+                />
+                :
                     <TextInput
                         style={styles.input}
                         disable={valor.length === 0} //validação desativada, se textInputName não for preenchida/igual a zero(0), não vai ser pressionável o botão "Enviar"
@@ -338,7 +364,11 @@ fileRef.getDownloadURL()
                         value={valor}
                         keyboardType="numeric" // Define esse teclado numérico quando deseja manipular dados de um TextInput com entrada somente números.
                         onChangeText={setValor}
+                        // para doação ficar igual valor nulo, o onChangeText={setDoacao} não deve existir, 
+                        // pois irá apenas ficar o value{doacao} que irá aparecer o valor 0,00 na tela sem o usuário poder preencher o valor.
+                        // Falta fazer o if, se marcar Doacao, valor igual a nulo, se marcar Para Vender, é obrigatório preencher um valor.
                     />
+                }
                 </View>
             </View>
             <View style={styles.botaoAdicionarMargem}>

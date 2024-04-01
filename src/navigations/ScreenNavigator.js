@@ -40,7 +40,7 @@ function Tabs() {
             <Icon name="home-outline" size={20} color={focused ? "blue" : "black" } />
           ),
           tabBarLabel: "Pagina Inicial",
-          headerShown: true
+          headerShown: false
         }}
 
       />
@@ -126,6 +126,17 @@ export default function ScreenNavigator() {
         options={{
           headerShown: false
         }}
+      />
+
+        {/* Para fazer a pesquisa da Página inicial para a Página "Pesquisar" */}
+      <Stack.Screen
+        name="Pesquisar"
+        component={Pesquisar}
+        options={{
+          headerShown: true,
+          title: 'Página Inicial',
+        }}
+        
       />
 
     </Stack.Navigator>

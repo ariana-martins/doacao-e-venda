@@ -2,16 +2,17 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, SafeAreaView, FlatList, Pressable} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import Pesquisar from '../Pesquisar';
+//import Pesquisar from '../Pesquisar';
 
-import ProdutosList from '../../components/ProdutosList';
+import Produtos from '../../data/produtos';
+import PesquisaFiltro from '../../components/PesquisaFiltro';
 
 
-//data temporário, para depois incluir o firebase
 
 export default function PaginaInicial(){
   const navigation = useNavigation();
 
+  /*
   const card = [
     {
     id: '1',
@@ -123,31 +124,35 @@ export default function PaginaInicial(){
       },
   
   ];
-  
+  */
+
   return(
     <SafeAreaView style={styles.container}>
      
-     {/*Aqui vai Pesquisar a lista de produtos*/}
-     {/* Falta configurar para quando clicar em Pesquisar, ele vai direto para a Página "Pesqusiar" */}
-      {/*<Pesquisar/>*/}
+      {/* Falta configurar para quando clicar em Filtrar e Pesquisar, 
+      ele vai direto para cada "função" de filtrar e pesquisar produto */}
+      <PesquisaFiltro/>
       
        {/*Aqui vai a lista de produtos*/}
        <FlatList 
         showsHorizontalScrollIndicator={false}
         columnWrapperStyle={{ justifyContent: 'space-around', padding: 10 }}
-        data={card} //data, da onde eu vou pegar os dados desta lista (nesse caso é o card com a lista de produtos)
+        data={Produtos} //data, da onde eu vou pegar os dados desta lista (nesse caso é o card/lista de "produtos")
         //keyExtractor={item=>item.id} //keyEstractor define uma chave para cada um dos elementos, aqui é um tipo que vou querer retornar um "item.id" 
-        keyExtractor={item=>item} //nesse caso o item pode ficar sem o ".id" pois já aparece a lista (dos produtos) do "card" na página Inicial, qual a diferença com .id?
+        keyExtractor={item=>item.id} 
         numColumns={3}
         renderItem={({item}) => (
           <View>
             <Pressable onPress={() => navigation.navigate('Detalhes')}>
               <View>
               <Image style={styles.prodImg}
-                  source={item.image}              
+                  source={item.image}
+                  // quando buscar os produtos do firestores/storage, 
+                  //utilizar imagem com "uri", pois busca imagem da internet (firestores/storage)
+                  //source={{ uri: item.image }}              
               />
               <Text style={styles.txt}>{item.title}</Text>
-              <Text style={styles.vlr}>{item.valor}</Text>
+              <Text style={styles.vlr}>R$ {item.valor}</Text>
             </View>
 
           </Pressable>

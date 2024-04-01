@@ -52,7 +52,7 @@ useEffect(()=>{
 
 return (
 
-    <View style={{ padding: 20, backgroundColor: 'white' }}>
+    <View style={{ flex:1, padding: 20, backgroundColor: 'white' }}>
 
         <View style={styles.containerCard}>
             <View style={styles.containerNotification}>
@@ -62,6 +62,7 @@ return (
             </View>
         </View>
 
+{/*
         <View style={{ padding: 20, alignItems: 'center' }}>
             <Text>Lista de produtos Para Doar e Vender</Text>
             <View style={{ padding: 10, flexDirection: 'row', justifyContent: 'space-evenly', }}>
@@ -71,6 +72,7 @@ return (
             </View>
             <Text>Lista de produtos Doados e Vendidos</Text>
         </View>
+*/}
 
             <FlatList
                 data={data}

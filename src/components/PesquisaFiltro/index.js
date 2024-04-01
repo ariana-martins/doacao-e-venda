@@ -1,80 +1,52 @@
 import React from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, SafeAreaView } from 'react-native';
-
+import { useNavigation } from '@react-navigation/native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
-import SearchForm from '../../components/SearchForm';
 
 
-export default function Pesquisar() {
+export default function PesquisaFiltro() {
+
+    const navigation = useNavigation();
 
 
-
-    //[28.03.2024] Exemplo de filtrar produtos, falta testar se vai dar certo depois...
-    // função para criar lista de produtos para pesquisar e filtrar...
-    {/*
-        const getProduct = async () => {
-            setLoading(true);
-            setList([]);              //inicia o carregamento da lista vazia. Tem que criar o '=useState([])' vazia tbm depois...
-
-            let res = await Api.getProduct(); // vai pegar o resultado da lista de produtos da "Api" (não utilizo o Api) / do firebase (utilizo o firebase).
-            console.log(res);                 // para ver no console.log os resultados desta função.
-            if(res.error == '') {              // verificar, vai pegar o resultado, se der algum erro.
-                
-                setList(res.data)              // vai mostrar a lista de "resultados" dos produtos (que ficam dentro do "card" data)
-            } else {                           // se não tiver erro nenhum
-                alert("Erro: "+res.error )    //vai mostrar o alert
-            }  
-            
-            setLoading(false);
-        }
-
-
-        //vai rodar "a telinha" (do console.log)
-        useEffect(()=> {
-            getProduct();    //aqui vai pegar a lista dos produtos que estão cadastrados
-        }, []);
-
-*/}
-
-    
     return (
 
         <View style={styles.container}>
 
             {/* //Formulário de pesquisa "SearchForm" é renderizado dentro da visualização da área segura "SafeAreaView"*/}
             <SafeAreaView>
-
         
-            <View style={styles.botaoFiltrar}>
+            <View>
                 <View style={styles.filtrarArea}>
-                    <TouchableOpacity>
-                        <Icon name="funnel-outline" size={20} color="#000000" />
+                    <Text style={styles.txtFiltrar}>Página Inicial</Text>
+                    {/* Falta configurar o botão Filtrar e pesquisar ir direto
+                     "dentro de cada função" da página de pesquisar*/}
+                    <View style={styles.botaoFiltrar}>
+                    <TouchableOpacity onPress={() => navigation.navigate('Pesquisar')}>
+                        <Icon name="funnel-outline" width={20} height={20} size={20} color="#000000" />
                     </TouchableOpacity>
-                    <Text style={styles.txtFiltrar}>Filtrar por categoria</Text>
+                    <TouchableOpacity onPress={() => navigation.navigate('Pesquisar')}>
+                        <Icon name="search" width={20} height={20} size={20} color="#000000" />
+                    </TouchableOpacity>
+                    </View>
                 </View>
             </View>
+            {/*
             <View style={styles.botaoPesquisar}>
                 <View style={styles.inputArea}>
+                    <TouchableOpacity onPress={() => navigation.navigate('Pesquisar')}>
                     <Icon name="search" size={20} color="#000000" />
-                    <TextInput
+                    </TouchableOpacity>
+                    <TextInput 
                         style={styles.input}
                         placeholder="Pesquisar / Pesquise aqui..."
                         keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
-                    />
+                    >
+                    </TextInput>
                 </View>
             </View>
-
-
-            <View>
-                <Text style={{ marginBottom: 10, paddingHorizontal: 20, }}>
-                    Aqui vai os produtos pesquisados e filtrados...
-                </Text>
-                
-            </View>
-    
-
-            {/*  <SearchForm/> */}
+    */}
 
             </SafeAreaView>
         </View>
@@ -83,20 +55,28 @@ export default function Pesquisar() {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1, //para ficar tudo no meio da tela
+      //  flex: 1, //para ficar tudo no meio da tela
         backgroundColor: '#FFFFFF',
     },
     botaoFiltrar: {
-        paddingHorizontal: 10,
+      //  flexWrap: 'wrap',
+        paddingHorizontal: 5,
+        paddingTop: 5,
         flexDirection: 'row',
-        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
-        width: '100%',
-        marginVertical: 5,
+       // alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
+        width: '18%',
+        justifyContent: 'space-between',
+    //    marginVertical: 5,
+       //width: 20,
+    //    height: 20,
+      //  backgroundColor: 'pink',
     },
     filtrarArea: {
         paddingHorizontal: 15,
+      //  alignContent: 'space-between',
         flexDirection: 'row',
-        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
+      //  alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
+        justifyContent: 'space-between',
     },
     txtFiltrar: {
         fontFamily: 'Roboto',

@@ -38,7 +38,6 @@ import EsqueciMinhaSenha from './src/pages/EsqueciMinhaSenha';
 import ScreenNavigator from './src/navigations/ScreenNavigator'; // Nova tela de navegação entre as páginas ("pages")
 
 
-import PaginaInicialTeste from './src/pages/PaginaInicialTeste';
 import SettingScreenTeste from './src/pages/SettingsScreenTeste';
 
 */

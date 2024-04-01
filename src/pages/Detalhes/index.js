@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { View, Text, Image, TouchableOpacity, Pressable, StyleSheet } from 'react-native';
+import { View, Text, Image, TouchableOpacity, Pressable, StyleSheet, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import { ScrollView } from 'react-native-gesture-handler';
 
 import SwiperNumberComponent from '../../components/SwiperNumber';
 import Icon from 'react-native-vector-icons/Ionicons';
+
+import Produtos from '../../data/produtos';
 
 
 //Falta configurar para clicar no botão chat, e aparecer o UserDono, 
@@ -21,30 +23,36 @@ export default function Detalhes({ userDono }) {
 
     return (
         <View style={styles.container}>
+
             <View style={styles.swiperNumberContent}>
+                {/*aqui vai as imagens*/}
                 <SwiperNumberComponent />
             </View>
+                    {/* ===>>> Falta trazer apenas o título, descrição, valor, imagem 
+                    apenas do produto que o usuário clicou para ver todas as informações somente daquele unico produto. */}
+            <FlatList
+                data={Produtos}
+                keyExtractor={item => item.id}
+                renderItem={({ item }) => (
 
-            <Text style={styles.txtTitle}>
-                Calçado marrom novo.
-            </Text>
+                    <View>
+                        <Text style={styles.txtTitle}>{item.title}</Text>
 
-            <Text style={styles.txtValor}>
-                R$ 120,00
-            </Text>
+                        <Text style={styles.txtDetalhes}>Detalhes: {item.descricao}</Text>
 
-            <Text style={styles.txtDetalhes}>
-                Detalhes: calçado marrom novo. /
-                Genero: Masculino /
-                Marca: Coturno /
-                Tamanho: 42 /
-            </Text>
+                        <Text style={styles.txtValor}>{item.valor}</Text>
+                    </View>
+
+
+                )}
+            />
+
 
             <View style={styles.botaoAdicionarMargem}>
                 {/*<TouchableOpacity style={styles.btnInteresse} */}
-                <TouchableOpacity style={{ backgroundColor: registrarInteresse ? '#000000' : '#191970', width: 250, height: 40, borderRadius: 10, justifyContent: 'center'}}
-                
-                onPress={() => setRegistrarInteresse(!registrarInteresse)}>
+                <TouchableOpacity style={{ backgroundColor: registrarInteresse ? '#000000' : '#191970', width: 250, height: 40, borderRadius: 10, justifyContent: 'center' }}
+
+                    onPress={() => setRegistrarInteresse(!registrarInteresse)}>
                     {/*<Text style={styles.textoBotao}>Registrar Interesse</Text>*/}
                     <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 20, textAlign: 'center' }}>
                         {registrarInteresse ? 'Registrar Interesse' : 'Cancelar Interesse'}
@@ -84,6 +92,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Inter',
         fontStyle: 'normal',
         fontSize: 20,
+        fontWeight: 'bold', //texto em negrito
         color: '#000000',
         marginTop: 10,
     },

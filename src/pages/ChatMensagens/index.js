@@ -107,8 +107,11 @@ export default function ChatMensagens() {
                         <View style={{ width: 180, margin: 10, display: 'flex', alignSelf: 'flex-end' }}>
                             <View style={{ backgroundColor: '#afeeee', borderRadius: 8 }}>
                                 <Text style={{ padding: 8, color: 'black' }}>{item.sender}: {item.text}</Text>
+                                <View style={{ flexDirection: 'row', alignSelf: 'flex-end' }}>
+                                    <Text>20:10</Text>
+                                    <Icon name="checkmark-done-outline" size={20} color="#000000" />
+                                </View>
                             </View>
-                            <Text>Pessoa - 20:10</Text>
                         </View>
                     </View>
                 )}

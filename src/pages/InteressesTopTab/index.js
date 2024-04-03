@@ -42,8 +42,8 @@ const ref = firebase.firestore().collection('produtos');
 
 
     return (
-        <View style={{ padding: 18, backgroundColor: '#FFFFFF' }}>
-            <Text style={{ fontWeight: 'bold', fontSize: 20 }}>Gerenciador, filtrando produtos do usuário</Text>
+        <View style={{ flex: 1, padding: 20, backgroundColor: '#FFFFFF' }}>
+            <Text style={{ fontSize: 16 }}>Lista de interesses</Text>
        
                 <FlatList
                     data={data}

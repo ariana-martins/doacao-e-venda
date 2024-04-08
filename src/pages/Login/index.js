@@ -42,7 +42,7 @@ export default function Login() {
 
    
     const userLogin = async () => {
-        if (!email || !senha) {
+        if (!email.trim() || !senha.trim()) {
             Alert.alert("Por favor preencha todos os dados")
             return;
         }

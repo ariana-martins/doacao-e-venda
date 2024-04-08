@@ -25,7 +25,7 @@ export default function Cadastrar() {
 
     //Autenticação do usuário com o firebase
     const userCadastrar = async () => {
-        if (!email || !senha || !nomeCompleto) {
+        if (!email.trim() || !senha.trim() || !nomeCompleto.trim()) {
             Alert.alert("Por favor preencha todos os dados")
             return
         }

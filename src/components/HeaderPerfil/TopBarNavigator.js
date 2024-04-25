@@ -2,9 +2,9 @@ import React from 'react';
 import { View, Text, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import PerfilTopTab from '../pages/PerfilTopTab';
-import InteressesTopTab from '../pages/InteressesTopTab';
-import MeusProdutosTopTab from '../pages/MeusProdutosTopTab';
+import PerfilTopTab from '../../pages/PerfilTopTab';
+import InteressesTopTab from '../../pages/InteressesTopTab';
+import MeusProdutosTopTab from '../../pages/MeusProdutosTopTab';
 
 
 //Navegações entre as páginas "do Perfil", navegações das Telas TopTab

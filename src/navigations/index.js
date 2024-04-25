@@ -1,5 +1,7 @@
+
 import React from "react";
-import { AuthProvider } from "./AuthProvider";
+import { AuthProvider } from "../components/componentesGerais/Auth/AuthProvider";
+//import { AuthProvider } from "./AuthProvider";
 import Routes from "./Routes";
 
 
@@ -10,3 +12,4 @@ export default function Providers() {
         </AuthProvider>
     )
 }
+

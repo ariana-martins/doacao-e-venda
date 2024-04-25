@@ -187,9 +187,10 @@ fileRef.getDownloadURL()
         ImageCropPicker.openCamera({
             width: 300,
             height: 400,
-            cropping: true
+            cropping: true,
         }).then(image => {
             console.log("Tire uma imagem", image);
+            
             setImages(image.path); //visualiza a imagem no App, após tirar foto oPor favor descreva uma descrição para o produtou selecionou da galeria de imagens
         });
     }
@@ -198,7 +199,7 @@ fileRef.getDownloadURL()
         ImageCropPicker.openPicker({
             width: 300,
             height: 400,
-            cropping: true
+            cropping: true,
         }).then(image => {
             console.log("Selecione uma imagem", image);
             setImages(image.path); //visualiza a imagem no App, após tirar foto ou selecionou da galeria de imagens
@@ -311,6 +312,7 @@ fileRef.getDownloadURL()
                         status={isSelected ? 'unchecked' : 'checked'}
                         onPress={() => {
                             setSelection(!isSelected);
+
                             Alert.alert('DOACAO', 'Valor nulo!')
                             
                         }}
@@ -324,6 +326,7 @@ fileRef.getDownloadURL()
                         onPress={() => {
                             setSelection(!isSelected);
                             Alert.alert('PARA VENDER', 'Acrescente um valor para o produto!')
+                            {/*aqui vc precisa colocar input=0,00, só não sei como referenciar aquele objeto no react native*/}
 
                         }}
                         color="#000000"
@@ -340,7 +343,7 @@ fileRef.getDownloadURL()
                     <Text>R$</Text>
                     
 
-
+                    {/*basicamente vc pecisa fazer isso abaixo quando o DoarVender mudar de valor (tipo num onChange)*/}
                     {/*Se valor é igual isSelected = true, o valor vai ficar nulo 0,00  (para doar) */}
                     {/*Se valor é igual !isSelected = false, o valor vai ser preenchido (para vender) */}
 
@@ -370,6 +373,7 @@ fileRef.getDownloadURL()
                     />
                 }
                 </View>
+        
             </View>
             <View style={styles.botaoAdicionarMargem}>
                 {/* =>Botão Inserir Produto<= */}

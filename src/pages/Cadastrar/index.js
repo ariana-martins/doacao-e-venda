@@ -59,7 +59,7 @@ export default function Cadastrar() {
 
                     <View style={styles.bordaTxtLogo}>
                         <Text style={styles.txtCadastro}>Cadastro</Text>
-                        <Image style={styles.imgLogo} source={require('../../../src/assets/logo_novo.jpg')} />
+                        <Image style={styles.imgLogo} source={require('../../../src/assets/logo/logo_novo.jpg')} />
                     </View>
 
                     <View style={styles.bordaEmail_e_Senha_e_outros_dados}>

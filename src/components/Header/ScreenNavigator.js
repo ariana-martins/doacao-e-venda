@@ -4,19 +4,19 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
-import TopBarNavigator from './TopBarNavigator';
+import TopBarNavigator from '../HeaderPerfil/TopBarNavigator';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import Login from '../pages/Login';
-import EsqueciMinhaSenha from '../pages/EsqueciMinhaSenha';
-import Cadastrar from '../pages/Cadastrar';
-import PaginaInicial from '../pages/PaginaInicial';
-import Pesquisar from '../pages/Pesquisar';
-import AdicionarNovoProduto from '../pages/AdicionarNovoProduto';
-import Chat from '../pages/Chat';
-import Detalhes from '../pages/Detalhes';
-import ChatMensagens from '../pages/ChatMensagens';
+import Login from '../../pages/Login';
+import EsqueciMinhaSenha from '../../pages/EsqueciMinhaSenha';
+import Cadastrar from '../../pages/Cadastrar';
+import PaginaInicial from '../../pages/PaginaInicial';
+import Pesquisar from '../../pages/Pesquisar';
+import AdicionarNovoProduto from '../../pages/AdicionarNovoProduto';
+import ItemListaChat from '../../pages/ItemListaChat';
+import Detalhes from '../../pages/Detalhes';
+import ChatMensagens from '../../pages/ChatMensagens';
 
 
 const Stack = createStackNavigator();
@@ -66,7 +66,7 @@ function Tabs() {
       />
       <Tab.Screen
         name='Chat - Tab'
-        component={Chat}
+        component={ItemListaChat}
         options={{
           headerShown: true,
           title: 'Chats',
@@ -134,7 +134,7 @@ export default function ScreenNavigator() {
         component={Pesquisar}
         options={{
           headerShown: true,
-          title: 'Página Inicial',
+          title: 'Voltar',
         }}
         
       />

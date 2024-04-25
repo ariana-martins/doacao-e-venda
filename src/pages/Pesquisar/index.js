@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import SearchForm from '../../components/SearchForm';
 
 
+
 export default function Pesquisar() {
 
 

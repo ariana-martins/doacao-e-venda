@@ -12,8 +12,9 @@ import ImageCropPicker from 'react-native-image-crop-picker';
 
 import storage from '@react-native-firebase/storage';
 
-import FormButton from '../../components/FormButton';
-import { AuthContext } from '../../navigations/AuthProvider';
+import FormButton from '../../components/FormItens/FormButton';
+import { AuthContext } from '../../components/componentesGerais/Auth/AuthProvider';
+//import { AuthContext } from '../../navigations/AuthProvider';
 
 //================================================================================================
 // Falta acrescentar displayName == NomeCompleto para o usuário, exemplo do link:
@@ -155,7 +156,7 @@ export default function PerfilTopTab() {
             <View style={styles.myCard}>
                 {/* "pic" é a "identificação da imagem" no firestore junto com "nomeCompleto" "uid" "email"...  */}
                 {/* <Image source={{uri:item.pic}} style={{width:60, height: 60, borderRadius:30, backgroundColor: "green" }} /> */}
-                <Image source={require('../../../src/assets/logo_novo.jpg')} style={{ width: 60, height: 60, borderRadius: 30, backgroundColor: "green" }} />
+                <Image source={require('../../assets/logo/logo_novo.jpg')} style={{ width: 60, height: 60, borderRadius: 30, backgroundColor: "green" }} />
                 {/*<Image source={require('../../../src/assets/logo_novo.jpg')} style={{ width: 100, height: 100, borderRadius: 50, borderWidth: 1, borderColor: "black" }} /> */}
                 <View>
                     <Text style={styles.txtEmail_e_Senha}>{item.nomeCompleto}</Text>
@@ -165,12 +166,13 @@ export default function PerfilTopTab() {
         )
     }
 
+    // ao invés desse user_id,tu pode fazer a mesma coisa mas usando o user todo
 
     // Ou seja, vai fazer um filtro para filtrar somente o usuário "conectado".
     //const user_id = firebase.auth().currentUser.uid; //[OK também, aqui mostra o Uid do usuário ao invés do email] 
     //const user_id = firebase.auth().currentUser.displayName; //Para incluir o nomeCompleto no Perfil do Usuário, tenho que fazer o displayName do firebase ficar igual o nome Completo.
-    const user_id = firebase.auth().currentUser.email;
-    console.log(auth().currentUser)
+    const user_id = firebase.auth().currentUser.uid;
+    console.log('Users',users);
 
 
 
@@ -184,7 +186,7 @@ export default function PerfilTopTab() {
                 <TouchableOpacity onPress={() => choose_photo()}>
                     {image && <Image source={{ uri: image }}
                         style={styles.image_picker} />}
-                    {!image && <Image source={require('../../assets/logo.png')}
+                    {!image && <Image source={require('../../assets/logo/logo.png')}
                         style={styles.image_picker} />}
                 </TouchableOpacity>
 
@@ -225,11 +227,11 @@ export default function PerfilTopTab() {
             <View style={{ flexDirection: "row", fontWeight: 'bold' }}>
                 {/* (Observação: o ícone está acima do Text (do usuário conectado, user_id), então ele aparece na extrema esquerda, se estivesse abaixo do Text, ele apareceria à direita.) */}
                 <Icon style={styles.iconEmail} name="person-outline" size={20} color="#000000" />
-                <Text style={{ fontSize: 20, color: 'black', fontWeight: 'bold' }}>Usuário: falta sincrozinar nomeCompleto</Text>
+                <Text style={{ fontSize: 20, color: 'black', fontWeight: 'bold' }}>Usuário: oii</Text>
             </View>
             <View style={{ flexDirection: "row", fontWeight: 'bold' }}>
                 <Icon style={styles.iconEmail} name="mail-outline" size={20} color="#000000" />
-                <Text style={{ fontSize: 20, color: 'black', fontWeight: 'bold' }}>Email: {user_id}</Text>
+                <Text style={{ fontSize: 20, color: 'black', fontWeight: 'bold' }}>Email: alguma cois</Text>
             </View>
 {/*
  

@@ -3,14 +3,14 @@ import { View, Image, Text, FlatList, StyleSheet, TouchableOpacity } from 'react
 import { useNavigation } from '@react-navigation/native';
 
 
-export default function Chat() {
+export default function ItemListaChat() {
     const navigation = useNavigation();
 
 
     const Chat = [
         {
         id: '1',
-        image: require('../../../src/assets/img1.png'),
+        image: require('../../../src/assets/img/img1.png'),
         title: 'Sapatênis',
         valor: 'R$200,00', 
         messageTime: '4 mins atrás',
@@ -19,7 +19,7 @@ export default function Chat() {
         },
         {
         id: '2',
-        image: require('../../../src/assets/img2.png'),
+        image: require('../../../src/assets/img/img2.png'),
         title: 'Blusa branca',
         valor: 'R$0,00',
         messageTime: '2 horas atrás',
@@ -28,7 +28,7 @@ export default function Chat() {
         },
         {
         id: '3',
-        image: require('../../../src/assets/img3.png'),
+        image: require('../../../src/assets/img/img3.png'),
         title: 'Tênis branco',
         valor: 'R$0,00',
         messageTime: '2 dias atrás',

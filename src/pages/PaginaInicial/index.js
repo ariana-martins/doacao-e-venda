@@ -1,16 +1,48 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, SafeAreaView, FlatList, Pressable} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+
+import firestore, { firebase } from '@react-native-firebase/firestore';
 
 //import Pesquisar from '../Pesquisar';
 
 import Produtos from '../../data/produtos';
-import PesquisaFiltro from '../../components/PesquisaFiltro';
+import PesquisaFiltro from '../../components/componentesGerais/PesquisaFiltro';
 
 
 
 export default function PaginaInicial(){
-  const navigation = useNavigation();
+  const navigation = useNavigation(); 
+
+  const [data, setData] = useState('');
+
+
+// Refazer o getDowload em "Adicionar novo produto" e aqui também incluir um "UseEffect + getDetail"
+// Conforme seguindo o manual do canal do Youtube: CODERS NEVER QUIT
+// Título do vídeo: Part 1/2 | OLX Clone using React Native & Firebase | React Native & Firebase for beginners in Hindi
+// Link canal do Youtube: https://www.youtube.com/watch?v=ntPQ-IPm3AM&list=PLB97yPrFwo5ihgCoWXlEDHrAPQNshsfzP&index=7
+// Observação: Nesse exemplo inicia desde o login com o usuário, e mostra o "produto c/ imagem" em um Card c/ getDowload do Firebase + Storage.
+
+  const ref = firebase.firestore().collection('produtos');
+    useEffect(()=>{
+        ref.onSnapshot(querySnapshot =>{
+            const data = []
+            querySnapshot.forEach(doc =>{
+                data.push({
+                     ...doc.data(),
+                        key:doc.id
+                })
+            })
+                setData(data)
+        })
+      //  return () => ref()
+    }, [])
+
+
+    //Para deletar e/ou editar apenas os produtos que um usuário adicionou, e não deletar todos os produtos de todos os usuários
+    // Ou seja, vai fazer um filtro para filtrar somente os produtos do usuário "x".
+    const user_id = firebase.auth().currentUser.uid;
+
 
   /*
   const card = [
@@ -126,6 +158,10 @@ export default function PaginaInicial(){
   ];
   */
 
+  ////===========>>>> PRIORIDADE <<<<<<<<<<<<<<<<<<<============================
+  /*resolver essa questão de lançar no telefone e poder ver no computador [12/04/2024]*/
+
+
   return(
     <SafeAreaView style={styles.container}>
      
@@ -137,21 +173,22 @@ export default function PaginaInicial(){
        <FlatList 
         showsHorizontalScrollIndicator={false}
         columnWrapperStyle={{ justifyContent: 'space-around', padding: 10 }}
-        data={Produtos} //data, da onde eu vou pegar os dados desta lista (nesse caso é o card/lista de "produtos")
+        data={data} //data, da onde eu vou pegar os dados desta lista (nesse caso é o card/lista de "produtos")
         //keyExtractor={item=>item.id} //keyEstractor define uma chave para cada um dos elementos, aqui é um tipo que vou querer retornar um "item.id" 
-        keyExtractor={item=>item.id} 
+       // keyExtractor={item=>item.id} 
+      // keyExtractor={item=>item.user_id}
         numColumns={3}
         renderItem={({item}) => (
           <View>
             <Pressable onPress={() => navigation.navigate('Detalhes')}>
               <View>
               <Image style={styles.prodImg}
-                  source={item.image}
+                 // source={item.image}
                   // quando buscar os produtos do firestores/storage, 
                   //utilizar imagem com "uri", pois busca imagem da internet (firestores/storage)
-                  //source={{ uri: item.image }}              
+                  source={{ uri: item.images }}              
               />
-              <Text style={styles.txt}>{item.title}</Text>
+              <Text style={styles.txt}>{item.titulo}</Text>
               <Text style={styles.vlr}>R$ {item.valor}</Text>
             </View>
 
@@ -181,6 +218,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     lineHeight: 20,
     color: "#000000",
+    fontWeight: 'bold',
   },
   vlr: {
     width: 96,

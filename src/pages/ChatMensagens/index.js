@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, Button, FlatList, TouchableOpacity, SafeAreaView, Alert } from 'react-native';
+import { View, Text, TextInput, Button, FlatList, TouchableOpacity, Alert, Modal, StyleSheet } from 'react-native';
 import EnviarReceberMensagens from '../../components/EnviarReceberMensagens';
 
 import firestore from '@react-native-firebase/firestore';
@@ -10,10 +10,11 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 
 export default function ChatMensagens() {
+    const [modalActive, setModalActive] = useState(false)
 
-
-    //substituir por Modal e falta fazer o upload da imagem.
+    //substituir por Modal e falta fazer o upload da imagem. [OK]
     //Função carregar imagem.
+    /*
     const gerarFoto = () => {
         if (gerarFoto) {
 
@@ -42,7 +43,7 @@ export default function ChatMensagens() {
             )
         }
     }
-
+*/
 
     //Step 1: Create a Firestore Collection
     // Create a reference to the "messages" collection
@@ -98,6 +99,49 @@ export default function ChatMensagens() {
     return (
 
         <View style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+
+            <View style={styles.containerModal}>
+                <Modal
+                    animationType="slide"
+                    swipeDirection="down"
+                    transparent={true}
+                    visible={modalActive}
+                    onRequestClose={() => {
+                        Alert.alert('Modal has been closed');
+                        setModalActive(!modalActive);
+                    }}
+                >
+                    <View style={styles.outerView}>
+                        <View style={styles.modalView}>
+                            <View style={styles.modalMargemDivisa}>
+                                <TouchableOpacity onPress={() => Alert.alert('Clicou na camera')}>
+                                    <View style={styles.iconesModal}>
+                                        <Icon name="camera-outline" size={20} color="#000000" onPress={() => setModalActive(true)} />
+                                        <Text style={styles.modalText}>Tirar Foto</Text>
+                                    </View>
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={() => Alert.alert('Clicou na Galeria')}>
+                                    <View style={styles.iconesModal}>
+                                        <Icon name="image-outline" size={20} color="#000000" onPress={() => setModalActive(true)} />
+                                        <Text style={styles.modalText}>Escolher Existente</Text>
+                                    </View>
+                                </TouchableOpacity>
+                            </View>
+                            <TouchableOpacity style={styles.buttonModal} onPress={() => setModalActive(!modalActive)}>
+                                <Text style={styles.outroTextModal}>Cancelar</Text>
+                            </TouchableOpacity>
+
+                        </View>
+                    </View>
+
+                </Modal>
+
+
+
+
+            </View>
+
+
             <FlatList
                 data={messages}
                 keyExtractor={(item) => item.id}
@@ -117,6 +161,8 @@ export default function ChatMensagens() {
                 )}
             />
 
+
+
             {/*
             <ScrollView>
                 <View style={{ marginTop: 8, display: 'flex', flex: 1, overflow: 'scroll' }}>
@@ -129,7 +175,7 @@ export default function ChatMensagens() {
             <View style={{ display: 'flex', flexDirection: 'row', marginTop: 10, backgroundColor: 'white', paddingHorizontal: 10, alignItems: 'center', justifyContent: 'flex-end', }}>
                 {/*<View style={{ paddingHorizontal: 10, flexDirection: 'row', alignItems: 'center' }} >*/}
                 <TouchableOpacity>
-                    <Icon name="camera-outline" size={20} color="#000000" onPress={gerarFoto} />
+                    <Icon name="camera-outline" size={20} color="#000000" onPress={() => setModalActive(true)} />
                 </TouchableOpacity>
                 <TextInput
                     style={{
@@ -155,12 +201,60 @@ export default function ChatMensagens() {
 
             </View>
 
+
+
         </View>
 
     );
 };
 
 
+const styles = StyleSheet.create({
+    /*
+    containerModal: {
+        flex: 1,    
+    },
+    */
+    outerView: { //visualiza o chat acima do modal
+        flex: 1,
+        justifyContent: 'flex-end',
+        backgroundColor: 'rgba(0,0,0,0.5)',
+    },
+    modalView: {
+        backgroundColor: 'white',
+        padding: 10,
+        justifyContent: 'center',
+    },
+    modalMargemDivisa: {
+        borderBottomWidth: 1,
+        borderBottomColor: '#CCCCCC',
+    },
+    iconesModal: {
+        flexDirection: 'row',
+        paddingVertical: 10,
+        margin: 5,
+        alignItems: 'center',
+    },
+    modalText: {
+        textAlign: 'left',
+        alignItems: 'center',
+        fontWeight: 'bold', //texto em negrito
+        fontSize: 20, //tamanho do texto
+        color: '#000000',
+        marginLeft: 10,
+    },
+    buttonModal: { //Botão Cancelar
+        padding: 5,
+        marginTop: 10,
+        width: '100%',
+    },
+    outroTextModal: { //texto Cancelar
+        fontWeight: 'normal',
+        textAlign: 'right',
+        fontSize: 20, //tamanho do texto
+        color: '#000000',
+    },
+});
 
 
 /*

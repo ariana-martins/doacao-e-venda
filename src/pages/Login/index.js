@@ -67,7 +67,7 @@ export default function Login() {
         <View style={{ flex: 1, backgroundColor: "white" }}>
             <View style={styles.container}>
                 <Text style={styles.txtLogin}>Login</Text>
-                <Image style={styles.imgLogo} source={require('../../../src/assets/logo_novo.jpg')} />
+                <Image style={styles.imgLogo} source={require('../../../src/assets/logo/logo_novo.jpg')} />
 
                 <View style={styles.bordaEmail_e_Senha}>
                     <Text style={styles.txtEmail_e_Senha}>E-mail:</Text>

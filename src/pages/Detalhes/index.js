@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import { ScrollView } from 'react-native-gesture-handler';
 
-import SwiperNumberComponent from '../../components/SwiperNumber';
+import SwiperNumberComponent from '../../components/componentesGerais/CarrouselImagens/SwiperNumber';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import Produtos from '../../data/produtos';
@@ -29,7 +29,9 @@ export default function Detalhes({ userDono }) {
                 <SwiperNumberComponent />
             </View>
                     {/* ===>>> Falta trazer apenas o título, descrição, valor, imagem 
-                    apenas do produto que o usuário clicou para ver todas as informações somente daquele unico produto. */}
+                    apenas do produto que o usuário clicou para ver todas as informações somente daquele unico produto. 
+                        ==>> Também falta criar uma função/renderizar se o produto foi "Registrar Interesse" = true / "Cancelar Interesse" = false
+                    */}
             <FlatList
                 data={Produtos}
                 keyExtractor={item => item.id}
@@ -46,7 +48,7 @@ export default function Detalhes({ userDono }) {
 
                 )}
             />
-
+            
 
             <View style={styles.botaoAdicionarMargem}>
                 {/*<TouchableOpacity style={styles.btnInteresse} */}

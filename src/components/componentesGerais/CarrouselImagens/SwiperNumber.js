@@ -24,25 +24,25 @@ export default function SwiperNumberComponent(){
         >
             <View style={styles.slide}>
                 <Image
-                source={require('../assets/img1.png')}
+                source={require('../../../assets/img/img1.png')}
                 style={{ width: '100%', width: 370, height: 350}}
                 />
             </View>
             <View style={styles.slide}>
                 <Image
-                source={require('../assets/img2.png')}
+                source={require('../../../assets/img/img2.png')}
                 style={{ width: '100%', width: 370, height: 350}}
                 />
             </View>
             <View style={styles.slide}>
                 <Image
-                source={require('../assets/img3.png')}
+                source={require('../../../assets/img/img3.png')}
                 style={{ width: '100%', width: 370, height: 350}}
                 />
             </View>
             <View style={styles.slide}>
                 <Image
-                source={require('../assets/img4.png')}
+                source={require('../../../assets/img/img4.png')}
                 style={{ width: '100%', width: 370, height: 350}}
                 />
             </View>

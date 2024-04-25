@@ -25,7 +25,7 @@ export default function EsqueciMinhaSenha({ navigation }) {
                 <KeyboardAvoidingView behavior='position' style={{ flex: 1, width: "100%" }}>
                     <View style={styles.bordaTxtLogo}>
                         <Text style={styles.txtNovaSenha}>Nova senha</Text>
-                        <Image style={styles.imgLogo} source={require('../../../src/assets/logo_novo.jpg')} />
+                        <Image style={styles.imgLogo} source={require('../../../src/assets/logo/logo_novo.jpg')} />
                     </View>
 
                     <View style={styles.bordaEmail_e_Senha_e_outros_dados}>

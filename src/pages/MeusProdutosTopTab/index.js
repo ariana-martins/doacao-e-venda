@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
+import { View, Text, StyleSheet, FlatList, Image } from 'react-native';
 import { Card } from 'react-native-elements';
 
 
@@ -81,6 +80,7 @@ return (
                         <Card containerStyle={{ marginTop: 15 }}>
                             <Text style={{ fontWeight: 'bold', fontSize: 16 }}>{user_id}</Text>
                             {/*aqui vai o card de imagens, mas não está puxando do banco de dados todas as imagens*/}
+           
                             <Card.Image
                                 style={styles.img}
                                 source={{ uri: item.images }}
@@ -96,10 +96,24 @@ return (
                     </View>
                 )}
             />
-        
-
+     
+     
+    {/** 
+      //========== Exemplo: faz a estilização em components, e renderiza na pagina principal ==============
+     
+     <NativeBaseProvider theme={customTheme}>
+    <Box>
+        <FlatList
+            horizontal={true}
+            data={data}
+            renderItem={ ({item}) => <ImgMeusProdutos data={item}/> }
+            showsHorizontalScrollIndicator={true}
+        />        
+   </Box>
+   </NativeBaseProvider>
+ */}
     </View>
-
+    
 );
 };
 

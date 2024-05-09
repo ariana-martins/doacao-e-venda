@@ -1,8 +1,9 @@
+/*
 import React, { useContext } from "react";
 import { View, Text, StyleSheet } from "react-native";
 
 import FormButton from "../components/FormItens/FormButton";
-import { AuthContext } from "../navigations/AuthProvider";
+//import { AuthContext } from "../navigations/AuthProvider";
 
 
 export default function HomeScreen() {
@@ -30,3 +31,5 @@ const styles = StyleSheet.create({
         color: '#333333',
     },
 });
+
+*/

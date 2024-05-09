@@ -1,10 +1,34 @@
 import React from 'react';
+//import { NativeBaseProvider, extendTheme } from 'native-base';
 import Providers from './src/navigations';
+//import { customTheme } from './src/styles/theme';
+
+//import { Loading } from './src/components/componentesGerais/Loading/Loading';
+//import LoginNovo from './src/pages/LoginNovo';
+
+
 
 
 export default function App() {
-  return <Providers />;
+  return (
+  <Providers />
+  );
 }
+
+
+/*
+export default function App() {
+
+  return (
+    <NativeBaseProvider theme={customTheme}>
+        <LoginNovo />
+    </NativeBaseProvider>
+  );
+
+}
+*/
+
+
 
 //==========================
 // DAQUI PRA CIMA, FUNCIONA O LOGIN E LOGOUT PARA DIVERSOS USUÁRIOS SEM O "RELOAD" DO APLICATIVO
@@ -55,10 +79,10 @@ const AuthNavigator = () => {
 
   return (
     <Stack.Navigator>
-      // Os "name" e "component" sempre precisam estar com os nomes iguais para funcionar o "navigation.navigate" 
-      {/*<Stack.Screen name="Login" component={Login} options={{ headerShown: false }} /> 
-      {/*<Stack.Screen name="Cadastrar" component={Cadastrar} options={{ headerShown: false }} /> 
-      {/*<Stack.Screen name="EsqueciMinhaSenha" component={EsqueciMinhaSenha} options={{ headerShown: false }} /> 
+      // Os "name" e "component" sempre precisam estar com os nomes iguais para funcionar o "navigation.navigate"
+      {/*<Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+      {/*<Stack.Screen name="Cadastrar" component={Cadastrar} options={{ headerShown: false }} />
+      {/*<Stack.Screen name="EsqueciMinhaSenha" component={EsqueciMinhaSenha} options={{ headerShown: false }} />
 
     {/*</Stack.Navigator>
  /* )
@@ -110,7 +134,7 @@ const Navigation = () => {
       </View>
     );
   }
-    
+
   */
 
 

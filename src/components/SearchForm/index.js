@@ -1,3 +1,7 @@
+// =========== Exemplo de Pesquisar, ==========================
+//==========="value" funcionando certinho com console.log conforme preenchido ================
+
+/*
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
 
@@ -22,15 +26,15 @@ const [to, setTo] = useState('default');
 
             <TextInput 
                 value={from} /*value sempre defini o valor padrão de estado */
-                onChangeText={setFrom} /*onChangeText faz a chamada e defini um novo valor de estado.*/
-                placeholder="From" 
+/*                onChangeText={setFrom} /*onChangeText faz a chamada e defini um novo valor de estado.*/
+/*                placeholder="From" 
                 style={styles.input}
             />
             
             <TextInput 
                 value={to} /*value sempre defini o valor padrão de estado */
-                onChangeText={setTo} /*onChangeText faz a chamada e defini um novo valor de estado.*/
-                placeholder="To" 
+ /*               onChangeText={setTo} /*onChangeText faz a chamada e defini um novo valor de estado.*/
+ /*               placeholder="To" 
                 style={styles.input}
             />
 
@@ -74,3 +78,6 @@ const styles = StyleSheet.create({
 
 
 })
+
+
+*/

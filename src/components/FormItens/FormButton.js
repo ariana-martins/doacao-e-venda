@@ -1,3 +1,6 @@
+/*
+// =========== Exemplo de Estilo para a página do Login ==========================
+
 import React from "react";
 import { StyleSheet, TouchableOpacity, Text } from "react-native";
 import { windowHeight, windowWidth } from "../../utils/Dimensions";
@@ -27,3 +30,5 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
     },
 })
+
+*/

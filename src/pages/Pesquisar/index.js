@@ -73,9 +73,11 @@ export default function Pesquisar() {
                 </Text>
                 
             </View>
-    
-
-            {/*  <SearchForm/> */}
+    {/*
+    // =========== Exemplo de Pesquisar, ==========================
+    //==========="value" funcionando certinho com console.log conforme preenchido ================
+              <SearchForm/> 
+ */}
 
             </SafeAreaView>
         </View>

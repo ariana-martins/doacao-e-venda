@@ -7,7 +7,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import SwiperNumberComponent from '../../components/componentesGerais/CarrouselImagens/SwiperNumber';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import Produtos from '../../data/produtos';
+import Produtos from '../../data/testeProdutos';
 
 
 //Falta configurar para clicar no botão chat, e aparecer o UserDono, 

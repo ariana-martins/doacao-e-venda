@@ -83,7 +83,7 @@ return (
            
                             <Card.Image
                                 style={styles.img}
-                                source={{ uri: item.images }}
+                                source={{ uri: item.imagem }}
                             />
                             <Card.Divider />
                             <Card.Title>{item.titulo}</Card.Title>

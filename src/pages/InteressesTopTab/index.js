@@ -57,7 +57,7 @@ const ref = firebase.firestore().collection('produtos');
                                 {/*aqui vai o card de imagens, mas não está puxando do banco de dados todas as imagens*/}
                                 <Card.Image 
                                     style={styles.img}
-                                    source={{uri : item.images}} 
+                                    source={{uri : item.imagem}} 
                                 />
                                 <Card.Divider />
                                 <Card.Title>{item.titulo}</Card.Title>

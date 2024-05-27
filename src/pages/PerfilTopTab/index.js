@@ -99,16 +99,18 @@ export default function PerfilTopTab() {
             height: 400,
             cropping: true
         }).then(image => {
-            console.log(image);
+            console.log("Selecione uma imagem aqui:", image);
             setImage(image.path)
-            sheet.current.close()
+         //   sheet.current.close()
+        }).catch(error => {
+            console.log("Aviso: Cancelou imagemmm", error);
         });
     }
 
 
     //React Hook com useState para pegar a imagem selecionada e exibi-la em nosso aplicativo.
     const [image, setImage] = React.useState(null);
-
+    
 
     //===========================================
     // Referência: https://dev.to/papemalick2015/react-native-firebase-storage-11kf
@@ -119,36 +121,32 @@ export default function PerfilTopTab() {
 
     const savephoto = async () => {
         const aploaduri = image;
-        let filename =
-            aploaduri.substring(aploaduri.lastIndexOf('/') + 1);
-        const reference = storage().ref(filename)
+        let filename = aploaduri.substring(aploaduri.lastIndexOf('/') + 1);
+        const reference = storage().ref(`imagens/${filename}`)
         const task = reference.putFile(aploaduri)
+
         //set  transferred state
         task.on('state_changed', taskSnapshot => {
-            console.log(`${taskSnapshot.bytesTransferred} 
-        transferred out of 
-            ${taskSnapshot.totalBytes}`);
+            console.log(`${taskSnapshot.bytesTransferred} transferred out of ${taskSnapshot.totalBytes}`);
         });
 
         try {
             await task;
             const url = await reference.getDownloadURL() //Baixando um arquivo com uma URL, e para obter uma URL de uma referência usando .getDownloadURL().
+            
             Alert.alert("Foto", "Aqui salvei imagem")
             console.log('Download URL:', url);
             return url
         }
         catch (error) {
             // Handle any errors that occur
-            console.error(error);
-        }
-        /*
-        catch (e) {
-            console.log(e)
-            return null
-        }
-*/
-    }
+            console.error("Qualquer erro", error);
+           
+        };
 
+       // setImage(null);  //Essa linha resolveu temporariamente o erro de "Possible Unhandled Promise Rejeition (id: 1) qdo faz o upload da imagem e após salvar aparece esse erro..."
+    
+    }
 
 
     const RenderCard = ({ item }) => {
@@ -183,7 +181,7 @@ export default function PerfilTopTab() {
         <View style={styles.container}>
             
             <View style={styles.container_images}>
-                <TouchableOpacity onPress={() => choose_photo()}>
+                <TouchableOpacity onPress={choose_photo}>
                     {image && <Image source={{ uri: image }}
                         style={styles.image_picker} />}
                     {!image && <Image source={require('../../assets/logo/logo.png')}
@@ -227,11 +225,11 @@ export default function PerfilTopTab() {
             <View style={{ flexDirection: "row", fontWeight: 'bold' }}>
                 {/* (Observação: o ícone está acima do Text (do usuário conectado, user_id), então ele aparece na extrema esquerda, se estivesse abaixo do Text, ele apareceria à direita.) */}
                 <Icon style={styles.iconEmail} name="person-outline" size={20} color="#000000" />
-                <Text style={{ fontSize: 20, color: 'black', fontWeight: 'bold' }}>Usuário: oii</Text>
+                <Text style={{ fontSize: 20, color: 'black', fontWeight: 'bold' }}>Usuário: oi</Text>
             </View>
             <View style={{ flexDirection: "row", fontWeight: 'bold' }}>
                 <Icon style={styles.iconEmail} name="mail-outline" size={20} color="#000000" />
-                <Text style={{ fontSize: 20, color: 'black', fontWeight: 'bold' }}>Email: alguma cois</Text>
+                <Text style={{ fontSize: 20, color: 'black', fontWeight: 'bold' }}>Email: alguma coisa</Text>
             </View>
 {/*
  
@@ -279,6 +277,7 @@ const styles = StyleSheet.create({
         width: 100,
         height: 100,
         borderRadius: 50, //essa numeração é para deixar a borda da imagem completamente circular
+        margin: 10,
     },
     button: {
         width: 150,

@@ -13,10 +13,6 @@ import storage from '@react-native-firebase/storage';
 import { useNavigation } from '@react-navigation/native';
 
 
-
-
-
-
 export default function AdicionarNovoProdutoTeste() {
     const navigation = useNavigation();
     const [isSelected, setSelection] = React.useState(false);

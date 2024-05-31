@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, Image, TouchableOpacity, Alert, StyleSheet, ActivityIndicator, TextInput, Button } from "react-native";
+import { View, Text, Image, TouchableOpacity, Alert, StyleSheet, ActivityIndicator, TextInput } from "react-native";
 import { Checkbox } from "react-native-paper";
 
 import ImageCropPicker from 'react-native-image-crop-picker';
@@ -9,8 +9,6 @@ import firestore from '@react-native-firebase/firestore';
 import { firebase } from "@react-native-firebase/auth";
 
 import { useNavigation } from '@react-navigation/native';
-
-import Icon from 'react-native-vector-icons/Ionicons';
 
 
 export default function AdicionarNovoProduto() {
@@ -42,7 +40,33 @@ export default function AdicionarNovoProduto() {
         console.log('titulo do produto:', titulo);
         console.log('descricao:', descricao);
         console.log('valor', valor);
-        
+
+        //=================================
+        // Falta ajustar para o usuário preencher *obrigatoriamente todos os dados completos.
+        {/*
+            console.log(titulo, "Titulo aqui")
+            if (titulo.length == 0) {
+            Alert.alert("Nome do Produto:", "Por favor descreva um título para o produto")
+            return
+            }
+            console.log(descricao, "Descricao aqui")
+            if (descricao.length == 0) {
+            Alert.alert("Descrição:", "Por favor descreva uma descrição para o produto.")
+            return
+            }
+            console.log(doacao, "Doacao aqui")
+            if (doacao.length == 0) {
+            Alert.alert("Doacao:", "Valor nulo")
+            return
+            } 
+            console.log(valor, "Valor aqui")
+            if (valor.length == 0) {
+            Alert.alert("Valor:", "Para vender um produto, digite um valor.")
+            return
+            }
+    */}
+        //=================================
+
 
         //importar o firestore, e após isso, especificar a coleção, como tbm add os dados com o ID do usuário que queremos armazenar em nosso banco de dados
         firestore()
@@ -160,7 +184,6 @@ export default function AdicionarNovoProduto() {
     }
 */
 
-
     //função assíncrona "async", após clicar no botão de Postagem "Post"
     // vai fazer o upload dessa imagem para o armazenamento em nuvem, envia a foto para o Storage do firebase
     //função de upload da imagem
@@ -179,7 +202,6 @@ export default function AdicionarNovoProduto() {
         //variavel para armazenar apenas o nome do arquivo
         let filename = uploadUri.substring(uploadUri.lastIndexOf('/') + 1);
 
-
         //antes do bloco try e de catch atualizarei o estado de "Upload" para "true" e depois do "await" para "false", e depois do catch retorna a imagem como "null"
         setUploading(true);
         setTransferred(0); //valor padrão
@@ -196,7 +218,6 @@ export default function AdicionarNovoProduto() {
                 Math.round(taskSnapshot.bytesTransferred / taskSnapshot.totalBytes) * 100
             )
         });
-
 
         //fazer o upload da Foto
         try {
@@ -223,19 +244,19 @@ export default function AdicionarNovoProduto() {
     }
 
 
-//====================================
-  //funcao Selecionar Doar e Vender Produto. [OK - dia 25.03.24]
+    //====================================
+    //funcao Selecionar Doar e Vender Produto. [OK - dia 25.03.24]
     // Exemplo de funcao no exemplo do Youtube: Renderização Condicional em React Native - Curso de React Native - Aula 10
     // Link: https://www.youtube.com/watch?v=veB-CF6ugSY
     // Canal do Youtube: CFBCursos
 
-    let DoarVender=!isSelected; // !isSelect = true (Doacao), !isSelect = false (Para Vender)
+    let DoarVender = !isSelected; // !isSelect = true (Doacao), !isSelect = false (Para Vender)
     {/* Falta configurar para o valor ficar nulo (R$ 0,00) quando retornar selecionado PARA DOAR, 
         após preencher e/ou se enganar de selecionar o produto PARA VENDER e preencher qualquer valor.
      */}
-     //console.log(DoarVender);
+    //console.log(DoarVender);
 
-//====================================
+    //====================================
 
 
 
@@ -254,8 +275,8 @@ export default function AdicionarNovoProduto() {
                         style={styles.img}
                         source={{ uri: image }}
                     />
-                )
-                    : null}
+
+                ) : null}
             </View>
 
             {/** Imagem, substitui o "null" após do ":" fica como imagem inicial, e após fazer o upload da imagem nova, volta a imagem do logo.
@@ -268,8 +289,15 @@ export default function AdicionarNovoProduto() {
              */}
 
 
+            {/* "onPress={() }" entre parenteses o onPress chama funcao anonima, que vai chamar o ImageCropPicker */}
+            <TouchableOpacity
+                style={styles.buttonEscolherImagem}
+                activeOpacity={0.8}
+                onPress={() => onSelectImage()}
+            // Verificar algum procedimento para o usuário selecionar de 1 até 4 imagens aqui, 
+            // sem necessitar utilizar o "multiplas imagens" do Image Crop Picker
+            >
 
-            <TouchableOpacity style={styles.button} activeOpacity={0.8} onPress={() => onSelectImage()}>
                 <Text style={styles.buttonText}>Escolher imagem</Text>
             </TouchableOpacity>
             {/*Animação carregando imagem depois de ter feito "Cadastrar Produto" */}
@@ -278,20 +306,16 @@ export default function AdicionarNovoProduto() {
                     <Text style={{ color: '#000000' }}>{transferred} % Carregando imagem!</Text>
                     <ActivityIndicator size='large' color='#6646ee' />
                 </View>
-            ) : (
-                <Text style={{ backgroundColor: 'green' }}>Cadastrar Produto</Text>
-
-            )
+            ) : null
             }
 
-            <View style={{ margin: 10 }}>
+            <View >
 
                 <Text style={styles.texto}>Título do produto:</Text>
                 <View style={styles.botaoAdicionarMargem}>
                     <View style={styles.inputArea}>
                         <TextInput
-                            // style={styles.input}
-                            // disable={titulo.length === 0} //validação desativada, se textInputName não for preenchida/igual a zero(0), não vai ser pressionável o botão "Enviar"
+                            style={styles.inputTituloDetalhes}
                             placeholder="Escreva aqui o nome do produto..."
                             value={titulo}
                             keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
@@ -302,12 +326,11 @@ export default function AdicionarNovoProduto() {
 
                 <Text style={styles.texto}>Descrição do produto:</Text>
                 <View style={styles.botaoAdicionarMargem}>
-                    <View style={styles.inputArea}>
+                    <View style={styles.inputAreaDetalhes}>
                         <TextInput
-                            //  multiline={true}
-                            //  autoCorrect={false}
-                            //   style={styles.inputDetalhes}
-                            //  disable={descricao.length === 0} //validação desativada, se textInputName não for preenchida/igual a zero(0), não vai ser pressionável o botão "Enviar"
+                            multiline={true}
+                            autoCorrect={false}
+                            style={styles.inputTituloDetalhes}
                             placeholder="Escreva aqui os detalhes do produto..."
                             value={descricao}
                             keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
@@ -343,59 +366,61 @@ export default function AdicionarNovoProduto() {
                 </View>
 
 
-                
-            <View style={styles.botaoAdicionarMargem}>
-                <View style={styles.inputArea}>
-                    <Text>R$</Text>
-                    
 
-                    {/*basicamente vc pecisa fazer isso abaixo quando o DoarVender mudar de valor (tipo num onChange)*/}
-                    {/*Se valor é igual isSelected = true, o valor vai ficar nulo 0,00  (para doar) */}
-                    {/*Se valor é igual !isSelected = false, o valor vai ser preenchido (para vender) */}
-                    {/*// Falta fazer o if, se marcar Doacao, valor igual a nulo, se marcar Para Vender, é obrigatório preencher um valor. */}
+                <View style={styles.botaoAdicionarMargem}>
+                    <View style={styles.inputArea}>
+                        <Text>R$</Text>
 
-                    {DoarVender ?
-                    <TextInput
-                    style={styles.inputValor}
-                 //   disable={valor.length === 0} //validação desativada, se textInputName não for preenchida/igual a zero(0), não vai ser pressionável o botão "Enviar"
-                    placeholder="0,00"
-                    value={valor} 
-                    keyboardType="numeric" // Define esse teclado numérico quando deseja manipular dados de um TextInput com entrada somente números.
-                    //  onChangeText={setValor}
-                   setValor={'0,00'} // PARA DOAR ==>>> O valor igual a zero 
-                    // para doação ficar igual valor nulo, o onChangeText={setDoacao} não deve existir, 
-                    // pois irá apenas ficar o value{doacao} que irá aparecer o valor 0,00 na tela sem o usuário poder preencher o valor.
-                />
-                :
-                    <TextInput
-                        style={styles.inputValor}
-                   //     disable={valor.length === 0} //validação desativada, se textInputName não for preenchida/igual a zero(0), não vai ser pressionável o botão "Enviar"
-                        placeholder="0,00"
-                        value={valor}
-                        keyboardType="numeric" // Define esse teclado numérico quando deseja manipular dados de um TextInput com entrada somente números.
-                        onChangeText={setValor}
-                        // para doação ficar igual valor nulo, o onChangeText={setDoacao} não deve existir, 
-                        // pois irá apenas ficar o value{doacao} que irá aparecer o valor 0,00 na tela sem o usuário poder preencher o valor.
-                        // Falta fazer o if, se marcar Doacao, valor igual a nulo/ZERO, se marcar Para Vender, é obrigatório preencher um valor.
-                    />
-                }
+
+                        {/*basicamente vc pecisa fazer isso abaixo quando o DoarVender mudar de valor (tipo num onChange)*/}
+                        {/*Se valor é igual isSelected = true, o valor vai ficar nulo 0,00  (para doar) */}
+                        {/*Se valor é igual !isSelected = false, o valor vai ser preenchido (para vender) */}
+                        {/*// Falta fazer o if, se marcar Doacao, valor igual a nulo, se marcar Para Vender, é obrigatório preencher um valor. */}
+
+                        {DoarVender ?
+                            <TextInput
+                                style={styles.inputValor}
+                                placeholder="0,00"
+                                value={valor}
+                                keyboardType="numeric" // Define esse teclado numérico quando deseja manipular dados de um TextInput com entrada somente números.
+                                //  onChangeText={setValor}
+                                setValor={'0,00'} // PARA DOAR ==>>> O valor igual a zero 
+                            // para doação ficar igual valor nulo, o onChangeText={setDoacao} não deve existir, 
+                            // pois irá apenas ficar o value{doacao} que irá aparecer o valor 0,00 na tela sem o usuário poder preencher o valor.
+                            />
+                            :
+                            <TextInput
+                                style={styles.inputValor}
+                                placeholder="0,00"
+                                value={valor}
+                                keyboardType="numeric" // Define esse teclado numérico quando deseja manipular dados de um TextInput com entrada somente números.
+                                onChangeText={setValor} // OnChangeText para preencher o valor de "PARA VENDER"
+                            // Falta fazer o if, se marcar Doacao, valor igual a nulo/ZERO, se marcar Para Vender, é obrigatório preencher um valor.
+                            />
+                        }
+                    </View>
                 </View>
-        
             </View>
 
-
-
+            <View style={styles.botaoAdicionarMargem}>
+                <TouchableOpacity
+                    style={styles.buttonCadastrarCancelar}
+                    activeOpacity={0.8}
+                    onPress={() => submitPress()}>
+                    <Text style={styles.buttonTextCadastrarCancelar}>Cadastrar Produto</Text>
+                </TouchableOpacity>
             </View>
 
+            <View style={styles.botaoAdicionarMargem}>
+                <TouchableOpacity
+                    style={styles.buttonCadastrarCancelar}
+                    activeOpacity={0.8}
+                    onPress={() => VoltarAoInicio()}>
+                    <Text style={styles.buttonTextCadastrarCancelar}>Cancelar</Text>
+                </TouchableOpacity>
+            </View>
 
-            <TouchableOpacity style={styles.button} activeOpacity={0.8} onPress={() => submitPress()}>
-                <Text style={styles.buttonText}>Cadastrar Produto</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} activeOpacity={0.8} onPress={() => VoltarAoInicio()}>
-                <Text style={styles.buttonText}>Cancelar</Text>
-            </TouchableOpacity>
-
-        </View>
+        </View >
     );
 
 }
@@ -408,24 +433,22 @@ const styles = StyleSheet.create({
         alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
     },
     bordaAddFotos: {
-        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
-        justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
-        width: '80%',
-        height: 200,
+        width: '50%',
+        height: 150, //altura da borda
         borderRadius: 5,
         borderWidth: 3,
         borderColor: "#000000",
         borderStyle: 'dashed',
-        margin: 10,
+        margin: 5,
     },
     img: {
         width: '100%',
         height: '100%',
         resizeMode: 'contain',
     },
-    button: {
+    buttonEscolherImagem: {
         width: 150,
-        height: 50,
+        height: 40,
         borderRadius: 10,
         backgroundColor: '#191970',
         justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
@@ -446,11 +469,8 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     botaoAdicionarMargem: {
-        //   paddingHorizontal: 15,
-        //    flexDirection: 'row',
         alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
         justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
-        //   width: '100%',
         marginVertical: 5,
     },
     inputArea: {
@@ -461,7 +481,24 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFFFF',
         elevation: 2,
         paddingHorizontal: 10,
-        height: 40,
+        height: 40, //altura da borda do textInput
+        borderRadius: 10,
+        borderWidth: 2,
+        borderColor: '#000000',
+    },
+    inputTituloDetalhes: {
+        fontFamily: 'Roboto',
+        fontSize: 15,
+    },
+    inputAreaDetalhes: {
+        paddingHorizontal: 15,
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        width: '100%',
+        backgroundColor: '#FFFFFF',
+        elevation: 2,
+        paddingHorizontal: 10,
+        height: 80, //altura da borda do textInput
         borderRadius: 10,
         borderWidth: 2,
         borderColor: '#000000',
@@ -472,10 +509,27 @@ const styles = StyleSheet.create({
     },
     label: { //Texto ao lado do Checkbox
         margin: 8,
+        fontFamily: 'Roboto',
+        color: '#000000', //cor do texto
+        fontSize: 15, //tamanho do texto
     },
     inputValor: {
         fontFamily: 'Roboto',
         paddingHorizontal: 10,
         fontSize: 15,
     },
+    buttonCadastrarCancelar: {
+        width: 250, //largura
+        height: 40, //altura 
+        backgroundColor: '#000000', //cor dentro da borda, onde vai ser incluído o texto
+        borderRadius: 10, // circunferência da borda
+        justifyContent: 'center', //centraliza o texto ao meio da borda
+    },
+    buttonTextCadastrarCancelar: {
+        color: '#FFFFFF', //cor do texto
+        fontWeight: 'bold', //texto em negrito
+        fontSize: 20, //tamanho do texto
+        textAlign: 'center', // alinha texto dentro da borda, ao centro
+    }
+
 })

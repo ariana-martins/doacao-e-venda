@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity, Pressable, StyleSheet, FlatList } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -8,14 +8,21 @@ import SwiperNumberComponent from '../../components/componentesGerais/CarrouselI
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import Produtos from '../../data/testeProdutos';
+import BotaoVoltar from '../../components/componentesGerais/BotaoVoltar';
 
-
+//Falta configurar botão "Voltar", utilizar o "<Button title='Voltar'onPress={() => navigation.goBack()}"/>
+//Utilizar esse botão/função ao invés do "ScreenNavigations", pois vai retornar a página anterior o "goBack"
+//================
 //Falta configurar para clicar no botão chat, e aparecer o UserDono, 
 //clicando na imagem do produto da página Inicial, e depois clicar em Chat aqui na tela Detalhes
 //Já está configurado em App.js em ChatMensagens e aparece o nome do UserDono
 
 
 export default function Detalhes({ userDono }) {
+    const route = useRoute(); //Recebe o item da "PaginaInicial"
+    const { name, detalhes, preco } = route.params; //Recebe os itens "route.params" da "PaginaInicial"
+    
+
     const navigation = useNavigation();
 
     const [registrarInteresse, setRegistrarInteresse] = useState(true);
@@ -24,14 +31,26 @@ export default function Detalhes({ userDono }) {
     return (
         <View style={styles.container}>
 
+            <View style={styles.addMargemTituloDetalhes}>
+                <BotaoVoltar />
+                <Text style={styles.txtTituloDetalhes}>Detalhes</Text>
+            </View>
+
             <View style={styles.swiperNumberContent}>
                 {/*aqui vai as imagens*/}
                 <SwiperNumberComponent />
             </View>
-                    {/* ===>>> Falta trazer apenas o título, descrição, valor, imagem 
+            
+            <Text style={styles.txtTitle}>{JSON.stringify(name)}</Text>
+            <Text style={styles.txtDetalhes}>Detalhes: {detalhes}</Text>
+            <Text style={styles.txtValor}>R$ {preco}</Text>
+
+            {/* ===>>> Falta trazer apenas o título, descrição, valor, imagem 
                     apenas do produto que o usuário clicou para ver todas as informações somente daquele unico produto. 
                         ==>> Também falta criar uma função/renderizar se o produto foi "Registrar Interesse" = true / "Cancelar Interesse" = false
                     */}
+
+            {/**
             <FlatList
                 data={Produtos}
                 keyExtractor={item => item.id}
@@ -48,7 +67,7 @@ export default function Detalhes({ userDono }) {
 
                 )}
             />
-            
+             */}
 
             <View style={styles.botaoAdicionarMargem}>
                 {/*<TouchableOpacity style={styles.btnInteresse} */}
@@ -84,10 +103,25 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#FFFFFF',
     },
+    addMargemTituloDetalhes: {
+        flexDirection: 'row',
+        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
+        width: '100%',
+        marginVertical: 10,
+    },
+    txtTituloDetalhes: {
+        fontFamily: 'Roboto',
+        fontSize: 25,
+        color: '#000000',
+        marginLeft: 10,
+        paddingHorizontal: 10,
+        marginTop: 10,
+    },
     swiperNumberContent: {
         flexDirection: 'row',
         height: 340,
         width: '100%',
+        marginTop: 10,
     },
     txtTitle: {
         paddingHorizontal: 20,
@@ -116,7 +150,6 @@ const styles = StyleSheet.create({
         marginTop: 10,
         //        marginVertical: 60,
     },
-
     botaoAdicionarMargem: {
         paddingHorizontal: 15,
         flexDirection: 'row',

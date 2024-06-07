@@ -9,6 +9,10 @@ export default function PesquisaFiltro() {
 
     const navigation = useNavigation();
 
+    {/*
+      //Falta configurar botão "Voltar", utilizar o "<Button title='Voltar'onPress={() => navigation.goBack()}"/>
+     //Utilizar esse botão/função ao invés do "ScreenNavigations", pois vai retornar a página anterior o "goBack"
+    */}
 
     return (
 

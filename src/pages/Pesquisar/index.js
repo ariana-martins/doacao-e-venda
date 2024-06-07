@@ -1,15 +1,17 @@
 import React from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, SafeAreaView } from 'react-native';
-
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, SafeAreaView, Pressable } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
+import BotaoVoltar from '../../components/componentesGerais/BotaoVoltar';
+
 import SearchForm from '../../components/SearchForm';
 
+//Falta configurar botão "Voltar", utilizar o "<Button title='Voltar' onPress={() => navigation.goBack()}"/>
+//Utilizar esse botão/função ao invés do "ScreenNavigations", pois vai retornar a página anterior o "goBack"
+//================
 
 
 export default function Pesquisar() {
-
-
 
     //[28.03.2024] Exemplo de filtrar produtos, falta testar se vai dar certo depois...
     // função para criar lista de produtos para pesquisar e filtrar...
@@ -38,7 +40,7 @@ export default function Pesquisar() {
 
 */}
 
-    
+
     return (
 
         <View style={styles.container}>
@@ -46,34 +48,35 @@ export default function Pesquisar() {
             {/* //Formulário de pesquisa "SearchForm" é renderizado dentro da visualização da área segura "SafeAreaView"*/}
             <SafeAreaView>
 
-        
-            <View style={styles.botaoFiltrar}>
-                <View style={styles.filtrarArea}>
-                    <TouchableOpacity>
-                        <Icon name="funnel-outline" size={20} color="#000000" />
-                    </TouchableOpacity>
-                    <Text style={styles.txtFiltrar}>Filtrar por categoria</Text>
+                <BotaoVoltar />
+            
+                <View style={styles.botaoFiltrar}>
+                    <View style={styles.filtrarArea}>
+                        <TouchableOpacity>
+                            <Icon name="funnel-outline" size={20} color="#000000" />
+                        </TouchableOpacity>
+                        <Text style={styles.txtFiltrar}>Filtrar por categoria</Text>
+                    </View>
                 </View>
-            </View>
-            <View style={styles.botaoPesquisar}>
-                <View style={styles.inputArea}>
-                    <Icon name="search" size={20} color="#000000" />
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Pesquisar / Pesquise aqui..."
-                        keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
-                    />
+                <View style={styles.botaoPesquisar}>
+                    <View style={styles.inputArea}>
+                        <Icon name="search" size={20} color="#000000" />
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Pesquisar / Pesquise aqui..."
+                            keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
+                        />
+                    </View>
                 </View>
-            </View>
 
 
-            <View>
-                <Text style={{ marginBottom: 10, paddingHorizontal: 20, }}>
-                    Aqui vai os produtos pesquisados e filtrados...
-                </Text>
-                
-            </View>
-    {/*
+                <View>
+                    <Text style={{ marginBottom: 10, paddingHorizontal: 20, }}>
+                        Aqui vai os produtos pesquisados e filtrados...
+                    </Text>
+
+                </View>
+                {/*
     // =========== Exemplo de Pesquisar, ==========================
     //==========="value" funcionando certinho com console.log conforme preenchido ================
               <SearchForm/> 
@@ -88,6 +91,18 @@ const styles = StyleSheet.create({
     container: {
         flex: 1, //para ficar tudo no meio da tela
         backgroundColor: '#FFFFFF',
+    },
+    inputAreaVoltar: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
+        backgroundColor: '#C4C4C4',
+        elevation: 2,
+        width: 40,
+        height: 37,
+        borderRadius: 10,
+        marginLeft: 15,
+        marginTop: 15,
     },
     botaoFiltrar: {
         paddingHorizontal: 10,

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, SafeAreaView, FlatList, Pressable} from 'react-native';
+import { View, Text, StyleSheet, Image, SafeAreaView, FlatList, Pressable, Alert} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 //import firestore, { firebase } from '@react-native-firebase/firestore';
@@ -61,11 +61,6 @@ useEffect(() =>{
 
 //=============================
   
-
-
-
-
-
 
 // Refazer o getDowload em "Adicionar novo produto" e aqui também incluir um "UseEffect + getDetail"
 // Conforme seguindo o manual do canal do Youtube: CODERS NEVER QUIT
@@ -134,12 +129,30 @@ useEffect(() =>{
   /*resolver essa questão de lançar no telefone e poder ver no computador [12/04/2024]*/
 
 
+
+  //===================================
+  //Função Abrir Tela Detalhes
+  const AbrirDetalhes = () => {
+    navigation.navigate('Detalhes', { name: 'titulo vai aqui', detalhes: 'descricao aqui', preco: '0,01' });
+    //navigation.navigate('Detalhes');
+  }; 
+
+
+  //===================================
+
+
+
+
   return(
     <SafeAreaView style={styles.container}>
      
       {/* Falta configurar para quando clicar em Filtrar e Pesquisar, 
       ele vai direto para cada "função" de filtrar e pesquisar produto */}
       <PesquisaFiltro/>
+     {/*
+      //Falta configurar botão "Voltar", utilizar o "<Button title='Voltar'onPress={() => navigation.goBack()}"/>
+     //Utilizar esse botão/função ao invés do "ScreenNavigations", pois vai retornar a página anterior o "goBack"
+    */}
       
        {/*Aqui vai a lista de produtos*/}
        <FlatList 
@@ -153,7 +166,9 @@ useEffect(() =>{
         numColumns={3}
         renderItem={({item}) => (
           <View>
-            <Pressable onPress={() => navigation.navigate('Detalhes')}>
+            {/* <Pressable onPress={() => navigation.navigate('Detalhes')}> */}
+              <Pressable onPress={AbrirDetalhes}> 
+             {/* <Pressable onPress={() => Alert.alert('teste clicou')}> */}
               <View>
              
               <Image style={styles.prodImg}

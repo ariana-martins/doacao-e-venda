@@ -101,13 +101,10 @@ export default function ScreenNavigator() {
         name="Detalhes"
         component={Detalhes}
         options={{
-          title: 'Detalhes',
-          headerTitleStyle: {
-            fontFamily: 'Roboto',
-            fontSize: 25,
-            color: '#000000',
-          },
+          headerShown: false,
+        //  title: 'Voltar',
         }}
+        
       />
 
       <Stack.Screen
@@ -132,8 +129,8 @@ export default function ScreenNavigator() {
         name="Pesquisar"
         component={Pesquisar}
         options={{
-          headerShown: true,
-          title: 'Voltar',
+          headerShown: false,
+        //  title: 'Voltar',
         }}
         
       />

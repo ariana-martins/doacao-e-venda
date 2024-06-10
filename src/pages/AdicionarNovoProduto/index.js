@@ -22,7 +22,6 @@ export default function AdicionarNovoProduto() {
     const [isSelected, setSelection] = useState(false);
     const [valor, setValor] = useState('0,00');
 
-
     //Para deletar e/ou editar apenas os produtos que um usuário adicionou, e não deletar todos os produtos de todos os usuários
     // Ou seja, vai fazer um filtro para filtrar somente os produtos do usuário "x".
     const user_id = firebase.auth().currentUser.uid;
@@ -112,6 +111,7 @@ export default function AdicionarNovoProduto() {
                 //Dicas nos links: https://www.tabnews.com.br/marcosveloso/template-de-rotas-react-native-com-native-stack-bottom-tabs-e-drawer-navigator
                 //Dicas nos link complementar com o código gitHub: https://github.com/MarcosVel/routes-template/commit/33e621df08b702225460437fd0b3fb58678b98d9
                 // ==>> Falta arrumar para: Limpar toda a Página quando clicar em  "Cancelar em Sim" e ir para a tela "Pagina Inicial" 
+                //Tenho que criar algo como uma "const [teste, setTeste] = ([]);" tenho que criar esse array vazio, para qdo for criar o produto sempre vai estar vazio...
             }
         ]);
         return true;

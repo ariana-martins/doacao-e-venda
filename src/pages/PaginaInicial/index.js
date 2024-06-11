@@ -135,8 +135,8 @@ export default function PaginaInicial() {
   //Função Abrir Tela Detalhes
   const abrirDetalhes = (data) => {
     //navigation.navigate('Detalhes', { name: 'titulo vai aqui', detalhes: 'descricao aqui', preco: '0,01' });
-    //navigation.navigate('Detalhes');
-    console.log(data);
+    navigation.navigate('Detalhes', {data});
+   // console.log(data);
   };
 
 
@@ -159,8 +159,6 @@ export default function PaginaInicial() {
         // data={testeProdutos}
         data={data} //data, da onde eu vou pegar os dados desta lista (nesse caso é o card/lista de "produtos")
         //keyExtractor={item=>item.id} //keyEstractor define uma chave para cada um dos elementos, aqui é um tipo que vou querer retornar um "item.id" 
-        // keyExtractor={item=>item.id} 
-        // keyExtractor={item=>item.user_id}
         keyExtractor={(item) => String(item.key)}
         numColumns={3}
         renderItem={({ item }) => <ListaProdutos data={item} abrirDetalhes={abrirDetalhes} />}

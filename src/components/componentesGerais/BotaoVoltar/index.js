@@ -4,6 +4,9 @@ import { useNavigation } from '@react-navigation/native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 
+//botão "Voltar", utiliza o "<Button title='Voltar'onPress={() => navigation.goBack()}"/>
+//Ao invés do botão/função do "ScreenNavigations", pois vai retornar a página anterior o "goBack"
+
 export default function BotaoVoltar() {
     const navigation = useNavigation();
 

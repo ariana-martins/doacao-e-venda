@@ -8,7 +8,7 @@ export default function ListaProdutos({ data, abrirDetalhes }) {
 
     return (
         <SafeAreaView style={styles.container}>
-            <View>
+            <View style={styles.adicionarMargem}>
                 <Pressable onPress={() => abrirDetalhes(data)}>
                     <View>
                         <Image style={styles.prodImg}
@@ -30,6 +30,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#FFFFFF',
+    },
+    adicionarMargem: {
+        margin: 10,
     },
     prodImg: {
         width: 96,

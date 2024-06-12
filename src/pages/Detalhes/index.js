@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Pressable, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, Pressable, StyleSheet, ScrollView } from 'react-native';
 import { Card } from 'react-native-paper';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 import BotaoVoltar from '../../components/componentesGerais/BotaoVoltar';
 
 //import SwiperNumberComponent from '../../components/componentesGerais/CarrouselImagens/SwiperNumber';
+//import Produtos from '../../data/testeProdutos';
 
 //================
 //Falta configurar para clicar no botão chat, e aparecer o UserDono, 
@@ -16,7 +17,7 @@ import BotaoVoltar from '../../components/componentesGerais/BotaoVoltar';
 export default function Detalhes({ userDono }) {
     const route = useRoute(); //Recebe o item da "PaginaInicial"
     //const { name, detalhes, preco } = route.params; //Recebe os itens "route.params" da "PaginaInicial"
-    const { data } = route.params; //Recebe os itens "route.params" da "PaginaInicial"
+    const { data } = route.params; //Recebe os itens "route.params" da "PaginaInicial" buscando do firebase
 
     const navigation = useNavigation();
 
@@ -36,51 +37,53 @@ export default function Detalhes({ userDono }) {
                     style={styles.igmDetalhes}
                     source={{ uri: data.imagem }}
                 />
-                <Card.Title title={data.titulo} />
+                <Text style={styles.txtTitle}>{data.titulo}</Text>
             </Card>
-            <Text style={styles.txtDetalhes}>Detalhes: {data.descricao}</Text>
-            <Text style={styles.txtValor}>R$ {data.valor}</Text>
 
-            {/**
+
+            <ScrollView >
+                <Text style={styles.txtDetalhes}>Detalhes: {data.descricao}</Text>
+                <Text style={styles.txtValor}>R$ {data.valor}</Text>
+
+                {/**
             <View style={styles.swiperNumberContent}>
                 //aqui vai mais que uma imagem, carrossel de imagens
                 <SwiperNumberComponent />
             </View>
             */}
-            {/*
+                {/*
             <Text style={styles.txtTitle}>{name}</Text>
             <Text style={styles.txtDetalhes}>Detalhes: {detalhes}</Text>
             <Text style={styles.txtValor}>R$ {preco}</Text>
             */}
 
 
-            {/* ===>>> Falta trazer apenas o título, descrição, valor, imagem 
-                    apenas do produto que o usuário clicou para ver todas as informações somente daquele unico produto. 
-                        ==>> Também falta criar uma função/renderizar se o produto foi "Registrar Interesse" = true / "Cancelar Interesse" = false
+                {/* ==>>  falta criar uma função/renderizar se o produto foi "Registrar Interesse" = true / "Cancelar Interesse" = false
                     */}
 
-            <View style={{ marginTop: 15 }}>
-                <View style={styles.botaoAdicionarMargem}>
-                    {/*<TouchableOpacity style={styles.btnInteresse} */}
-                    <TouchableOpacity
-                        style={{ backgroundColor: registrarInteresse ? '#000000' : '#191970', width: 250, height: 40, borderRadius: 10, justifyContent: 'center' }}
-                        onPress={() => setRegistrarInteresse(!registrarInteresse)}>
-                        {/*<Text style={styles.textoBotao}>Registrar Interesse</Text>*/}
-                        <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 20, textAlign: 'center' }}>
-                            {registrarInteresse ? 'Registrar Interesse' : 'Cancelar Interesse'}
-                        </Text>
-                    </TouchableOpacity>
-                </View>
+                <View style={{ marginVertical: 15 }}>
+                    <View style={styles.botaoAdicionarMargem}>
+                        {/*<TouchableOpacity style={styles.btnInteresse} */}
+                        <TouchableOpacity
+                            style={{ backgroundColor: registrarInteresse ? '#000000' : '#191970', width: 250, height: 40, borderRadius: 10, justifyContent: 'center' }}
+                            onPress={() => setRegistrarInteresse(!registrarInteresse)}>
+                            {/*<Text style={styles.textoBotao}>Registrar Interesse</Text>*/}
+                            <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 20, textAlign: 'center' }}>
+                                {registrarInteresse ? 'Registrar Interesse' : 'Cancelar Interesse'}
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
 
-                <View style={styles.botaoAdicionarMargem}>
-                    <Pressable style={styles.btnChat}
-                        onPress={() => navigation.navigate('ChatMensagens', { userDono })}
-                    // onPress={() => navigation.navigate('ChatMensagens', {userDono: item.messageText})}
-                    >
-                        <Text style={styles.textoBotao}>Chat</Text>
-                    </Pressable>
+                    <View style={styles.botaoAdicionarMargem}>
+                        <Pressable style={styles.btnChat}
+                            onPress={() => navigation.navigate('ChatMensagens', { userDono })}
+                        // onPress={() => navigation.navigate('ChatMensagens', {userDono: item.messageText})}
+                        >
+                            <Text style={styles.textoBotao}>Chat</Text>
+                        </Pressable>
+                    </View>
                 </View>
-            </View>
+            </ScrollView>
 
         </View>
 
@@ -96,8 +99,6 @@ const styles = StyleSheet.create({
     addMargemTituloDetalhes: {
         flexDirection: 'row',
         alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
-        //   width: '100%',
-        // marginVertical: 10,
     },
     txtTituloDetalhes: {
         fontFamily: 'Roboto',
@@ -108,8 +109,16 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     igmDetalhes: {
-        width: '100%',
-        height: 300,
+        width: '100%', // ocupa toda largura do Card.Image
+        height: 250, // altura da imagem
+    },
+    txtTitle: {
+        fontFamily: 'Inter',
+        fontStyle: 'normal',
+        fontSize: 15,
+        fontWeight: 'bold', //texto em negrito
+        color: '#000000',
+        margin: 10,
     },
     txtDetalhes: {
         paddingHorizontal: 10,
@@ -117,7 +126,7 @@ const styles = StyleSheet.create({
         fontStyle: 'normal',
         fontSize: 20,
         color: '#000000',
-        lineHeight: 25,
+       // lineHeight: 25,
         marginTop: 10,
         marginHorizontal: 10,
     },
@@ -165,47 +174,7 @@ const styles = StyleSheet.create({
         width: 300,
         height: 300,
     },
-    txtTitle: {
-        paddingHorizontal: 20,
-        fontFamily: 'Inter',
-        fontStyle: 'normal',
-        fontSize: 20,
-        fontWeight: 'bold', //texto em negrito
-        color: '#000000',
-        marginTop: 10,
-    },
-    txtValor: {
-        paddingHorizontal: 20,
-        fontFamily: 'Inter',
-        fontStyle: 'normal',
-        fontSize: 20,
-        color: '#000000',
-        marginTop: 10,
-    },
-    txtDetalhes: {
-        paddingHorizontal: 20,
-        fontFamily: 'Inter',
-        fontStyle: 'normal',
-        fontSize: 20,
-        color: '#000000',
-        lineHeight: 25,
-        marginTop: 10,
-        //        marginVertical: 60,
-    },
-    botaoAdicionarMargem: {
-        paddingHorizontal: 15,
-        flexDirection: 'row',
-        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
-        justifyContent: 'center',
-        width: '100%',
-        marginVertical: 10,
-    },
-    textoBotao: {
-        color: '#FFFFFF', //cor do texto
-        fontWeight: 'bold', //texto em negrito
-        fontSize: 20, //tamanho do texto
-        textAlign: 'center', // alinha texto dentro da borda, ao centro
-    },
+
     btnInteresse: {
         width: 250, //largura
         height: 40, //altura 
@@ -214,13 +183,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center', //centraliza o texto ao meio da borda
         backgroundColor: '#191970',
     },
-    btnChat: {
-        width: 250, //largura
-        height: 40, //altura 
-        backgroundColor: '#000000', //cor dentro da borda, onde vai ser incluído o texto
-        borderRadius: 10, // circunferência da borda
-        justifyContent: 'center', //centraliza o texto ao meio da borda
-        //backgroundColor: '#191970',
-    },
+
     */
 });

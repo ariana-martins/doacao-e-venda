@@ -309,7 +309,7 @@ export default function AdicionarNovoProduto() {
             ) : null
             }
 
-            <View >
+            <View style={{ paddingHorizontal: 15}}>
 
                 <Text style={styles.texto}>Título do produto:</Text>
                 <View style={styles.botaoAdicionarMargem}>
@@ -444,7 +444,7 @@ const styles = StyleSheet.create({
     img: {
         width: '100%',
         height: '100%',
-        resizeMode: 'contain',
+        resizeMode: 'cover',
     },
     buttonEscolherImagem: {
         width: 150,
@@ -461,6 +461,8 @@ const styles = StyleSheet.create({
         fontSize: 15,
     },
     texto: {
+        marginHorizontal: 15,
+        paddingHorizontal: 10, 
         fontFamily: "Inter",
         fontStyle: "normal",
         fontSize: 15,
@@ -469,18 +471,21 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     botaoAdicionarMargem: {
+        marginHorizontal: 15,
+        paddingHorizontal: 10,
         alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
         justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
         marginVertical: 5,
     },
     inputArea: {
-        paddingHorizontal: 15,
+        marginHorizontal: 15,
+        paddingHorizontal: 10,
         flexDirection: 'row',
         alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
         width: '100%',
         backgroundColor: '#FFFFFF',
         elevation: 2,
-        paddingHorizontal: 10,
+        //paddingHorizontal: 10,
         height: 40, //altura da borda do textInput
         borderRadius: 10,
         borderWidth: 2,
@@ -491,19 +496,22 @@ const styles = StyleSheet.create({
         fontSize: 15,
     },
     inputAreaDetalhes: {
-        paddingHorizontal: 15,
+        marginHorizontal: 15,
+        paddingHorizontal: 10,
         flexDirection: 'row',
         alignItems: 'flex-start',
         width: '100%',
         backgroundColor: '#FFFFFF',
         elevation: 2,
-        paddingHorizontal: 10,
+      //  paddingHorizontal: 10,
         height: 80, //altura da borda do textInput
         borderRadius: 10,
         borderWidth: 2,
         borderColor: '#000000',
     },
     checkboxOpcoes: {
+        marginHorizontal: 15,
+        paddingHorizontal: 10,
         flexDirection: "row",
         marginBottom: 5,
     },

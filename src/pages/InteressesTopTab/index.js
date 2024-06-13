@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, FlatList } from 'react-native';
+import { StyleSheet, View, Text, FlatList, TouchableOpacity } from 'react-native';
 //import { Card } from 'react-native-elements';
-import { Card } from 'react-native-paper';
+import { Card, Divider } from 'react-native-paper';
 
 import firestore, { firebase } from '@react-native-firebase/firestore';
 
@@ -41,8 +41,11 @@ export default function InteressesTopTab() {
 
 
     return (
-        <View style={{ flex: 1, padding: 20, backgroundColor: '#FFFFFF' }}>
-            <Text style={{ fontSize: 16 }}>Lista de interesses</Text>
+        <View style={{ flex: 1, padding: 10, backgroundColor: '#FFFFFF' }}>
+
+            <Text style={{ fontSize: 15 }}>Lista de interesses - Aguardando confirmação:</Text>
+            <Divider />
+                    {/** Falta criar função: Lista de interesses - Aguardando confirmação:<  */}
 
             <FlatList
                 data={data}
@@ -61,8 +64,18 @@ export default function InteressesTopTab() {
                                     <Text style={styles.txtTitle}>{item.titulo}</Text>
                                     <Text style={styles.txtValor}>{item.valor}</Text>
                                     <Text style={styles.txtDetalhes}>Detalhes: {item.descricao}</Text>
+
+                                    <View style={styles.botaoAdicionarMargem}>
+                                        <TouchableOpacity style={styles.btnChat}
+                                        // onPress={() => navigation.navigate('ChatMensagens', { userDono })}
+                                        // onPress={() => navigation.navigate('ChatMensagens', {userDono: item.messageText})}
+                                        >
+                                            <Text style={styles.textoBotao}>Cancelar Interesse</Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                    {/* Aqui vai o botão "Cancelar interesse, fica no canto inferior à direita do item do produto*/}
                                 </View>
-                                {/* Aqui vai o botão "Cancelar interesse, fica no canto inferior à direita do item do produto*/}
+
                             </View>
 
                         </Card>
@@ -88,9 +101,15 @@ export default function InteressesTopTab() {
                             </Card>
                     */}
                     </View >
-                )
-                }
+                )}
             />
+            <Text style={{ fontSize: 15 }}>Lista de interesses - Aceitos ou Recusados:</Text>
+            <Divider />
+                    {/** Falta criar função: Lista de interesses - Aceitos ou Recusados:  */}
+
+            <Text style={{ fontSize: 15 }}>Lista de interesses Adquiridos:</Text>
+            <Divider />
+                    {/* Falta criar função: Lista de interesses Adquiridos: */}
 
         </View >
     );
@@ -101,13 +120,8 @@ export default function InteressesTopTab() {
 
 const styles = StyleSheet.create({
     img: {
-        //  width: 96,
         width: 98,
         height: 118, // altura da imagem
-        /*
-        padding: 0,
-        resizeMode: 'contain',
-        */
     },
     txtTitle: {
         paddingHorizontal: 10,
@@ -116,7 +130,6 @@ const styles = StyleSheet.create({
         fontSize: 15,
         fontWeight: 'bold', //texto em negrito
         color: '#000000',
-        // margin: 10,
     },
     txtValor: {
         paddingHorizontal: 10,
@@ -124,10 +137,6 @@ const styles = StyleSheet.create({
         fontStyle: 'normal',
         fontSize: 15,
         color: '#000000',
-        //marginTop: 10,
-        //marginHorizontal: 10,
-        //  margin: 10,
-
     },
     txtDetalhes: {
         paddingLeft: 10,
@@ -137,12 +146,29 @@ const styles = StyleSheet.create({
         fontSize: 12,
         color: '#000000',
         width: '60%',
-
-        //  marginHorizontal: 5,
-        //   marginRight: 10,
-        //paddingRight: 15,     
-
     },
+    botaoAdicionarMargem: {
+        //paddingHorizontal: 15,
+        // alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
+        //justifyContent: 'center',
+        alignItems: 'center',
+        marginVertical: 10,
+    },
+    btnChat: {
+        width: 100, //largura
+        //  width: 250, //largura
+        height: 40, //altura 
+        backgroundColor: '#000000', //cor dentro da borda, onde vai ser incluído o texto
+        borderRadius: 10, // circunferência da borda
+        justifyContent: 'center', //centraliza o texto ao meio da borda
+    },
+    textoBotao: {
+        color: '#FFFFFF', //cor do texto
+        //fontWeight: 'bold', //texto em negrito
+        fontSize: 15, //tamanho do texto
+        textAlign: 'center', // alinha texto dentro da borda, ao centro
+    },
+
 });
 
 

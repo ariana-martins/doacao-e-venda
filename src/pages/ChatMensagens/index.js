@@ -91,7 +91,7 @@ export default function ChatMensagens() {
     }, []);
 
     const handleSend = () => {
-        sendMessage(text, 'User');
+        sendMessage(text, 'User'); //testar acrescentar a id/key do "produto" 
         setText('');
     };
 

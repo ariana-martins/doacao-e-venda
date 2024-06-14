@@ -67,9 +67,10 @@ function Tabs() {
         name='Chat - Tab'
         component={ItemListaChat}
         options={{
-          headerShown: true,
-          title: 'Chats',
-          headerTitleAlign: 'center',
+          //headerShown: true,
+        //  title: 'Chats',
+          //headerTitleAlign: 'center',
+          headerShown: false,
           tabBarIcon: ({ focused, color }) => (
             <Icon name="chatbubble-outline" size={20} color={focused ? "blue" : "black" } />
           ),

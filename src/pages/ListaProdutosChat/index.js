@@ -3,12 +3,11 @@ import { View, Text, StyleSheet, Image, SafeAreaView, Pressable } from 'react-na
 
 
 // "data" busca os produtos dos dados do firebase, que estão puxando da "PaginaInicial"
-export default function ListaProdutosChat({item}) {
+export default function ListaProdutosChat() {
     //Lista os produtos na PaginaInicial.
 
     return (
         <View style={styles.container}>
-
                 <View style={styles.card}>
                     <View style={styles.userInfo}>
                         <View style={styles.userImgWrapper}>
@@ -20,7 +19,7 @@ export default function ListaProdutosChat({item}) {
 
                         <View style={styles.textSection}>
                             <View style={styles.userInfoText}>
-                                <Text style={styles.userName}>oi</Text>
+                                <Text style={styles.userName}>teste title</Text>
                                 <Text style={styles.postTime}>oi</Text>
                             </View>
                             <Text style={styles.userValor}>oi</Text>
@@ -31,16 +30,14 @@ export default function ListaProdutosChat({item}) {
                 </View>
         </View>
     );
+    
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#FFFFFF',
-      //  backgroundColor: 'pink',
-    },
-    addMargem: {
         margin: 10,
+        backgroundColor: '#FFFFFF',
     },
     txtTituloChats: {
         textAlign: 'center',
@@ -48,11 +45,6 @@ const styles = StyleSheet.create({
         fontSize: 25,
         color: '#000000',
         marginVertical: 10,
-    },
-    linhaDivid: {
-        width: '100%',
-        borderBottomWidth: 1,
-        borderBottomColor: '#CCCCCC',
     },
 
     card: {
@@ -62,6 +54,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: '#CCCCCC',
         marginVertical: 5,
+        paddingVertical: 5,
     },
     userInfo: {
         flexDirection: 'row',

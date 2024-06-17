@@ -1,5 +1,6 @@
 
 export default [
+    
     {
         id: '1',
         image: require('../assets/img/img1.png'),

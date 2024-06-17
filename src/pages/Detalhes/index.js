@@ -24,6 +24,18 @@ export default function Detalhes({ userDono }) {
     const [registrarInteresse, setRegistrarInteresse] = useState(true);
 
 
+    //===================================
+    //Função Abrir NovoChat ItemListaChat Message
+    const abrirItemListaChat = () => {
+        //navigation.navigate('Detalhes', { name: 'titulo vai aqui', detalhes: 'descricao aqui', preco: '0,01' });
+      //  navigation.navigate('ChatMensagens', { data });
+     navigation.navigate('ChatMensagens', {userDono: data.titulo});
+     // console.log('ChatMensagens', {userDono: data.titulo});
+    };
+
+
+
+
     return (
 
         <View style={styles.container}>
@@ -76,8 +88,9 @@ export default function Detalhes({ userDono }) {
 
                     <View style={styles.botaoAdicionarMargem}>
                         <Pressable style={styles.btnChat}
-                            onPress={() => navigation.navigate('ChatMensagens', { userDono })}
-                        // onPress={() => navigation.navigate('ChatMensagens', {userDono: item.messageText})}
+                            //onPress={() => navigation.navigate('ChatMensagens', { userDono })}
+                            // onPress={() => navigation.navigate('ChatMensagens', {userDono: item.messageText})}
+                            onPress={abrirItemListaChat}
                         >
                             <Text style={styles.textoBotao}>Chat</Text>
                         </Pressable>
@@ -126,7 +139,7 @@ const styles = StyleSheet.create({
         fontStyle: 'normal',
         fontSize: 20,
         color: '#000000',
-       // lineHeight: 25,
+        // lineHeight: 25,
         marginTop: 10,
         marginHorizontal: 10,
     },

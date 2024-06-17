@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Image, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import ListaProdutosChat from '../ListaProdutosChat';
 import testeChat from '../../data/testeChat';
@@ -8,7 +8,11 @@ import testeChat from '../../data/testeChat';
 export default function ItemListaChat() {
     const navigation = useNavigation();
 
-/*
+  //  const route = useRoute(); //Recebe o item da "PaginaInicial"
+    //const { name, detalhes, preco } = route.params; //Recebe os itens "route.params" da "PaginaInicial"
+   // const { testeChat } = route.params;
+
+
     const Chat = [
         {
             id: '1',
@@ -37,53 +41,10 @@ export default function ItemListaChat() {
             messageText: 'Maria - dono do produto',
             messageUser: 'Usuário 3',
         },
-        {
-            id: '4',
-            image: require('../../../src/assets/img/img3.png'),
-            title: 'Tênis branco',
-            valor: 'R$0,00',
-            messageTime: '2 dias atrás',
-            messageText: 'Maria - dono do produto',
-            messageUser: 'Usuário 3',
-        },
-        {
-            id: '5',
-            image: require('../../../src/assets/img/img3.png'),
-            title: 'Tênis branco',
-            valor: 'R$0,00',
-            messageTime: '2 dias atrás',
-            messageText: 'Maria - dono do produto',
-            messageUser: 'Usuário 3',
-        },
-        {
-            id: '6',
-            image: require('../../../src/assets/img/img3.png'),
-            title: 'Tênis branco',
-            valor: 'R$0,00',
-            messageTime: '2 dias atrás',
-            messageText: 'Maria - dono do produto',
-            messageUser: 'Usuário 3',
-        },
-        {
-            id: '7',
-            image: require('../../../src/assets/img/img3.png'),
-            title: 'Tênis branco',
-            valor: 'R$0,00',
-            messageTime: '2 dias atrás',
-            messageText: 'Maria - dono do produto',
-            messageUser: 'Usuário 3',
-        },
-        {
-            id: '8',
-            image: require('../../../src/assets/img/img3.png'),
-            title: 'Tênis branco',
-            valor: 'R$0,00',
-            messageTime: '2 dias atrás',
-            messageText: 'Maria - dono do produto',
-            messageUser: 'Usuário 3',
-        },
+        
     ];
-*/
+
+
 
     //===================================
     //Função Abrir Tela Detalhes
@@ -97,6 +58,8 @@ export default function ItemListaChat() {
         console.log(data);
     };
 */
+
+/*
     return (
         <View style={styles.container}>
             <View style={styles.addMargem}>
@@ -115,9 +78,14 @@ export default function ItemListaChat() {
 
 
     );
-    {/*
+    */
+    
     return (
         <View style={styles.container}>
+               <View style={styles.addMargem}>
+                <View style={styles.linhaDivid}>
+                    <Text style={styles.txtTituloChats}>Chats</Text>
+                </View>
             <FlatList
                 showsHorizontalScrollIndicator={false}
                 data={Chat}
@@ -147,9 +115,10 @@ export default function ItemListaChat() {
                     </View>
                 )}
             />
+            </View>
         </View>
     );
-                */}
+                
 };
 
 

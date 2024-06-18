@@ -26,13 +26,25 @@ export default function Detalhes({ userDono }) {
 
     //===================================
     //Função Abrir NovoChat ItemListaChat Message
-    const abrirItemListaChat = () => {
+    const abrirChatMessageChat = () => {
         //navigation.navigate('Detalhes', { name: 'titulo vai aqui', detalhes: 'descricao aqui', preco: '0,01' });
       //  navigation.navigate('ChatMensagens', { data });
-     navigation.navigate('ChatMensagens', {userDono: data.titulo});
+     navigation.navigate('ChatMensagens', {
+        userDono: data.user_id, 
+        name: 'aqui vai titulo, imagem e valor do produto, que clicou na página Detalhes', 
+        image: require('../../assets/img/img9.png'),
+    });
      // console.log('ChatMensagens', {userDono: data.titulo});
     };
 
+    //===================================
+    //Função Abrir NovoChat ItemListaChat Message
+  //  const novoItemListaChat = () => {
+        //navigation.navigate('Detalhes', { name: 'titulo vai aqui', detalhes: 'descricao aqui', preco: '0,01' });
+      //  navigation.navigate('ChatMensagens', { data });
+    // navigation.navigate('ChatMensagens', {data});
+    // console.log('ChatMensagens', {userDono: data.titulo});
+   // };
 
 
 
@@ -90,7 +102,7 @@ export default function Detalhes({ userDono }) {
                         <Pressable style={styles.btnChat}
                             //onPress={() => navigation.navigate('ChatMensagens', { userDono })}
                             // onPress={() => navigation.navigate('ChatMensagens', {userDono: item.messageText})}
-                            onPress={abrirItemListaChat}
+                            onPress={abrirChatMessageChat}
                         >
                             <Text style={styles.textoBotao}>Chat</Text>
                         </Pressable>

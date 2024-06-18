@@ -20,7 +20,7 @@ export default function ItemListaChat() {
             title: 'Sapatênis',
             valor: 'R$200,00',
             messageTime: '4 mins atrás',
-            messageText: 'João - dono do produto',
+            messageText: 'João - dono do produto', // {userDono: data.user_id} porém tem que ser o "nomeCompleto"
             messageUser: 'Usuário 1',
         },
         {
@@ -29,7 +29,7 @@ export default function ItemListaChat() {
             title: 'Blusa branca',
             valor: 'R$0,00',
             messageTime: '2 horas atrás',
-            messageText: 'Maria - dono do produto',
+            messageText: 'Maria - dono do produto', // {userDono: data.user_id} porém tem que ser o "nomeCompleto"
             messageUser: 'Usuário 2',
         },
         {
@@ -38,7 +38,7 @@ export default function ItemListaChat() {
             title: 'Tênis branco',
             valor: 'R$0,00',
             messageTime: '2 dias atrás',
-            messageText: 'Maria - dono do produto',
+            messageText: 'Maria - dono do produto', // {userDono: data.user_id} porém tem que ser o "nomeCompleto"
             messageUser: 'Usuário 3',
         },
         

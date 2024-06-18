@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, Button, FlatList, TouchableOpacity, Alert, Modal, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, FlatList, TouchableOpacity, Alert, Modal, StyleSheet, Image } from 'react-native';
+import { useRoute } from '@react-navigation/native';
+
+//import { ScrollView } from 'react-native-gesture-handler';
+import firestore from '@react-native-firebase/firestore';
+import Icon from 'react-native-vector-icons/Ionicons';
 import EnviarReceberMensagens from '../../components/EnviarReceberMensagens';
 
-import firestore from '@react-native-firebase/firestore';
-import { ScrollView } from 'react-native-gesture-handler';
-
-
-import Icon from 'react-native-vector-icons/Ionicons';
 
 
 export default function ChatMensagens() {
+    const route = useRoute(); //Recebe o item da "PaginaInicial"
+    //const { name, detalhes, preco } = route.params; //Recebe os itens "route.params" da "PaginaInicial"
+    const { name, image } = route.params; //Recebe os itens "route.params" da "PaginaInicial" buscando do firebase
+
+
+
     const [modalActive, setModalActive] = useState(false)
 
     //substituir por Modal e falta fazer o upload da imagem. [OK]
@@ -98,7 +104,7 @@ export default function ChatMensagens() {
 
     return (
 
-        <View style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+        <View style={{ display: 'flex', flexDirection: 'column', flex: 1, }}>
 
             <View style={styles.containerModal}>
                 <Modal
@@ -141,12 +147,23 @@ export default function ChatMensagens() {
 
             </View>
 
+            <Text>Teste receber dados dos detalhes do produto</Text>
+
+            <View style={{ flexDirection: 'row', padding: 5 }}>
+                <Image style={styles.imagemMaisDetalhes}
+                    source={image}
+                />
+                <Text>{name}</Text>
+            </View>
 
             <FlatList
                 data={messages}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => (
                     <View style={{ marginTop: 8, display: 'flex', flex: 1, overflow: 'scroll' }}>
+
+
+
                         <EnviarReceberMensagens />
                         <View style={{ width: 180, margin: 10, display: 'flex', alignSelf: 'flex-end' }}>
                             <View style={{ backgroundColor: '#afeeee', borderRadius: 8 }}>
@@ -253,6 +270,12 @@ const styles = StyleSheet.create({
         textAlign: 'right',
         fontSize: 20, //tamanho do texto
         color: '#000000',
+    },
+
+    imagemMaisDetalhes: {
+        width: 50,
+        height: 50,
+        marginRight: 12,
     },
 });
 

@@ -1,3 +1,4 @@
+/*
 import React, { useState, useContext} from "react";
 import { View, Text, StyleSheet } from "react-native";
 import FormButton from "../components/FormButton";
@@ -50,3 +51,4 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
 });
+*/

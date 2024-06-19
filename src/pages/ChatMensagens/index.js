@@ -5,14 +5,17 @@ import { useRoute } from '@react-navigation/native';
 //import { ScrollView } from 'react-native-gesture-handler';
 import firestore from '@react-native-firebase/firestore';
 import Icon from 'react-native-vector-icons/Ionicons';
+
+import BotaoVoltar from '../../components/componentesGerais/BotaoVoltar';
 import EnviarReceberMensagens from '../../components/EnviarReceberMensagens';
+
 
 
 
 export default function ChatMensagens() {
     const route = useRoute(); //Recebe o item da "PaginaInicial"
     //const { name, detalhes, preco } = route.params; //Recebe os itens "route.params" da "PaginaInicial"
-    const { name, image } = route.params; //Recebe os itens "route.params" da "PaginaInicial" buscando do firebase
+    const { userDono, imageUserDono, image, name, valor } = route.params; //Recebe os itens "route.params" da "PaginaInicial" buscando do firebase
 
 
 
@@ -104,83 +107,97 @@ export default function ChatMensagens() {
 
     return (
 
-        <View style={{ display: 'flex', flexDirection: 'column', flex: 1, }}>
+        <View style={styles.container}>
+            <View style={styles.linhaDivid}>
+                <View style={styles.addMargemTituloDetalhes}>
+                    <BotaoVoltar />
+                    <Text style={styles.txtTituloDetalhes}>{userDono}</Text>
+                    <Image style={styles.imagemMaisDetalhesUserDono}
+                        source={imageUserDono}/>
+                </View>
+            </View>
+            <View style={{ display: 'flex', flexDirection: 'column', flex: 1, }}>
 
-            <View style={styles.containerModal}>
-                <Modal
-                    animationType="slide"
-                    swipeDirection="down"
-                    transparent={true}
-                    visible={modalActive}
-                    onRequestClose={() => {
-                        Alert.alert('Modal has been closed');
-                        setModalActive(!modalActive);
-                    }}
-                >
-                    <View style={styles.outerView}>
-                        <View style={styles.modalView}>
-                            <View style={styles.modalMargemDivisa}>
-                                <TouchableOpacity onPress={() => Alert.alert('Clicou na camera')}>
-                                    <View style={styles.iconesModal}>
-                                        <Icon name="camera-outline" size={20} color="#000000" onPress={() => setModalActive(true)} />
-                                        <Text style={styles.modalText}>Tirar Foto</Text>
-                                    </View>
+                <View style={styles.containerModal}>
+                    <Modal
+                        animationType="slide"
+                        swipeDirection="down"
+                        transparent={true}
+                        visible={modalActive}
+                        onRequestClose={() => {
+                            Alert.alert('Modal has been closed');
+                            setModalActive(!modalActive);
+                        }}
+                    >
+                        <View style={styles.outerView}>
+                            <View style={styles.modalView}>
+                                <View style={styles.modalMargemDivisa}>
+                                    <TouchableOpacity onPress={() => Alert.alert('Clicou na camera')}>
+                                        <View style={styles.iconesModal}>
+                                            <Icon name="camera-outline" size={20} color="#000000" onPress={() => setModalActive(true)} />
+                                            <Text style={styles.modalText}>Tirar Foto</Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={() => Alert.alert('Clicou na Galeria')}>
+                                        <View style={styles.iconesModal}>
+                                            <Icon name="image-outline" size={20} color="#000000" onPress={() => setModalActive(true)} />
+                                            <Text style={styles.modalText}>Escolher Existente</Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                </View>
+                                <TouchableOpacity style={styles.buttonModal} onPress={() => setModalActive(!modalActive)}>
+                                    <Text style={styles.outroTextModal}>Cancelar</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity onPress={() => Alert.alert('Clicou na Galeria')}>
-                                    <View style={styles.iconesModal}>
-                                        <Icon name="image-outline" size={20} color="#000000" onPress={() => setModalActive(true)} />
-                                        <Text style={styles.modalText}>Escolher Existente</Text>
-                                    </View>
-                                </TouchableOpacity>
+
                             </View>
-                            <TouchableOpacity style={styles.buttonModal} onPress={() => setModalActive(!modalActive)}>
-                                <Text style={styles.outroTextModal}>Cancelar</Text>
-                            </TouchableOpacity>
-
                         </View>
+
+                    </Modal>
+
+
+
+
+                </View>
+
+                <View style={{
+                    flexDirection: 'row', backgroundColor: '#FFFFFF', marginTop: 5,
+                    borderBottomWidth: 1, borderBottomColor: '#CCCCCC',
+                }}>
+                    <Image style={styles.imagemMaisDetalhes}
+                        source={image}
+                    />
+
+                    <View style={{ flex: 1, flexDirection: 'column' }} >
+                        <Text style={{ paddingRight: 10 }}>{name}</Text>
+                        <Text style={{ marginVertical: 5 }}>{valor}</Text>
                     </View>
+                </View>
 
-                </Modal>
-
-
-
-
-            </View>
-
-            <Text>Teste receber dados dos detalhes do produto</Text>
-
-            <View style={{ flexDirection: 'row', padding: 5 }}>
-                <Image style={styles.imagemMaisDetalhes}
-                    source={image}
-                />
-                <Text>{name}</Text>
-            </View>
-
-            <FlatList
-                data={messages}
-                keyExtractor={(item) => item.id}
-                renderItem={({ item }) => (
-                    <View style={{ marginTop: 8, display: 'flex', flex: 1, overflow: 'scroll' }}>
+                <FlatList
+                    data={messages}
+                    keyExtractor={(item) => item.id}
+                    renderItem={({ item }) => (
+                        <View style={{ marginTop: 8, display: 'flex', flex: 1, overflow: 'scroll' }}>
 
 
 
-                        <EnviarReceberMensagens />
-                        <View style={{ width: 180, margin: 10, display: 'flex', alignSelf: 'flex-end' }}>
-                            <View style={{ backgroundColor: '#afeeee', borderRadius: 8 }}>
-                                <Text style={{ padding: 8, color: 'black' }}>{item.sender}: {item.text}</Text>
-                                <View style={{ flexDirection: 'row', alignSelf: 'flex-end' }}>
-                                    <Text>20:10</Text>
-                                    <Icon name="checkmark-done-outline" size={20} color="#000000" />
+                            <EnviarReceberMensagens />
+                            <View style={{ width: 180, margin: 10, display: 'flex', alignSelf: 'flex-end' }}>
+                                <View style={{ backgroundColor: '#afeeee', borderRadius: 8 }}>
+                                    <Text style={{ padding: 8, color: 'black' }}>{item.sender}: {item.text}</Text>
+                                    <View style={{ flexDirection: 'row', alignSelf: 'flex-end' }}>
+                                        <Text>20:10</Text>
+                                        <Icon name="checkmark-done-outline" size={20} color="#000000" />
+                                    </View>
                                 </View>
                             </View>
                         </View>
-                    </View>
-                )}
-            />
+                    )}
+                />
 
 
 
-            {/*
+                {/*
             <ScrollView>
                 <View style={{ marginTop: 8, display: 'flex', flex: 1, overflow: 'scroll' }}>
                     <EnviarReceberMensagens />
@@ -189,36 +206,36 @@ export default function ChatMensagens() {
                 </View>
             </ScrollView>
  */}
-            <View style={{ display: 'flex', flexDirection: 'row', marginTop: 10, backgroundColor: 'white', paddingHorizontal: 10, alignItems: 'center', justifyContent: 'flex-end', }}>
-                {/*<View style={{ paddingHorizontal: 10, flexDirection: 'row', alignItems: 'center' }} >*/}
-                <TouchableOpacity>
-                    <Icon name="camera-outline" size={20} color="#000000" onPress={() => setModalActive(true)} />
-                </TouchableOpacity>
-                <TextInput
-                    style={{
-                        flex: 1,
-                        minHeight: 40,
-                        maxHeight: 90,
-                        paddingHorizontal: 12,
-                        fontSize: 17,
-                        paddingTop: 8,
-                        marginHorizontal: 5,
-                        //   borderColor: 'black',
-                        //    borderWidth: 1,
-                        //    backgroundColor: 'yellow',
-                        borderRadius: 5,
-                    }}
-                    value={text}
-                    onChangeText={setText}
-                    placeholder="Escreva sua mensagem aqui..."
-                />
-                <TouchableOpacity>
-                    <Icon name="send-outline" size={20} color="#000000" onPress={handleSend} />
-                </TouchableOpacity>
+                <View style={{ display: 'flex', flexDirection: 'row', marginTop: 10, backgroundColor: 'white', paddingHorizontal: 10, alignItems: 'center', justifyContent: 'flex-end', }}>
+                    {/*<View style={{ paddingHorizontal: 10, flexDirection: 'row', alignItems: 'center' }} >*/}
+                    <TouchableOpacity>
+                        <Icon name="camera-outline" size={20} color="#000000" onPress={() => setModalActive(true)} />
+                    </TouchableOpacity>
+                    <TextInput
+                        style={{
+                            flex: 1,
+                            minHeight: 40,
+                            maxHeight: 90,
+                            paddingHorizontal: 12,
+                            fontSize: 17,
+                            paddingTop: 8,
+                            marginHorizontal: 5,
+                            //   borderColor: 'black',
+                            //    borderWidth: 1,
+                            //    backgroundColor: 'yellow',
+                            borderRadius: 5,
+                        }}
+                        value={text}
+                        onChangeText={setText}
+                        placeholder="Escreva sua mensagem aqui..."
+                    />
+                    <TouchableOpacity>
+                        <Icon name="send-outline" size={20} color="#000000" onPress={handleSend} />
+                    </TouchableOpacity>
+
+                </View>
 
             </View>
-
-
 
         </View>
 
@@ -227,11 +244,39 @@ export default function ChatMensagens() {
 
 
 const styles = StyleSheet.create({
-    /*
-    containerModal: {
-        flex: 1,    
+    container: {
+        flex: 1,
+        backgroundColor: '#FFFFFF',
     },
-    */
+    addMargemTituloDetalhes: {
+        flexDirection: 'row',
+        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
+        backgroundColor: 'yellow',
+    },
+    txtTituloDetalhes: {
+        fontFamily: 'Roboto',
+        fontSize: 20,
+        color: '#000000',
+        marginLeft: 10,
+        paddingHorizontal: 10,
+        marginTop: 10,
+        backgroundColor: 'pink',
+    },
+    imagemMaisDetalhesUserDono: {
+        width: 50,
+        height: 50,
+        marginRight: 10,
+        borderRadius: 50,
+        resizeMode: "cover",
+    },
+    linhaDivid: {
+        width: '100%',
+        borderBottomWidth: 1,
+        borderBottomColor: '#CCCCCC',
+        marginVertical: 5,
+        paddingVertical: 5,
+    },
+
     outerView: { //visualiza o chat acima do modal
         flex: 1,
         justifyContent: 'flex-end',
@@ -275,7 +320,8 @@ const styles = StyleSheet.create({
     imagemMaisDetalhes: {
         width: 50,
         height: 50,
-        marginRight: 12,
+        marginRight: 10,
+        resizeMode: "cover",
     },
 });
 

@@ -111,10 +111,17 @@ export default function ScreenNavigator() {
       <Stack.Screen
         name="ChatMensagens"
         component={ChatMensagens}
+        options={{
+          headerShown: false,
+        //  title: 'Voltar',
+        }}
+        /*
         options={({ route }) => ({
           title: route.params.userDono,
           headerTitleAlign: 'center',
         })}
+*/
+
       />
 
       <Stack.Screen

@@ -20,7 +20,7 @@ export default function ItemListaChat() {
             title: 'Sapatênis',
             valor: 'R$200,00',
             messageTime: '4 mins atrás',
-            messageText: 'João - dono do produto', // {userDono: data.user_id} porém tem que ser o "nomeCompleto"
+            messageText: 'João - dono do produto', 
             messageUser: 'Usuário 1',
         },
         {

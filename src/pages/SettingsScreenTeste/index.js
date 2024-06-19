@@ -1,3 +1,4 @@
+/*
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Button } from 'react-native';
 
@@ -37,3 +38,4 @@ const styles = StyleSheet.create({
         textAlign: 'center', // alinha texto dentro da borda, ao centro
     },
 })
+*/

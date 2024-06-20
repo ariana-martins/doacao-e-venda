@@ -30,11 +30,11 @@ export default function Detalhes({ userDono }) {
         //navigation.navigate('Detalhes', { name: 'titulo vai aqui', detalhes: 'descricao aqui', preco: '0,01' });
       //  navigation.navigate('ChatMensagens', { data });
      navigation.navigate('ChatMensagens', {
-        userDono: 'User Dono', //data.user_id, 
+        userDono: 'User Dono', //data.user_id,
         imageUserDono: require('../../assets/logo/logo.png'),
-        image: require('../../assets/img/img9.png'),
-        name: 'Titulo do produto', 
-        valor: 'R$ 0,00 exemplo' 
+        image: data.imagem,
+        name: data.titulo, //'Titulo do produto', 
+        valor: data.valor,
     });
      // console.log('ChatMensagens', {userDono: data.titulo});
     };

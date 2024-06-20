@@ -160,8 +160,8 @@ const styles = StyleSheet.create({
         paddingBottom: 15,
     },
     prodImg: {
-        width: 50,
-        height: 50,
+        width: 60,
+        height: 60,
         borderRadius: 0,
     },
     textSection: {

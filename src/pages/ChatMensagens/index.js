@@ -77,6 +77,7 @@ export default function ChatMensagens() {
     const subscribeToMessages = (callback) => {
         const unsubscribe = messagesRef
             .orderBy('timestamp')
+            //.orderBy('createdAt', 'desc')
             .onSnapshot((snapshot) => {
                 const messages = [];
                 snapshot.forEach((doc) => {
@@ -113,7 +114,7 @@ export default function ChatMensagens() {
                     <BotaoVoltar />
                     <Text style={styles.txtTituloDetalhes}>{userDono}</Text>
                     <Image style={styles.imagemMaisDetalhesUserDono}
-                        source={imageUserDono}/>
+                        source={imageUserDono} />
                 </View>
             </View>
             <View style={{ display: 'flex', flexDirection: 'column', flex: 1, }}>
@@ -164,7 +165,7 @@ export default function ChatMensagens() {
                     borderBottomWidth: 1, borderBottomColor: '#CCCCCC',
                 }}>
                     <Image style={styles.imagemMaisDetalhes}
-                        source={image}
+                        source={{uri: image}}
                     />
 
                     <View style={{ flex: 1, flexDirection: 'column' }} >
@@ -206,7 +207,11 @@ export default function ChatMensagens() {
                 </View>
             </ScrollView>
  */}
-                <View style={{ display: 'flex', flexDirection: 'row', marginTop: 10, backgroundColor: 'white', paddingHorizontal: 10, alignItems: 'center', justifyContent: 'flex-end', }}>
+                
+                    <View style={{ display: 'flex', flexDirection: 'row', marginTop: 10, backgroundColor: 'white', paddingHorizontal: 10, alignItems: 'center', justifyContent: 'flex-end'}}>
+
+                    
+
                     {/*<View style={{ paddingHorizontal: 10, flexDirection: 'row', alignItems: 'center' }} >*/}
                     <TouchableOpacity>
                         <Icon name="camera-outline" size={20} color="#000000" onPress={() => setModalActive(true)} />
@@ -251,7 +256,6 @@ const styles = StyleSheet.create({
     addMargemTituloDetalhes: {
         flexDirection: 'row',
         alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
-        backgroundColor: 'yellow',
     },
     txtTituloDetalhes: {
         fontFamily: 'Roboto',
@@ -260,7 +264,6 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         paddingHorizontal: 10,
         marginTop: 10,
-        backgroundColor: 'pink',
     },
     imagemMaisDetalhesUserDono: {
         width: 50,

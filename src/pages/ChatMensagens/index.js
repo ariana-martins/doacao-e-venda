@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, Button, FlatList, TouchableOpacity, Alert, Modal, StyleSheet, Image } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 
-//import { ScrollView } from 'react-native-gesture-handler';
 import firestore from '@react-native-firebase/firestore';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -60,12 +59,12 @@ export default function ChatMensagens() {
 
 
     //Step 2: Add Messages to Firestore
-    const sendMessage = async (text, sender) => {
+    const sendMessage = async (text, msgEnviada) => {
         try {
             // Add a new document to the "messages" collection
             await messagesRef.add({
                 text,
-                sender,
+                msgEnviada,
                 timestamp: firestore.FieldValue.serverTimestamp(),
             });
         } catch (error) {
@@ -101,22 +100,28 @@ export default function ChatMensagens() {
     }, []);
 
     const handleSend = () => {
-        sendMessage(text, 'User'); //testar acrescentar a id/key do "produto" 
+        sendMessage(text, userDono); //testar acrescentar a id/key do "produto" 
+        //sendMessage(text, 'User'); //testar acrescentar a id/key do "produto" 
         setText('');
     };
-
+ 
 
     return (
 
         <View style={styles.container}>
-            <View style={styles.linhaDivid}>
-                <View style={styles.addMargemTituloDetalhes}>
-                    <BotaoVoltar />
-                    <Text style={styles.txtTituloDetalhes}>{userDono}</Text>
-                    <Image style={styles.imagemMaisDetalhesUserDono}
-                        source={imageUserDono} />
-                </View>
-            </View>
+
+            <View style={{ borderBottomWidth: 1, borderBottomColor: '#CCCCCC', }}>
+                    <View style={styles.headerChatMsg}>
+                        <View style={{marginBottom: 5 }}>
+                        <BotaoVoltar />
+                        </View>
+                        <Text style={styles.txtTituloDetalhes}>{userDono}</Text>
+                        {/*ImageUserDono vem da página "Detalhes" */}
+                        <Image style={styles.imagemMaisDetalhesUserDono}
+                            source={imageUserDono} />
+                    </View>
+            </View>    
+
             <View style={{ display: 'flex', flexDirection: 'column', flex: 1, }}>
 
                 <View style={styles.containerModal}>
@@ -155,19 +160,13 @@ export default function ChatMensagens() {
 
                     </Modal>
 
-
-
-
                 </View>
 
-                <View style={{
-                    flexDirection: 'row', backgroundColor: '#FFFFFF', marginTop: 5,
-                    borderBottomWidth: 1, borderBottomColor: '#CCCCCC',
-                }}>
-                    <Image style={styles.imagemMaisDetalhes}
-                        source={{uri: image}}
-                    />
 
+                <View style={{ flexDirection: 'row', backgroundColor: '#FFFFFF', borderBottomWidth: 1, borderBottomColor: '#CCCCCC', }}>
+                    <Image style={styles.imagemMaisDetalhes}
+                        source={{ uri: image }}
+                    />
                     <View style={{ flex: 1, flexDirection: 'column' }} >
                         <Text style={{ paddingRight: 10 }}>{name}</Text>
                         <Text style={{ marginVertical: 5 }}>{valor}</Text>
@@ -180,12 +179,10 @@ export default function ChatMensagens() {
                     renderItem={({ item }) => (
                         <View style={{ marginTop: 8, display: 'flex', flex: 1, overflow: 'scroll' }}>
 
-
-
-                            <EnviarReceberMensagens />
+                           <EnviarReceberMensagens />
                             <View style={{ width: 180, margin: 10, display: 'flex', alignSelf: 'flex-end' }}>
                                 <View style={{ backgroundColor: '#afeeee', borderRadius: 8 }}>
-                                    <Text style={{ padding: 8, color: 'black' }}>{item.sender}: {item.text}</Text>
+                                    <Text style={{ padding: 8, color: 'black' }}>{item.msgEnviada}: {item.text}</Text>
                                     <View style={{ flexDirection: 'row', alignSelf: 'flex-end' }}>
                                         <Text>20:10</Text>
                                         <Icon name="checkmark-done-outline" size={20} color="#000000" />
@@ -207,10 +204,10 @@ export default function ChatMensagens() {
                 </View>
             </ScrollView>
  */}
-                
-                    <View style={{ display: 'flex', flexDirection: 'row', marginTop: 10, backgroundColor: 'white', paddingHorizontal: 10, alignItems: 'center', justifyContent: 'flex-end'}}>
 
-                    
+                <View style={{ display: 'flex', flexDirection: 'row', marginTop: 10, backgroundColor: 'white', paddingHorizontal: 10, alignItems: 'center', justifyContent: 'flex-end' }}>
+
+
 
                     {/*<View style={{ paddingHorizontal: 10, flexDirection: 'row', alignItems: 'center' }} >*/}
                     <TouchableOpacity>
@@ -251,20 +248,31 @@ export default function ChatMensagens() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#FFFFFF',
     },
+    headerChatMsg: {
+        width: '100%',
+      //  paddingHorizontal: 10,
+        backgroundColor: '#FFFFFF',
+       // marginBottom: 5,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+   txtTituloDetalhes: {
+        fontFamily: 'Roboto',
+        fontSize: 15,
+        color: '#000000',
+        marginLeft: 5,
+      //  paddingHorizontal: 10,
+        // marginTop: 10,
+        textAlign: 'center',
+    },
+
     addMargemTituloDetalhes: {
         flexDirection: 'row',
         alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
     },
-    txtTituloDetalhes: {
-        fontFamily: 'Roboto',
-        fontSize: 20,
-        color: '#000000',
-        marginLeft: 10,
-        paddingHorizontal: 10,
-        marginTop: 10,
-    },
+ 
     imagemMaisDetalhesUserDono: {
         width: 50,
         height: 50,
@@ -280,7 +288,7 @@ const styles = StyleSheet.create({
         paddingVertical: 5,
     },
 
-    outerView: { //visualiza o chat acima do modal
+    outerView: { //visualiza o chat abaixo do modal
         flex: 1,
         justifyContent: 'flex-end',
         backgroundColor: 'rgba(0,0,0,0.5)',

@@ -91,40 +91,6 @@ export default function PaginaInicial() {
   const user_id = firebase.auth().currentUser.uid;
 
 
-  /*
-  const card = [
-    {
-    id: '1',
-    image: require('../../../src/assets/img1.png'),
-    title: 'Sapatênis',
-    valor: 'R$200,00',
-    },
-    {
-    id: '2',
-    image: require('../../../src/assets/img2.png'),
-    title: 'Blusa branca',
-    valor: 'R$0,00',
-    },
-    {
-    id: '3',
-    image: require('../../../src/assets/img3.png'),
-    title: 'Tênis branco',
-    valor: 'R$0,00',
-    },
-    {
-    id: '4',
-    image: require('../../../src/assets/img4.png'),
-    title: 'Bermuda',
-    valor: 'R$0,00',
-    },
-    {
-    id: '5',
-    image: require('../../../src/assets/img5.png'),
-    title: 'Chinelo adulto',
-    valor: 'R$35,00',
-    },
-  ];
-  */
 
   ////===========>>>> PRIORIDADE <<<<<<<<<<<<<<<<<<<============================
   /*resolver essa questão de lançar no telefone e poder ver no computador [12/04/2024]*/

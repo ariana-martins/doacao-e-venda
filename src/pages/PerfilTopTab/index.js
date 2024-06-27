@@ -2,19 +2,17 @@ import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image, Alert, FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
+//import FormButton from '../../components/FormItens/FormButton';
+import { AuthContext } from '../../components/componentesGerais/Auth/AuthProvider';
 import { useNavigation } from '@react-navigation/native';
 
 import auth from '@react-native-firebase/auth';
 //import firestore from '@react-native-firebase/firestore';
 import firestore, { firebase } from '@react-native-firebase/firestore';
+import storage from '@react-native-firebase/storage';
 
 import ImageCropPicker from 'react-native-image-crop-picker';
 
-import storage from '@react-native-firebase/storage';
-
-import FormButton from '../../components/FormItens/FormButton';
-import { AuthContext } from '../../components/componentesGerais/Auth/AuthProvider';
-//import { AuthContext } from '../../navigations/AuthProvider';
 
 //================================================================================================
 // Falta acrescentar displayName == NomeCompleto para o usuário, exemplo do link:
@@ -29,6 +27,7 @@ import { AuthContext } from '../../components/componentesGerais/Auth/AuthProvide
 export default function PerfilTopTab() {
     const navigation = useNavigation();
 
+    //Falta configurar o authContext. Perfil - Sair do App (seria o "logout" do AuthContext)
     const { user, logout } = useContext(AuthContext);
 
     const [nomeCompleto, setNomeCompleto] = useState('');
@@ -37,6 +36,7 @@ export default function PerfilTopTab() {
     const [users, setUsers] = useState(null);
 
     const [userData, setUserData] = useState(null);
+
 
 
 
@@ -57,14 +57,16 @@ export default function PerfilTopTab() {
             }
         ]);
         return true;
+        
     };
 
 
     const getUsers = async () => {
         const querySanp = await firestore().collection('users').get()
         const allusers = querySanp.docs.map(docSnap => docSnap.data())
-        console.log(allusers)
-        setUsers(allusers)
+       // console.log(allusers)
+       setUsers(allusers)
+       console.log('usuario logado: ', user.uid)
     }
 
     useEffect(() => {
@@ -156,13 +158,14 @@ export default function PerfilTopTab() {
                 {/* <Image source={{uri:item.pic}} style={{width:60, height: 60, borderRadius:30, backgroundColor: "green" }} /> */}
                 <Image source={require('../../assets/logo/logo_novo.jpg')} style={{ width: 60, height: 60, borderRadius: 30, backgroundColor: "green" }} />
                 {/*<Image source={require('../../../src/assets/logo_novo.jpg')} style={{ width: 100, height: 100, borderRadius: 50, borderWidth: 1, borderColor: "black" }} /> */}
-                <View>
+               <View>
                     <Text style={styles.txtEmail_e_Senha}>{item.nomeCompleto}</Text>
                     <Text style={styles.txtEmail_e_Senha}>{item.email}</Text>
                 </View>
             </View>
         )
     }
+
 
     // ao invés desse user_id,tu pode fazer a mesma coisa mas usando o user todo
 

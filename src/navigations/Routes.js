@@ -12,9 +12,11 @@ import Loading from '../components/componentesGerais/Loading/Loading';
 //import AuthStack from './AuthStack';
 //import { AuthContext } from './AuthProvider';
 
+//Dicas do link: https://amanhimself.dev/blog/chat-app-with-react-native-part-2/
+
 
 export default function Routes() {
-    const [initializing, setInitializing] = useState(true);    
+    const [initializing, setInitializing] = useState(true);        
     const { user, setUser } = useContext(AuthContext);
     const [loading, setLoading] = useState(true);
     
@@ -25,7 +27,7 @@ export default function Routes() {
         setUser(user);
         if (initializing) setInitializing(false);
         setLoading(false);
-        console.log(user);
+       console.log(user); //nenhum usuario logado, ou user fez login
     }
 
     useEffect(() => { // onAuthStateChanged retorna o usuário atual que fez login

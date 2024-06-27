@@ -25,29 +25,28 @@ export default function Detalhes({ userDono }) {
 
 
     //===================================
-    //Função Abrir NovoChat ItemListaChat Message
+    //Função informações dos "Detalhes" no "ChatMensagens", dentro do novo "ItemListaChat" Message
     const abrirChatMessageChat = () => {
         //navigation.navigate('Detalhes', { name: 'titulo vai aqui', detalhes: 'descricao aqui', preco: '0,01' });
-      //  navigation.navigate('ChatMensagens', { data });
-     navigation.navigate('ChatMensagens', {
-        userDono: 'User Dono', //data.user_id,
-        imageUserDono: require('../../assets/logo/logo.png'),
-        image: data.imagem,
-        name: data.titulo, //'Titulo do produto', 
-        valor: data.valor,
-    });
-     // console.log('ChatMensagens', {userDono: data.titulo});
+        //  navigation.navigate('ChatMensagens', { data });
+        navigation.navigate('ChatMensagens', {
+            userDono: data.user_id, //'User Dono', //data.user_id,
+            imageUserDono: require('../../assets/imgUserDono/logoFACCAT.png'),
+            image: data.imagem,
+            name: data.titulo, //'Titulo do produto', 
+            valor: data.valor,
+        });
+        // console.log('ChatMensagens', {userDono: data.titulo});
     };
 
     //===================================
     //Função Abrir NovoChat ItemListaChat Message
-  //  const novoItemListaChat = () => {
-        //navigation.navigate('Detalhes', { name: 'titulo vai aqui', detalhes: 'descricao aqui', preco: '0,01' });
-      //  navigation.navigate('ChatMensagens', { data });
+    //  const novoItemListaChat = () => {
+    //navigation.navigate('Detalhes', { name: 'titulo vai aqui', detalhes: 'descricao aqui', preco: '0,01' });
+    //  navigation.navigate('ChatMensagens', { data });
     // navigation.navigate('ChatMensagens', {data});
     // console.log('ChatMensagens', {userDono: data.titulo});
-   // };
-
+    // };
 
 
     return (

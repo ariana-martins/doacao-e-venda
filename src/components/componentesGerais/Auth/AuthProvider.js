@@ -12,7 +12,14 @@ import auth from '@react-native-firebase/auth';
  * para acessar o usuário em todo o aplicativo
  * */
 
+//Link de referência: https://amanhimself.dev/blog/chat-app-with-react-native-part-2/
+
 //=====================================
+
+
+// Falta configurar essa tela junto com as telas "Login" de login, 
+//e "Cadastrar" de register, como também a tela "Perfil - sair" de logout
+// Onde configura o AuthContext
 
 export const AuthContext = createContext({});
 

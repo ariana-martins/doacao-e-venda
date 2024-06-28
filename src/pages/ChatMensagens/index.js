@@ -65,7 +65,8 @@ export default function ChatMensagens() {
             await messagesRef.add({
                 text,
                 msgEnviada,
-                timestamp: firestore.FieldValue.serverTimestamp(),
+                //timestamp: firestore.FieldValue.serverTimestamp(),
+                createdAt: new Date(),
             });
         } catch (error) {
             console.error('Error sending message: ', error);
@@ -75,8 +76,8 @@ export default function ChatMensagens() {
     //Step 3: Real-Time Data Syncing
     const subscribeToMessages = (callback) => {
         const unsubscribe = messagesRef
-            .orderBy('timestamp')
-            //.orderBy('createdAt', 'desc')
+            //.orderBy('timestamp')
+            .orderBy('createdAt', 'desc')
             .onSnapshot((snapshot) => {
                 const messages = [];
                 snapshot.forEach((doc) => {
@@ -104,23 +105,33 @@ export default function ChatMensagens() {
         //sendMessage(text, 'User'); //testar acrescentar a id/key do "produto" 
         setText('');
     };
- 
+
+
+    {/*=======>>>>>> //Falta Configurar nesta tela. <<<<========================
+    // Na tela de "Chats/"ChatMensagens" qdo digita a msg, tem que deixar o texto aparecendo 
+    a ultima msg que o usuário digitou (utilizar algo assim "initialScrollIndex={index}") 
+    e vincular o texto somente a esse usuário... 
+
+    //OK - temporariamente com a opção "inverted={-1}" no Flatlist.
+    //==========================================================================
+    */}
+
 
     return (
 
         <View style={styles.container}>
 
             <View style={{ borderBottomWidth: 1, borderBottomColor: '#CCCCCC', }}>
-                    <View style={styles.headerChatMsg}>
-                        <View style={{marginBottom: 5 }}>
+                <View style={styles.headerChatMsg}>
+                    <View style={{ marginBottom: 5 }}>
                         <BotaoVoltar />
-                        </View>
-                        <Text style={styles.txtTituloDetalhes}>{userDono}</Text>
-                        {/*ImageUserDono vem da página "Detalhes" */}
-                        <Image style={styles.imagemMaisDetalhesUserDono}
-                            source={imageUserDono} />
                     </View>
-            </View>    
+                    <Text style={styles.txtTituloDetalhes}>{userDono}</Text>
+                    {/*ImageUserDono vem da página "Detalhes" */}
+                    <Image style={styles.imagemMaisDetalhesUserDono}
+                        source={imageUserDono} />
+                </View>
+            </View>
 
             <View style={{ display: 'flex', flexDirection: 'column', flex: 1, }}>
 
@@ -175,11 +186,12 @@ export default function ChatMensagens() {
 
                 <FlatList
                     data={messages}
+                    inverted={-1} //junto com a data e horário ".orderBy('createdAt', 'desc')" o texto fica próximo do botão "Enviar"
                     keyExtractor={(item) => item.id}
                     renderItem={({ item }) => (
                         <View style={{ marginTop: 8, display: 'flex', flex: 1, overflow: 'scroll' }}>
 
-                           <EnviarReceberMensagens />
+                            <EnviarReceberMensagens />
                             <View style={{ width: 180, margin: 10, display: 'flex', alignSelf: 'flex-end' }}>
                                 <View style={{ backgroundColor: '#afeeee', borderRadius: 8 }}>
                                     <Text style={{ padding: 8, color: 'black' }}>{item.msgEnviada}: {item.text}</Text>
@@ -251,19 +263,19 @@ const styles = StyleSheet.create({
     },
     headerChatMsg: {
         width: '100%',
-      //  paddingHorizontal: 10,
+        //  paddingHorizontal: 10,
         backgroundColor: '#FFFFFF',
-       // marginBottom: 5,
+        // marginBottom: 5,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
     },
-   txtTituloDetalhes: {
+    txtTituloDetalhes: {
         fontFamily: 'Roboto',
         fontSize: 15,
         color: '#000000',
         marginLeft: 5,
-      //  paddingHorizontal: 10,
+        //  paddingHorizontal: 10,
         // marginTop: 10,
         textAlign: 'center',
     },
@@ -272,7 +284,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
     },
- 
+
     imagemMaisDetalhesUserDono: {
         width: 50,
         height: 50,

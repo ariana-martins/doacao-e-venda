@@ -48,6 +48,23 @@ export default function ItemListaChat() {
     ];
 
 
+    //Tem que ir para o firebase
+    /*
+    const chats = [
+        {
+            id: // data.key,
+            image: //imagem do produto,
+            title: //titulo do produto,
+            valor: //valor do produto,
+            messageTime: //horário creat_at,
+            messageText: // {userDono: data.user_id} porém tem que ser o "nomeCompleto"
+            imagemUserDono: //img dono do produto
+            messageUser: //outro usuario com interesse no meu produto...
+        },
+    ];
+*/
+
+
     //===================================
     //Função Abrir Tela Detalhes
     //const abrirDetalhes = (data) => {
@@ -60,6 +77,7 @@ export default function ItemListaChat() {
         console.log(data);
     };
 */
+
 
 
     return (
@@ -135,7 +153,6 @@ const styles = StyleSheet.create({
         fontFamily: 'Roboto',
         fontSize: 25,
         color: '#000000',
-        marginVertical: 10,
     },
     linhaDivid: {
         width: '100%',

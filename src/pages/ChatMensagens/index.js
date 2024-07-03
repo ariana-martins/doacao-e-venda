@@ -128,8 +128,12 @@ export default function ChatMensagens() {
                     </View>
                     <Text style={styles.txtTituloDetalhes}>{userDono}</Text>
                     {/*ImageUserDono vem da página "Detalhes" */}
+                    {/*
                     <Image style={styles.imagemMaisDetalhesUserDono}
                         source={imageUserDono} />
+    */}
+                    <Image style={styles.imagemMaisDetalhesUserDono}
+                        source={require('../../assets/logo/logo_novo.jpg')} />
                 </View>
             </View>
 
@@ -174,7 +178,11 @@ export default function ChatMensagens() {
                 </View>
 
 
-                <View style={{ flexDirection: 'row', backgroundColor: '#FFFFFF', borderBottomWidth: 1, borderBottomColor: '#CCCCCC', }}>
+                <View style={{
+                    flexDirection: 'row', backgroundColor: '#FFFFFF', margin: 10,
+                    borderBottomWidth: 1, borderBottomColor: '#CCCCCC',
+                }}>
+
                     <Image style={styles.imagemMaisDetalhes}
                         source={{ uri: image }}
                     />
@@ -182,6 +190,7 @@ export default function ChatMensagens() {
                         <Text style={{ paddingRight: 10 }}>{name}</Text>
                         <Text style={{ marginVertical: 5 }}>{valor}</Text>
                     </View>
+
                 </View>
 
                 <FlatList

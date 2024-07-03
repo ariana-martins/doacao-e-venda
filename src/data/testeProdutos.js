@@ -1,5 +1,5 @@
 
-export default [
+/*export default [
     {
         id: '1',
         image: require('../assets/img/img1.png'),
@@ -128,3 +128,78 @@ export default [
           },
 ];
 
+*/
+
+export default [
+  {
+    id: '1',
+    avatar: 'https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT.png',
+    title: 'Sapatênis',
+    valor: '200,00',
+    descricao: 'Sapatênis marrom novo blablabla roupas calçados, Genero: Masculino / Marca: Coturno',
+  },
+  {
+    id: '2',
+    avatar: 'https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT.png',
+    title: 'Blusa branca',
+    valor: '0,00',
+    descricao: 'Blusa branca novo blablabla roupas calçados, Genero: Masculino / Marca: Coturno',
+  },
+  {
+    id: '3',
+    avatar: 'https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT.png',
+    title: 'Tênis branco',
+    valor: '2,00',
+    descricao: 'Tênis branco novo blablabla roupas calçados, Genero: Masculino / Marca: Coturno',
+  },
+  {
+    id: '4',
+    avatar: 'https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT.png',
+    title: 'Bermuda',
+    valor: '0,00',
+    descricao: 'Bermuda blablabla roupas calçados, Genero: Masculino / Marca: Coturno',
+  },
+  {
+    id: '5',
+    avatar: 'https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT.png',
+    title: 'Chinelo adulto',
+    valor: '35,00',
+    descricao: 'calçado marrom novo blablabla roupas calçados, Genero: Masculino / Marca: Coturno',
+  },
+  {
+    id: '6',
+    avatar: 'https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT.png',
+    title: 'Casaco infantil',
+    valor: '100,00',
+    descricao: 'calçado marrom novo blablabla roupas calçados, Genero: Masculino / Marca: Coturno',
+  },
+  {
+    id: '7',
+    avatar: 'https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT.png',
+    title: 'Sapato',
+    valor: '0,00',
+    descricao: 'calçado marrom novo blablabla roupas calçados, Genero: Masculino / Marca: Coturno',
+  },
+  {
+    id: '8',
+    avatar: 'https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT.png',
+    title: 'Casaco preto',
+    valor: '214,00',
+    descricao: 'calçado marrom novo blablabla roupas calçados, Genero: Masculino / Marca: Coturno',
+  },
+  {
+    id: '9',
+    avatar: 'https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT.png',
+    title: 'Vestido roxo',
+    valor: '0,00',
+    descricao: 'calçado marrom novo blablabla roupas calçados, Genero: Masculino / Marca: Coturno',
+  },
+  {
+    id: '10',
+    avatar: 'https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT.png',
+    title: 'teste1',
+    valor: '0,00',
+    descricao: 'calçado marrom novo blablabla roupas calçados, Genero: Masculino / Marca: Coturno',
+  },
+
+];

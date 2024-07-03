@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../../components/componentesGerais/Auth/AuthProvider';
 import { View, Image, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 
 
@@ -79,7 +79,6 @@ export default function ItemListaChat() {
 */
 
 
-
     return (
         <View style={styles.container}>
             <View style={styles.addMargem}>
@@ -93,7 +92,7 @@ export default function ItemListaChat() {
                     renderItem={({ item }) => (
                         <View style={styles.card}>
                             <TouchableOpacity onPress={() => navigation.navigate('ChatMensagens',
-                                { userDono: item.messageText })}>
+                                { userDono: item.messageText })}>                      
                                 <View style={styles.userInfo}>
                                     <View style={styles.userImgWrapper}>
 

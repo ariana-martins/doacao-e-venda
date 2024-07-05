@@ -52,7 +52,8 @@ export default function Login() {
             
            // console.log(auth().currentUser) //Esse console.log mostra todos os dados de login do usuário, mesmo não configurado o displayName.
 
-            return result;
+          //  return result;
+          return console.log(result)
             
         } catch (error) {
             //console.log(error.code) //error.code mostra se o endereço de e-mail ou a senha foi digitado errado, e mostra através do log

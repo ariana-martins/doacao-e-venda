@@ -25,22 +25,24 @@ import ImageCropPicker from 'react-native-image-crop-picker';
 
 
 export default function PerfilTopTab() {
-    const navigation = useNavigation();
+    // const navigation = useNavigation();
 
     //Falta configurar o authContext. Perfil - Sair do App (seria o "logout" do AuthContext)
-    const { user, logout } = useContext(AuthContext);
+    //const { user, logout } = useContext(AuthContext);
 
-    const [nomeCompleto, setNomeCompleto] = useState('');
-    const [email, setEmail] = useState('');
+    // const [userInfo, setUserInfo] = useState([]);
+    //const [nomeCompleto, setNomeCompleto] = useState('');
+    // const [email, setEmail] = useState('');
 
-    const [users, setUsers] = useState(null);
+    //const [users, setUsers] = useState(null);
 
-    const [userData, setUserData] = useState(null);
-
-
+    //const [userData, setUserData] = useState(null);
 
 
-//Função voltar ao Inicio do aplicativo, para fazer outro login.
+
+
+
+    //Função voltar ao Inicio do aplicativo, para fazer outro login.
     const Logout = () => {
         Alert.alert("SAIR", "Tem certeza que deseja SAIR?", [
             {
@@ -53,28 +55,27 @@ export default function PerfilTopTab() {
                 onPress: () => auth().signOut() //Navigation.goBack() volta para "PaginaInicial" pois as Tabs já estão configuradas como InitialHome para iniciar na "Pagina Inicial"
                 //Dicas nos links: https://www.tabnews.com.br/marcosveloso/template-de-rotas-react-native-com-native-stack-bottom-tabs-e-drawer-navigator
                 //Dicas nos link complementar com o código gitHub: https://github.com/MarcosVel/routes-template/commit/33e621df08b702225460437fd0b3fb58678b98d9
-                
+
             }
         ]);
         return true;
-        
+
     };
 
-
-    const getUsers = async () => {
-        const querySanp = await firestore().collection('users').get()
-        const allusers = querySanp.docs.map(docSnap => docSnap.data())
-       // console.log(allusers)
-       setUsers(allusers)
-       console.log('usuario logado: ', user.uid)
-    }
-
-    useEffect(() => {
-        getUsers()
-    }, [])
-
-
-
+    /*
+        const getUsers = async () => {
+            const querySanp = await firestore().collection('users').get()
+            const allusers = querySanp.docs.map(docSnap => docSnap.data())
+           // console.log(allusers)
+           setUsers(allusers)
+           console.log('usuario logado: ', user.uid)
+        }
+    
+        useEffect(() => {
+            getUsers()
+        }, [])
+    
+    */
 
     //Ref of our image
     //const reference = storage().ref('url or name_of_file');
@@ -103,7 +104,7 @@ export default function PerfilTopTab() {
         }).then(image => {
             console.log("Selecione uma imagem aqui:", image);
             setImage(image.path)
-         //   sheet.current.close()
+            //   sheet.current.close()
         }).catch(error => {
             console.log("Aviso: Cancelou imagemmm", error);
         });
@@ -112,7 +113,7 @@ export default function PerfilTopTab() {
 
     //React Hook com useState para pegar a imagem selecionada e exibi-la em nosso aplicativo.
     const [image, setImage] = React.useState(null);
-    
+
 
     //===========================================
     // Referência: https://dev.to/papemalick2015/react-native-firebase-storage-11kf
@@ -135,7 +136,7 @@ export default function PerfilTopTab() {
         try {
             await task;
             const url = await reference.getDownloadURL() //Baixando um arquivo com uma URL, e para obter uma URL de uma referência usando .getDownloadURL().
-            
+
             Alert.alert("Foto", "Aqui salvei imagem")
             console.log('Download URL:', url);
             return url
@@ -143,22 +144,23 @@ export default function PerfilTopTab() {
         catch (error) {
             // Handle any errors that occur
             console.error("Qualquer erro", error);
-           
+
         };
 
-       // setImage(null);  //Essa linha resolveu temporariamente o erro de "Possible Unhandled Promise Rejeition (id: 1) qdo faz o upload da imagem e após salvar aparece esse erro..."
-    
+        // setImage(null);  //Essa linha resolveu temporariamente o erro de "Possible Unhandled Promise Rejeition (id: 1) qdo faz o upload da imagem e após salvar aparece esse erro..."
+
     }
 
+    {/*
 
     const RenderCard = ({ item }) => {
         return (
             <View style={styles.myCard}>
                 {/* "pic" é a "identificação da imagem" no firestore junto com "nomeCompleto" "uid" "email"...  */}
-                {/* <Image source={{uri:item.pic}} style={{width:60, height: 60, borderRadius:30, backgroundColor: "green" }} /> */}
-                <Image source={require('../../assets/logo/logo_novo.jpg')} style={{ width: 60, height: 60, borderRadius: 30, backgroundColor: "green" }} />
+    {/* <Image source={{uri:item.pic}} style={{width:60, height: 60, borderRadius:30, backgroundColor: "green" }} /> */ }
+    {/*         <Image source={require('../../assets/logo/logo_novo.jpg')} style={{ width: 60, height: 60, borderRadius: 30, backgroundColor: "green" }} />
                 {/*<Image source={require('../../../src/assets/logo_novo.jpg')} style={{ width: 100, height: 100, borderRadius: 50, borderWidth: 1, borderColor: "black" }} /> */}
-               <View>
+    {/*           <View>
                     <Text style={styles.txtEmail_e_Senha}>{item.nomeCompleto}</Text>
                     <Text style={styles.txtEmail_e_Senha}>{item.email}</Text>
                 </View>
@@ -166,14 +168,61 @@ export default function PerfilTopTab() {
         )
     }
 
+*/}
 
     // ao invés desse user_id,tu pode fazer a mesma coisa mas usando o user todo
 
     // Ou seja, vai fazer um filtro para filtrar somente o usuário "conectado".
     //const user_id = firebase.auth().currentUser.uid; //[OK também, aqui mostra o Uid do usuário ao invés do email] 
     //const user_id = firebase.auth().currentUser.displayName; //Para incluir o nomeCompleto no Perfil do Usuário, tenho que fazer o displayName do firebase ficar igual o nome Completo.
-    const user_id = firebase.auth().currentUser.uid;
-    console.log('Users',users);
+    // const user_id = firebase.auth().currentUser.uid;
+    //console.log('Users',users);
+
+    /*
+        firebase.firestore().collection('users')
+            .doc(firebase.auth().currentUser.uid)
+            .get()
+            .then((snapshot) => {
+                if (snapshot.exists) {
+                    setUserInfo(snapshot.data());
+                } else { }
+            })
+    
+        console.log('User:', userInfo.nomeCompleto); //Está em loop, repetindo o nomeCompleto na tela do console.log
+        console.log('Email:', userInfo.email); //Está em loop, repetindo o email na tela do console.log
+    
+    */
+
+    {/*
+    //Dica do cadastrar o usuário e mostrar o nome do usuário no perfil
+    //Link: https://stackoverflow.com/questions/64578393/displaying-user-data-from-firebase-firestore-in-react-native-within-a-text-tag
+    [OK - corrigido aqui dia 05/07/2024]
+*/}
+    const [user, setUser] = useState();
+    const { uid } = auth().currentUser;
+
+    const getUser = async () => {
+        try {
+            const documentSnapshot = await firestore()
+                .collection('users')
+                .doc(uid)
+                .get();
+
+            const userData = documentSnapshot.data();
+            setUser(userData);
+        } catch {
+            //do whatever
+        }
+    };
+
+    // Get user on mount
+    useEffect(() => {
+        getUser();
+    }, []);
+
+    console.log(user && user?.nomeCompleto)
+    console.log(user && user?.email)
+
 
 
 
@@ -182,7 +231,7 @@ export default function PerfilTopTab() {
 
     return (
         <View style={styles.container}>
-            
+
             <View style={styles.container_images}>
                 <TouchableOpacity onPress={choose_photo}>
                     {image && <Image source={{ uri: image }}
@@ -197,23 +246,25 @@ export default function PerfilTopTab() {
                 </TouchableOpacity>
 
             </View>
-    
+
             {/* //====>>>> Falta configurar navegação do Login p/ as telas de páginas do usuário  */}
             {/* O Logout deve funcionar como exemplo do vídeo: "Part 1/2 | OLX Clone using React Native & Firebase | React Native & Firebase for beginners in Hindi" */}
             {/* Link do vídeo: https://www.youtube.com/watch?v=ntPQ-IPm3AM&list=PLB97yPrFwo5ihgCoWXlEDHrAPQNshsfzP&index=6 */}
+            {/* 
             <View>
                 {/*
                 <Text style={styles.txtEmail_e_Senha}>{nomeCompleto}Nome Usuário aqui</Text>
                 <Text style={styles.txtEmail_e_Senha}>{email}E-mail do usuário aqui</Text>
                 */}
 
-                {/*
+            {/*
                 <Text>{auth().currentUser.email}</Text>
                 <Button mode="contained" onPress={() => auth().signOut()} >
                     LogoutTeste
                 </Button>
                  */}
 
+            {/*
                 <FlatList
                     data={users}
                     renderItem={({ item }) => {
@@ -221,21 +272,33 @@ export default function PerfilTopTab() {
                     }}
                     keyExtractor={(item) => item.uid}
                 >
-
                 </FlatList>
+
+            </View>
+                */}
+
+
+
+            <View style={{ alignItems: 'center', marginTop: 20 }}>
+                <Image style={{ width: 100, height: 100, borderRadius: 50, borderWidth: 1, borderColor: "green" }}
+                    source={require('../../assets/logo/logo_novo.jpg')} />
+
+
+                <View style={{ marginTop: 20 }} >
+                    <View style={{ flexDirection: "row", fontWeight: 'bold' }}>
+                        {/* (Observação: o ícone está acima do Text (do usuário conectado, user_id), então ele aparece na extrema esquerda, se estivesse abaixo do Text, ele apareceria à direita.) */}
+                        <Icon style={styles.iconEmail} name="person-outline" size={20} color="#000000" />
+                        <Text style={{ fontSize: 20, color: 'black', fontWeight: 'bold' }}>Usuário: {user && user?.nomeCompleto}</Text>
+                    </View>
+                    <View style={{ flexDirection: "row", fontWeight: 'bold' }}>
+                        <Icon style={styles.iconEmail} name="mail-outline" size={20} color="#000000" />
+                        <Text style={{ fontSize: 20, color: 'black', fontWeight: 'bold' }}>Email: {user && user?.email}</Text>
+                    </View>
+                </View>
+
             </View>
 
-            <View style={{ flexDirection: "row", fontWeight: 'bold' }}>
-                {/* (Observação: o ícone está acima do Text (do usuário conectado, user_id), então ele aparece na extrema esquerda, se estivesse abaixo do Text, ele apareceria à direita.) */}
-                <Icon style={styles.iconEmail} name="person-outline" size={20} color="#000000" />
-                <Text style={{ fontSize: 20, color: 'black', fontWeight: 'bold' }}>Usuário: oi</Text>
-            </View>
-            <View style={{ flexDirection: "row", fontWeight: 'bold' }}>
-                <Icon style={styles.iconEmail} name="mail-outline" size={20} color="#000000" />
-                <Text style={{ fontSize: 20, color: 'black', fontWeight: 'bold' }}>Email: alguma coisa</Text>
-            </View>
-{/*
- 
+            {/*
  
             <View style={styles.containerTeste}>
                 <Text style={styles.textBemVindoUser}>Bem vindo user: {user.uid}</Text>
@@ -263,7 +326,7 @@ const styles = StyleSheet.create({
         // alignItems: "center"
     },
     containerTeste: {
-      //  flex: 1,
+        //  flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#f5f5f5',

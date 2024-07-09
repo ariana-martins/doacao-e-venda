@@ -9,6 +9,7 @@ import storage from '@react-native-firebase/storage';
 import auth from '@react-native-firebase/auth';
 
 import Icon from 'react-native-vector-icons/Ionicons';
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 //============================================================================
@@ -20,85 +21,110 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 
 export default function MeusProdutos() {
-   
+
     const [data, setData] = useState('');
 
 
 
-//a partir de então 
-useEffect(()=>{
-    //where p/ filtrar meus produtos, só vai mostrar as publicações do usuário logado,
-    // e dentro do where, irá os parametros de quem é usuario ("id do usuário", "igual", usuário) 
-    let ref = firebase.firestore().collection('produtos').where('user_id', '==', user_id)
-        .onSnapshot(querySnapshot =>{
-        const data = []
-        querySnapshot.forEach(doc =>{
-            data.push({ //eu quero que o banco de dados traga todas as informações 
-                 ...doc.data(),
-                    key:doc.id // do banco que esteja este usuario que está logado
+    //a partir de então 
+    useEffect(() => {
+        //where p/ filtrar meus produtos, só vai mostrar as publicações do usuário logado,
+        // e dentro do where, irá os parametros de quem é usuario ("id do usuário", "igual", usuário) 
+        let ref = firebase.firestore().collection('produtos').where('user_id', '==', user_id)
+            .onSnapshot(querySnapshot => {
+                const data = []
+                querySnapshot.forEach(doc => {
+                    data.push({ //eu quero que o banco de dados traga todas as informações 
+                        ...doc.data(),
+                        key: doc.id // do banco que esteja este usuario que está logado
+                    })
+                })
+                setData(data)
             })
-        })
-            setData(data)
-    })
-    return () => ref()
-}, [])
+        return () => ref()
+    }, [])
 
 
 
 
-  //variável constante
-  const user_id = firebase.auth().currentUser.uid
+    //variável constante
+    const user_id = firebase.auth().currentUser.uid
 
-return (
+    return (
 
-    <View style={{ flex:1, padding: 20, backgroundColor: 'white' }}>
+        <View style={{ flex: 1, padding: 20, backgroundColor: 'pink' }}>
 
-        <View style={styles.containerCard}>
-            <View style={styles.containerNotification}>
-                <Icon name="notifications-outline" size={20} color="#000000" />
-                <Text style={styles.notificationBold}>Clique aqui</Text>
-                <Text style={styles.notification}>para verificar as notificações</Text>
+            <View style={styles.containerCard}>
+                <View style={styles.containerNotification}>
+                    <Icon name="notifications-outline" size={20} color="#000000" />
+                    <Text style={styles.notificationBold}>Clique aqui</Text>
+                    <Text style={styles.notification}>para verificar as notificações</Text>
+                </View>
             </View>
-        </View>
 
-{/*
-        <View style={{ padding: 20, alignItems: 'center' }}>
-            <Text>Lista de produtos Para Doar e Vender</Text>
-            <View style={{ padding: 10, flexDirection: 'row', justifyContent: 'space-evenly', }}>
-            <Image style={styles.prodImage} source={require('../../assets/img9.png')}/>
-            <Image style={styles.prodImage} source={require('../../assets/img8.png')}/>
-            <Image style={styles.prodImage} source={require('../../assets/img7.png')}/>
+
+
+            {/*  <View style={{ padding: 20, alignItems: 'center' }}> */}
+            <Text style={styles.txtTitleMeusProdutos}>Lista de produtos Para Doar e Vender</Text>
+
+            {/* <View style={{ padding: 10, flexDirection: 'row', justifyContent: 'space-evenly', }}> */}
+
+            <View style={styles.containerCardsImgMeusProdutos}>
+                <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+
+
+                    <Image style={styles.prodImage} source={require('../../assets/img/img9.png')} />
+                    <View style={styles.iconEdicaoMeusProdutos}>
+                        <Icon name="pencil-outline" size={20} color="#000000" />
+                        <Icon name="archive-outline" size={20} color="#000000" />
+                        <Icon name="trash-outline" size={20} color="#000000" />
+                    </View>
+
+
+
+                    <Image style={styles.prodImage} source={require('../../assets/img/img8.png')} />
+                    <Image style={styles.prodImage} source={require('../../assets/img/img7.png')} />
+                    <Image style={styles.prodImage} source={require('../../assets/img/img6.png')} />
+                    <Image style={styles.prodImage} source={require('../../assets/img/img5.png')} />
+                    <Image style={styles.prodImage} source={require('../../assets/img/img4.png')} />
+                </ScrollView>
             </View>
-            <Text>Lista de produtos Doados e Vendidos</Text>
-        </View>
-*/}
+
+            {/*  </View> */}
+            <Text style={styles.txtTitleMeusProdutos}>Lista de produtos Doados e Vendidos</Text>
+            {/*   </View> */}
+
 
             <FlatList
                 data={data}
+                horizontal={true}
+
                 renderItem={({ item }) => (
-                    <View style={{ marginTop: 14 }}>
-                        <Card containerStyle={{ marginTop: 15 }}>
-                            <Text style={{ fontWeight: 'bold', fontSize: 16 }}>{user_id}</Text>
-                            {/*aqui vai o card de imagens, mas não está puxando do banco de dados todas as imagens*/}
-           
-                            <Card.Image
-                                style={styles.img}
-                                source={{ uri: item.imagem }}
-                            />
+                    <View style={{ marginTop: 15 }}>
+                        {/*  <Card containerStyle={{ marginTop: 15 }}> */}
+                        {/*<Text style={{ fontWeight: 'bold', fontSize: 16 }}>{user_id}</Text>*/}
+                        {/*aqui vai o card de imagens, mas não está puxando do banco de dados todas as imagens*/}
+
+                        <Image
+                            style={styles.prodImage}
+                            source={{ uri: item.imagem }}
+                        />
+                        {/*
                             <Card.Divider />
                             <Card.Title>{item.titulo}</Card.Title>
                             <Text style={{ fontWeight: 'bold', fontSize: 16 }}>{item.valor}</Text>
 
                             <Text style={{ fontSize: 16, marginTop: 5 }}>{item.descricao}</Text>
+                */}
 
-                        </Card>
-                       
+                        {/*     </Card> */}
+
                     </View>
                 )}
             />
-     
-     
-    {/** 
+
+
+            {/** 
       //========== Exemplo: faz a estilização em components, e renderiza na pagina principal ==============
      
      <NativeBaseProvider theme={customTheme}>
@@ -112,31 +138,22 @@ return (
    </Box>
    </NativeBaseProvider>
  */}
-    </View>
-    
-);
+        </View>
+
+    );
 };
 
 
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 25,
-        backgroundColor: 'white',
-    },
-    prodImage: {
-        width: 96,
-        height: 118,
-        resizeMode: "cover",
-      },
+
 
     containerCard: {
         backgroundColor: 'white',
-      //  margin: 10,
-     //   padding: 15,
-        borderRadius: 10,
+        //  margin: 10,
+        //   padding: 15,
 
+        borderRadius: 10,
         //shadows - sombras no textInput
         shadowColor: '#000',
         shadowOffset: {
@@ -150,8 +167,8 @@ const styles = StyleSheet.create({
     containerNotification: {
         flexDirection: 'row',
         alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
-      //  width: '100%',
-      //  backgroundColor: '#C4C4C4',
+        //  width: '100%',
+        //  backgroundColor: '#C4C4C4',
         height: 37,
         //borderRadius: 10,
         justifyContent: 'center',
@@ -162,41 +179,98 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginLeft: 5,
         fontWeight: 'bold',
-     //   fontFamily: 'Roboto',
-      //  paddingHorizontal: 10,
+        //   fontFamily: 'Roboto',
+        //  paddingHorizontal: 10,
         fontSize: 15, //tamanho da fonte
-       // color: 'black',
+        // color: 'black',
     },
     notification: {
         borderBottomWidth: StyleSheet.hairlineWidth,
         borderBottomColor: 'black',
         textAlign: 'center',
         marginLeft: 5,
-    //    fontFamily: 'Roboto',
-     //   paddingHorizontal: 10,
+        //    fontFamily: 'Roboto',
+        //   paddingHorizontal: 10,
         fontSize: 15, //tamanho da fonte
-      //  color: 'black',
+        //  color: 'black',
     },
 
-textInputStyle: {
-    width: '100%',
-    height: 40,
-    paddingHorizontal: 5,
-    borderWidth: 0.5,
-    marginTop: 20,
-},
-button: {
-    width: 150,
-    height: 50,
-    borderRadius: 10,
-    backgroundColor: '#7159c1',
-    justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
-    alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
-},
-img: {   
-    padding: 0,
-    resizeMode: 'contain',
-},
+    txtTitleMeusProdutos: {
+        paddingHorizontal: 10,
+        paddingTop: 15,
+        fontSize: 15,
+        color: '#000000',
+        fontFamily: 'Roboto',
+    },
+    containerCardsImgMeusProdutos: {
+        flexDirection: 'row',
+        width: '100%',
+        /*     
+             width: 150,
+             height: 150,
+             justifyContent: 'center',
+             alignItems: 'center',
+             borderRadius: 4,
+             borderColor: '#E6E6E6',
+             borderWidth: 3,
+             marginHorizontal: 10,
+             */
+    },
+
+    prodImage: {
+        //   width: 96,
+        //  height: 118,
+        width: 150,
+        height: 150,
+        resizeMode: "cover",
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 4,
+        borderColor: '#E6E6E6',
+        borderWidth: 3,
+        marginHorizontal: 10,
+    },
+    iconEdicaoMeusProdutos: {
+        flex: 1,
+        backgroundColor: '#E6E6E6',
+        flexDirection: 'row',
+        alignSelf: 'flex-end',
+        //  position: 'absolute',
+    },
+
+
+
+    //======>>>>>>>Não está mais na página<<<<====================
+    /*
+    container: {
+        flex: 1,
+        padding: 25,
+        backgroundColor: 'white',
+    },
+      textInputStyle: {
+        width: '100%',
+        height: 40,
+        paddingHorizontal: 5,
+        borderWidth: 0.5,
+        marginTop: 20,
+    },
+      button: {
+        width: 150,
+        height: 50,
+        borderRadius: 10,
+        backgroundColor: '#7159c1',
+        justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
+        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
+    },
+
+     img: {
+        padding: 0,
+        resizeMode: 'contain',
+    },
+    
+    
+    */
+
 });
 
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, FlatList, Image } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity } from 'react-native';
 import { Card } from 'react-native-elements';
 
 
@@ -52,14 +52,16 @@ export default function MeusProdutos() {
 
     return (
 
-        <View style={{ flex: 1, padding: 20, backgroundColor: 'pink' }}>
+        <View style={{ flex: 1, padding: 20, backgroundColor: '#FFFFFF' }}>
 
             <View style={styles.containerCard}>
+            <TouchableOpacity>
                 <View style={styles.containerNotification}>
                     <Icon name="notifications-outline" size={20} color="#000000" />
-                    <Text style={styles.notificationBold}>Clique aqui</Text>
-                    <Text style={styles.notification}>para verificar as notificações</Text>
+                        <Text style={styles.notificationBold}>Clique aqui</Text>
+                        <Text style={styles.notification}>para verificar as notificações</Text>
                 </View>
+                </TouchableOpacity>
             </View>
 
 
@@ -69,46 +71,36 @@ export default function MeusProdutos() {
 
             {/* <View style={{ padding: 10, flexDirection: 'row', justifyContent: 'space-evenly', }}> */}
 
-            <View style={styles.containerCardsImgMeusProdutos}>
-                <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-
-
-                    <Image style={styles.prodImage} source={require('../../assets/img/img9.png')} />
-                    <View style={styles.iconEdicaoMeusProdutos}>
-                        <Icon name="pencil-outline" size={20} color="#000000" />
-                        <Icon name="archive-outline" size={20} color="#000000" />
-                        <Icon name="trash-outline" size={20} color="#000000" />
-                    </View>
-
-
-
-                    <Image style={styles.prodImage} source={require('../../assets/img/img8.png')} />
-                    <Image style={styles.prodImage} source={require('../../assets/img/img7.png')} />
-                    <Image style={styles.prodImage} source={require('../../assets/img/img6.png')} />
-                    <Image style={styles.prodImage} source={require('../../assets/img/img5.png')} />
-                    <Image style={styles.prodImage} source={require('../../assets/img/img4.png')} />
-                </ScrollView>
-            </View>
-
-            {/*  </View> */}
-            <Text style={styles.txtTitleMeusProdutos}>Lista de produtos Doados e Vendidos</Text>
-            {/*   </View> */}
-
 
             <FlatList
                 data={data}
                 horizontal={true}
-
+                showsHorizontalScrollIndicator={false}
+                style={{ maxHeight: 170 }}
                 renderItem={({ item }) => (
-                    <View style={{ marginTop: 15 }}>
+                    <View>
                         {/*  <Card containerStyle={{ marginTop: 15 }}> */}
                         {/*<Text style={{ fontWeight: 'bold', fontSize: 16 }}>{user_id}</Text>*/}
                         {/*aqui vai o card de imagens, mas não está puxando do banco de dados todas as imagens*/}
+                        <View>
+                            <Image
+                                style={styles.prodImage}
+                                source={{ uri: item.imagem }}
+                            />
+                            <View style={styles.iconEdicaoMeusProdutos}>
+                                <TouchableOpacity>
+                                    <Icon name="pencil-outline" size={20} color="#000000" />
+                                </TouchableOpacity>
+                                <TouchableOpacity>
+                                    <Icon name="archive-outline" size={20} color="#000000" />
+                                </TouchableOpacity>
+                                <TouchableOpacity>
+                                    <Icon name="trash-outline" size={20} color="#000000" />
+                                </TouchableOpacity>
+                            </View>
 
-                        <Image
-                            style={styles.prodImage}
-                            source={{ uri: item.imagem }}
-                        />
+                        </View>
+
                         {/*
                             <Card.Divider />
                             <Card.Title>{item.titulo}</Card.Title>
@@ -122,6 +114,26 @@ export default function MeusProdutos() {
                     </View>
                 )}
             />
+
+
+
+
+            {/*  </View> */}
+            <Text style={styles.txtTitleMeusProdutos}>Lista de produtos Doados e Vendidos</Text>
+            {/*   </View> */}
+
+            <View style={styles.containerCardsImgMeusProdutos}>
+                <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+
+                    <Image style={styles.prodImage} source={require('../../assets/img/img9.png')} />
+                    <Image style={styles.prodImage} source={require('../../assets/img/img8.png')} />
+                    <Image style={styles.prodImage} source={require('../../assets/img/img7.png')} />
+                    <Image style={styles.prodImage} source={require('../../assets/img/img6.png')} />
+                    <Image style={styles.prodImage} source={require('../../assets/img/img5.png')} />
+
+                </ScrollView>
+            </View>
+
 
 
             {/** 
@@ -198,9 +210,10 @@ const styles = StyleSheet.create({
     txtTitleMeusProdutos: {
         paddingHorizontal: 10,
         paddingTop: 15,
-        fontSize: 15,
+        fontSize: 16,
         color: '#000000',
         fontFamily: 'Roboto',
+        marginVertical: 15,
     },
     containerCardsImgMeusProdutos: {
         flexDirection: 'row',
@@ -231,11 +244,15 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
     },
     iconEdicaoMeusProdutos: {
-        flex: 1,
         backgroundColor: '#E6E6E6',
         flexDirection: 'row',
-        alignSelf: 'flex-end',
-        //  position: 'absolute',
+        width: '40%',
+        position: 'absolute',
+        right: 10,
+        alignItems: 'flex-end',
+        justifyContent: 'space-between',
+
+
     },
 
 

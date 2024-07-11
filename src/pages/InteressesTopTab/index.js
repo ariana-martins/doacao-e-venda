@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, FlatList, TouchableOpacity, Image, ScrollView } from 'react-native';
 //import { Card } from 'react-native-elements';
 import { Card, Divider } from 'react-native-paper';
 
@@ -43,16 +43,20 @@ export default function InteressesTopTab() {
     return (
         <View style={{ flex: 1, padding: 10, backgroundColor: '#FFFFFF' }}>
 
-            <Text style={{ fontSize: 15 }}>Lista de interesses - Aguardando confirmação:</Text>
-            <Divider />
-                    {/** Falta criar função: Lista de interesses - Aguardando confirmação:<  */}
+            <Text style={styles.txtTitleInteresses}>Lista de interesses - Aguardando confirmação:</Text>
+
+            {/** Falta criar função: Lista de interesses - Aguardando confirmação:<  */}
 
             <FlatList
                 data={data}
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+                style={{ maxHeight: 170 }}
                 renderItem={({ item }) => (
-                    <View style={{ marginTop: 10 }}>
+                    <View style={{ justifyContent: 'center' }}>
                         <Card style={{ margin: 5 }}>
                             <View style={{ flexDirection: 'row' }}>
+
                                 <Card >
                                     <Card.Cover
                                         style={styles.img}
@@ -60,10 +64,15 @@ export default function InteressesTopTab() {
                                     />
 
                                 </Card>
-                                <View style={{ flexDirection: 'column', width: '100%' }}>
-                                    <Text style={styles.txtTitle}>{item.titulo}</Text>
-                                    <Text style={styles.txtValor}>{item.valor}</Text>
-                                    <Text style={styles.txtDetalhes}>Detalhes: {item.descricao}</Text>
+                                {/*<View style={{ flexDirection: 'column', width: '100%' }}> */}
+
+                                <View style={{ flexDirection: 'column', width: 220, height: 150 }}>
+
+                                    <View style={{ width: '100%', height: '65%', }}>
+                                        <Text style={styles.txtTitle}>{item.titulo}</Text>
+                                        <Text style={styles.txtValor}>{item.valor}</Text>
+                                        <Text style={styles.txtDetalhes}>Detalhes: {item.descricao}</Text>
+                                    </View>
 
                                     <View style={styles.botaoAdicionarMargem}>
                                         <TouchableOpacity style={styles.btnChat}
@@ -75,6 +84,7 @@ export default function InteressesTopTab() {
                                     </View>
                                     {/* Aqui vai o botão "Cancelar interesse, fica no canto inferior à direita do item do produto*/}
                                 </View>
+
 
                             </View>
 
@@ -103,13 +113,53 @@ export default function InteressesTopTab() {
                     </View >
                 )}
             />
-            <Text style={{ fontSize: 15 }}>Lista de interesses - Aceitos ou Recusados:</Text>
-            <Divider />
-                    {/** Falta criar função: Lista de interesses - Aceitos ou Recusados:  */}
+            <Text style={styles.txtTitleInteresses}>Lista de interesses - Aceitos ou Recusados:</Text>
 
-            <Text style={{ fontSize: 15 }}>Lista de interesses Adquiridos:</Text>
-            <Divider />
-                    {/* Falta criar função: Lista de interesses Adquiridos: */}
+
+            <Text style={styles.txtSubtituloInteresses}>Aceitos:</Text>
+
+            {/** Falta criar função: Lista de interesses - Aceitos ou Recusados:  */}
+
+            <View style={{ marginTop: 5, }}>
+                <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                    <Image style={styles.prodImage2} source={require('../../assets/img/img9.png')} />
+                    <Image style={styles.prodImage2} source={require('../../assets/img/img8.png')} />
+                    <Image style={styles.prodImage2} source={require('../../assets/img/img7.png')} />
+                    <Image style={styles.prodImage2} source={require('../../assets/img/img6.png')} />
+                    <Image style={styles.prodImage2} source={require('../../assets/img/img5.png')} />
+                    <Image style={styles.prodImage2} source={require('../../assets/img/img4.png')} />
+                    <Image style={styles.prodImage2} source={require('../../assets/img/img3.png')} />
+                    <Image style={styles.prodImage2} source={require('../../assets/img/img2.png')} />
+                </ScrollView>
+            </View>
+
+            <Text style={styles.txtSubtituloInteresses}>Recusados:</Text>
+
+            {/** Falta criar função: Lista de interesses - Aceitos ou Recusados:  */}
+
+            <View style={{ marginTop: 5, }}>
+                <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                    <Image style={styles.prodImage2} source={require('../../assets/img/img3.png')} />
+                    <Image style={styles.prodImage2} source={require('../../assets/img/img2.png')} />
+                    <Image style={styles.prodImage2} source={require('../../assets/img/img1.png')} />
+
+                </ScrollView>
+            </View>
+
+
+            <Text style={styles.txtTitleInteresses}>Lista de interesses - Adquiridos:</Text>
+
+            {/* Falta criar função: Lista de interesses Adquiridos: */}
+            <View style={{ marginTop: 5, }}>
+                <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                    <Image style={styles.prodImage} source={require('../../assets/img/img5.png')} />
+                    <Image style={styles.prodImage} source={require('../../assets/img/img4.png')} />
+                    <Image style={styles.prodImage} source={require('../../assets/img/img3.png')} />
+                    <Image style={styles.prodImage} source={require('../../assets/img/img2.png')} />
+                    <Image style={styles.prodImage} source={require('../../assets/img/img1.png')} />
+                </ScrollView>
+            </View>
+
 
         </View >
     );
@@ -119,6 +169,15 @@ export default function InteressesTopTab() {
 
 
 const styles = StyleSheet.create({
+    txtTitleInteresses: {
+        fontSize: 16,
+        color: '#000000',
+        fontFamily: 'Roboto',
+    },
+    txtSubtituloInteresses: {
+        fontSize: 15,
+        fontWeight: 'bold',
+    },
     img: {
         width: 98,
         height: 118, // altura da imagem
@@ -145,22 +204,25 @@ const styles = StyleSheet.create({
         fontStyle: 'normal',
         fontSize: 12,
         color: '#000000',
-        width: '60%',
+
     },
     botaoAdicionarMargem: {
         //paddingHorizontal: 15,
         // alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
         //justifyContent: 'center',
-        alignItems: 'center',
-        marginVertical: 10,
+        //  marginVertical: 10,
+        alignItems: 'flex-end',
+        marginRight: 10,
     },
+
     btnChat: {
-        width: 100, //largura
+        width: 80, //largura
         //  width: 250, //largura
-        height: 40, //altura 
+        height: 50, //altura 
         backgroundColor: '#000000', //cor dentro da borda, onde vai ser incluído o texto
         borderRadius: 10, // circunferência da borda
         justifyContent: 'center', //centraliza o texto ao meio da borda
+
     },
     textoBotao: {
         color: '#FFFFFF', //cor do texto
@@ -168,6 +230,29 @@ const styles = StyleSheet.create({
         fontSize: 15, //tamanho do texto
         textAlign: 'center', // alinha texto dentro da borda, ao centro
     },
+
+    prodImage: {
+        width: 96,
+        height: 118,
+        resizeMode: "cover",
+        //  justifyContent: 'center',
+        //  alignItems: 'center',
+        borderRadius: 4,
+        borderColor: '#E6E6E6',
+        borderWidth: 3,
+        marginHorizontal: 5,
+    },
+    prodImage2: {
+        width: 60,
+        height: 80,
+        resizeMode: "cover",
+        //  justifyContent: 'center',
+        //  alignItems: 'center',
+        borderRadius: 4,
+        borderColor: '#E6E6E6',
+        borderWidth: 3,
+        marginHorizontal: 5,
+    }
 
 });
 

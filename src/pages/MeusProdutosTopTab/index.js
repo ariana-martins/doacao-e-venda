@@ -67,7 +67,7 @@ export default function MeusProdutos() {
 
 
             {/*  <View style={{ padding: 20, alignItems: 'center' }}> */}
-            <Text style={styles.txtTitleMeusProdutos}>Lista de produtos Para Doar e Vender</Text>
+            <Text style={styles.txtTitleMeusProdutos}>Lista de produtos Para Doar e Vender:</Text>
 
             {/* <View style={{ padding: 10, flexDirection: 'row', justifyContent: 'space-evenly', }}> */}
 
@@ -119,7 +119,7 @@ export default function MeusProdutos() {
 
 
             {/*  </View> */}
-            <Text style={styles.txtTitleMeusProdutos}>Lista de produtos Doados e Vendidos</Text>
+            <Text style={styles.txtTitleMeusProdutos}>Lista de produtos Doados e Vendidos:</Text>
             {/*   </View> */}
 
             <View style={styles.containerCardsImgMeusProdutos}>

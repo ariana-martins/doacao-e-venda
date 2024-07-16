@@ -12,10 +12,11 @@ import EnviarReceberMensagens from '../../components/EnviarReceberMensagens';
 
 
 export default function ChatMensagens() {
+
+    
     const route = useRoute(); //Recebe o item da "PaginaInicial"
     //const { name, detalhes, preco } = route.params; //Recebe os itens "route.params" da "PaginaInicial"
     const { userDono, imageUserDono, image, name, valor } = route.params; //Recebe os itens "route.params" da "PaginaInicial" buscando do firebase
-
 
 
     const [modalActive, setModalActive] = useState(false)
@@ -56,6 +57,7 @@ export default function ChatMensagens() {
     //Step 1: Create a Firestore Collection
     // Create a reference to the "messages" collection
     const messagesRef = firestore().collection('messages');
+    //Falta criar uma nova collection('Chatrooms') por exemplo, para diferenciar a conversa p/ cada usuário/chat ItemListaChat
 
 
     //Step 2: Add Messages to Firestore
@@ -73,6 +75,7 @@ export default function ChatMensagens() {
         }
     };
 
+    
     //Step 3: Real-Time Data Syncing
     const subscribeToMessages = (callback) => {
         const unsubscribe = messagesRef
@@ -90,7 +93,7 @@ export default function ChatMensagens() {
 
 
     //Step 4: Displaying Messages
-    const [messages, setMessages] = useState([]);
+    const [messages, setMessages] = useState([]); // ([]) => array vazio
     const [text, setText] = useState('');
 
     useEffect(() => {
@@ -200,10 +203,11 @@ export default function ChatMensagens() {
                     renderItem={({ item }) => (
                         <View style={{ marginTop: 8, display: 'flex', flex: 1, overflow: 'scroll' }}>
 
-                            <EnviarReceberMensagens />
+                         <EnviarReceberMensagens /> 
+                          
                             <View style={{ width: 180, margin: 10, display: 'flex', alignSelf: 'flex-end' }}>
                                 <View style={{ backgroundColor: '#afeeee', borderRadius: 8 }}>
-                                    <Text style={{ padding: 8, color: 'black' }}>{item.msgEnviada}: {item.text}</Text>
+                                    <Text style={{ padding: 8, color: 'black' }}>{item.msgEnviada}:{"\n"}{item.text}</Text>
                                     <View style={{ flexDirection: 'row', alignSelf: 'flex-end' }}>
                                         <Text>20:10</Text>
                                         <Icon name="checkmark-done-outline" size={20} color="#000000" />

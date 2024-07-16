@@ -60,7 +60,7 @@ function Tabs() {
           tabBarIcon: ({ focused, color }) => (
             <Icon name="add-outline" size={30} color={focused ? "blue" : "black" } />
           ),
-          tabBarLabel: "Adicionar novo produto",
+          tabBarLabel: "Adicionar", //"Adicionar novo Produto"
         }}
       />
       <Tab.Screen

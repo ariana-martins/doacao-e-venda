@@ -1,17 +1,16 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../components/componentesGerais/Auth/AuthProvider';
-import { View, Image, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Image, Text, FlatList, StyleSheet, TouchableOpacity, Pressable, TextInput } from 'react-native';
 
 import { useNavigation, useRoute } from '@react-navigation/native';
 
-
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export default function ItemListaChat() {
 
     const { user, logout } = useContext(AuthContext);
 
     const navigation = useNavigation();
-
 
     const Chat = [
         {
@@ -46,6 +45,59 @@ export default function ItemListaChat() {
         },
 
     ];
+
+
+
+
+
+    /*
+    const [groupName, setGroupName] = useState("");
+
+    const handleCreateRoom = () => {
+        console.log( "createRoom", groupName );
+        //closedModal();
+    };
+
+    const rooms = [
+        {
+            id: "1",
+            name: "Novu Hangouts",
+            messages: [
+                {
+                    id: "1a",
+                    text: "Hello guys, welcome!",
+                    time: "07:50",
+                    user: "Tomer",
+                },
+                {
+                    id: "1b",
+                    text: "Hi Tomer, thank you! 😇",
+                    time: "08:50",
+                    user: "David",
+                },
+            ],
+        },
+        {
+            id: "2",
+            name: "Hacksquad Team 1",
+            messages: [
+                {
+                    id: "2a",
+                    text: "Guys, who's awake? 🙏🏽",
+                    time: "12:50",
+                    user: "Team Leader",
+                },
+                {
+                    id: "2b",
+                    text: "What's up? 🧑🏻‍💻",
+                    time: "03:50",
+                    user: "Victoria",
+                },
+            ],
+        },
+    ];
+
+*/
 
 
     //Tem que ir para o firebase
@@ -84,7 +136,41 @@ export default function ItemListaChat() {
             <View style={styles.addMargem}>
                 <View style={styles.linhaDivid}>
                     <Text style={styles.txtTituloChats}>Chats</Text>
+
+                    {/*
+                    <View>
+                        <TextInput
+                            placeholder='Group name aqui:'
+                            onChangeText={(value) => setGroupName(value)}
+                        />
+                    </View>
+                    <Pressable onPress={handleCreateRoom}>
+                    <Icon name="add" size={20} color="#000000" />
+                    </Pressable> 
+    */}
+
                 </View>
+
+                {/*
+                {rooms.length > 0 ? (
+                    <FlatList
+                        data={rooms}
+                        renderItem={({ item }) => <ChatComponent item={item} />}
+                        keyExtractor={(item) => item.id}
+                    />
+                ) : (
+                    <View>
+                        <Text>Não há chat criado</Text>
+                        <Text>Clique aqui para criar novo chat</Text>
+                    </View>
+
+                )}
+
+                */}
+
+
+
+
                 <FlatList
                     showsHorizontalScrollIndicator={false}
                     data={Chat}
@@ -92,7 +178,7 @@ export default function ItemListaChat() {
                     renderItem={({ item }) => (
                         <View style={styles.card}>
                             <TouchableOpacity onPress={() => navigation.navigate('ChatMensagens',
-                                { userDono: item.messageText })}>                      
+                                { userDono: item.messageText })}>
                                 <View style={styles.userInfo}>
                                     <View style={styles.userImgWrapper}>
 
@@ -100,15 +186,15 @@ export default function ItemListaChat() {
                                             <Image style={styles.prodImg}
                                                 source={item.image}
                                             />
-                                            
+
                                             <View style={{ flexDirection: 'row' }}>
-                                            <View style={{ flexDirection: 'column', marginLeft: 15, }}>
-                                                <Text style={styles.userName}>{item.title}</Text>
-                                                <Text style={styles.userValor}>{item.valor}</Text>
-                                                <Text>{item.messageText}</Text>
-                                                <Text>{item.messageUser}</Text>
-                                            </View>
-                                            <Text style={styles.postTime}>{item.messageTime}</Text>
+                                                <View style={{ flexDirection: 'column', marginLeft: 15, }}>
+                                                    <Text style={styles.userName}>{item.title}</Text>
+                                                    <Text style={styles.userValor}>{item.valor}</Text>
+                                                    <Text>{item.messageText}</Text>
+                                                    <Text>{item.messageUser}</Text>
+                                                </View>
+                                                <Text style={styles.postTime}>{item.messageTime}</Text>
                                             </View>
 
                                         </View>
@@ -117,11 +203,22 @@ export default function ItemListaChat() {
 
                                     <View style={styles.textSection}>
 
+                                        {/*
+                                        <Icon
+                                            name='person-circle-outline'
+                                            size={45}
+                                            color='black'
+                                            style={{marginTop: 10}}
+                                        />
+                    */}
+
+                                        
                                         <View style={{ marginTop: 20, }}>
                                             <Image style={styles.userDonoImg}
                                                 source={item.imagemUserDono}
                                             />
                                         </View>
+                                    
 
                                     </View>
                                 </View>
@@ -129,6 +226,7 @@ export default function ItemListaChat() {
                         </View>
                     )}
                 />
+
             </View>
 
 

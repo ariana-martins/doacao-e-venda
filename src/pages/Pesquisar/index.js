@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, SafeAreaView, SectionList, Alert, FlatList } from 'react-native';
-
-import { Card } from 'react-native-paper';
-
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, SafeAreaView, SectionList, Alert, FlatList, ScrollView, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+
+import { firebase } from '@react-native-firebase/firestore';
 
 import BotaoVoltar from '../../components/componentesGerais/BotaoVoltar';
 
@@ -23,6 +22,75 @@ export default function Pesquisar() {
     const [searchText, setSearchText] = useState('');
     const [list, setList] = useState(testeProdutos);
 
+    const [data, setData] = useState('');
+
+
+    //Busca produto no firestore
+    const ref = firebase.firestore().collection('produtos');
+    useEffect(() => {
+        ref.onSnapshot(querySnapshot => {
+            const data = []
+            querySnapshot.forEach(doc => {
+                data.push({
+                    ...doc.data(),
+                    key: doc.id
+                })
+            })
+            setData(data)
+        })
+        //  return () => ref()
+
+        
+            if (searchText === '') {
+                setData(data);
+            } else {
+                setData(
+                    data.filter(item => (item.titulo.toLocaleLowerCase().indexOf(searchText.toLocaleLowerCase()) > -1)
+                        /*
+                        //Mostra o mesmo resultado, porém vai o if e return do teste.   
+                           {
+                           if (item.title.toLocaleLowerCase().indexOf(searchText.toLocaleLowerCase()) > -1)
+                           {
+                               return true;
+                           } else {
+                               return false;
+                           }
+                       }
+                       //Exemplo completo no vídeo: "Como FILTRAR e ORDENAR um FlatList no React Native"
+                       // Link do canal do Youtube: https://www.youtube.com/watch?v=Rv2eJK1iOTo
+                       // Canal do Youtube: Bonieky Lacerda.
+                       */
+                    )
+                );
+            }
+        
+    
+    }, [searchText])
+
+
+
+    //Lista produtos do banco de dados
+    const RenderItemList = ({data}) => {
+        return (
+            <View style={styles.containerItemLista}>
+                <View style={styles.adicionarMargem}>
+                    <View>
+                        <Image style={styles.prodImg}
+                            //source={item.image}
+                            // quando buscar os produtos do firestores/storage, 
+                            //utilizar imagem com "uri", pois busca imagem da internet (firestores/storage)
+                            source={{ uri: data.imagem }}
+                        />
+                        <Text style={styles.txt}>{data.titulo}</Text>
+                        <Text style={styles.vlr}>R$ {data.valor}</Text>
+                    </View>
+
+                </View>
+            </View>
+        );
+    };
+
+
 
     //.toLowerCase() => Transforma o nome em minusculo, para poder pesquisar por palavra chave qualquer tamanho de letra...
     //tanto o nome aparecendo na lista, tanto o nome onde vai pesquisar, "vai transformar letras em minusculas".
@@ -33,24 +101,25 @@ export default function Pesquisar() {
         } else {
             setList(
                 testeProdutos.filter(item => (item.title.toLocaleLowerCase().indexOf(searchText.toLocaleLowerCase()) > -1)
-                 /*
-                 //Mostra o mesmo resultado, porém vai o if e return do teste.   
-                    {
-                    if (item.title.toLocaleLowerCase().indexOf(searchText.toLocaleLowerCase()) > -1)
-                    {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                }
-                //Exemplo completo no vídeo: "Como FILTRAR e ORDENAR um FlatList no React Native"
-                // Link do canal do Youtube: https://www.youtube.com/watch?v=Rv2eJK1iOTo
-                // Canal do Youtube: Bonieky Lacerda.
-                */
+                    /*
+                    //Mostra o mesmo resultado, porém vai o if e return do teste.   
+                       {
+                       if (item.title.toLocaleLowerCase().indexOf(searchText.toLocaleLowerCase()) > -1)
+                       {
+                           return true;
+                       } else {
+                           return false;
+                       }
+                   }
+                   //Exemplo completo no vídeo: "Como FILTRAR e ORDENAR um FlatList no React Native"
+                   // Link do canal do Youtube: https://www.youtube.com/watch?v=Rv2eJK1iOTo
+                   // Canal do Youtube: Bonieky Lacerda.
+                   */
                 )
             );
         }
     }, [searchText]);
+
 
 
 
@@ -130,17 +199,35 @@ export default function Pesquisar() {
                 </View>
 
                 <View>
+                 {/*
                     <Text style={{ marginBottom: 10, paddingHorizontal: 20, }}>
                         Aqui vai os produtos pesquisados e filtrados...
                     </Text>
+                 */}
 
-                    <FlatList
-                        data={list}
-                        //  style={styles.list}
-                        renderItem={({ item }) => <ListItem data={item} />}
-                        keyExtractor={(item) => item.id}
-                    />
-                   
+                    <View>
+
+                        {/*
+                        <FlatList
+                            data={list}
+                            //  style={styles.list}
+                            renderItem={({ item }) => <ListItem data={item} />}
+                            keyExtractor={(item) => item.id}
+                        />
+                        */}
+                        <FlatList
+                            showsHorizontalScrollIndicator={false}
+                            columnWrapperStyle={{ justifyContent: 'space-around', padding: 10 }}
+                            // data={testeProdutos}
+                            data={data} //data, da onde eu vou pegar os dados desta lista (nesse caso é o card/lista de "produtos")
+                            //keyExtractor={item=>item.id} //keyEstractor define uma chave para cada um dos elementos, aqui é um tipo que vou querer retornar um "item.id" 
+                            keyExtractor={(item) => String(item.key)}
+                            numColumns={3}
+                            renderItem={({ item }) => <RenderItemList data={item} />}
+                        />
+
+                    </View>
+
                 </View>
                 {/*
     // =========== Exemplo de Pesquisar, ==========================
@@ -246,4 +333,35 @@ const styles = StyleSheet.create({
         fontSize: 15,
         width: '98%'
     },
+
+
+    containerItemLista: {
+        flex: 1,
+        backgroundColor: '#FFFFFF',
+    },
+    adicionarMargem: {
+        margin: 10,
+    },
+    prodImg: {
+        width: 96,
+        height: 118,
+        resizeMode: "cover",
+    },
+    txt: {
+        width: 96,
+        fontFamily: "Inter",
+        fontStyle: "normal",
+        fontSize: 15,
+        lineHeight: 20,
+        color: "#000000",
+        fontWeight: 'bold',
+    },
+    vlr: {
+        width: 96,
+        fontFamily: "Inter",
+        fontStyle: "normal",
+        fontSize: 15,
+        lineHeight: 20,
+        color: "#000000",
+    }
 });

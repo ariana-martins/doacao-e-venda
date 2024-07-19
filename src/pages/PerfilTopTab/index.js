@@ -95,6 +95,7 @@ export default function PerfilTopTab() {
     
     */
 
+
     //function for choose the image with image-crop-picker
     const choose_photo = () => {
         ImageCropPicker.openPicker({
@@ -232,6 +233,11 @@ export default function PerfilTopTab() {
     return (
         <View style={styles.container}>
 
+{/*
+//============================================================
+//O carregamento da imagem está correto até o firebase,
+// porém tem que ajustar para carregar a imagem de perfil certinho de cada usuário.
+
             <View style={styles.container_images}>
                 <TouchableOpacity onPress={choose_photo}>
                     {image && <Image source={{ uri: image }}
@@ -246,6 +252,8 @@ export default function PerfilTopTab() {
                 </TouchableOpacity>
 
             </View>
+            //============================================================
+    */}
 
             {/* //====>>>> Falta configurar navegação do Login p/ as telas de páginas do usuário  */}
             {/* O Logout deve funcionar como exemplo do vídeo: "Part 1/2 | OLX Clone using React Native & Firebase | React Native & Firebase for beginners in Hindi" */}

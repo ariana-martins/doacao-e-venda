@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, FlatList, TouchableOpacity, Image, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, FlatList, TouchableOpacity, Image, ScrollView, Alert } from 'react-native';
 //import { Card } from 'react-native-elements';
 import { Card, Divider } from 'react-native-paper';
 
@@ -78,8 +78,10 @@ export default function InteressesTopTab() {
                                         <TouchableOpacity style={styles.btnChat}
                                         // onPress={() => navigation.navigate('ChatMensagens', { userDono })}
                                         // onPress={() => navigation.navigate('ChatMensagens', {userDono: item.messageText})}
+                                        onPress={() => {Alert.alert('Cancelar Interesse', 'Clicou em Cancelar Interesse')}}
                                         >
                                             <Text style={styles.textoBotao}>Cancelar Interesse</Text>
+                                            
                                         </TouchableOpacity>
                                     </View>
                                     {/* Aqui vai o botão "Cancelar interesse, fica no canto inferior à direita do item do produto*/}

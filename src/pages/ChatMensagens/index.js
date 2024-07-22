@@ -13,7 +13,7 @@ import EnviarReceberMensagens from '../../components/EnviarReceberMensagens';
 
 export default function ChatMensagens() {
 
-    
+
     const route = useRoute(); //Recebe o item da "PaginaInicial"
     //const { name, detalhes, preco } = route.params; //Recebe os itens "route.params" da "PaginaInicial"
     const { userDono, imageUserDono, image, name, valor } = route.params; //Recebe os itens "route.params" da "PaginaInicial" buscando do firebase
@@ -75,7 +75,6 @@ export default function ChatMensagens() {
         }
     };
 
-    
     //Step 3: Real-Time Data Syncing
     const subscribeToMessages = (callback) => {
         const unsubscribe = messagesRef
@@ -126,9 +125,11 @@ export default function ChatMensagens() {
 
             <View style={{ borderBottomWidth: 1, borderBottomColor: '#CCCCCC', }}>
                 <View style={styles.headerChatMsg}>
-                    <View style={{ marginBottom: 5 }}>
+       
+                    <View style={{ marginBottom: 15, marginTop: 15, marginLeft: 15 }}>
                         <BotaoVoltar />
                     </View>
+
                     <Text style={styles.txtTituloDetalhes}>{userDono}</Text>
                     {/*ImageUserDono vem da página "Detalhes" */}
                     {/*
@@ -203,8 +204,8 @@ export default function ChatMensagens() {
                     renderItem={({ item }) => (
                         <View style={{ marginTop: 8, display: 'flex', flex: 1, overflow: 'scroll' }}>
 
-                         <EnviarReceberMensagens /> 
-                          
+                            <EnviarReceberMensagens />
+
                             <View style={{ width: 180, margin: 10, display: 'flex', alignSelf: 'flex-end' }}>
                                 <View style={{ backgroundColor: '#afeeee', borderRadius: 8 }}>
                                     <Text style={{ padding: 8, color: 'black' }}>{item.msgEnviada}:{"\n"}{item.text}</Text>

@@ -233,10 +233,6 @@ export default function PerfilTopTab() {
     return (
         <View style={styles.container}>
 
-{/*
-//============================================================
-//O carregamento da imagem está correto até o firebase,
-// porém tem que ajustar para carregar a imagem de perfil certinho de cada usuário.
 
             <View style={styles.container_images}>
                 <TouchableOpacity onPress={choose_photo}>
@@ -252,9 +248,8 @@ export default function PerfilTopTab() {
                 </TouchableOpacity>
 
             </View>
-            //============================================================
-    */}
-
+     
+    
             {/* //====>>>> Falta configurar navegação do Login p/ as telas de páginas do usuário  */}
             {/* O Logout deve funcionar como exemplo do vídeo: "Part 1/2 | OLX Clone using React Native & Firebase | React Native & Firebase for beginners in Hindi" */}
             {/* Link do vídeo: https://www.youtube.com/watch?v=ntPQ-IPm3AM&list=PLB97yPrFwo5ihgCoWXlEDHrAPQNshsfzP&index=6 */}

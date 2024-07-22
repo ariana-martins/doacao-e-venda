@@ -40,37 +40,37 @@ export default function Pesquisar() {
         })
         //  return () => ref()
 
-        
-            if (searchText === '') {
-                setData(data);
-            } else {
-                setData(
-                    data.filter(item => (item.titulo.toLocaleLowerCase().indexOf(searchText.toLocaleLowerCase()) > -1)
-                        /*
-                        //Mostra o mesmo resultado, porém vai o if e return do teste.   
-                           {
-                           if (item.title.toLocaleLowerCase().indexOf(searchText.toLocaleLowerCase()) > -1)
-                           {
-                               return true;
-                           } else {
-                               return false;
-                           }
+
+        if (searchText === '') {
+            setData(data);
+        } else {
+            setData(
+                data.filter(item => (item.titulo.toLocaleLowerCase().indexOf(searchText.toLocaleLowerCase()) > -1)
+                    /*
+                    //Mostra o mesmo resultado, porém vai o if e return do teste.   
+                       {
+                       if (item.title.toLocaleLowerCase().indexOf(searchText.toLocaleLowerCase()) > -1)
+                       {
+                           return true;
+                       } else {
+                           return false;
                        }
-                       //Exemplo completo no vídeo: "Como FILTRAR e ORDENAR um FlatList no React Native"
-                       // Link do canal do Youtube: https://www.youtube.com/watch?v=Rv2eJK1iOTo
-                       // Canal do Youtube: Bonieky Lacerda.
-                       */
-                    )
-                );
-            }
-        
-    
+                   }
+                   //Exemplo completo no vídeo: "Como FILTRAR e ORDENAR um FlatList no React Native"
+                   // Link do canal do Youtube: https://www.youtube.com/watch?v=Rv2eJK1iOTo
+                   // Canal do Youtube: Bonieky Lacerda.
+                   */
+                )
+            );
+        }
+
+
     }, [searchText])
 
 
 
     //Lista produtos do banco de dados
-    const RenderItemList = ({data}) => {
+    const RenderItemList = ({ data }) => {
         return (
             <View style={styles.containerItemLista}>
                 <View style={styles.adicionarMargem}>
@@ -174,8 +174,10 @@ export default function Pesquisar() {
             {/* //Formulário de pesquisa "SearchForm" é renderizado dentro da visualização da área segura "SafeAreaView"*/}
             <SafeAreaView>
 
-                <BotaoVoltar />
-
+                <View style={{ marginLeft: 15, marginTop: 15 }}>
+                    <BotaoVoltar />
+                </View>
+                
                 <View style={styles.botaoFiltrar}>
                     <View style={styles.filtrarArea}>
                         <TouchableOpacity>
@@ -199,7 +201,7 @@ export default function Pesquisar() {
                 </View>
 
                 <View>
-                 {/*
+                    {/*
                     <Text style={{ marginBottom: 10, paddingHorizontal: 20, }}>
                         Aqui vai os produtos pesquisados e filtrados...
                     </Text>

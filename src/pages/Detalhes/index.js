@@ -53,7 +53,10 @@ export default function Detalhes({ userDono }) {
 
         <View style={styles.container}>
             <View style={styles.addMargemTituloDetalhes}>
-                <BotaoVoltar />
+                
+                <View style={{ marginLeft: 15, marginTop: 15 }}>
+                    <BotaoVoltar />
+                </View>
                 <Text style={styles.txtTituloDetalhes}>Detalhes</Text>
             </View>
 

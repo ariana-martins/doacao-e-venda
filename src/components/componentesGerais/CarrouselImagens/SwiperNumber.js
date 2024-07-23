@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Text, Image } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
 import Swiper from "react-native-swiper";
 
 export default function SwiperNumberComponent() {
@@ -23,27 +23,23 @@ export default function SwiperNumberComponent() {
             }}
         >
             <View style={styles.slide}>
-                <Image
+                <Image style={styles.imgCarousel}
                     source={require('../../../assets/img/img1.png')}
-                    style={{ width: '100%', width: 370, height: 350 }}
                 />
             </View>
             <View style={styles.slide}>
-                <Image
+                <Image style={styles.imgCarousel}
                     source={require('../../../assets/img/img2.png')}
-                    style={{ width: '100%', width: 370, height: 350 }}
                 />
             </View>
             <View style={styles.slide}>
-                <Image
+                <Image style={styles.imgCarousel}
                     source={require('../../../assets/img/img3.png')}
-                    style={{ width: '100%', width: 370, height: 350 }}
                 />
             </View>
             <View style={styles.slide}>
-                <Image
+                <Image style={styles.imgCarousel}
                     source={require('../../../assets/img/img4.png')}
-                    style={{ width: '100%', width: 370, height: 350 }}
                 />
             </View>
         </Swiper>
@@ -59,5 +55,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
         alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
         backgroundColor: '#FFFFFF',
-    }
+    },
+    imgCarousel: {
+        width: '100%', 
+        width: 370, 
+        height: 350,
+    },
 });

@@ -292,6 +292,7 @@ const styles = StyleSheet.create({
         //  paddingHorizontal: 10,
         // marginTop: 10,
         textAlign: 'center',
+        padding: 5,
     },
 
     addMargemTituloDetalhes: {

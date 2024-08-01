@@ -6,12 +6,13 @@ import { useNavigation } from '@react-navigation/native';
 import { firebase } from "@react-native-firebase/auth";
 import firestore from '@react-native-firebase/firestore';
 
-
+import HeaderPaginaInicial from '../../components/Header/HeaderPaginaInicial';
 //import Pesquisar from '../Pesquisar';
 
 import testeProdutos from '../../data/testeProdutos';
 import PesquisaFiltro from '../../components/componentesGerais/PesquisaFiltro';
 import ListaProdutos from '../ListaProdutos';
+
 
 
 
@@ -112,7 +113,9 @@ export default function PaginaInicial() {
 
       {/* Falta configurar para quando clicar em Filtrar e Pesquisar, 
       ele vai direto para cada "função" de filtrar e pesquisar produto */}
-      <PesquisaFiltro />
+      {/*<PesquisaFiltro /> */}
+      <HeaderPaginaInicial />
+      
       {/*
       //Falta configurar botão "Voltar", utilizar o "<Button title='Voltar'onPress={() => navigation.goBack()}"/>
      //Utilizar esse botão/função ao invés do "ScreenNavigations", pois vai retornar a página anterior o "goBack"

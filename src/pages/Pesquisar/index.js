@@ -11,6 +11,7 @@ import testeFiltros from '../../data/testeFiltros';
 
 import ListItem from '../../components/ListItem';
 import testeProdutos from '../../data/testeProdutos';
+import HeaderPesquisar from '../../components/Header/HeaderPesquisar';
 
 //Falta configurar botão "Voltar", utilizar o "<Button title='Voltar' onPress={() => navigation.goBack()}"/>
 //Utilizar esse botão/função ao invés do "ScreenNavigations", pois vai retornar a página anterior o "goBack"
@@ -174,18 +175,18 @@ export default function Pesquisar() {
             {/* //Formulário de pesquisa "SearchForm" é renderizado dentro da visualização da área segura "SafeAreaView"*/}
             <SafeAreaView>
 
-                <View style={{ marginLeft: 15, marginTop: 15 }}>
-                    <BotaoVoltar />
-                </View>
-                
+                <HeaderPesquisar />
+
                 <View style={styles.botaoFiltrar}>
                     <View style={styles.filtrarArea}>
+            
                         <TouchableOpacity>
                             <Icon name="funnel-outline" size={20} color="#000000" />
                         </TouchableOpacity>
                         <Text style={styles.txtFiltrar}>Filtrar por categoria</Text>
                     </View>
                 </View>
+
                 <View style={styles.botaoPesquisar}>
                     <View style={styles.inputArea}>
                         <Icon name="search" size={20} color="#000000" />

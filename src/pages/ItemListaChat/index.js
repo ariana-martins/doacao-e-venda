@@ -5,6 +5,7 @@ import { View, Image, Text, FlatList, StyleSheet, TouchableOpacity, Pressable, T
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
+import HeaderChat from '../../components/Header/HeaderChat';
 
 export default function ItemListaChat() {
 
@@ -132,8 +133,15 @@ export default function ItemListaChat() {
 
 
     return (
+        
         <View style={styles.container}>
-            <View style={styles.addMargem}>
+
+            <HeaderChat />
+
+
+          {/*  <View style={styles.addMargem}> */}
+
+                {/*
                 <View style={styles.linhaDivid}>
                     <Text style={styles.txtTituloChats}>Chats</Text>
 
@@ -149,8 +157,7 @@ export default function ItemListaChat() {
                     </Pressable> 
     */}
 
-                </View>
-
+      {/*          </View>
                 {/*
                 {rooms.length > 0 ? (
                     <FlatList
@@ -226,8 +233,8 @@ export default function ItemListaChat() {
                         </View>
                     )}
                 />
-
-            </View>
+ 
+  {/*          </View>   */}
 
 
         </View>

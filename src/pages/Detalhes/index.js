@@ -4,6 +4,7 @@ import { Card } from 'react-native-paper';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 import BotaoVoltar from '../../components/componentesGerais/BotaoVoltar';
+import HeaderDetalhes from '../../components/Header/HeaderDetalhes';
 
 //import SwiperNumberComponent from '../../components/componentesGerais/CarrouselImagens/SwiperNumber';
 //import Produtos from '../../data/testeProdutos';
@@ -52,14 +53,9 @@ export default function Detalhes({ userDono }) {
     return (
 
         <View style={styles.container}>
-            <View style={styles.addMargemTituloDetalhes}>
-                
-                <View style={{ marginLeft: 15, marginTop: 15 }}>
-                    <BotaoVoltar />
-                </View>
-                <Text style={styles.txtTituloDetalhes}>Detalhes</Text>
-            </View>
+            <HeaderDetalhes />
 
+ 
             <Card style={{ marginHorizontal: 15, marginTop: 10 }}>
                 <Card.Cover
                     style={styles.igmDetalhes}
@@ -67,7 +63,7 @@ export default function Detalhes({ userDono }) {
                 />
                 <Text style={styles.txtTitle}>{data.titulo}</Text>
             </Card>
-
+            
 
             <ScrollView >
                 <Text style={styles.txtDetalhes}>Detalhes: {data.descricao}</Text>
@@ -125,18 +121,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#FFFFFF',
     },
-    addMargemTituloDetalhes: {
-        flexDirection: 'row',
-        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
-    },
-    txtTituloDetalhes: {
-        fontFamily: 'Roboto',
-        fontSize: 25,
-        color: '#000000',
-        marginLeft: 10,
-        paddingHorizontal: 10,
-        marginTop: 10,
-    },
+
     igmDetalhes: {
         width: '100%', // ocupa toda largura do Card.Image
         height: 250, // altura da imagem

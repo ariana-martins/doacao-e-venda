@@ -35,6 +35,7 @@ export default function AdicionarNovoProduto() {
         //==>>> aqui vai aparecer o upload e o getDowload da imagem ==
         const imageUrl = await uploadImage();
         console.log('Imagem Url:', imageUrl);
+
         //=========================================
         console.log('titulo do produto:', titulo);
         console.log('descricao:', descricao);
@@ -253,11 +254,19 @@ export default function AdicionarNovoProduto() {
     let DoarVender = !isSelected; // !isSelect = true (Doacao), !isSelect = false (Para Vender)
     {/* Falta configurar para o valor ficar nulo (R$ 0,00) quando retornar selecionado PARA DOAR, 
         após preencher e/ou se enganar de selecionar o produto PARA VENDER e preencher qualquer valor.
+        --
+        Para fazer a seleção de doar e vender produto, eu tenho que usar a opção de "boolean" pois só vai me dar uma opção ou a outra opção.
+        Exemplo:
+        Só posso selecionar se vai ser "True" ou "False".
+
+        Se "True" is select valor == 0
+        Se "False is select valor == "" //vazio, preenche valor, para vender produto
      */}
+    //console.log(typeof DoarVender); //[06/08/2024] utilizando o "typeof" consigo ver que a opção já é boolean 
     //console.log(DoarVender);
+    
 
     //====================================
-
 
 
 

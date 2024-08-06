@@ -5,6 +5,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import PerfilTopTab from '../../pages/PerfilTopTab';
 import InteressesTopTab from '../../pages/InteressesTopTab';
 import MeusProdutosTopTab from '../../pages/MeusProdutosTopTab';
+import { StyleSheet, View } from 'react-native';
 
 
 
@@ -39,13 +40,14 @@ export default function TopBarNavigator() {
 
 
     return (
-
+        
         <Tab.Navigator
             initialRouteName='Perfil'
             screenOptions={{
                 tabBarInactiveTintColor: 'black',
                 tabBarActiveTintColor: 'blue',
-            }}          
+                tabBarItemStyle: {paddingTop: 30}
+            }}
         >
 
             <Tab.Screen
@@ -65,7 +67,9 @@ export default function TopBarNavigator() {
             />
 
         </Tab.Navigator>
-
+       
 
     );
 };
+
+

@@ -48,8 +48,36 @@ export default function ItemListaChat() {
     ];
 
 
+// Falta fazer
+{/*
+=> Identifcar o chat, que são dois usuários diferentes:
+    - Meu Id: tirando duvidas no chat de outro usuario
+    - Id de outro usuario: que está tirando dúvidas para meu usuário
+*/}
+{/*
+=> Add "Sala 1(item_enviado)" Chat (através da página "Detalhes") com:
+    * imagem do produto,
+    * nome do produto,
+    * valor do produto,    
+    * imagem do usuario que está doando e/ou vendendo outro produto e eu estou tirando duvidas com esse usuario,
+    * nome do usuario que está doando e/ou vendendo outro produto e eu estou tirando duvidas com esse usuario,
+    * nome do meu usuário.
+=> Add "Sala 2(item_recebido)" Chat (através da página "Detalhes") com:
+    * imagem do meu produto,
+    * nome do meu produto,
+    * valor do meu produto,    
+    * imagem do meu usuario que está doando e/ou vendendo outro produto e alguém está tirando duvidas com meu usuario,
+    * nome do usuario que está doando e/ou vendendo outro produto e alguém está tirando duvidas com meu usuario,
+    * nome do outro usuário que está tirando duvida do meu produto.
+*/}
 
+{/*
+=> Não enviar mensagem para:
+    * Se é meu produto, desabilitar o chat
+    * Se é meu produto, identificar de alguma forma que é meu produto na página inicial e em detalhes.
+*/}
 
+//===============================================================================================
 
     /*
     const [groupName, setGroupName] = useState("");
@@ -137,7 +165,6 @@ export default function ItemListaChat() {
         <View style={styles.container}>
 
             <HeaderChat />
-
 
           {/*  <View style={styles.addMargem}> */}
 

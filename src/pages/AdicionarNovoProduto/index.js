@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { View, Text, Image, TouchableOpacity, Alert, StyleSheet, ActivityIndicator, TextInput } from "react-native";
 import { Checkbox } from "react-native-paper";
 
+import { styles } from "./styles";
+
 import ImageCropPicker from 'react-native-image-crop-picker';
 import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
@@ -9,6 +11,8 @@ import firestore from '@react-native-firebase/firestore';
 import { firebase } from "@react-native-firebase/auth";
 
 import { useNavigation } from '@react-navigation/native';
+import { Card } from "@rneui/themed";
+import HeaderAddNovoProduto from "../../components/Header/HeaderAddNovoProduto";
 
 
 export default function AdicionarNovoProduto() {
@@ -264,7 +268,7 @@ export default function AdicionarNovoProduto() {
      */}
     //console.log(typeof DoarVender); //[06/08/2024] utilizando o "typeof" consigo ver que a opção já é boolean 
     //console.log(DoarVender);
-    
+
 
     //====================================
 
@@ -274,18 +278,19 @@ export default function AdicionarNovoProduto() {
     return (
         <View style={styles.container}>
 
+            <HeaderAddNovoProduto />
             {/*Verificando se a imagem é nulo */}
             {/* {image != null ? <AddImage source={{uri: image}} /> : null} */}
 
             <View style={styles.bordaAddFotos}>
-                {image !== null ? (
 
-                    <Image
+                {image !== null ? (
+                    <Card.Image
                         style={styles.img}
                         source={{ uri: image }}
                     />
-
                 ) : null}
+
             </View>
 
             {/** Imagem, substitui o "null" após do ":" fica como imagem inicial, e após fazer o upload da imagem nova, volta a imagem do logo.
@@ -299,16 +304,18 @@ export default function AdicionarNovoProduto() {
 
 
             {/* "onPress={() }" entre parenteses o onPress chama funcao anonima, que vai chamar o ImageCropPicker */}
-            <TouchableOpacity
-                style={styles.buttonEscolherImagem}
-                activeOpacity={0.8}
-                onPress={() => onSelectImage()}
-            // Verificar algum procedimento para o usuário selecionar de 1 até 4 imagens aqui, 
-            // sem necessitar utilizar o "multiplas imagens" do Image Crop Picker
-            >
+            <View style={styles.bordaButtonEscolherImagem}>
+                <TouchableOpacity
+                    style={styles.buttonEscolherImagem}
+                    activeOpacity={0.8}
+                    onPress={() => onSelectImage()}
+                // Verificar algum procedimento para o usuário selecionar de 1 até 4 imagens aqui, 
+                // sem necessitar utilizar o "multiplas imagens" do Image Crop Picker
+                >
+                    <Text style={styles.buttonTextEscolherImagem}>Escolher imagem</Text>
+                </TouchableOpacity>
+            </View>
 
-                <Text style={styles.buttonText}>Escolher imagem</Text>
-            </TouchableOpacity>
             {/*Animação carregando imagem depois de ter feito "Cadastrar Produto" */}
             {uploading ? (
                 <View style={{ justifyContent: 'center', alignItems: 'center' }}>
@@ -318,235 +325,113 @@ export default function AdicionarNovoProduto() {
             ) : null
             }
 
-            <View style={{ paddingHorizontal: 15}}>
+            <Text style={styles.texto}>Título do produto:</Text>
+            <View style={styles.inputAreaTitulo}>
+                <TextInput
+                    style={styles.inputDescricaoTituloDetalhes}
+                    placeholder="Escreva aqui o nome do produto..."
+                    value={titulo}
+                    keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
+                    onChangeText={setTitulo}
+                />
+            </View>
 
-                <Text style={styles.texto}>Título do produto:</Text>
-                <View style={styles.botaoAdicionarMargem}>
-                    <View style={styles.inputArea}>
-                        <TextInput
-                            style={styles.inputTituloDetalhes}
-                            placeholder="Escreva aqui o nome do produto..."
-                            value={titulo}
-                            keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
-                            onChangeText={setTitulo}
-                        />
-                    </View>
-                </View>
+            <Text style={styles.texto}>Descrição do produto:</Text>
+            <View style={styles.inputAreaDetalhes}>
+                <TextInput
+                    multiline={true}
+                    autoCorrect={false}
+                    style={styles.inputDescricaoTituloDetalhes}
+                    placeholder="Escreva aqui os detalhes do produto..."
+                    value={descricao}
+                    keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
+                    onChangeText={setDescricao}
+                />
+            </View>
 
-                <Text style={styles.texto}>Descrição do produto:</Text>
-                <View style={styles.botaoAdicionarMargem}>
-                    <View style={styles.inputAreaDetalhes}>
-                        <TextInput
-                            multiline={true}
-                            autoCorrect={false}
-                            style={styles.inputTituloDetalhes}
-                            placeholder="Escreva aqui os detalhes do produto..."
-                            value={descricao}
-                            keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
-                            onChangeText={setDescricao}
-                        />
-                    </View>
-                </View>
-
-                <Text style={styles.texto}>Selecione uma opção:</Text>
-                <View>
-                    {/* ==>>> FAZER TESTE NA OUTRA TELA, TRANSFORMAR EM FUNÇÃO, COM IF <<====== */}
-                    <View style={styles.checkboxOpcoes}>
-                        <Checkbox
-                            status={isSelected ? 'unchecked' : 'checked'}
-                            onPress={() => {
-                                setSelection(!isSelected);
-                                Alert.alert('DOACAO', 'Valor nulo!')
-                            }}
-                            color="#000000"
-                        />
-                        <Text style={styles.label}>PARA DOAR</Text>
-                        <Checkbox
-                            status={isSelected ? 'checked' : 'unchecked'}
-                            onPress={() => {
-                                setSelection(!isSelected);
-                                Alert.alert('PARA VENDER', 'Acrescente um valor para o produto!')
-                                {/*aqui vc precisa colocar input=0,00, só não sei como referenciar aquele objeto no react native*/ }
-                            }}
-                            color="#000000"
-                        />
-                        <Text style={styles.label}>PARA VENDER </Text>
-                    </View>
-                </View>
-
-
-
-                <View style={styles.botaoAdicionarMargem}>
-                    <View style={styles.inputArea}>
-                        <Text>R$</Text>
-
-
-                        {/*basicamente vc pecisa fazer isso abaixo quando o DoarVender mudar de valor (tipo num onChange)*/}
-                        {/*Se valor é igual isSelected = true, o valor vai ficar nulo 0,00  (para doar) */}
-                        {/*Se valor é igual !isSelected = false, o valor vai ser preenchido (para vender) */}
-                        {/*// Falta fazer o if, se marcar Doacao, valor igual a nulo, se marcar Para Vender, é obrigatório preencher um valor. */}
-
-                        {DoarVender ?
-                            <TextInput
-                                style={styles.inputValor}
-                                placeholder="0,00"
-                                value={valor}
-                                keyboardType="numeric" // Define esse teclado numérico quando deseja manipular dados de um TextInput com entrada somente números.
-                                //  onChangeText={setValor}
-                                setValor={'0,00'} // PARA DOAR ==>>> O valor igual a zero 
-                            // para doação ficar igual valor nulo, o onChangeText={setDoacao} não deve existir, 
-                            // pois irá apenas ficar o value{doacao} que irá aparecer o valor 0,00 na tela sem o usuário poder preencher o valor.
-                            />
-                            :
-                            <TextInput
-                                style={styles.inputValor}
-                                placeholder="0,00"
-                                value={valor}
-                                keyboardType="numeric" // Define esse teclado numérico quando deseja manipular dados de um TextInput com entrada somente números.
-                                onChangeText={setValor} // OnChangeText para preencher o valor de "PARA VENDER"
-                            // Falta fazer o if, se marcar Doacao, valor igual a nulo/ZERO, se marcar Para Vender, é obrigatório preencher um valor.
-                            />
-                        }
-                    </View>
+            <Text style={styles.texto}>Selecione uma opção:</Text>
+            <View>
+                {/* ==>>> FAZER TESTE NA OUTRA TELA, TRANSFORMAR EM FUNÇÃO, COM IF <<====== */}
+                <View style={styles.checkboxOpcoes}>
+                    <Checkbox
+                        status={isSelected ? 'unchecked' : 'checked'}
+                        onPress={() => {
+                            setSelection(!isSelected);
+                            Alert.alert('DOACAO', 'Valor nulo!')
+                        }}
+                        color="#000000"
+                    />
+                    <Text style={styles.textoCheckBoxOpcoes}>PARA DOAR</Text>
+                    <Checkbox
+                        status={isSelected ? 'checked' : 'unchecked'}
+                        onPress={() => {
+                            setSelection(!isSelected);
+                            Alert.alert('PARA VENDER', 'Acrescente um valor para o produto!')
+                            {/*aqui vc precisa colocar input=0,00, só não sei como referenciar aquele objeto no react native*/ }
+                        }}
+                        color="#000000"
+                    />
+                    <Text style={styles.textoCheckBoxOpcoes}>PARA VENDER </Text>
                 </View>
             </View>
 
-            <View style={styles.botaoAdicionarMargem}>
-                <TouchableOpacity
-                    style={styles.buttonCadastrarCancelar}
-                    activeOpacity={0.8}
-                    onPress={() => submitPress()}>
-                    <Text style={styles.buttonTextCadastrarCancelar}>Cadastrar Produto</Text>
-                </TouchableOpacity>
+
+            <View style={styles.inputAreaCheckBoxOpcoes}>
+                <Text>R$</Text>
+
+                {/*basicamente vc pecisa fazer isso abaixo quando o DoarVender mudar de valor (tipo num onChange)*/}
+                {/*Se valor é igual isSelected = true, o valor vai ficar nulo 0,00  (para doar) */}
+                {/*Se valor é igual !isSelected = false, o valor vai ser preenchido (para vender) */}
+                {/*// Falta fazer o if, se marcar Doacao, valor igual a nulo, se marcar Para Vender, é obrigatório preencher um valor. */}
+
+                {DoarVender ?
+                    <TextInput
+                        style={styles.inputValor}
+                        placeholder="0,00"
+                        value={valor}
+                        keyboardType="numeric" // Define esse teclado numérico quando deseja manipular dados de um TextInput com entrada somente números.
+                        //  onChangeText={setValor}
+                        setValor={'0,00'} // PARA DOAR ==>>> O valor igual a zero 
+                    // para doação ficar igual valor nulo, o onChangeText={setDoacao} não deve existir, 
+                    // pois irá apenas ficar o value{doacao} que irá aparecer o valor 0,00 na tela sem o usuário poder preencher o valor.
+                    />
+                    :
+                    <TextInput
+                        style={styles.inputValor}
+                        placeholder="0,00"
+                        value={valor}
+                        keyboardType="numeric" // Define esse teclado numérico quando deseja manipular dados de um TextInput com entrada somente números.
+                        onChangeText={setValor} // OnChangeText para preencher o valor de "PARA VENDER"
+                    // Falta fazer o if, se marcar Doacao, valor igual a nulo/ZERO, se marcar Para Vender, é obrigatório preencher um valor.
+                    />
+                }
             </View>
 
-            <View style={styles.botaoAdicionarMargem}>
-                <TouchableOpacity
-                    style={styles.buttonCadastrarCancelar}
-                    activeOpacity={0.8}
-                    onPress={() => VoltarAoInicio()}>
-                    <Text style={styles.buttonTextCadastrarCancelar}>Cancelar</Text>
-                </TouchableOpacity>
-            </View>
+            <View style={styles.bordabuttonCadastrarCancelar}>
+                <View style={styles.botaoAdicionarMargem}>
+                    <TouchableOpacity
+                        style={styles.buttonCadastrarCancelar}
+                        activeOpacity={0.8}
+                        onPress={() => submitPress()}>
+                        <Text style={styles.buttonTextCadastrarCancelar}>Cadastrar Produto</Text>
+                    </TouchableOpacity>
+                </View>
+                </View>
 
+                <View style={styles.bordabuttonCadastrarCancelar}>
+                <View style={styles.botaoAdicionarMargem}>
+                    <TouchableOpacity
+                        style={styles.buttonCadastrarCancelar}
+                        activeOpacity={0.8}
+                        onPress={() => VoltarAoInicio()}>
+                        <Text style={styles.buttonTextCadastrarCancelar}>Cancelar</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+            
         </View >
     );
 
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: 'white',
-        justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
-        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
-    },
-    bordaAddFotos: {
-        width: '50%',
-        height: 150, //altura da borda
-        borderRadius: 5,
-        borderWidth: 3,
-        borderColor: "#000000",
-        borderStyle: 'dashed',
-        margin: 5,
-    },
-    img: {
-        width: '100%',
-        height: '100%',
-        resizeMode: 'cover',
-    },
-    buttonEscolherImagem: {
-        width: 150,
-        height: 40,
-        borderRadius: 10,
-        backgroundColor: '#191970',
-        justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
-        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
-        margin: 10,
-    },
-    buttonText: {
-        color: '#fff',
-        fontWeight: 'bold',
-        fontSize: 15,
-    },
-    texto: {
-        marginHorizontal: 15,
-        paddingHorizontal: 10, 
-        fontFamily: "Inter",
-        fontStyle: "normal",
-        fontSize: 15,
-        lineHeight: 20,
-        color: "#000000",
-        fontWeight: 'bold',
-    },
-    botaoAdicionarMargem: {
-        marginHorizontal: 15,
-        paddingHorizontal: 10,
-        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
-        justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
-        marginVertical: 5,
-    },
-    inputArea: {
-        marginHorizontal: 15,
-        paddingHorizontal: 10,
-        flexDirection: 'row',
-        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
-        width: '100%',
-        backgroundColor: '#FFFFFF',
-        elevation: 2,
-        //paddingHorizontal: 10,
-        height: 40, //altura da borda do textInput
-        borderRadius: 10,
-        borderWidth: 2,
-        borderColor: '#000000',
-    },
-    inputTituloDetalhes: {
-        fontFamily: 'Roboto',
-        fontSize: 15,
-    },
-    inputAreaDetalhes: {
-        marginHorizontal: 15,
-        paddingHorizontal: 10,
-        flexDirection: 'row',
-        alignItems: 'flex-start',
-        width: '100%',
-        backgroundColor: '#FFFFFF',
-        elevation: 2,
-      //  paddingHorizontal: 10,
-        height: 80, //altura da borda do textInput
-        borderRadius: 10,
-        borderWidth: 2,
-        borderColor: '#000000',
-    },
-    checkboxOpcoes: {
-        marginHorizontal: 15,
-        paddingHorizontal: 10,
-        flexDirection: "row",
-        marginBottom: 5,
-    },
-    label: { //Texto ao lado do Checkbox
-        margin: 8,
-        fontFamily: 'Roboto',
-        color: '#000000', //cor do texto
-        fontSize: 15, //tamanho do texto
-    },
-    inputValor: {
-        fontFamily: 'Roboto',
-        paddingHorizontal: 10,
-        fontSize: 15,
-    },
-    buttonCadastrarCancelar: {
-        width: 250, //largura
-        height: 40, //altura 
-        backgroundColor: '#000000', //cor dentro da borda, onde vai ser incluído o texto
-        borderRadius: 10, // circunferência da borda
-        justifyContent: 'center', //centraliza o texto ao meio da borda
-    },
-    buttonTextCadastrarCancelar: {
-        color: '#FFFFFF', //cor do texto
-        fontWeight: 'bold', //texto em negrito
-        fontSize: 20, //tamanho do texto
-        textAlign: 'center', // alinha texto dentro da borda, ao centro
-    }
 
-})

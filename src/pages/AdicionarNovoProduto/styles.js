@@ -7,13 +7,14 @@ export const styles = StyleSheet.create({
     },
     
     bordaAddFotos: {
+        flex: 1,
         marginHorizontal: 15,
         borderRadius: 10,
         borderWidth: 3,
         borderColor: "#000000",
         borderStyle: 'dashed',
-        height: 180,
-        width: 180,
+        width: "80%",
+        //height: "80%",
         alignSelf: 'center',
     },
     img: {

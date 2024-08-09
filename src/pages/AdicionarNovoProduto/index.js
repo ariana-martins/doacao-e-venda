@@ -278,7 +278,7 @@ export default function AdicionarNovoProduto() {
     return (
         <View style={styles.container}>
 
-            <HeaderAddNovoProduto />
+           <HeaderAddNovoProduto /> 
             {/*Verificando se a imagem é nulo */}
             {/* {image != null ? <AddImage source={{uri: image}} /> : null} */}
 

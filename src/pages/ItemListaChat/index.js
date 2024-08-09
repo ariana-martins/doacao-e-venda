@@ -216,7 +216,10 @@ export default function ItemListaChat() {
                                 <View style={styles.userInfo}>
                                     <View style={styles.userImgWrapper}>
 
-                                        <View style={{ flexDirection: 'row', flexWrap: 'wrap', position: 'absolute', }}>
+                                        <View style={{ flexDirection: 'row', flexWrap: 'wrap', 
+                                        position: 'absolute', 
+                                        //top: 0, bottom: 0, left: 0, right: 0
+                                    }}>
                                             <Image style={styles.prodImg}
                                                 source={item.image}
                                             />

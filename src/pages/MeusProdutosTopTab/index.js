@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, Alert } from 'react-native';
 import { Card } from 'react-native-elements';
 
 
@@ -46,21 +46,47 @@ export default function MeusProdutos() {
 
 
 
-
     //variável constante
     const user_id = firebase.auth().currentUser.uid
+
+
+    //Função Delete/Excluir produto
+    //Referência no link: https://www.luiztools.com.br/post/tutorial-crud-em-app-android-e-ios-com-react-native-4/
+    function handleDeletePress() {
+        Alert.alert(
+            "Atenção!",
+            "Tem certeza que deseja excluir este item?",
+            [
+                {
+                    text: "Não",
+                    onPress: () => console.log("Cancelado"),
+                    style: "cancel"
+                },
+                //{ text: "Sim", onPress: () => console.log(`${props.id} deleted`) }
+                { text: "Sim", onPress: () => console.log("Item deletado") }
+                // ===>>> Exemplo com asyncStorage (do arquivo que está no database.js) como deletar o item:  <=========
+                /*{ text: "Sim", onPress: () => {
+                    Database.deleteItem(props.id)
+                        .then(response => props.navigation.navigate("AppList", {id: props.id}));
+                    }
+                } */
+            ],
+            { cancelable: false }
+        );
+    }
+
 
     return (
 
         <View style={{ flex: 1, padding: 20, backgroundColor: '#FFFFFF' }}>
 
             <View style={styles.containerCard}>
-            <TouchableOpacity>
-                <View style={styles.containerNotification}>
-                    <Icon name="notifications-outline" size={20} color="#000000" />
+                <TouchableOpacity>
+                    <View style={styles.containerNotification}>
+                        <Icon name="notifications-outline" size={20} color="#000000" />
                         <Text style={styles.notificationBold}>Clique aqui</Text>
                         <Text style={styles.notification}>para verificar as notificações</Text>
-                </View>
+                    </View>
                 </TouchableOpacity>
             </View>
 
@@ -87,6 +113,11 @@ export default function MeusProdutos() {
                                 style={styles.prodImage}
                                 source={{ uri: item.imagem }}
                             />
+                            {/* Referência para editar um item da lista, com AsyncStorage, 
+                            mas criar funções para Firebase.firestore
+                            Link: https://www.luiztools.com.br/post/tutorial-crud-em-app-android-e-ios-com-react-native-3/
+                            
+                            */}
                             <View style={styles.iconEdicaoMeusProdutos}>
                                 <TouchableOpacity>
                                     <Icon name="pencil-outline" size={20} color="#000000" />
@@ -94,7 +125,7 @@ export default function MeusProdutos() {
                                 <TouchableOpacity>
                                     <Icon name="archive-outline" size={20} color="#000000" />
                                 </TouchableOpacity>
-                                <TouchableOpacity>
+                                <TouchableOpacity onPress={handleDeletePress}>
                                     <Icon name="trash-outline" size={20} color="#000000" />
                                 </TouchableOpacity>
                             </View>

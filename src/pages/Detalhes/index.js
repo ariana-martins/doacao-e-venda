@@ -25,6 +25,25 @@ export default function Detalhes({ userDono }) {
     const [registrarInteresse, setRegistrarInteresse] = useState(true);
 
 
+//======================================
+//Função "CRUD" => Criar ItemListaChat 
+
+/* Exemplo em AsnycStorage, transformar para Firestore:
+// Fonte: https://www.luiztools.com.br/post/tutorial-crud-em-app-android-e-ios-com-react-native-2/
+async function handleButtonPress(){ 
+  const listItem = {id: new Date().getTime(), descricao, quantidade: parseInt(quantidade)};
+  let savedItems = [];
+  const response = await AsyncStorage.getItem('items');
+  
+  if(response) savedItems = JSON.parse(response);
+  savedItems.push(listItem);
+ 
+  await AsyncStorage.setItem('items', JSON.stringify(savedItems));
+  navigation.navigate("AppList", listItem);
+}
+*/
+
+
     //===================================
     //Função informações dos "Detalhes" no "ChatMensagens", dentro do novo "ItemListaChat" Message
     const abrirChatMessageChat = () => {

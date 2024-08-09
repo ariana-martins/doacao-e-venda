@@ -20,13 +20,14 @@ import HeaderPesquisar from '../../components/Header/HeaderPesquisar';
 
 export default function Pesquisar() {
 
-    const [searchText, setSearchText] = useState('');
+    const [searchText, setSearchText] = useState(''); //começa com uma string vazia
     const [list, setList] = useState(testeProdutos);
 
     const [data, setData] = useState('');
 
 
     //Busca produto no firestore
+
     const ref = firebase.firestore().collection('produtos');
     useEffect(() => {
         ref.onSnapshot(querySnapshot => {
@@ -67,6 +68,8 @@ export default function Pesquisar() {
 
 
     }, [searchText])
+
+
 
 
 

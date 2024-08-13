@@ -161,14 +161,14 @@ export default function ItemListaChat() {
 
 
     return (
-        
+
         <View style={styles.container}>
 
             <HeaderChat />
 
-          {/*  <View style={styles.addMargem}> */}
+            {/*  <View style={styles.addMargem}> */}
 
-                {/*
+            {/*
                 <View style={styles.linhaDivid}>
                     <Text style={styles.txtTituloChats}>Chats</Text>
 
@@ -184,7 +184,7 @@ export default function ItemListaChat() {
                     </Pressable> 
     */}
 
-      {/*          </View>
+            {/*          </View>
                 {/*
                 {rooms.length > 0 ? (
                     <FlatList
@@ -205,42 +205,43 @@ export default function ItemListaChat() {
 
 
 
-                <FlatList
-                    showsHorizontalScrollIndicator={false}
-                    data={Chat}
-                    keyExtractor={item => item.id} //Mudar de item.id p/ item.key ( "key" do firebase)
-                    renderItem={({ item }) => (
-                        <View style={styles.card}>
-                            <TouchableOpacity onPress={() => navigation.navigate('ChatMensagens',
-                                { userDono: item.messageText })}>
-                                <View style={styles.userInfo}>
-                                    <View style={styles.userImgWrapper}>
+            <FlatList
+                showsHorizontalScrollIndicator={false}
+                data={Chat}
+                keyExtractor={item => item.id} //Mudar de item.id p/ item.key ( "key" do firebase)
+                renderItem={({ item }) => (
+                    <View style={styles.card}>
+                        <TouchableOpacity onPress={() => navigation.navigate('ChatMensagens',
+                            { userDono: item.messageText })}>
+                            <View style={styles.userInfo}>
+                                <View style={styles.userImgWrapper}>
 
-                                        <View style={{ flexDirection: 'row', flexWrap: 'wrap', 
-                                        position: 'absolute', 
+                                    <View style={{
+                                        flexDirection: 'row', flexWrap: 'wrap',
+                                        position: 'absolute',
                                         //top: 0, bottom: 0, left: 0, right: 0
                                     }}>
-                                            <Image style={styles.prodImg}
-                                                source={item.image}
-                                            />
+                                        <Image style={styles.prodImg}
+                                            source={item.image}
+                                        />
 
-                                            <View style={{ flexDirection: 'row' }}>
-                                                <View style={{ flexDirection: 'column', marginLeft: 15, }}>
-                                                    <Text style={styles.userName}>{item.title}</Text>
-                                                    <Text style={styles.userValor}>{item.valor}</Text>
-                                                    <Text>{item.messageText}</Text>
-                                                    <Text>{item.messageUser}</Text>
-                                                </View>
-                                                <Text style={styles.postTime}>{item.messageTime}</Text>
+                                        <View style={{ flexDirection: 'row' }}>
+                                            <View style={{ flexDirection: 'column', marginLeft: 15, }}>
+                                                <Text style={styles.userName}>{item.title}</Text>
+                                                <Text style={styles.userValor}>{item.valor}</Text>
+                                                <Text>{item.messageText}</Text>
+                                                <Text>{item.messageUser}</Text>
                                             </View>
-
+                                            <Text style={styles.postTime}>{item.messageTime}</Text>
                                         </View>
 
                                     </View>
 
-                                    <View style={styles.textSection}>
+                                </View>
 
-                                        {/*
+                                <View style={styles.textSection}>
+
+                                    {/*
                                         <Icon
                                             name='person-circle-outline'
                                             size={45}
@@ -249,22 +250,23 @@ export default function ItemListaChat() {
                                         />
                     */}
 
-                                        
-                                        <View style={{ marginTop: 20, }}>
-                                            <Image style={styles.userDonoImg}
-                                                source={item.imagemUserDono}
-                                            />
-                                        </View>
-                                    
 
+                                    <View style={{ marginTop: 20, }}>
+                                        <Image style={styles.userDonoImg}
+                                            source={item.imagemUserDono}
+                                        />
                                     </View>
+
+
                                 </View>
-                            </TouchableOpacity>
-                        </View>
-                    )}
-                />
- 
-  {/*          </View>   */}
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                )}
+            />
+
+            {/*          </View>   */}
+            
 
 
         </View>

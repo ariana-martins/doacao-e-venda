@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { View, Text, Image, TouchableOpacity, Alert, StyleSheet, ActivityIndicator, TextInput } from "react-native";
+import { View, Text, Image, TouchableOpacity, Alert, ActivityIndicator, TextInput } from "react-native";
 import { Checkbox } from "react-native-paper";
+import { Card } from "@rneui/themed";
 
 import { styles } from "./styles";
 
@@ -11,7 +12,7 @@ import firestore from '@react-native-firebase/firestore';
 import { firebase } from "@react-native-firebase/auth";
 
 import { useNavigation } from '@react-navigation/native';
-import { Card } from "@rneui/themed";
+
 import HeaderAddNovoProduto from "../../components/Header/HeaderAddNovoProduto";
 
 
@@ -35,7 +36,7 @@ export default function AdicionarNovoProduto() {
     {/* =>Botão Inserir Produto<= */ }
     //Cria função fora do "upload de imagem", para ver a url da imagem... e postagem de envio da função completa "imagem e add outros detalhes para pagina inicial do app"
     const submitPress = async () => {
-
+        
         //==>>> aqui vai aparecer o upload e o getDowload da imagem ==
         const imageUrl = await uploadImage();
         console.log('Imagem Url:', imageUrl);

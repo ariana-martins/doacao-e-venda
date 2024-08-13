@@ -97,6 +97,11 @@ export default function Cadastrar() {
                             </View>
                         </View>
 
+                        {/* Utilizar aqui talvez a biblioteca (mascara) para criar data de nascimento:
+                            => React Native Masked text (npm i react-native-mask-text), e/ou
+                            => React Native Mask Input (npm i react-native-mask-input)
+                        */}
+
                         <Text style={styles.txtEmail_e_Senha}>Data de Nascimento:</Text>
                         <View style={styles.botaoAdicionarMargem}>
                             <View style={styles.inputAreaEmail}>

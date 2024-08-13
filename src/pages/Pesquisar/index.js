@@ -12,6 +12,8 @@ import testeFiltros from '../../data/testeFiltros';
 import ListItem from '../../components/ListItem';
 import testeProdutos from '../../data/testeProdutos';
 import HeaderPesquisar from '../../components/Header/HeaderPesquisar';
+import { Searchbar } from 'react-native-paper';
+
 
 //Falta configurar botão "Voltar", utilizar o "<Button title='Voltar' onPress={() => navigation.goBack()}"/>
 //Utilizar esse botão/função ao invés do "ScreenNavigations", pois vai retornar a página anterior o "goBack"
@@ -182,7 +184,7 @@ export default function Pesquisar() {
 
                 <View style={styles.botaoFiltrar}>
                     <View style={styles.filtrarArea}>
-            
+
                         <TouchableOpacity>
                             <Icon name="funnel-outline" size={20} color="#000000" />
                         </TouchableOpacity>
@@ -190,6 +192,7 @@ export default function Pesquisar() {
                     </View>
                 </View>
 
+{/*
                 <View style={styles.botaoPesquisar}>
                     <View style={styles.inputArea}>
                         <Icon name="search" size={20} color="#000000" />
@@ -201,8 +204,22 @@ export default function Pesquisar() {
                             onChangeText={(t) => setSearchText(t)}
                             keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
                         />
+
                     </View>
                 </View>
+    */}
+   
+
+                        <Searchbar
+                          //  style={styles.input}
+                           style={{marginHorizontal: 10, backgroundColor: '#C4C4C4',}}
+                            placeholder="Pesquisar / Pesquise aqui..."
+                            placeholderTextColor="#000000"
+                            value={searchText}
+                            onChangeText={(t) => setSearchText(t)}
+                            keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
+                        />
+            
 
                 <View>
                     {/*
@@ -278,10 +295,6 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 24
     },
-
-
-
-
 
 
     inputAreaVoltar: {

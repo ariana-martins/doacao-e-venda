@@ -25,18 +25,18 @@ const Tab = createBottomTabNavigator();
 
 function Tabs() {
   return (
-    <Tab.Navigator screenOptions={{ 
+    <Tab.Navigator screenOptions={{
       headerShown: false,
       tabBarInactiveTintColor: 'black',
-      tabBarActiveTintColor: 'blue',      
-      }}>
+      tabBarActiveTintColor: 'blue',
+    }}>
 
       <Tab.Screen
         name='Página Inicial - Pesquisar/ Filtrar'
         component={PaginaInicial}
         options={{
-          tabBarIcon: ({ focused , color }) => (
-            <Icon name="home-outline" size={20} color={focused ? "blue" : "black" } />
+          tabBarIcon: ({ focused, color }) => (
+            <Icon name="home-outline" size={20} color={focused ? "blue" : "black"} />
           ),
           tabBarLabel: "Pagina Inicial",
           headerShown: false
@@ -48,7 +48,7 @@ function Tabs() {
         component={Pesquisar}
         options={{
           tabBarIcon: ({ focused, color }) => (
-            <Icon name="search-outline" size={20} color={focused ? "blue" : "black" } />
+            <Icon name="search-outline" size={20} color={focused ? "blue" : "black"} />
           ),
           tabBarLabel: "Pesquisar",
         }}
@@ -58,7 +58,7 @@ function Tabs() {
         component={AdicionarNovoProduto}
         options={{
           tabBarIcon: ({ focused, color }) => (
-            <Icon name="add-outline" size={30} color={focused ? "blue" : "black" } />
+            <Icon name="add-outline" size={30} color={focused ? "blue" : "black"} />
           ),
           tabBarLabel: "Adicionar", //"Adicionar novo Produto"
         }}
@@ -68,11 +68,11 @@ function Tabs() {
         component={ItemListaChat}
         options={{
           //headerShown: true,
-        //  title: 'Chats',
+          //  title: 'Chats',
           //headerTitleAlign: 'center',
           headerShown: false,
           tabBarIcon: ({ focused, color }) => (
-            <Icon name="chatbubble-outline" size={20} color={focused ? "blue" : "black" } />
+            <Icon name="chatbubble-outline" size={20} color={focused ? "blue" : "black"} />
           ),
           tabBarLabel: "Chat",
         }}
@@ -82,7 +82,7 @@ function Tabs() {
         component={TopBarNavigator}
         options={{
           tabBarIcon: ({ focused, color }) => (
-            <Icon name="person-outline" size={20} color={focused ? "blue" : "black" } />
+            <Icon name="person-outline" size={20} color={focused ? "blue" : "black"} />
           ),
           tabBarLabel: "Perfil",
         }}
@@ -103,9 +103,9 @@ export default function ScreenNavigator() {
         component={Detalhes}
         options={{
           headerShown: false,
-        //  title: 'Voltar',
+          //  title: 'Voltar',
         }}
-        
+
       />
 
       <Stack.Screen
@@ -113,13 +113,13 @@ export default function ScreenNavigator() {
         component={ChatMensagens}
         options={{
           headerShown: false,
-        //  title: 'Voltar',
+          //  title: 'Voltar',
         }}
-        /*
-        options={({ route }) => ({
-          title: route.params.userDono,
-          headerTitleAlign: 'center',
-        })}
+      /*
+      options={({ route }) => ({
+        title: route.params.userDono,
+        headerTitleAlign: 'center',
+      })}
 */
 
       />
@@ -132,15 +132,15 @@ export default function ScreenNavigator() {
         }}
       />
 
-        {/* Para fazer a pesquisa da Página inicial para a Página "Pesquisar" */}
+      {/* Para fazer a pesquisa da Página inicial para a Página "Pesquisar" */}
       <Stack.Screen
         name="Pesquisar"
         component={Pesquisar}
         options={{
           headerShown: false,
-        //  title: 'Voltar',
+          //  title: 'Voltar',
         }}
-        
+
       />
 
     </Stack.Navigator>

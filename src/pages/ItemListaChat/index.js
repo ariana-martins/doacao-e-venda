@@ -44,17 +44,85 @@ export default function ItemListaChat() {
             imagemUserDono: require('../../assets/imgUserDono/logoFACCAT.png'),
             messageUser: 'Usuário 3',
         },
-
     ];
 
 
-// Falta fazer
+    //falta modificar para "data"
+    //const RenderItemListChat=({ data }) => {
+    const RenderItemListChat = ({ item }) => {
+        return (
+            <View style={styles.card}>
+                <TouchableOpacity onPress={() => navigation.navigate('ChatMensagens',
+                    { userDono: item.messageText })}>
+                    <View style={styles.userInfo}>
+                        <View style={styles.userImgWrapper}>
+
+                            <View style={{
+                                flexDirection: 'row',
+                                //flexWrap: 'wrap',
+                                //   position: 'absolute', 
+                                //top: 0, bottom: 0, left: 0, right: 0
+
+                            }}>
+
+
+                                <Image style={styles.prodImg}
+                                    source={item.image}
+                                />
+
+                                <Image style={styles.userDonoImg}
+                                    source={item.imagemUserDono}
+                                />
+
+
+                                <View style={{ flexDirection: 'row' }}>
+                                    <View style={{ flexDirection: 'column', marginLeft: 20, }}>
+                                        <Text style={styles.userName}>{item.title}</Text>
+                                        <Text style={styles.userValor}>{item.valor}</Text>
+                                        <Text>{item.messageText}</Text>
+                                        <Text>{item.messageUser}</Text>
+                                    </View>
+                                    <Text style={styles.postTime}>{item.messageTime}</Text>
+                                </View>
+
+                            </View>
+
+                        </View>
+
+                        <View style={styles.textSection}>
+
+                            {/*
+                            <Icon
+                                name='person-circle-outline'
+                                size={45}
+                                color='black'
+                                style={{marginTop: 10}}
+                            />
+        */}
+
 {/*
+                            <View style={{ marginTop: 20, }}>
+                                <Image style={styles.userDonoImg}
+                                    source={item.imagemUserDono}
+                                />
+                            </View>
+    */}
+
+                        </View>
+                    </View>
+                </TouchableOpacity>
+            </View>
+        );
+    };
+
+
+    // Falta fazer
+    {/*
 => Identifcar o chat, que são dois usuários diferentes:
     - Meu Id: tirando duvidas no chat de outro usuario
     - Id de outro usuario: que está tirando dúvidas para meu usuário
 */}
-{/*
+    {/*
 => Add "Sala 1(item_enviado)" Chat (através da página "Detalhes") com:
     * imagem do produto,
     * nome do produto,
@@ -71,13 +139,13 @@ export default function ItemListaChat() {
     * nome do outro usuário que está tirando duvida do meu produto.
 */}
 
-{/*
+    {/*
 => Não enviar mensagem para:
     * Se é meu produto, desabilitar o chat
     * Se é meu produto, identificar de alguma forma que é meu produto na página inicial e em detalhes.
 */}
 
-//===============================================================================================
+    //===============================================================================================
 
     /*
     const [groupName, setGroupName] = useState("");
@@ -209,64 +277,14 @@ export default function ItemListaChat() {
                 showsHorizontalScrollIndicator={false}
                 data={Chat}
                 keyExtractor={item => item.id} //Mudar de item.id p/ item.key ( "key" do firebase)
-                renderItem={({ item }) => (
-                    <View style={styles.card}>
-                        <TouchableOpacity onPress={() => navigation.navigate('ChatMensagens',
-                            { userDono: item.messageText })}>
-                            <View style={styles.userInfo}>
-                                <View style={styles.userImgWrapper}>
+                //falta modificar para "data"
+                //renderItem={({ item }) => <RenderItemList data={item} />}
+                renderItem={({ item }) => <RenderItemListChat item={item} />}
 
-                                    <View style={{
-                                        flexDirection: 'row', flexWrap: 'wrap',
-                                        position: 'absolute',
-                                        //top: 0, bottom: 0, left: 0, right: 0
-                                    }}>
-                                        <Image style={styles.prodImg}
-                                            source={item.image}
-                                        />
-
-                                        <View style={{ flexDirection: 'row' }}>
-                                            <View style={{ flexDirection: 'column', marginLeft: 15, }}>
-                                                <Text style={styles.userName}>{item.title}</Text>
-                                                <Text style={styles.userValor}>{item.valor}</Text>
-                                                <Text>{item.messageText}</Text>
-                                                <Text>{item.messageUser}</Text>
-                                            </View>
-                                            <Text style={styles.postTime}>{item.messageTime}</Text>
-                                        </View>
-
-                                    </View>
-
-                                </View>
-
-                                <View style={styles.textSection}>
-
-                                    {/*
-                                        <Icon
-                                            name='person-circle-outline'
-                                            size={45}
-                                            color='black'
-                                            style={{marginTop: 10}}
-                                        />
-                    */}
-
-
-                                    <View style={{ marginTop: 20, }}>
-                                        <Image style={styles.userDonoImg}
-                                            source={item.imagemUserDono}
-                                        />
-                                    </View>
-
-
-                                </View>
-                            </View>
-                        </TouchableOpacity>
-                    </View>
-                )}
             />
 
             {/*          </View>   */}
-            
+
 
 
         </View>
@@ -321,6 +339,9 @@ const styles = StyleSheet.create({
         width: 40,
         height: 40,
         borderRadius: 20,
+        position: 'absolute', //top: 0, bottom: 0, left: 0, right: 0
+        top: 40,
+        left: 35,      
     },
 
     textSection: {

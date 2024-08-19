@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, SafeAreaView, SectionList, Alert, FlatList, ScrollView, Image } from 'react-native';
+import { Searchbar } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import { firebase } from '@react-native-firebase/firestore';
@@ -12,7 +13,7 @@ import testeFiltros from '../../data/testeFiltros';
 import ListItem from '../../components/ListItem';
 import testeProdutos from '../../data/testeProdutos';
 import HeaderPesquisar from '../../components/Header/HeaderPesquisar';
-import { Searchbar } from 'react-native-paper';
+
 
 
 //Falta configurar botão "Voltar", utilizar o "<Button title='Voltar' onPress={() => navigation.goBack()}"/>
@@ -178,7 +179,6 @@ export default function Pesquisar() {
         <View style={styles.container}>
 
             {/* //Formulário de pesquisa "SearchForm" é renderizado dentro da visualização da área segura "SafeAreaView"*/}
-            <SafeAreaView>
 
                 <HeaderPesquisar />
 
@@ -212,7 +212,7 @@ export default function Pesquisar() {
 
                         <Searchbar
                           //  style={styles.input}
-                           style={{marginHorizontal: 10, backgroundColor: '#C4C4C4',}}
+                           style={{marginHorizontal: 15, backgroundColor: '#C4C4C4' }}
                             placeholder="Pesquisar / Pesquise aqui..."
                             placeholderTextColor="#000000"
                             value={searchText}
@@ -272,7 +272,6 @@ export default function Pesquisar() {
         ========================================================================
     */}
 
-            </SafeAreaView>
         </View>
     );
 }

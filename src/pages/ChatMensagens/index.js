@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import BotaoVoltar from '../../components/componentesGerais/BotaoVoltar';
 import EnviarReceberMensagens from '../../components/EnviarReceberMensagens';
+import ModalEscolherImagem from '../../components/componentesGerais/ModalEscolharImagem';
 
 
 
@@ -18,8 +19,6 @@ export default function ChatMensagens() {
     //const { name, detalhes, preco } = route.params; //Recebe os itens "route.params" da "PaginaInicial"
     const { userDono, imageUserDono, image, name, valor } = route.params; //Recebe os itens "route.params" da "PaginaInicial" buscando do firebase
 
-
-    const [modalActive, setModalActive] = useState(false)
 
     //substituir por Modal e falta fazer o upload da imagem. [OK]
     //Função carregar imagem.
@@ -61,12 +60,13 @@ export default function ChatMensagens() {
 
 
     //Step 2: Add Messages to Firestore
-    const sendMessage = async (text, msgEnviada) => {
+    const sendMessage = async (text, enviadoPara) => {
         try {
             // Add a new document to the "messages" collection
             await messagesRef.add({
                 text,
-                msgEnviada,
+              //  enviadoPor, //falta acrescentar, para identificar o outro usuário.
+                enviadoPara,
                 //timestamp: firestore.FieldValue.serverTimestamp(),
                 createdAt: new Date(),
             });
@@ -125,7 +125,7 @@ export default function ChatMensagens() {
 
             <View style={{ borderBottomWidth: 1, borderBottomColor: '#CCCCCC', }}>
                 <View style={styles.headerChatMsg}>
-       
+
                     <View style={{ marginBottom: 15, marginTop: 15, marginLeft: 15 }}>
                         <BotaoVoltar />
                     </View>
@@ -138,48 +138,11 @@ export default function ChatMensagens() {
     */}
                     <Image style={styles.imagemMaisDetalhesUserDono}
                         source={require('../../assets/logo/logo_novo.jpg')} />
+    
                 </View>
             </View>
 
             <View style={{ display: 'flex', flexDirection: 'column', flex: 1, }}>
-
-                <View style={styles.containerModal}>
-                    <Modal
-                        animationType="slide"
-                        swipeDirection="down"
-                        transparent={true}
-                        visible={modalActive}
-                        onRequestClose={() => {
-                            Alert.alert('Modal has been closed');
-                            setModalActive(!modalActive);
-                        }}
-                    >
-                        <View style={styles.outerView}>
-                            <View style={styles.modalView}>
-                                <View style={styles.modalMargemDivisa}>
-                                    <TouchableOpacity onPress={() => Alert.alert('Clicou na camera')}>
-                                        <View style={styles.iconesModal}>
-                                            <Icon name="camera-outline" size={20} color="#000000" onPress={() => setModalActive(true)} />
-                                            <Text style={styles.modalText}>Tirar Foto</Text>
-                                        </View>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity onPress={() => Alert.alert('Clicou na Galeria')}>
-                                        <View style={styles.iconesModal}>
-                                            <Icon name="image-outline" size={20} color="#000000" onPress={() => setModalActive(true)} />
-                                            <Text style={styles.modalText}>Escolher Existente</Text>
-                                        </View>
-                                    </TouchableOpacity>
-                                </View>
-                                <TouchableOpacity style={styles.buttonModal} onPress={() => setModalActive(!modalActive)}>
-                                    <Text style={styles.outroTextModal}>Cancelar</Text>
-                                </TouchableOpacity>
-
-                            </View>
-                        </View>
-
-                    </Modal>
-
-                </View>
 
 
                 <View style={{
@@ -208,7 +171,7 @@ export default function ChatMensagens() {
 
                             <View style={{ width: 180, margin: 10, display: 'flex', alignSelf: 'flex-end' }}>
                                 <View style={{ backgroundColor: '#afeeee', borderRadius: 8 }}>
-                                    <Text style={{ padding: 8, color: 'black' }}>{item.msgEnviada}:{"\n"}{item.text}</Text>
+                                    <Text style={{ padding: 8, color: 'black' }}>{item.enviadoPara}:{"\n"}{item.text}</Text>
                                     <View style={{ flexDirection: 'row', alignSelf: 'flex-end' }}>
                                         <Text>20:10</Text>
                                         <Icon name="checkmark-done-outline" size={20} color="#000000" />
@@ -231,14 +194,17 @@ export default function ChatMensagens() {
             </ScrollView>
  */}
 
-                <View style={{ display: 'flex', flexDirection: 'row', marginTop: 10, backgroundColor: 'white', paddingHorizontal: 10, alignItems: 'center', justifyContent: 'flex-end' }}>
-
-
+                {/*<View style={{ display: 'flex', flexDirection: 'row', marginTop: 10, backgroundColor: "pink", paddingHorizontal: 10, alignItems: 'center', justifyContent: 'flex-end' }}>*/}
+                <View style={{ backgroundColor: "#FFFFFF", flexDirection: 'row', paddingHorizontal: 10, }}>
 
                     {/*<View style={{ paddingHorizontal: 10, flexDirection: 'row', alignItems: 'center' }} >*/}
-                    <TouchableOpacity>
-                        <Icon name="camera-outline" size={20} color="#000000" onPress={() => setModalActive(true)} />
-                    </TouchableOpacity>
+                    <View style={{ maxHeight: 40, paddingTop: 12}}>
+                        <TouchableOpacity>
+                            {/*<Icon name="camera-outline" size={20} color="#000000" onPress={() => setModalActive(true)} />*/}
+                            <ModalEscolherImagem />
+                        </TouchableOpacity>
+                    </View>
+
                     <TextInput
                         style={{
                             flex: 1,
@@ -257,10 +223,11 @@ export default function ChatMensagens() {
                         onChangeText={setText}
                         placeholder="Escreva sua mensagem aqui..."
                     />
-                    <TouchableOpacity>
-                        <Icon name="send-outline" size={20} color="#000000" onPress={handleSend} />
-                    </TouchableOpacity>
-
+                    <View style={{ maxHeight: 40, paddingTop: 12 }}>
+                        <TouchableOpacity>
+                            <Icon name="send-outline" size={20} color="#000000" onPress={handleSend} />
+                        </TouchableOpacity>
+                    </View>
                 </View>
 
             </View>
@@ -316,7 +283,7 @@ const styles = StyleSheet.create({
         paddingVertical: 5,
     },
 
-    outerView: { //visualiza o chat abaixo do modal
+    visualizaAbaixoDoModal: { //visualiza o chat abaixo do modal
         flex: 1,
         justifyContent: 'flex-end',
         backgroundColor: 'rgba(0,0,0,0.5)',

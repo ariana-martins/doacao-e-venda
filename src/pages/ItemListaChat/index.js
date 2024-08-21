@@ -1,11 +1,13 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../components/componentesGerais/Auth/AuthProvider';
-import { View, Image, Text, FlatList, StyleSheet, TouchableOpacity, Pressable, TextInput } from 'react-native';
+import { View, Image, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import HeaderChat from '../../components/Header/HeaderChat';
+import DialogConfirmacao from '../../components/Dialog/DialogConfirmacao';
+import DialogErro from '../../components/Dialog/DialogErro';
 
 export default function ItemListaChat() {
 
@@ -13,6 +15,7 @@ export default function ItemListaChat() {
 
     const navigation = useNavigation();
 
+    //array "Chat"
     const Chat = [
         {
             id: '1',
@@ -285,7 +288,8 @@ export default function ItemListaChat() {
 
             {/*          </View>   */}
 
-
+            <DialogConfirmacao />
+            <DialogErro />
 
         </View>
 

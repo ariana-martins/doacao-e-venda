@@ -38,40 +38,44 @@ export default function AdicionarNovoProduto() {
     const submitPress = async () => {
         
         //==>>> aqui vai aparecer o upload e o getDowload da imagem ==
+       
+        
         const imageUrl = await uploadImage();
         console.log('Imagem Url:', imageUrl);
-
         //=========================================
         console.log('titulo do produto:', titulo);
         console.log('descricao:', descricao);
         console.log('valor', valor);
 
         //=================================
-        // Falta ajustar para o usuário preencher *obrigatoriamente todos os dados completos.
-        {/*
+        // Ajustado para o usuário preencher *obrigatoriamente todos os dados completos.
+            if (imageUrl === null) {
+            Alert.alert("Imagem do produto", "Por favor selecione uma imagem para o produto")
+            return null
+            }
             console.log(titulo, "Titulo aqui")
-            if (titulo.length == 0) {
+            if (titulo === null) {
             Alert.alert("Nome do Produto:", "Por favor descreva um título para o produto")
-            return
+            return null
             }
             console.log(descricao, "Descricao aqui")
-            if (descricao.length == 0) {
+            if (descricao === null) {
             Alert.alert("Descrição:", "Por favor descreva uma descrição para o produto.")
-            return
+            return null
             }
-            console.log(doacao, "Doacao aqui")
-            if (doacao.length == 0) {
-            Alert.alert("Doacao:", "Valor nulo")
-            return
-            } 
+            //console.log(doacao, "Doacao aqui")
+            //if (doacao === null) {
+            //Alert.alert("Doacao:", "Valor nulo")
+            //return
+            //} 
             console.log(valor, "Valor aqui")
-            if (valor.length == 0) {
+            if (valor === null) {
             Alert.alert("Valor:", "Para vender um produto, digite um valor.")
-            return
+            return null
             }
-    */}
+    
         //=================================
-
+        
 
         //importar o firestore, e após isso, especificar a coleção, como tbm add os dados com o ID do usuário que queremos armazenar em nosso banco de dados
         firestore()
@@ -113,11 +117,17 @@ export default function AdicionarNovoProduto() {
             },
             {
                 text: "SIM",
-                onPress: () => navigation.goBack() //Navigation.goBack() volta para "PaginaInicial" pois as Tabs já estão configuradas como InitialHome para iniciar na "Pagina Inicial"
+                onPress: () => {
+                    setTitulo(null); //se Cancelar "SIM", irei atualizar o "post" como null.
+                    setDescricao(null);
+                    setValor(null);
+                    setImage(null);
+                    setSelection(!isSelected);
+                    navigation.goBack(); 
+                }//Navigation.goBack() volta para "PaginaInicial" pois as Tabs já estão configuradas como InitialHome para iniciar na "Pagina Inicial"
                 //Dicas nos links: https://www.tabnews.com.br/marcosveloso/template-de-rotas-react-native-com-native-stack-bottom-tabs-e-drawer-navigator
                 //Dicas nos link complementar com o código gitHub: https://github.com/MarcosVel/routes-template/commit/33e621df08b702225460437fd0b3fb58678b98d9
-                // ==>> Falta arrumar para: Limpar toda a Página quando clicar em  "Cancelar em Sim" e ir para a tela "Pagina Inicial" 
-                //Tenho que criar algo como uma "const [teste, setTeste] = ([]);" tenho que criar esse array vazio, para qdo for criar o produto sempre vai estar vazio...
+         
             }
         ]);
         return true;
@@ -197,11 +207,11 @@ export default function AdicionarNovoProduto() {
 
         //================================= 
         //Para remover o erro "ReactImageView: Image source "null" doesn't exist"
-        /*
+        
         if( image == null ) {
             return null;
           }
-          */
+        
         //===============================
 
         const uploadUri = image;
@@ -359,6 +369,7 @@ export default function AdicionarNovoProduto() {
                         onPress={() => {
                             setSelection(!isSelected);
                             Alert.alert('DOACAO', 'Valor nulo!')
+                            // Aqui nesse local vc precisa setar o valor 0,00 dentro do input
                         }}
                         color="#000000"
                     />

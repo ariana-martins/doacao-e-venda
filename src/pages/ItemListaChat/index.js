@@ -1,22 +1,92 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../../components/componentesGerais/Auth/AuthProvider';
-import { View, Image, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Image, Text, FlatList, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { styles } from './styles';
 
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { firebase } from '@react-native-firebase/firestore';
 
 import Icon from 'react-native-vector-icons/Ionicons';
+
 import HeaderChat from '../../components/Header/HeaderChat';
 import DialogConfirmacao from '../../components/Dialog/DialogConfirmacao';
 import DialogErro from '../../components/Dialog/DialogErro';
 
-export default function ItemListaChat() {
+
+export default function ItemListaChat({ navigation }) {
 
     const { user, logout } = useContext(AuthContext);
 
-    const navigation = useNavigation();
+    //const navigation = useNavigation();
+
+
+    const [data, setData] = useState([]);
+
+
+    //Nome do vídeo de exemplo do youtube: REACT NATIVE + FIREBASE: CRIANDO UM APP COMPLETO
+    //Vídeo de exemplo do youtube: https://www.youtube.com/watch?v=0AM6AXlFwxM
+    //Canal do youtube: Léo Scorza - OneBitCode
+
+    //Função deletar Tarefa - falta arrumar e deletar por "id"
+    const deleteTask = async () => {
+        firebase.firestore()
+        .collection("Tasks")
+        .doc("vrNfQlDZe8PFLcS5tjyS")
+        .delete()
+        .then(() => {
+            Alert.alert("Deletado com sucesso")
+            console.log('id deletado')
+        })
+        .catch(() => {
+            Alert.alert("Error qlqr")
+        })
+    }
+/*
+    function deleteTask(id) {
+        firebase.firestore().collection("Tasks").doc(id).delete()
+    }
+    */
+
+    //Referência de exemplo para criar lista, site tarefas (Tasks): 
+    // Link do youtube: https://www.youtube.com/watch?v=0AM6AXlFwxM
+    // Título do video do youtube: REACT NATIVE + FIREBASE: CRIANDO UM APP COMPLETO
+    // Canal do youtube: Léo Scorza - OneBitCode
+
+  /*  const qlqrCoisa = firebase.firestore().collection('Tasks');
+    useEffect(() => {
+        qlqrCoisa.onSnapshot((querySnapshot) => {
+            const data = []
+            querySnapshot.forEach((doc) => {
+                // ao invés de utilizar "id", trocar depois para "key", exemplo:
+                // data.push({ ...doc.data(), key: doc.id
+                data.push({ ...doc.data(), key: doc.id })
+            })
+            setTask(data)
+        })
+    }, [])
+    */
+    const ref = firebase.firestore().collection('Tasks');
+    useEffect(() => {
+      ref.onSnapshot(querySnapshot => {
+        const data = []
+        querySnapshot.forEach(doc => {
+          data.push({
+            ...doc.data(),
+            key: doc.id
+          })
+        })
+        setData(data)
+      })
+      //  return () => ref()
+    }, [])
+  
+
+
+
 
     //array "Chat"
     const Chat = [
+       /*
         {
             id: '1',
             image: require('../../../src/assets/img/img1.png'),
@@ -37,6 +107,7 @@ export default function ItemListaChat() {
             imagemUserDono: require('../../assets/imgUserDono/logoFaccatColor.png'),
             messageUser: 'Usuário 2',
         },
+        */
         {
             id: '3',
             image: require('../../../src/assets/img/img3.png'),
@@ -47,6 +118,7 @@ export default function ItemListaChat() {
             imagemUserDono: require('../../assets/imgUserDono/logoFACCAT.png'),
             messageUser: 'Usuário 3',
         },
+        
     ];
 
 
@@ -103,7 +175,7 @@ export default function ItemListaChat() {
                             />
         */}
 
-{/*
+                            {/*
                             <View style={{ marginTop: 20, }}>
                                 <Image style={styles.userDonoImg}
                                     source={item.imagemUserDono}
@@ -152,12 +224,12 @@ export default function ItemListaChat() {
 
     /*
     const [groupName, setGroupName] = useState("");
-
+    
     const handleCreateRoom = () => {
         console.log( "createRoom", groupName );
         //closedModal();
     };
-
+    
     const rooms = [
         {
             id: "1",
@@ -196,8 +268,8 @@ export default function ItemListaChat() {
             ],
         },
     ];
-
-*/
+    
+    */
 
 
     //Tem que ir para o firebase
@@ -214,7 +286,7 @@ export default function ItemListaChat() {
             messageUser: //outro usuario com interesse no meu produto...
         },
     ];
-*/
+    */
 
 
     //===================================
@@ -228,7 +300,7 @@ export default function ItemListaChat() {
         //navigation.navigate('ChatMensagens', {data});
         console.log(data);
     };
-*/
+    */
 
 
     return (
@@ -275,7 +347,6 @@ export default function ItemListaChat() {
 
 
 
-
             <FlatList
                 showsHorizontalScrollIndicator={false}
                 data={Chat}
@@ -285,19 +356,66 @@ export default function ItemListaChat() {
                 renderItem={({ item }) => <RenderItemListChat item={item} />}
 
             />
-
             {/*          </View>   */}
 
+
+            <View style={styles.containerAddLista}>
+                <FlatList
+                    showsVerticalScrollIndicator={false}
+                   // data={task}
+                   data={data}
+                   keyExtractor={(item) => String(item.key)}
+                    renderItem={({item}) => {
+                        return (
+                            <View style={styles.styloTarefas}>
+                                <TouchableOpacity
+                                    style={styles.styloDeletarTarefa}
+                                    onPress={() => {
+                                        deleteTask(item.id)
+                                    }}
+                                >
+                                    <Icon name="star" size={20} color="#F92e6a" />
+                                </TouchableOpacity>
+                                <Text style={styles.styloDescricaoTarefa}
+                                    onPress={() => {
+                                        navigation.navigate("ItemListaChatDetalhes", {
+                                           id: item.id,
+                                           descricao: item.descricao,
+                                        })
+                                    }}
+                                >
+                                   {item.descricao}
+                                </Text>
+                            </View>
+                        )
+
+                    }}
+                />
+                <TouchableOpacity
+                    style={styles.buttonNovaTarefaAddLista}
+                    onPress={() => navigation.navigate("ItemListaChatNovaTarefa")}
+                >
+                    <Text style={styles.iconButtonAddLista}>+</Text>
+                </TouchableOpacity>
+
+            </View>
+
+                    {/*
+                    ==>>> Dialog
+                    EU ACHO QUE COLOCA A MESMA MENSAGEM QUE TEM nos alerts hj e os mesmos botões
+                    */}
+                    {/*
             <DialogConfirmacao />
             <DialogErro />
-
+                */}
+                
         </View>
 
     );
 
 };
 
-
+/*
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -345,7 +463,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         position: 'absolute', //top: 0, bottom: 0, left: 0, right: 0
         top: 40,
-        left: 35,      
+        left: 35,
     },
 
     textSection: {
@@ -387,3 +505,4 @@ const styles = StyleSheet.create({
 
 
 });
+*/

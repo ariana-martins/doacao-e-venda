@@ -16,7 +16,8 @@ import AdicionarNovoProduto from '../../pages/AdicionarNovoProduto';
 import ItemListaChat from '../../pages/ItemListaChat';
 import Detalhes from '../../pages/Detalhes';
 import ChatMensagens from '../../pages/ChatMensagens';
-
+import ItemListaChatNovaTarefa from '../../pages/ItemListaChatNovaTarefa';
+import ItemListaChatDetalhes from '../../pages/ItemListaChatDetalhes';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -107,6 +108,40 @@ export default function ScreenNavigator() {
         }}
 
       />
+
+      <Stack.Screen
+        name="ItemListaChat"
+        component={ItemListaChat}
+        options={{
+          headerShown: false,
+          //  title: 'Voltar',
+        }}
+      /*
+      options={({ route }) => ({
+        title: route.params.userDono,
+        headerTitleAlign: 'center',
+      })}
+*/
+
+      />
+
+      <Stack.Screen
+        name="ItemListaChatNovaTarefa"
+        component={ItemListaChatNovaTarefa}
+        options={{
+          headerShown: true,
+          //  title: 'Voltar',
+        }}
+      />
+       <Stack.Screen
+        name="ItemListaChatDetalhes"
+        component={ItemListaChatDetalhes}
+        options={{
+          headerShown: true,
+          //  title: 'Voltar',
+        }}
+      />
+
 
       <Stack.Screen
         name="ChatMensagens"

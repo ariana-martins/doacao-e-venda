@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Pressable, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, Pressable, StyleSheet, ScrollView, Alert } from 'react-native';
 import { Card } from 'react-native-paper';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
@@ -109,7 +109,10 @@ async function handleButtonPress(){
                         {/*<TouchableOpacity style={styles.btnInteresse} */}
                         <TouchableOpacity
                             style={{ backgroundColor: registrarInteresse ? '#000000' : '#191970', width: 250, height: 40, borderRadius: 10, justifyContent: 'center' }}
-                            onPress={() => setRegistrarInteresse(!registrarInteresse)}>
+                            onPress={() => {
+                                setRegistrarInteresse(!registrarInteresse);
+                                //Alert.alert incluir o Alert aqui.
+                            }}>
                             {/*<Text style={styles.textoBotao}>Registrar Interesse</Text>*/}
                             <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 20, textAlign: 'center' }}>
                                 {registrarInteresse ? 'Registrar Interesse' : 'Cancelar Interesse'}

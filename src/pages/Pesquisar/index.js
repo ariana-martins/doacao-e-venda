@@ -101,7 +101,7 @@ export default function Pesquisar() {
 
     //.toLowerCase() => Transforma o nome em minusculo, para poder pesquisar por palavra chave qualquer tamanho de letra...
     //tanto o nome aparecendo na lista, tanto o nome onde vai pesquisar, "vai transformar letras em minusculas".
-
+/*
     useEffect(() => {
         if (searchText === '') {
             setList(testeProdutos);
@@ -122,10 +122,10 @@ export default function Pesquisar() {
                    // Link do canal do Youtube: https://www.youtube.com/watch?v=Rv2eJK1iOTo
                    // Canal do Youtube: Bonieky Lacerda.
                    */
-                )
-            );
-        }
-    }, [searchText]);
+    //             )
+    //         );
+    //     }
+    // }, [searchText]);
 
 
 

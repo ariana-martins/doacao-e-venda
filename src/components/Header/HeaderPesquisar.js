@@ -5,7 +5,7 @@ import { Header } from "@rneui/themed";
 import BotaoVoltar from "../componentesGerais/BotaoVoltar";
 
 
-export default function Pesquisar() {
+export default function HeaderPesquisar() {
 
  
     return (

@@ -25,7 +25,7 @@ export default function DialogErro() {
             <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => setModalVisible(!modalVisible)}>
-              <Text style={styles.textStyle}>Hide Modal - Fechar</Text>
+              <Text style={styles.textStyle}>Fechar</Text>
             </Pressable>
           </View>
         </View>

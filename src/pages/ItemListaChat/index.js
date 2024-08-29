@@ -2,15 +2,18 @@ import React, { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../../components/componentesGerais/Auth/AuthProvider';
 import { View, Image, Text, FlatList, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { styles } from './styles';
+//Novo React Native Elements
+import { ListItem, Avatar } from '@rneui/themed';
+
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { firebase } from '@react-native-firebase/firestore';
 
-import Icon from 'react-native-vector-icons/Ionicons';
-
 import HeaderChat from '../../components/Header/HeaderChat';
 import DialogConfirmacao from '../../components/Dialog/DialogConfirmacao';
 import DialogErro from '../../components/Dialog/DialogErro';
+import { Divider } from 'react-native-paper';
 
 
 export default function ItemListaChat({ navigation }) {
@@ -30,84 +33,106 @@ export default function ItemListaChat({ navigation }) {
     //Função deletar Tarefa - falta arrumar e deletar por "id"
     const deleteTask = async () => {
         firebase.firestore()
-        .collection("Tasks")
-        .doc("vrNfQlDZe8PFLcS5tjyS")
-        .delete()
-        .then(() => {
-            Alert.alert("Deletado com sucesso")
-            console.log('id deletado')
-        })
-        .catch(() => {
-            Alert.alert("Error qlqr")
-        })
+            .collection("Tasks")
+            .doc("iqTV0edUEE1FJbEa0Ovh")
+            .delete()
+            .then(() => {
+                Alert.alert("Deletado com sucesso")
+                console.log('id deletado')
+            })
+            // .catch(() => {
+            //     Alert.alert("Error qlqr")
+            // })
+            .catch(error =>
+                console.log("Qlqr erro da tarefa deletado", error))
     }
-/*
-    function deleteTask(id) {
-        firebase.firestore().collection("Tasks").doc(id).delete()
-    }
-    */
+    /*
+        function deleteTask(id) {
+            firebase.firestore().collection("Tasks").doc(id).delete()
+        }
+        */
 
     //Referência de exemplo para criar lista, site tarefas (Tasks): 
     // Link do youtube: https://www.youtube.com/watch?v=0AM6AXlFwxM
     // Título do video do youtube: REACT NATIVE + FIREBASE: CRIANDO UM APP COMPLETO
     // Canal do youtube: Léo Scorza - OneBitCode
 
-  /*  const qlqrCoisa = firebase.firestore().collection('Tasks');
-    useEffect(() => {
-        qlqrCoisa.onSnapshot((querySnapshot) => {
-            const data = []
-            querySnapshot.forEach((doc) => {
-                // ao invés de utilizar "id", trocar depois para "key", exemplo:
-                // data.push({ ...doc.data(), key: doc.id
-                data.push({ ...doc.data(), key: doc.id })
-            })
-            setTask(data)
-        })
-    }, [])
-    */
-    const ref = firebase.firestore().collection('Tasks');
-    useEffect(() => {
-      ref.onSnapshot(querySnapshot => {
-        const data = []
-        querySnapshot.forEach(doc => {
-          data.push({
-            ...doc.data(),
-            key: doc.id
+    /*  const qlqrCoisa = firebase.firestore().collection('Tasks');
+      useEffect(() => {
+          qlqrCoisa.onSnapshot((querySnapshot) => {
+              const data = []
+              querySnapshot.forEach((doc) => {
+                  // ao invés de utilizar "id", trocar depois para "key", exemplo:
+                  // data.push({ ...doc.data(), key: doc.id
+                  data.push({ ...doc.data(), key: doc.id })
+              })
+              setTask(data)
           })
+      }, [])
+      */
+
+    // ".orderBy('postProduto', 'desc')" acrescentado as listas por ultimo no inicio da pagina.
+    const ref = firebase.firestore().collection('Tasks').orderBy('postMensagem', 'desc');
+    useEffect(() => {
+        ref.onSnapshot(querySnapshot => {
+            const data = []
+            querySnapshot.forEach(doc => {
+                data.push({
+                    ...doc.data(),
+                    key: doc.id
+                })
+            })
+            setData(data)
         })
-        setData(data)
-      })
-      //  return () => ref()
+        //  return () => ref()
     }, [])
-  
 
 
+    //======================================================
+    //import { ListItem, Avatar } from 'react-native-elements'
+
+    const list = [
+        {
+            name: 'Amy Farha',
+            avatar_url: 'https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT(1).jpg',
+            subtitle: 'Vice President'
+        },
+        {
+            name: 'Chris Jackson',
+            avatar_url: 'https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT%20-%20P&B.jpg',
+            subtitle: 'Vice Chairman'
+        },
+        // ... // more items
+    ];
+
+
+    //======================================================
 
 
     //array "Chat"
     const Chat = [
-       /*
-        {
-            id: '1',
-            image: require('../../../src/assets/img/img1.png'),
-            title: 'Sapatênis',
-            valor: 'R$200,00',
-            messageTime: '4 mins atrás',
-            messageText: 'João - dono do produto',
-            imagemUserDono: require('../../assets/imgUserDono/logoTI.png'),
-            messageUser: 'Usuário 1',
-        },
-        {
-            id: '2',
-            image: require('../../../src/assets/img/img2.png'),
-            title: 'Blusa branca',
-            valor: 'R$0,00',
-            messageTime: '2 horas atrás',
-            messageText: 'Maria - dono do produto', // {userDono: data.user_id} porém tem que ser o "nomeCompleto"
-            imagemUserDono: require('../../assets/imgUserDono/logoFaccatColor.png'),
-            messageUser: 'Usuário 2',
-        },
-        */
+        /*
+         {
+             id: '1',
+             image: require('../../../src/assets/img/img1.png'),
+             title: 'Sapatênis',
+             valor: 'R$200,00',
+             messageTime: '4 mins atrás',
+             messageText: 'João - dono do produto',
+             imagemUserDono: require('../../assets/imgUserDono/logoTI.png'),
+             messageUser: 'Usuário 1',
+         },
+         {
+             id: '2',
+             image: require('../../../src/assets/img/img2.png'),
+             title: 'Blusa branca',
+             valor: 'R$0,00',
+             messageTime: '2 horas atrás',
+             messageText: 'Maria - dono do produto', // {userDono: data.user_id} porém tem que ser o "nomeCompleto"
+             imagemUserDono: require('../../assets/imgUserDono/logoFaccatColor.png'),
+             messageUser: 'Usuário 2',
+         },
+         */
         {
             id: '3',
             image: require('../../../src/assets/img/img3.png'),
@@ -118,7 +143,7 @@ export default function ItemListaChat({ navigation }) {
             imagemUserDono: require('../../assets/imgUserDono/logoFACCAT.png'),
             messageUser: 'Usuário 3',
         },
-        
+
     ];
 
 
@@ -126,67 +151,31 @@ export default function ItemListaChat({ navigation }) {
     //const RenderItemListChat=({ data }) => {
     const RenderItemListChat = ({ item }) => {
         return (
-            <View style={styles.card}>
+
+
+            <View>
                 <TouchableOpacity onPress={() => navigation.navigate('ChatMensagens',
                     { userDono: item.messageText })}>
-                    <View style={styles.userInfo}>
-                        <View style={styles.userImgWrapper}>
 
-                            <View style={{
-                                flexDirection: 'row',
-                                //flexWrap: 'wrap',
-                                //   position: 'absolute', 
-                                //top: 0, bottom: 0, left: 0, right: 0
+                    <ListItem style={styles.card} bottomDivider>
+                        {/*    <Avatar source={{ uri: l.avatar_url }} /> */}
+                        <Avatar style={styles.prodImg} source={item.image} />
+                        {/*<Avatar rounded source={{ uri: l.avatar_url }} /> */}
+                        <Avatar style={styles.userDonoImg} source={item.imagemUserDono} />
+                        <ListItem.Content>
+                            <ListItem.Title style={styles.userNameEvalor}>{item.title}</ListItem.Title>
+                            <ListItem.Title style={styles.userNameEvalor}>{item.valor}</ListItem.Title>
+                            <ListItem.Subtitle>{item.messageText}</ListItem.Subtitle>
+                            <ListItem.Subtitle>{item.messageUser}</ListItem.Subtitle>
+                        </ListItem.Content>
+                        <ListItem.Content right>
+                            <ListItem.Subtitle right>{item.messageTime}</ListItem.Subtitle>
 
-                            }}>
-
-
-                                <Image style={styles.prodImg}
-                                    source={item.image}
-                                />
-
-                                <Image style={styles.userDonoImg}
-                                    source={item.imagemUserDono}
-                                />
-
-
-                                <View style={{ flexDirection: 'row' }}>
-                                    <View style={{ flexDirection: 'column', marginLeft: 20, }}>
-                                        <Text style={styles.userName}>{item.title}</Text>
-                                        <Text style={styles.userValor}>{item.valor}</Text>
-                                        <Text>{item.messageText}</Text>
-                                        <Text>{item.messageUser}</Text>
-                                    </View>
-                                    <Text style={styles.postTime}>{item.messageTime}</Text>
-                                </View>
-
-                            </View>
-
-                        </View>
-
-                        <View style={styles.textSection}>
-
-                            {/*
-                            <Icon
-                                name='person-circle-outline'
-                                size={45}
-                                color='black'
-                                style={{marginTop: 10}}
-                            />
-        */}
-
-                            {/*
-                            <View style={{ marginTop: 20, }}>
-                                <Image style={styles.userDonoImg}
-                                    source={item.imagemUserDono}
-                                />
-                            </View>
-    */}
-
-                        </View>
-                    </View>
+                        </ListItem.Content>
+                    </ListItem>
                 </TouchableOpacity>
-            </View>
+
+            </View >
         );
     };
 
@@ -224,12 +213,12 @@ export default function ItemListaChat({ navigation }) {
 
     /*
     const [groupName, setGroupName] = useState("");
-    
+     
     const handleCreateRoom = () => {
         console.log( "createRoom", groupName );
         //closedModal();
     };
-    
+     
     const rooms = [
         {
             id: "1",
@@ -268,7 +257,7 @@ export default function ItemListaChat({ navigation }) {
             ],
         },
     ];
-    
+     
     */
 
 
@@ -308,6 +297,7 @@ export default function ItemListaChat({ navigation }) {
         <View style={styles.container}>
 
             <HeaderChat />
+
 
             {/*  <View style={styles.addMargem}> */}
 
@@ -357,15 +347,27 @@ export default function ItemListaChat({ navigation }) {
 
             />
             {/*          </View>   */}
+          {/*
+            <View>
+                <FlatList
+                    ListHeaderComponent={
+                        <>
+                            <View style={{ paddingVertical: 8 }}>
 
 
+                            </View>
+                        </>
+                    }
+                />
+            </View>
+                */}
             <View style={styles.containerAddLista}>
                 <FlatList
                     showsVerticalScrollIndicator={false}
-                   // data={task}
-                   data={data}
-                   keyExtractor={(item) => String(item.key)}
-                    renderItem={({item}) => {
+                    // data={task}
+                    data={data}
+                    keyExtractor={(item) => String(item.key)}
+                    renderItem={({ item }) => {
                         return (
                             <View style={styles.styloTarefas}>
                                 <TouchableOpacity
@@ -379,16 +381,18 @@ export default function ItemListaChat({ navigation }) {
                                 <Text style={styles.styloDescricaoTarefa}
                                     onPress={() => {
                                         navigation.navigate("ItemListaChatDetalhes", {
-                                           id: item.id,
-                                           descricao: item.descricao,
+                                            id: item.id,
+                                            descricao: item.descricao,
                                         })
                                     }}
                                 >
-                                   {item.descricao}
+                                    {item.descricao}
                                 </Text>
+                                <Divider style={{ borderWidth: 1, borderColor: 'pink' }} />
                             </View>
                         )
-
+                        //Falta acrescentar "se o usuário não digitou a descrição,
+                        // é == error, descreva algo".
                     }}
                 />
                 <TouchableOpacity
@@ -400,109 +404,19 @@ export default function ItemListaChat({ navigation }) {
 
             </View>
 
-                    {/*
+            {/*
                     ==>>> Dialog
                     EU ACHO QUE COLOCA A MESMA MENSAGEM QUE TEM nos alerts hj e os mesmos botões
                     */}
-                    {/*
+
+            {/*
             <DialogConfirmacao />
             <DialogErro />
-                */}
-                
+        */}
+
         </View>
 
     );
 
 };
 
-/*
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#FFFFFF',
-    },
-    addMargem: {
-        margin: 10,
-    },
-    txtTituloChats: {
-        textAlign: 'center',
-        fontFamily: 'Roboto',
-        fontSize: 25,
-        color: '#000000',
-    },
-    linhaDivid: {
-        width: '100%',
-        borderBottomWidth: 1,
-        borderBottomColor: '#CCCCCC',
-    },
-
-    card: {
-        width: '100%',
-        marginRight: 10,
-        paddingRight: 10,
-        borderBottomWidth: 1,
-        borderBottomColor: '#CCCCCC',
-        marginVertical: 5,
-    },
-    userInfo: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    },
-    userImgWrapper: {
-        paddingTop: 15,
-        paddingBottom: 15,
-    },
-
-    prodImg: {
-        width: 60,
-        height: 60,
-    },
-    userDonoImg: {
-        width: 40,
-        height: 40,
-        borderRadius: 20,
-        position: 'absolute', //top: 0, bottom: 0, left: 0, right: 0
-        top: 40,
-        left: 35,
-    },
-
-    textSection: {
-        flexDirection: 'column',
-        justifyContent: 'center',
-        padding: 15,
-        paddingLeft: 0,
-        marginLeft: 10,
-        width: 300,
-        // borderBottomWidth: 1,
-        //borderBottomColor: '#CCCCCC',
-    },
-    userInfoText: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginBottom: 5,
-    },
-    userName: {
-        fontSize: 14,
-        fontWeight: 'bold',
-        fontFamily: 'roboto',
-    },
-    userValor: {
-        fontSize: 14,
-        fontWeight: 'bold',
-        fontFamily: 'roboto',
-    },
-    postTime: {
-        fontSize: 12,
-        color: '#666666',
-        fontFamily: 'roboto',
-        marginRight: 10,
-        paddingRight: 10,
-    },
-    messageText: {
-        fontSize: 14,
-        color: '#333333',
-    },
-
-
-});
-*/

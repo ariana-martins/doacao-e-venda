@@ -3,8 +3,9 @@ import { View, Text, TouchableOpacity, Pressable, StyleSheet, ScrollView, Alert 
 import { Card } from 'react-native-paper';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
-import BotaoVoltar from '../../components/componentesGerais/BotaoVoltar';
+
 import HeaderDetalhes from '../../components/Header/HeaderDetalhes';
+
 
 //import SwiperNumberComponent from '../../components/componentesGerais/CarrouselImagens/SwiperNumber';
 //import Produtos from '../../data/testeProdutos';
@@ -15,7 +16,7 @@ import HeaderDetalhes from '../../components/Header/HeaderDetalhes';
 //Já está configurado em App.js em ChatMensagens e aparece o nome do UserDono
 
 
-export default function Detalhes({ userDono }) {
+export default function Detalhes({ userDono, item }) {
     const route = useRoute(); //Recebe o item da "PaginaInicial"
     //const { name, detalhes, preco } = route.params; //Recebe os itens "route.params" da "PaginaInicial"
     const { data } = route.params; //Recebe os itens "route.params" da "PaginaInicial" buscando do firebase
@@ -25,23 +26,40 @@ export default function Detalhes({ userDono }) {
     const [registrarInteresse, setRegistrarInteresse] = useState(true);
 
 
-//======================================
-//Função "CRUD" => Criar ItemListaChat 
+   // {registrarInteresse ? console.log('Acrescentou Interesse') : console.log('Cancelou Interesse') }
 
-/* Exemplo em AsnycStorage, transformar para Firestore:
-// Fonte: https://www.luiztools.com.br/post/tutorial-crud-em-app-android-e-ios-com-react-native-2/
-async function handleButtonPress(){ 
-  const listItem = {id: new Date().getTime(), descricao, quantidade: parseInt(quantidade)};
-  let savedItems = [];
-  const response = await AsyncStorage.getItem('items');
-  
-  if(response) savedItems = JSON.parse(response);
-  savedItems.push(listItem);
- 
-  await AsyncStorage.setItem('items', JSON.stringify(savedItems));
-  navigation.navigate("AppList", listItem);
-}
-*/
+   const Interesse = () => {
+   if (registrarInteresse === true) {
+        return console.log('Acrescentou Interesse')
+    }
+       else if (registrarInteresse === false)
+       return  console.log('Cancelou Interesse')
+    }
+    //====================================================
+    //Funcao selecionar e desmarcar "Registrar Interesse" : "Cancelar Interesse"
+    
+    //likeIcon = item.liked ? 'heart' : 'heart-outline';
+    //likeIconColor = item.liked ? '#2e64e5' : '#333';
+
+
+    //Essa parte aqui vai dentro do 
+    {/*
+    return (
+        <View>
+            <Interaction active={item.liked}>
+                <Icon name={likeIcon} size={25} color={likeIconColor} />
+            </Interaction>
+        </View>
+    )
+    */}
+
+    {/* {liked ? true : false}  
+      //se 'true', mostra "coracao selecionado"
+    // se 'false', mostra "coracao em branco" 
+*/}
+
+    {/* {registrarInteresse ? true : false}  */ }
+    //=====================================================
 
 
     //===================================
@@ -74,7 +92,7 @@ async function handleButtonPress(){
         <View style={styles.container}>
             <HeaderDetalhes />
 
- 
+
             <Card style={{ marginHorizontal: 15, marginTop: 10 }}>
                 <Card.Cover
                     style={styles.igmDetalhes}
@@ -82,22 +100,17 @@ async function handleButtonPress(){
                 />
                 <Text style={styles.txtTitle}>{data.titulo}</Text>
             </Card>
-            
+
 
             <ScrollView >
-                <Text style={styles.txtDetalhes}>Detalhes: {data.descricao}</Text>
-                <Text style={styles.txtValor}>R$ {data.valor}</Text>
+                <Text style={styles.txtDetalhesValor}>Detalhes: {data.descricao}</Text>
+                <Text style={styles.txtDetalhesValor}>R$ {data.valor}</Text>
 
                 {/**
             <View style={styles.swiperNumberContent}>
                 //aqui vai mais que uma imagem, carrossel de imagens
                 <SwiperNumberComponent />
             </View>
-            */}
-                {/*
-            <Text style={styles.txtTitle}>{name}</Text>
-            <Text style={styles.txtDetalhes}>Detalhes: {detalhes}</Text>
-            <Text style={styles.txtValor}>R$ {preco}</Text>
             */}
 
 
@@ -106,17 +119,20 @@ async function handleButtonPress(){
 
                 <View style={{ marginVertical: 15 }}>
                     <View style={styles.botaoAdicionarMargem}>
-                        {/*<TouchableOpacity style={styles.btnInteresse} */}
                         <TouchableOpacity
                             style={{ backgroundColor: registrarInteresse ? '#000000' : '#191970', width: 250, height: 40, borderRadius: 10, justifyContent: 'center' }}
                             onPress={() => {
-                                setRegistrarInteresse(!registrarInteresse);
-                                //Alert.alert incluir o Alert aqui.
+                                setRegistrarInteresse(!registrarInteresse)
+                                {
+                                    registrarInteresse ?
+                                        Alert.alert("Registrado!", "Interesse registrado com sucesso.")
+                                        :
+                                        Alert.alert("Cancelado!", "Interesse cancelado com sucesso.")
+                                }
                             }}>
-                            {/*<Text style={styles.textoBotao}>Registrar Interesse</Text>*/}
-                            <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 20, textAlign: 'center' }}>
+                            <Text style={styles.textoBotao}>
                                 {registrarInteresse ? 'Registrar Interesse' : 'Cancelar Interesse'}
-                            </Text>
+                            </Text>                          
                         </TouchableOpacity>
                     </View>
 
@@ -156,17 +172,7 @@ const styles = StyleSheet.create({
         color: '#000000',
         margin: 10,
     },
-    txtDetalhes: {
-        paddingHorizontal: 10,
-        fontFamily: 'Inter',
-        fontStyle: 'normal',
-        fontSize: 20,
-        color: '#000000',
-        // lineHeight: 25,
-        marginTop: 10,
-        marginHorizontal: 10,
-    },
-    txtValor: {
+    txtDetalhesValor: {
         paddingHorizontal: 10,
         fontFamily: 'Inter',
         fontStyle: 'normal',
@@ -175,6 +181,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginHorizontal: 10,
     },
+
     botaoAdicionarMargem: {
         paddingHorizontal: 15,
         alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
@@ -194,30 +201,13 @@ const styles = StyleSheet.create({
         fontSize: 20, //tamanho do texto
         textAlign: 'center', // alinha texto dentro da borda, ao centro
     },
+
     /*
     swiperNumberContent: {
         flexDirection: 'row',
         height: 340,
         width: '100%',
         marginTop: 10,
-    },
-    bordaIgmDetalhes: {
-        justifyContent: 'center',
-        marginHorizontal: 10,
-    },
-    igmDetalhes: {
-        width: '100%',
-        width: 300,
-        height: 300,
-    },
-
-    btnInteresse: {
-        width: 250, //largura
-        height: 40, //altura 
-        //backgroundColor: '#000000', //cor dentro da borda, onde vai ser incluído o texto
-        borderRadius: 10, // circunferência da borda
-        justifyContent: 'center', //centraliza o texto ao meio da borda
-        backgroundColor: '#191970',
     },
 
     */

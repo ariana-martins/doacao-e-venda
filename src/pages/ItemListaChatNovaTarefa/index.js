@@ -146,6 +146,7 @@ export default function ItemListaChatNovaTarefa({ navigation }) {
             .add({
                 descricao: descricao,
                 status: false,
+                postMensagem: firestore.Timestamp.fromDate(new Date()),
                 // created_at: firestore.FieldValue.serverTimestamp()
               //  postProduto: firestore.Timestamp.fromDate(new Date()),
             })

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, Button, FlatList, TouchableOpacity, Alert, Modal, StyleSheet, Image } from 'react-native';
-import { useRoute } from '@react-navigation/native';
+import { View, Text, TextInput, Button, FlatList, TouchableOpacity, Image } from 'react-native';
+import { styles } from './styles';
 
+import { useRoute } from '@react-navigation/native';
 import firestore from '@react-native-firebase/firestore';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -20,38 +21,6 @@ export default function ChatMensagens() {
     const { userDono, imageUserDono, image, name, valor } = route.params; //Recebe os itens "route.params" da "PaginaInicial" buscando do firebase
 
 
-    //substituir por Modal e falta fazer o upload da imagem. [OK]
-    //Função carregar imagem.
-    /*
-    const gerarFoto = () => {
-        if (gerarFoto) {
-
-            Alert.alert(
-                'Para as imagens',
-                'Escolha uma Opção:',
-                [
-                    {
-                        text: 'Camera', onPress: () => {
-                            Alert.alert('Clicou na camera');
-                        }
-                    },
-
-                    {
-                        text: 'Galeria', onPress: () => {
-                            Alert.alert('clicou na Galeria');
-                        }
-                    },
-
-                    {
-                        text: 'Cancelar', onPress: () => {
-                            Alert.alert('Você não selecionou nenhuma imagem');
-                        }
-                    }
-                ]
-            )
-        }
-    }
-*/
 
     //Step 1: Create a Firestore Collection
     // Create a reference to the "messages" collection
@@ -125,40 +94,29 @@ export default function ChatMensagens() {
 
             <View style={{ borderBottomWidth: 1, borderBottomColor: '#CCCCCC', }}>
                 <View style={styles.headerChatMsg}>
-
-                    <View style={{ marginBottom: 15, marginTop: 15, marginLeft: 15 }}>
+                    <View style={styles.headerChatMsgBotaoVoltar}>
                         <BotaoVoltar />
                     </View>
-
-                    <Text style={styles.txtTituloDetalhes}>{userDono}</Text>
+                    {/*<Text style={styles.headerTxtTituloDetalhesPerfil}>{userDono}</Text>*/}
+                    <Text style={styles.headerTxtTituloDetalhesPerfil}>Nome Completo Perfil + Img Perfil</Text>
                     {/*ImageUserDono vem da página "Detalhes" */}
-                    {/*
-                    <Image style={styles.imagemMaisDetalhesUserDono}
-                        source={imageUserDono} />
-    */}
-                    <Image style={styles.imagemMaisDetalhesUserDono}
+                    {/* <Image style={styles.headerImgDetalhesPerfil}
+                        source={imageUserDono} /> */}
+                    <Image style={styles.headerImgDetalhesPerfil}
                         source={require('../../assets/logo/logo_novo.jpg')} />
-    
                 </View>
             </View>
 
             <View style={{ display: 'flex', flexDirection: 'column', flex: 1, }}>
 
-
-                <View style={{
-                    flexDirection: 'row', backgroundColor: '#FFFFFF', margin: 10,
-                    borderBottomWidth: 1, borderBottomColor: '#CCCCCC',
-                }}>
-
-                    <Image style={styles.imagemMaisDetalhes}
-                        source={{ uri: image }}
-                    />
+                <View style={styles.containerStyloDetalhesDoProduto}>
+                    <Image style={styles.imagemMaisDetalhesDoProduto} source={{ uri: image }} />
                     <View style={{ flex: 1, flexDirection: 'column' }} >
                         <Text style={{ paddingRight: 10 }}>{name}</Text>
                         <Text style={{ marginVertical: 5 }}>{valor}</Text>
                     </View>
-
                 </View>
+
 
                 <FlatList
                     data={messages}
@@ -194,11 +152,9 @@ export default function ChatMensagens() {
             </ScrollView>
  */}
 
-                {/*<View style={{ display: 'flex', flexDirection: 'row', marginTop: 10, backgroundColor: "pink", paddingHorizontal: 10, alignItems: 'center', justifyContent: 'flex-end' }}>*/}
-                <View style={{ backgroundColor: "#FFFFFF", flexDirection: 'row', paddingHorizontal: 10, }}>
-
-                    {/*<View style={{ paddingHorizontal: 10, flexDirection: 'row', alignItems: 'center' }} >*/}
-                    <View style={{ maxHeight: 40, paddingTop: 12}}>
+            
+                <View style={styles.containerStyloEnviarChatMensagens}>
+                    <View style={styles.containerStyloModalImgEnviarChatMensagens}>
                         <TouchableOpacity>
                             {/*<Icon name="camera-outline" size={20} color="#000000" onPress={() => setModalActive(true)} />*/}
                             <ModalEscolherImagem />
@@ -206,19 +162,7 @@ export default function ChatMensagens() {
                     </View>
 
                     <TextInput
-                        style={{
-                            flex: 1,
-                            minHeight: 40,
-                            maxHeight: 90,
-                            paddingHorizontal: 12,
-                            fontSize: 17,
-                            paddingTop: 8,
-                            marginHorizontal: 5,
-                            //   borderColor: 'black',
-                            //    borderWidth: 1,
-                            //    backgroundColor: 'yellow',
-                            borderRadius: 5,
-                        }}
+                        style={styles.styloTextInputEnviarChatMensagens}
                         value={text}
                         onChangeText={setText}
                         placeholder="Escreva sua mensagem aqui..."
@@ -238,98 +182,6 @@ export default function ChatMensagens() {
 };
 
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    headerChatMsg: {
-        width: '100%',
-        //  paddingHorizontal: 10,
-        backgroundColor: '#FFFFFF',
-        // marginBottom: 5,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        paddingTop: 30,
-    },
-    txtTituloDetalhes: {
-        fontFamily: 'Roboto',
-        fontSize: 15,
-        color: '#000000',
-        marginLeft: 5,
-        //  paddingHorizontal: 10,
-        // marginTop: 10,
-        textAlign: 'center',
-        padding: 5,
-    },
-
-    addMargemTituloDetalhes: {
-        flexDirection: 'row',
-        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
-    },
-
-    imagemMaisDetalhesUserDono: {
-        width: 50,
-        height: 50,
-        marginRight: 10,
-        borderRadius: 50,
-        resizeMode: "cover",
-    },
-    linhaDivid: {
-        width: '100%',
-        borderBottomWidth: 1,
-        borderBottomColor: '#CCCCCC',
-        marginVertical: 5,
-        paddingVertical: 5,
-    },
-
-    visualizaAbaixoDoModal: { //visualiza o chat abaixo do modal
-        flex: 1,
-        justifyContent: 'flex-end',
-        backgroundColor: 'rgba(0,0,0,0.5)',
-    },
-    modalView: {
-        backgroundColor: 'white',
-        padding: 10,
-        justifyContent: 'center',
-    },
-    modalMargemDivisa: {
-        borderBottomWidth: 1,
-        borderBottomColor: '#CCCCCC',
-    },
-    iconesModal: {
-        flexDirection: 'row',
-        paddingVertical: 10,
-        margin: 5,
-        alignItems: 'center',
-    },
-    modalText: {
-        textAlign: 'left',
-        alignItems: 'center',
-        fontWeight: 'bold', //texto em negrito
-        fontSize: 20, //tamanho do texto
-        color: '#000000',
-        marginLeft: 10,
-    },
-    buttonModal: { //Botão Cancelar
-        padding: 5,
-        marginTop: 10,
-        width: '100%',
-    },
-    outroTextModal: { //texto Cancelar
-        fontWeight: 'normal',
-        textAlign: 'right',
-        fontSize: 20, //tamanho do texto
-        color: '#000000',
-    },
-
-    imagemMaisDetalhes: {
-        width: 50,
-        height: 50,
-        marginRight: 10,
-        resizeMode: "cover",
-    },
-});
 
 
 /*

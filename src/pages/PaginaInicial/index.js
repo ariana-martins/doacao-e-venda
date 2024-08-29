@@ -71,7 +71,8 @@ export default function PaginaInicial() {
   // Observação: Nesse exemplo inicia desde o login com o usuário, e mostra o "produto c/ imagem" em um Card c/ getDowload do Firebase + Storage.
 
 
-  const ref = firebase.firestore().collection('produtos');
+  // ".orderBy('postProduto')" acrescentado os produtos por ultimo no final da pagina.
+  const ref = firebase.firestore().collection('produtos').orderBy('postProduto');
   useEffect(() => {
     ref.onSnapshot(querySnapshot => {
       const data = []

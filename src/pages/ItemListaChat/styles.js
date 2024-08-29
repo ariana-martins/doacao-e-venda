@@ -14,6 +14,7 @@ export const styles = StyleSheet.create({
         position: "absolute",
         bottom: 5,
         left: 20,
+         //top: 0, bottom: 0, left: 0, right: 0
         backgroundColor: "#F92e6a",
         borderRadius: 50,
         justifyContent: "center",
@@ -51,12 +52,12 @@ export const styles = StyleSheet.create({
     },
 
     card: {
-        width: '100%',
-        marginRight: 10,
-        paddingRight: 10,
-        borderBottomWidth: 1,
+      //  width: '100%',
+     //   marginRight: 10,
+     //   paddingRight: 10,
+        borderBottomWidth: 2,
         borderBottomColor: '#CCCCCC',
-        marginVertical: 5,
+      //  marginVertical: 5,
     },
     userInfo: {
         flexDirection: 'row',
@@ -76,8 +77,9 @@ export const styles = StyleSheet.create({
         height: 40,
         borderRadius: 20,
         position: 'absolute', //top: 0, bottom: 0, left: 0, right: 0
-        top: 40,
-        left: 35,
+        top: 80,
+        left: 50,
+        backgroundColor: '#FFFFFF',
     },
 
     textSection: {
@@ -95,16 +97,18 @@ export const styles = StyleSheet.create({
         justifyContent: 'space-between',
         marginBottom: 5,
     },
-    userName: {
+    userNameEvalor: {
         fontSize: 14,
         fontWeight: 'bold',
         fontFamily: 'roboto',
     },
+    /*
     userValor: {
         fontSize: 14,
         fontWeight: 'bold',
         fontFamily: 'roboto',
     },
+    */
     postTime: {
         fontSize: 12,
         color: '#666666',

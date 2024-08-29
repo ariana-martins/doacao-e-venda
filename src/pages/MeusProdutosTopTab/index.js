@@ -24,6 +24,8 @@ export default function MeusProdutos() {
 
     const [data, setData] = useState('');
 
+   //variável constante
+   const user_id = firebase.auth().currentUser.uid
 
 
     //a partir de então 
@@ -45,9 +47,6 @@ export default function MeusProdutos() {
     }, [])
 
 
-
-    //variável constante
-    const user_id = firebase.auth().currentUser.uid
 
 
     //Função Delete/Excluir produto
@@ -74,6 +73,7 @@ export default function MeusProdutos() {
             { cancelable: false }
         );
     }
+
 
 
     return (
@@ -124,10 +124,11 @@ export default function MeusProdutos() {
                                 </TouchableOpacity>
                                 <TouchableOpacity>
                                     <Icon name="archive-outline" size={20} color="#000000" />
-                                </TouchableOpacity>
+                                </TouchableOpacity>                               
                                 <TouchableOpacity onPress={handleDeletePress}>
                                     <Icon name="trash-outline" size={20} color="#000000" />
                                 </TouchableOpacity>
+                        
                             </View>
 
                         </View>

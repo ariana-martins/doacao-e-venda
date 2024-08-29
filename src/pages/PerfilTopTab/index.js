@@ -12,6 +12,7 @@ import firestore, { firebase } from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
 
 import ImageCropPicker from 'react-native-image-crop-picker';
+import EscolherImagemPerfil from '../../components/componentesGerais/EscolherImagemPerfil';
 
 
 //================================================================================================
@@ -138,7 +139,7 @@ export default function PerfilTopTab() {
             await task;
             const url = await reference.getDownloadURL() //Baixando um arquivo com uma URL, e para obter uma URL de uma referência usando .getDownloadURL().
 
-            Alert.alert("Foto", "Aqui salvei imagem")
+            Alert.alert("Imagem!", "Imagem salva com sucesso.")
             console.log('Download URL:', url);
             return url
         }
@@ -233,7 +234,11 @@ export default function PerfilTopTab() {
     return (
         <View style={styles.container}>
 
+            
 
+
+
+            {/*
             <View style={styles.container_images}>
                 <TouchableOpacity onPress={choose_photo}>
                     {image && <Image source={{ uri: image }}
@@ -249,7 +254,8 @@ export default function PerfilTopTab() {
 
             </View>
      
-    
+    */}
+
             {/* //====>>>> Falta configurar navegação do Login p/ as telas de páginas do usuário  */}
             {/* O Logout deve funcionar como exemplo do vídeo: "Part 1/2 | OLX Clone using React Native & Firebase | React Native & Firebase for beginners in Hindi" */}
             {/* Link do vídeo: https://www.youtube.com/watch?v=ntPQ-IPm3AM&list=PLB97yPrFwo5ihgCoWXlEDHrAPQNshsfzP&index=6 */}
@@ -283,9 +289,13 @@ export default function PerfilTopTab() {
 
 
             <View style={{ alignItems: 'center', marginTop: 20 }}>
+             
+             {/*
                 <Image style={{ width: 100, height: 100, borderRadius: 50, borderWidth: 1, borderColor: "green" }}
                     source={require('../../assets/logo/logo_novo.jpg')} />
+            */}
 
+                    <EscolherImagemPerfil />
 
                 <View style={{ marginTop: 20 }} >
                     <View style={{ flexDirection: "row", fontWeight: 'bold' }}>
@@ -308,6 +318,8 @@ export default function PerfilTopTab() {
                 <FormButton buttonTitle='Logout' onPress={() => logout()} />
             </View>
 */}
+
+
             <View style={styles.botaoAdicionarMargem}>
                 <TouchableOpacity style={styles.btn} onPress={() => Logout()} >
                     {/* onPress={() => navigation.navigate("Login")}> */}

@@ -10,35 +10,40 @@ import firestore, { firebase } from '@react-native-firebase/firestore';
 
 export default function InteressesTopTab() {
     const [data, setData] = useState('');
-
-
+    const [loading, setLoading] = useState(true);
 
     // Refazer o getDowload em "Adicionar novo produto" e aqui também incluir um "UseEffect + getDetail"
     // Conforme seguindo o manual do canal do Youtube: CODERS NEVER QUIT
     // Título do vídeo: Part 1/2 | OLX Clone using React Native & Firebase | React Native & Firebase for beginners in Hindi
     // Link canal do Youtube: https://www.youtube.com/watch?v=ntPQ-IPm3AM&list=PLB97yPrFwo5ihgCoWXlEDHrAPQNshsfzP&index=7
     // Observação: Nesse exemplo inicia desde o login com o usuário, e mostra o "produto c/ imagem" em um Card c/ getDowload do Firebase + Storage.
-    const ref = firebase.firestore().collection('produtos');
-    useEffect(() => {
-        ref.onSnapshot(querySnapshot => {
-            const data = []
-            querySnapshot.forEach(doc => {
-                data.push({
-                    ...doc.data(),
-                    key: doc.id
+    
+        //a partir de então 
+        useEffect(() => {
+            //where p/ filtrar meus produtos, só vai mostrar as publicações do usuário logado,
+            // e dentro do where, irá os parametros de quem é usuario ("id do usuário", "igual", usuário) 
+           // let ref = firebase.firestore().collection('produtos').where('user_id', '==', user_id)
+           let ref = firebase.firestore().collection('produtos').where('registrarInteresse', '==', null)
+                .onSnapshot(querySnapshot => {
+                    const data = []
+                    querySnapshot.forEach(doc => {
+                        data.push({ //eu quero que o banco de dados traga todas as informações 
+                            ...doc.data(),
+                            key: doc.id // do banco que esteja este usuario que está logado
+                        })
+                    })
+                    setData(data)
                 })
-            })
-            setData(data)
-        })
-        //  return () => ref()
-    }, [])
+            return () => ref()
+        }, [])
+    
 
-
-
-    //Para deletar e/ou editar apenas os produtos que um usuário adicionou, e não deletar todos os produtos de todos os usuários
+ //Para deletar e/ou editar apenas os produtos que um usuário adicionou, e não deletar todos os produtos de todos os usuários
     // Ou seja, vai fazer um filtro para filtrar somente os produtos do usuário "x".
     const user_id = firebase.auth().currentUser.uid;
 
+   
+   
 
     return (
         <View style={{ flex: 1, padding: 10, backgroundColor: '#FFFFFF' }}>
@@ -78,7 +83,7 @@ export default function InteressesTopTab() {
                                         <TouchableOpacity style={styles.btnChat}
                                         // onPress={() => navigation.navigate('ChatMensagens', { userDono })}
                                         // onPress={() => navigation.navigate('ChatMensagens', {userDono: item.messageText})}
-                                        onPress={() => {Alert.alert('Cancelar Interesse', 'Clicou em Cancelar Interesse')}}
+                                        onPress={() => {Alert.alert('Cancelado!', 'Interesse cancelado com sucesso.')}}
                                         >
                                             <Text style={styles.textoBotao}>Cancelar Interesse</Text>
                                             

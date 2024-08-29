@@ -37,9 +37,7 @@ export default function AdicionarNovoProduto() {
     //Cria função fora do "upload de imagem", para ver a url da imagem... e postagem de envio da função completa "imagem e add outros detalhes para pagina inicial do app"
     const submitPress = async () => {
         
-        //==>>> aqui vai aparecer o upload e o getDowload da imagem ==
-       
-        
+        //==>>> aqui vai aparecer o upload e o getDowload da imagem ==     
         const imageUrl = await uploadImage();
         console.log('Imagem Url:', imageUrl);
         //=========================================
@@ -89,6 +87,7 @@ export default function AdicionarNovoProduto() {
                 status: 'teste',
                 // created_at: firestore.FieldValue.serverTimestamp()
                 postProduto: firestore.Timestamp.fromDate(new Date()),
+                registrarInteresse: null,
             })
             .then(() => { //se for bem sucedido, produto acrescentado.
                 console.log('Produto adicionado!');
@@ -245,7 +244,8 @@ export default function AdicionarNovoProduto() {
             const url = await storageRef.getDownloadURL();
 
             setUploading(false);
-            setImage(null); //aqui faz que, após a imagem ter "Feito concluído o getDownload para o arquivo, a imagem fica nula"
+            //Estou deixando comentado o "setImage(null)" para permanecer a imagem na tela após salvar a imagem de perfil.
+            //setImage(null); //aqui faz que, após a imagem ter "Feito concluído o getDownload para o arquivo, a imagem fica nula"
             //Alert.alert('Upload de imagem', 'Feito upload de imagem');
             console.log('Download URL:', url);
             return url; //retorna a url do .getDownloadURL();

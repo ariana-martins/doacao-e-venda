@@ -26,6 +26,12 @@ export default function ItemListaChat({ navigation }) {
     const [data, setData] = useState([]);
 
 
+    //Exemplo de ChatScreen UI
+    //Link do GitHub: https://github.com/itzpradip/react-native-firebase-social-app/blob/master/screens/ChatScreen.js
+    // Nome do vídeo de exemplo no youtube: React Native Chat App UI Tutorial
+    // Link do canal do youtube: https://www.youtube.com/watch?v=bGGeD5RkdzQ&list=PLQWFhX-gwJbmrCwksjn77tdl36dIWPFAt&index=10
+    
+
     //Nome do vídeo de exemplo do youtube: REACT NATIVE + FIREBASE: CRIANDO UM APP COMPLETO
     //Vídeo de exemplo do youtube: https://www.youtube.com/watch?v=0AM6AXlFwxM
     //Canal do youtube: Léo Scorza - OneBitCode
@@ -412,7 +418,7 @@ export default function ItemListaChat({ navigation }) {
             {/*
             <DialogConfirmacao />
             <DialogErro />
-        */}
+                */}
 
         </View>
 

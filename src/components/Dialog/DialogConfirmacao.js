@@ -7,37 +7,42 @@ export default function DialogConfirmacao() {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
-    <View style={styles.containerModal}>
 
-      <Modal
-        animationType="slide"
-        //swipeDirection="down"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
-          setModalVisible(!modalVisible);
-        }}>
-        <View style={styles.visualizaAbaixoDoModal}>
-          <View style={styles.modalView}>
-          <Icon name="checkmark-circle-sharp" size={100} color="#008000"  />
-            <Text style={styles.modalText}>Hello World!</Text>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}>
-              <Text style={styles.textStyle}>Fechar</Text>
-            </Pressable>
+      
+      <View style={styles.containerModal}>
+
+        <Modal
+          animationType="slide"
+          //swipeDirection="down"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            Alert.alert('Modal has been closed.');
+            setModalVisible(!modalVisible);
+          }}>
+          <View style={styles.visualizaAbaixoDoModal}>
+            <View style={styles.modalView}>
+              <Icon name="checkmark-circle-sharp" size={100} color="#008000" />
+              <Text style={styles.modalText}>Hello World!</Text>
+              <Pressable
+                style={[styles.button, styles.buttonClose]}
+                onPress={() => setModalVisible(!modalVisible)}>
+                <Text style={styles.textStyle}>Fechar</Text>
+              </Pressable>
+            </View>
           </View>
-        </View>
-      </Modal>
+        </Modal>
+     
 
-      <Pressable
-        style={[styles.button, styles.buttonOpen]}
-        onPress={() => setModalVisible(true)}>
-        <Text style={styles.textStyle}>Show Modal Confirmacao</Text>
-      </Pressable>
+        <Pressable
+          style={[styles.button, styles.buttonOpen]}
+          onPress={() => setModalVisible(true)}>
+          <Text style={styles.textStyle}>ABRIR MODAL</Text>
+        </Pressable>
+           
+
       
-      
+
     </View>
   );
 };
@@ -53,7 +58,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     backgroundColor: 'rgba(0,0,0,0.5)',
-},
+  },
   modalView: {
     margin: 20,
     backgroundColor: 'white',

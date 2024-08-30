@@ -34,7 +34,7 @@ export default function ChatMensagens() {
             // Add a new document to the "messages" collection
             await messagesRef.add({
                 text,
-              //  enviadoPor, //falta acrescentar, para identificar o outro usuário.
+                //  enviadoPor, //falta acrescentar, para identificar o outro usuário.
                 enviadoPara,
                 //timestamp: firestore.FieldValue.serverTimestamp(),
                 createdAt: new Date(),
@@ -97,8 +97,8 @@ export default function ChatMensagens() {
                     <View style={styles.headerChatMsgBotaoVoltar}>
                         <BotaoVoltar />
                     </View>
-                    {/*<Text style={styles.headerTxtTituloDetalhesPerfil}>{userDono}</Text>*/}
-                    <Text style={styles.headerTxtTituloDetalhesPerfil}>Nome Completo Perfil + Img Perfil</Text>
+                    {/*<Text style={styles.headerTxtTituloDetalhesPerfil}>Nome Completo Perfil + Img Perfil</Text>*/}
+                    <Text style={styles.headerTxtTituloDetalhesPerfil}>{userDono}</Text>
                     {/*ImageUserDono vem da página "Detalhes" */}
                     {/* <Image style={styles.headerImgDetalhesPerfil}
                         source={imageUserDono} /> */}
@@ -136,6 +136,7 @@ export default function ChatMensagens() {
                                     </View>
                                 </View>
                             </View>
+
                         </View>
                     )}
                 />
@@ -152,7 +153,7 @@ export default function ChatMensagens() {
             </ScrollView>
  */}
 
-            
+
                 <View style={styles.containerStyloEnviarChatMensagens}>
                     <View style={styles.containerStyloModalImgEnviarChatMensagens}>
                         <TouchableOpacity>
@@ -195,6 +196,12 @@ import EnviarReceberMensagens from '../../components/EnviarReceberMensagens';
 import { Input } from '@rneui/base';
 
 
+//Exemplo de React Native ChatScreen UI.
+// Link do gitHub: https://github.com/itzpradip/react-native-firebase-social-app/blob/master/screens/ChatScreen.js
+// Título do Youtube: React Native Chat App UI Tutorial
+// Link do Youtube: https://www.youtube.com/watch?v=bGGeD5RkdzQ&list=PLQWFhX-gwJbmrCwksjn77tdl36dIWPFAt&index=10
+
+
 //Continuar olhando e testando o vídeo
 // Título do video do Canal do Youtube: #8 Gifted chat UI & one to one chat using firestore | React Native & Firebase tutorial in Hindi
 // Link do video do Canal do Youtube: https://www.youtube.com/watch?v=flAFZC-xNwk&list=PLB97yPrFwo5ihgCoWXlEDHrAPQNshsfzP&index=21
@@ -213,6 +220,16 @@ export default function ChatMensagens() {
                     _id: 2,
                     name: 'React Native',
                     avatar: 'https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT.png',
+                },
+            },
+            {
+                _id: 2,
+                text: 'Hello world',
+                createdAt: new Date(),
+                user: {
+                    _id: 1,
+                    name: 'React Native',
+                    avatar: 'https://placeimg.com/140/140/any',
                 },
             },
         ])

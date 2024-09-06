@@ -2,7 +2,51 @@ import { StyleSheet} from "react-native"
 
 //conteúdo de CSS
 export const styles = StyleSheet.create({
-    containerAddLista: {
+     container: {
+        flex: 1,
+    },
+   
+    headerChatMsg: {
+        width: '100%',
+        backgroundColor: '#FFFFFF',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingTop: 30,
+    },
+    headerChatMsgBotaoVoltar: {
+        marginBottom: 15, 
+        marginTop: 15, 
+        marginLeft: 15
+    },
+    headerTxtTituloDetalhesPerfil: {
+        fontFamily: 'Roboto',
+        fontSize: 20,
+        color: '#000000',
+        marginLeft: 5,
+        textAlign: 'center',
+        padding: 5,
+
+      //  fontSize: 20, color: 'black', fontWeight: 'bold' 
+    },
+    headerImgDetalhesPerfil: {
+        width: 50,
+        height: 50,
+        marginRight: 10,
+        borderRadius: 50,
+        resizeMode: "cover",
+    },
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+    /* containerAddLista: {
         flex: 1,
    //     margin: 20,
         backgroundColor: '#FFFFFF',
@@ -138,5 +182,6 @@ export const styles = StyleSheet.create({
         fontSize: 14,
         color: '#333333',
     },
+    */
 });
 

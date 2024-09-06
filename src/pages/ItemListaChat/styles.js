@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
         flex: 1,
    //     margin: 20,
         backgroundColor: '#FFFFFF',
-        paddingTop: 40,
+     //   paddingTop: 40,
     },
     buttonNovaTarefaAddLista: {
         width: 60,

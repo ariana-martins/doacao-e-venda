@@ -88,6 +88,16 @@ export default function ChatMensagens() {
     */}
 
 
+    const MensagensCard = () => {
+        return (
+            <View>
+                <Text>Olá</Text>
+            </View>
+        )
+    }
+
+
+
     return (
 
         <View style={styles.container}>
@@ -126,6 +136,7 @@ export default function ChatMensagens() {
                         <View style={{ marginTop: 8, display: 'flex', flex: 1, overflow: 'scroll' }}>
 
                             <EnviarReceberMensagens />
+                           
 
                             <View style={{ width: 180, margin: 10, display: 'flex', alignSelf: 'flex-end' }}>
                                 <View style={{ backgroundColor: '#afeeee', borderRadius: 8 }}>

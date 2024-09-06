@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../../components/componentesGerais/Auth/AuthProvider';
-import { View, Image, Text, FlatList, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { View, Image, Text, FlatList, StyleSheet, TouchableOpacity, Alert, ScrollView } from 'react-native';
 import { styles } from './styles';
 //Novo React Native Elements
 import { ListItem, Avatar } from '@rneui/themed';
@@ -19,18 +19,37 @@ import { Divider } from 'react-native-paper';
 export default function ItemListaChat({ navigation }) {
 
     const { user, logout } = useContext(AuthContext);
-
     //const navigation = useNavigation();
-
 
     const [data, setData] = useState([]);
 
+    //===================================
+    //chatsNovo (no firebase firestore)
+   // const [chats, setChats] = useState(null);
+
+    const refChat = firebase.firestore().collection('chatsNovo').orderBy('id', 'desc');
+    useEffect(() => {
+        refChat.onSnapshot(querySnapshot => {
+            const data = []
+            querySnapshot.forEach(doc => {
+                data.push({
+                    ...doc.data(),
+                    key: doc.id
+                })
+            })
+            setData(data)
+        })
+        //  return () => ref()
+    }, [])
+    //===================================
+
+     
 
     //Exemplo de ChatScreen UI
     //Link do GitHub: https://github.com/itzpradip/react-native-firebase-social-app/blob/master/screens/ChatScreen.js
     // Nome do vídeo de exemplo no youtube: React Native Chat App UI Tutorial
     // Link do canal do youtube: https://www.youtube.com/watch?v=bGGeD5RkdzQ&list=PLQWFhX-gwJbmrCwksjn77tdl36dIWPFAt&index=10
-    
+
 
     //Nome do vídeo de exemplo do youtube: REACT NATIVE + FIREBASE: CRIANDO UM APP COMPLETO
     //Vídeo de exemplo do youtube: https://www.youtube.com/watch?v=0AM6AXlFwxM
@@ -78,7 +97,7 @@ export default function ItemListaChat({ navigation }) {
       */
 
     // ".orderBy('postProduto', 'desc')" acrescentado as listas por ultimo no inicio da pagina.
-    const ref = firebase.firestore().collection('Tasks').orderBy('postMensagem', 'desc');
+  /*  const ref = firebase.firestore().collection('Tasks').orderBy('postMensagem', 'desc');
     useEffect(() => {
         ref.onSnapshot(querySnapshot => {
             const data = []
@@ -93,24 +112,7 @@ export default function ItemListaChat({ navigation }) {
         //  return () => ref()
     }, [])
 
-
-    //======================================================
-    //import { ListItem, Avatar } from 'react-native-elements'
-
-    const list = [
-        {
-            name: 'Amy Farha',
-            avatar_url: 'https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT(1).jpg',
-            subtitle: 'Vice President'
-        },
-        {
-            name: 'Chris Jackson',
-            avatar_url: 'https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT%20-%20P&B.jpg',
-            subtitle: 'Vice Chairman'
-        },
-        // ... // more items
-    ];
-
+*/
 
     //======================================================
 
@@ -185,6 +187,28 @@ export default function ItemListaChat({ navigation }) {
         );
     };
 
+    const MessageCard = () => {
+        return (
+            <TouchableOpacity>
+                <ListItem style={styles.card} bottomDivider>
+                    <ListItem.Content>
+                        <ListItem.Title style={styles.userNameEvalor}>Imagem produto - idimgproduto</ListItem.Title>
+                        <ListItem.Title style={styles.userNameEvalor}>Titulo produto - idproduto</ListItem.Title>
+                        <ListItem.Title style={styles.userNameEvalor}>Valor produto - idproduto</ListItem.Title>
+                        <ListItem.Title style={styles.userNameEvalor}>Nome user dono do produto - idproprietario</ListItem.Title>
+                        <ListItem.Title style={styles.userNameEvalor}>Imagem user dono do produto - idimgproprietario</ListItem.Title>
+                        <ListItem.Subtitle>Nome user interessado - idinteressado</ListItem.Subtitle>
+                        <ListItem.Subtitle>Imagem user interessado - idimginteressado</ListItem.Subtitle>
+                    </ListItem.Content>
+                    <ListItem.Content right>
+                        <ListItem.Subtitle right>20:10</ListItem.Subtitle>
+                    </ListItem.Content>
+                </ListItem>
+            </TouchableOpacity>
+        )
+    }
+
+
 
     // Falta fazer
     {/*
@@ -216,55 +240,6 @@ export default function ItemListaChat({ navigation }) {
 */}
 
     //===============================================================================================
-
-    /*
-    const [groupName, setGroupName] = useState("");
-     
-    const handleCreateRoom = () => {
-        console.log( "createRoom", groupName );
-        //closedModal();
-    };
-     
-    const rooms = [
-        {
-            id: "1",
-            name: "Novu Hangouts",
-            messages: [
-                {
-                    id: "1a",
-                    text: "Hello guys, welcome!",
-                    time: "07:50",
-                    user: "Tomer",
-                },
-                {
-                    id: "1b",
-                    text: "Hi Tomer, thank you! 😇",
-                    time: "08:50",
-                    user: "David",
-                },
-            ],
-        },
-        {
-            id: "2",
-            name: "Hacksquad Team 1",
-            messages: [
-                {
-                    id: "2a",
-                    text: "Guys, who's awake? 🙏🏽",
-                    time: "12:50",
-                    user: "Team Leader",
-                },
-                {
-                    id: "2b",
-                    text: "What's up? 🧑🏻‍💻",
-                    time: "03:50",
-                    user: "Victoria",
-                },
-            ],
-        },
-    ];
-     
-    */
 
 
     //Tem que ir para o firebase
@@ -303,45 +278,11 @@ export default function ItemListaChat({ navigation }) {
         <View style={styles.container}>
 
             <HeaderChat />
+         
 
+              {/*  <MessageCard /> */}
 
-            {/*  <View style={styles.addMargem}> */}
-
-            {/*
-                <View style={styles.linhaDivid}>
-                    <Text style={styles.txtTituloChats}>Chats</Text>
-
-                    {/*
-                    <View>
-                        <TextInput
-                            placeholder='Group name aqui:'
-                            onChangeText={(value) => setGroupName(value)}
-                        />
-                    </View>
-                    <Pressable onPress={handleCreateRoom}>
-                    <Icon name="add" size={20} color="#000000" />
-                    </Pressable> 
-    */}
-
-            {/*          </View>
-                {/*
-                {rooms.length > 0 ? (
-                    <FlatList
-                        data={rooms}
-                        renderItem={({ item }) => <ChatComponent item={item} />}
-                        keyExtractor={(item) => item.id}
-                    />
-                ) : (
-                    <View>
-                        <Text>Não há chat criado</Text>
-                        <Text>Clique aqui para criar novo chat</Text>
-                    </View>
-
-                )}
-
-                */}
-
-
+         
 
             <FlatList
                 showsHorizontalScrollIndicator={false}
@@ -350,23 +291,27 @@ export default function ItemListaChat({ navigation }) {
                 //falta modificar para "data"
                 //renderItem={({ item }) => <RenderItemList data={item} />}
                 renderItem={({ item }) => <RenderItemListChat item={item} />}
-
             />
-            {/*          </View>   */}
-          {/*
-            <View>
-                <FlatList
-                    ListHeaderComponent={
-                        <>
-                            <View style={{ paddingVertical: 8 }}>
+
+            <FlatList
+                showsHorizontalScrollIndicator={false}
+                data={data}
+                keyExtractor={item => String(item.key)} //Mudar de item.id p/ item.key ( "key" do firebase)
+                //falta modificar para "data"
+                //renderItem={({ item }) => <RenderItemList data={item} />}
+                renderItem={({ item }) => {
+                    return (
+                        <View>
+                            <TouchableOpacity onPress={() => 
+                                navigation.navigate("ChatMensagensNovo", {item : item})}>
+                            <Text>{item.chatName}</Text>
+                            </TouchableOpacity>
+                        </View>
+                    )
+                }}
+            />
 
 
-                            </View>
-                        </>
-                    }
-                />
-            </View>
-                */}
             <View style={styles.containerAddLista}>
                 <FlatList
                     showsVerticalScrollIndicator={false}
@@ -384,6 +329,7 @@ export default function ItemListaChat({ navigation }) {
                                 >
                                     <Icon name="star" size={20} color="#F92e6a" />
                                 </TouchableOpacity>
+
                                 <Text style={styles.styloDescricaoTarefa}
                                     onPress={() => {
                                         navigation.navigate("ItemListaChatDetalhes", {
@@ -394,6 +340,7 @@ export default function ItemListaChat({ navigation }) {
                                 >
                                     {item.descricao}
                                 </Text>
+
                                 <Divider style={{ borderWidth: 1, borderColor: 'pink' }} />
                             </View>
                         )
@@ -409,7 +356,7 @@ export default function ItemListaChat({ navigation }) {
                 </TouchableOpacity>
 
             </View>
-
+               
             {/*
                     ==>>> Dialog
                     EU ACHO QUE COLOCA A MESMA MENSAGEM QUE TEM nos alerts hj e os mesmos botões

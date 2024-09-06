@@ -16,6 +16,7 @@ import AdicionarNovoProduto from '../../pages/AdicionarNovoProduto';
 import ItemListaChat from '../../pages/ItemListaChat';
 import Detalhes from '../../pages/Detalhes';
 import ChatMensagens from '../../pages/ChatMensagens';
+import ChatMensagensNovo from '../../pages/ChatMensagensNovo';
 import ItemListaChatNovaTarefa from '../../pages/ItemListaChatNovaTarefa';
 import ItemListaChatDetalhes from '../../pages/ItemListaChatDetalhes';
 
@@ -129,7 +130,7 @@ export default function ScreenNavigator() {
         name="ItemListaChatNovaTarefa"
         component={ItemListaChatNovaTarefa}
         options={{
-          headerShown: true,
+          headerShown: false,
           //  title: 'Voltar',
         }}
       />
@@ -156,7 +157,15 @@ export default function ScreenNavigator() {
         headerTitleAlign: 'center',
       })}
 */
+      />
 
+      <Stack.Screen
+        name="ChatMensagensNovo"
+        component={ChatMensagensNovo}
+        options={{
+          headerShown: false,
+          //  title: 'Voltar',
+        }}
       />
 
       <Stack.Screen

@@ -71,6 +71,7 @@ export const styles = StyleSheet.create({
     prodImg: {
         width: 60,
         height: 60,
+        resizeMode: 'cover',
     },
     userDonoImg: {
         width: 40,

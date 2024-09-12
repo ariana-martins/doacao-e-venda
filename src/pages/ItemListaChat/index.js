@@ -25,7 +25,7 @@ export default function ItemListaChat({ navigation }) {
 
     //===================================
     //chatsNovo (no firebase firestore)
-   // const [chats, setChats] = useState(null);
+    // const [chats, setChats] = useState(null);
 
     const refChat = firebase.firestore().collection('chatsNovo').orderBy('id', 'desc');
     useEffect(() => {
@@ -43,7 +43,7 @@ export default function ItemListaChat({ navigation }) {
     }, [])
     //===================================
 
-     
+
 
     //Exemplo de ChatScreen UI
     //Link do GitHub: https://github.com/itzpradip/react-native-firebase-social-app/blob/master/screens/ChatScreen.js
@@ -97,22 +97,22 @@ export default function ItemListaChat({ navigation }) {
       */
 
     // ".orderBy('postProduto', 'desc')" acrescentado as listas por ultimo no inicio da pagina.
-  /*  const ref = firebase.firestore().collection('Tasks').orderBy('postMensagem', 'desc');
-    useEffect(() => {
-        ref.onSnapshot(querySnapshot => {
-            const data = []
-            querySnapshot.forEach(doc => {
-                data.push({
-                    ...doc.data(),
-                    key: doc.id
-                })
-            })
-            setData(data)
-        })
-        //  return () => ref()
-    }, [])
-
-*/
+    /*  const ref = firebase.firestore().collection('Tasks').orderBy('postMensagem', 'desc');
+      useEffect(() => {
+          ref.onSnapshot(querySnapshot => {
+              const data = []
+              querySnapshot.forEach(doc => {
+                  data.push({
+                      ...doc.data(),
+                      key: doc.id
+                  })
+              })
+              setData(data)
+          })
+          //  return () => ref()
+      }, [])
+  
+  */
 
     //======================================================
 
@@ -148,7 +148,7 @@ export default function ItemListaChat({ navigation }) {
             valor: 'R$0,00',
             messageTime: '2 dias atrás',
             messageText: 'Maria - dono do produto', // {userDono: data.user_id} porém tem que ser o "nomeCompleto"
-            imagemUserDono: require('../../assets/imgUserDono/logoFACCAT.png'),
+            imagemUserDono: source={uri: 'https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT.png'},
             messageUser: 'Usuário 3',
         },
 
@@ -169,7 +169,7 @@ export default function ItemListaChat({ navigation }) {
                         {/*    <Avatar source={{ uri: l.avatar_url }} /> */}
                         <Avatar style={styles.prodImg} source={item.image} />
                         {/*<Avatar rounded source={{ uri: l.avatar_url }} /> */}
-                        <Avatar style={styles.userDonoImg} source={item.imagemUserDono} />
+                        {<Avatar style={styles.userDonoImg} source={item.imagemUserDono} />}
                         <ListItem.Content>
                             <ListItem.Title style={styles.userNameEvalor}>{item.title}</ListItem.Title>
                             <ListItem.Title style={styles.userNameEvalor}>{item.valor}</ListItem.Title>
@@ -278,11 +278,11 @@ export default function ItemListaChat({ navigation }) {
         <View style={styles.container}>
 
             <HeaderChat />
-         
 
-              {/*  <MessageCard /> */}
 
-         
+            {/*  <MessageCard /> */}
+
+
 
             <FlatList
                 showsHorizontalScrollIndicator={false}
@@ -302,9 +302,9 @@ export default function ItemListaChat({ navigation }) {
                 renderItem={({ item }) => {
                     return (
                         <View>
-                            <TouchableOpacity onPress={() => 
-                                navigation.navigate("ChatMensagensNovo", {item : item})}>
-                            <Text>{item.chatName}</Text>
+                            <TouchableOpacity onPress={() =>
+                                navigation.navigate("ChatMensagensNovo", { item: item })}>
+                                <Text>{item.chatName}</Text>
                             </TouchableOpacity>
                         </View>
                     )
@@ -313,6 +313,7 @@ export default function ItemListaChat({ navigation }) {
 
 
             <View style={styles.containerAddLista}>
+                {/*
                 <FlatList
                     showsVerticalScrollIndicator={false}
                     // data={task}
@@ -348,6 +349,7 @@ export default function ItemListaChat({ navigation }) {
                         // é == error, descreva algo".
                     }}
                 />
+                */}
                 <TouchableOpacity
                     style={styles.buttonNovaTarefaAddLista}
                     onPress={() => navigation.navigate("ItemListaChatNovaTarefa")}
@@ -356,7 +358,7 @@ export default function ItemListaChat({ navigation }) {
                 </TouchableOpacity>
 
             </View>
-               
+
             {/*
                     ==>>> Dialog
                     EU ACHO QUE COLOCA A MESMA MENSAGEM QUE TEM nos alerts hj e os mesmos botões

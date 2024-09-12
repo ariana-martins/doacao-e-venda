@@ -23,7 +23,7 @@ export default function Detalhes({ userDono, item }) {
 
     const navigation = useNavigation();
 
-    const [registrarInteresse, setRegistrarInteresse] = useState(true);
+    const [registrarInteresse, setRegistrarInteresse] = useState(true); //Registrar Interesse tem que começar com "false" que será "Interesse cancelado/desmarcado"
 
 
    // {registrarInteresse ? console.log('Acrescentou Interesse') : console.log('Cancelou Interesse') }

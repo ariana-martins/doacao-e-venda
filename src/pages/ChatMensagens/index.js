@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, Button, FlatList, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TextInput, FlatList, TouchableOpacity, Image } from 'react-native';
 import { styles } from './styles';
 
 import { useRoute } from '@react-navigation/native';
@@ -88,15 +88,6 @@ export default function ChatMensagens() {
     */}
 
 
-    const MensagensCard = () => {
-        return (
-            <View>
-                <Text>Olá</Text>
-            </View>
-        )
-    }
-
-
 
     return (
 
@@ -135,10 +126,7 @@ export default function ChatMensagens() {
                     renderItem={({ item }) => (
                         <View style={{ marginTop: 8, display: 'flex', flex: 1, overflow: 'scroll' }}>
 
-                            <EnviarReceberMensagens />
-                           
-
-                            <View style={{ width: 180, margin: 10, display: 'flex', alignSelf: 'flex-end' }}>
+                                <View style={{ width: 180, margin: 10, display: 'flex', alignSelf: 'flex-end' }}>
                                 <View style={{ backgroundColor: '#afeeee', borderRadius: 8 }}>
                                     <Text style={{ padding: 8, color: 'black' }}>{item.enviadoPara}:{"\n"}{item.text}</Text>
                                     <View style={{ flexDirection: 'row', alignSelf: 'flex-end' }}>
@@ -148,21 +136,22 @@ export default function ChatMensagens() {
                                 </View>
                             </View>
 
+                            <View style={{ width: 180, margin: 10, display: 'flex', alignSelf: 'flex-start' }}>
+                                <View style={{ backgroundColor: '#cdcdcd', borderRadius: 8 }}>
+                                    <Text style={{ padding: 8, color: 'black' }}>texto</Text>
+                                    <View style={{ flexDirection: 'row', alignSelf: 'flex-end' }}>
+                                        <Text>20:10</Text>
+                                        <Icon name="checkmark-done-outline" size={20} color="#000000" />
+                                    </View>
+                                </View>
+
+                            </View>
+
                         </View>
                     )}
                 />
 
 
-
-                {/*
-            <ScrollView>
-                <View style={{ marginTop: 8, display: 'flex', flex: 1, overflow: 'scroll' }}>
-                    <EnviarReceberMensagens />
-                    <EnviarReceberMensagens direita />
-                    <EnviarReceberMensagens />
-                </View>
-            </ScrollView>
- */}
 
 
                 <View style={styles.containerStyloEnviarChatMensagens}>
@@ -269,41 +258,10 @@ export default function ChatMensagens() {
    //     </View>
   //  )
 
-/*
-return (
-    <View style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
-        <ScrollView>
-            <View style={{ marginTop: 8, display: 'flex', flex: 1, overflow: 'scroll' }}>
-                <EnviarReceberMensagens />
-                <EnviarReceberMensagens direita />
-                <EnviarReceberMensagens />
-                <EnviarReceberMensagens />
-                <EnviarReceberMensagens />
-                <EnviarReceberMensagens />
-                <EnviarReceberMensagens />
-                <EnviarReceberMensagens />
-                <EnviarReceberMensagens />
-                <EnviarReceberMensagens />
-                <EnviarReceberMensagens />
-            </View>
-        </ScrollView>
 
-        <View style={{ display: 'flex', flexDirection: 'row', marginTop: 10 }}>
-            <Input placeholder='Digite sua mensagem aqui...' containerStyle={{ display: 'flex', flex: 1 }} />
-            <Button title={'Enviar'} />
-        </View>
-
-    </View>
-
-)
-    */
 
 //}
 
-//=============================================================
-//para funcionar aqui o Enviar e Receber Mensagens " <EnviarReceberMensagens />", estou utilizando (props) dentro da função dentro do arquivo desse componente de EnviarReberMensagens*/}
-// left => p/ mensagens recebidas, a esquerda 
-// right => p/ mensagens enviadas, a direita  "<EnviarReceberMensagens direita />
-//=============================================================
 
+//=============================================================
 // overflow: 'scroll' => direciona as caixa de "mensagens" p/ atrás do <input placeholder= 'Digite sua mensagem aqui...' />

@@ -221,6 +221,7 @@ export default function ItemListaChatNovaTarefa({ navigation }) {
                     value={addChat}
                     //onChangeText={(text) => setAddChat(text)}
                     onChangeText={setAddChat}
+                  //  onSubmitEditing={setAddChat} 
                 />
                 <View style={{ maxHeight: 40, paddingTop: 12 }}>
                     <TouchableOpacity>

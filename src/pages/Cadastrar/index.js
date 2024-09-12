@@ -20,7 +20,7 @@ export default function Cadastrar() {
 
     const [nomeCompleto, setNomeCompleto] = useState('');
     const [email, setEmail] = useState('');
-    const [dataNascimento, setdataNascimento] = useState('');
+  //  const [dataNascimento, setdataNascimento] = useState('');
     const [senha, setSenha] = useState('');
     const [confirmarSenha, setConfirmarSenha] = useState('');
     const [passwordVisibility, setPasswordVisibility] = useState(true);
@@ -101,6 +101,7 @@ export default function Cadastrar() {
                             => React Native Mask Input (npm i react-native-mask-input)
                         */}
 
+                       {/*
                         <Text style={styles.txtEmail_e_Senha}>Data de Nascimento:</Text>
                         <View style={styles.botaoAdicionarMargem}>
                             <View style={styles.inputAreaEmail}>
@@ -114,6 +115,7 @@ export default function Cadastrar() {
                                 />
                             </View>
                         </View>
+                    */}
 
                         <Text style={styles.txtEmail_e_Senha}>Senha:</Text>
                         <View style={styles.botaoAdicionarMargem}>

@@ -3,7 +3,6 @@ import { View, Text, TouchableOpacity, Pressable, StyleSheet, ScrollView, Alert 
 import { Card } from 'react-native-paper';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
-
 import HeaderDetalhes from '../../components/Header/HeaderDetalhes';
 
 
@@ -24,6 +23,24 @@ export default function Detalhes({ userDono, item }) {
     const navigation = useNavigation();
 
     const [registrarInteresse, setRegistrarInteresse] = useState(true); //Registrar Interesse tem que começar com "false" que será "Interesse cancelado/desmarcado"
+
+
+    //========================================================================================
+    //EXEMPLO de ADD e REMOVER FAVORITOS com .addListener a partir de 1:05:25 do vídeo a seguir:
+    //Link do vídeo: https://www.youtube.com/watch?v=UiqdBbvCHWo
+    //Título do Vídeo: Aula 4 | Integrando Axios com React Native no seu app
+    //Canal do Youtube: Gabriel Rangel - Fala, Coders!
+
+    const addDataInteresse = async () => {
+        const result = await addInteresse(item) 
+        console.log({ result })
+    }
+
+    const removeDataInteresse = async () => {
+        const result = await removeInteresse(item) 
+        console.log({ result })
+    }
+    //========================================================================================
 
 
    // {registrarInteresse ? console.log('Acrescentou Interesse') : console.log('Cancelou Interesse') }
@@ -121,14 +138,18 @@ export default function Detalhes({ userDono, item }) {
                     <View style={styles.botaoAdicionarMargem}>
                         <TouchableOpacity
                             style={{ backgroundColor: registrarInteresse ? '#000000' : '#191970', width: 250, height: 40, borderRadius: 10, justifyContent: 'center' }}
-                            onPress={() => {
+                            onPress={() => { 
+                                {/* isInteresse ? removeDataInteresse : addDataInteresse() */}
+        
                                 setRegistrarInteresse(!registrarInteresse)
                                 {
                                     registrarInteresse ?
                                         Alert.alert("Registrado!", "Interesse registrado com sucesso.")
                                         :
                                         Alert.alert("Cancelado!", "Interesse cancelado com sucesso.")
-                                }
+                                }                            
+        
+
                             }}>
                             <Text style={styles.textoBotao}>
                                 {registrarInteresse ? 'Registrar Interesse' : 'Cancelar Interesse'}
@@ -145,6 +166,8 @@ export default function Detalhes({ userDono, item }) {
                             <Text style={styles.textoBotao}>Chat</Text>
                         </Pressable>
                     </View>
+
+
                 </View>
             </ScrollView>
 

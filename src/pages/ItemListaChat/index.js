@@ -287,7 +287,7 @@ export default function ItemListaChat({ navigation }) {
             <FlatList
                 showsHorizontalScrollIndicator={false}
                 data={Chat}
-                keyExtractor={item => item.id} //Mudar de item.id p/ item.key ( "key" do firebase)
+                keyExtractor={item => item.id.toString()} //Mudar de item.id p/ item.key ( "key" do firebase), "toString()" transforma em String
                 //falta modificar para "data"
                 //renderItem={({ item }) => <RenderItemList data={item} />}
                 renderItem={({ item }) => <RenderItemListChat item={item} />}

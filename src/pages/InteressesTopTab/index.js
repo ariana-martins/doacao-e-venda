@@ -11,6 +11,40 @@ import firestore, { firebase } from '@react-native-firebase/firestore';
 export default function InteressesTopTab() {
     const [data, setData] = useState('');
     const [loading, setLoading] = useState(true);
+    
+
+
+   //========================================================================================
+    //EXEMPLO de ADD e REMOVER FAVORITOS com .addListener a partir de 1:05:25 do vídeo a seguir:
+    //Link do vídeo: https://www.youtube.com/watch?v=UiqdBbvCHWo
+    //Título do Vídeo: Aula 4 | Integrando Axios com React Native no seu app
+    //Canal do Youtube: Gabriel Rangel - Fala, Coders!
+   
+   
+    //usa os interesses do banco de dados, exemplo a fazer (buscar os interesses)
+   {/* const { getInteresses } = useInteresses()
+
+    //Busca Interesses
+    const buscaInteresses = async () => {
+        const interesses = await getInteresses() 
+        console.log({ interesses })
+        
+    }
+
+    useEffect(() => {
+
+        const unsubscribe = navigation.addListener('focus', () => {
+            // do something
+            buscaInteresses() //chama a funcao buscar interesses
+          });
+      
+          return unsubscribe;
+        
+    },[])
+*/}
+//===========================================================================================
+
+
 
     // Refazer o getDowload em "Adicionar novo produto" e aqui também incluir um "UseEffect + getDetail"
     // Conforme seguindo o manual do canal do Youtube: CODERS NEVER QUIT

@@ -47,7 +47,7 @@ export default function EsqueciMinhaSenha({ navigation }) {
                         </View>
 
 
-                        <Text style={styles.txtEmail_e_Senha}>Data de Nascimento:</Text>
+            {/*            <Text style={styles.txtEmail_e_Senha}>Data de Nascimento:</Text>
                         <View style={styles.botaoAdicionarMargem}>
                             <View style={styles.inputAreaEmail}>
                                 <TextInput
@@ -60,7 +60,7 @@ export default function EsqueciMinhaSenha({ navigation }) {
                                 />
                             </View>
                         </View>
-
+    */}
                         <Text style={styles.txtEmail_e_Senha}>Senha:</Text>
                         <View style={styles.botaoAdicionarMargem}>
                             <View style={styles.inputAreaSenha}>

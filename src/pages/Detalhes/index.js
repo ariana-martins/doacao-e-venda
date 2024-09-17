@@ -139,16 +139,18 @@ export default function Detalhes({ userDono, item }) {
                         <TouchableOpacity
                             style={{ backgroundColor: registrarInteresse ? '#000000' : '#191970', width: 250, height: 40, borderRadius: 10, justifyContent: 'center' }}
                             onPress={() => { 
-                                {/* isInteresse ? removeDataInteresse : addDataInteresse() */}
-        
+
                                 setRegistrarInteresse(!registrarInteresse)
                                 {
                                     registrarInteresse ?
                                         Alert.alert("Registrado!", "Interesse registrado com sucesso.")
                                         :
                                         Alert.alert("Cancelado!", "Interesse cancelado com sucesso.")
-                                }                            
-        
+                                }
+
+                                
+                               {/* isInteresse ? removeDataInteresse : addDataInteresse() */}
+                                
 
                             }}>
                             <Text style={styles.textoBotao}>

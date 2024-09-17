@@ -197,9 +197,3 @@ const styles = StyleSheet.create({
 // Link do Vídeo: https://www.youtube.com/watch?v=V-uYjDnuXkU
 // Canal do Youtube: Cod3r Cursos
 
-
-//Para melhorar e organizar as rotas e navigations após incluir o Login, rever essas dicas abaixo:
-// =========================================================================================
-// Título "Melhorando a navegação do seu app com Stack, Tab e Drawer Navigator"
-// Link do Vídeo: https://www.youtube.com/watch?v=gH9Vvq6WbnA
-// Canal do Youtube: Rocketseat

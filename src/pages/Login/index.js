@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import { useNavigation } from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
-
+import { firebase } from '@react-native-firebase/firestore';
 
 
 //Função Login
@@ -31,37 +31,94 @@ export default function Login() {
     //      </NavigationContainer>
     //    )
 
-/*
-    function userLogin() {
-        signInWithEmailAndPassword(email, senha)
-    }
-*/
+    /*
+        function userLogin() {
+            signInWithEmailAndPassword(email, senha)
+        }
+    */
 
-   
+
+    function recuperarSenha() {
+
+        if (email === "") {
+            return (
+                Alert.alert("Erro", "Digite o email para recuperar a senha")
+            )
+        }
+
+        //return 
+        firebase.auth().sendPasswordResetEmail(email).then(() => {
+            Alert.alert('Email enviado com sucesso');
+        })
+       
+            // .catch(error => {
+            //     Alert.alert("O erro é: ", error.message);
+            // })
+        .catch(error => {
+                Alert.alert("E-mail não existe!", "Por favor, realize o cadastro com e-mail válido!")
+                //precisa deixar esse console log como "error.message" para que o Alert funcione certinho, 
+                //sem mostrar erro na tela do usuario da aplicação
+                console.log(error.message) 
+         })
+    }
+
+
+
+
     const userLogin = async () => {
         if (!email.trim() || !senha.trim()) {
             Alert.alert("Por favor preencha todos os dados")
             return;
         }
 
-        try { //acessa conta do usuário já criado na tela Cadastrar com mesmo email e senha
+        try { //modificar nome de "result" para "credencial"
+            //acessa conta do usuário já criado na tela Cadastrar com mesmo email e senha
             const result = await auth().signInWithEmailAndPassword(email, senha)
             Alert.alert("Feito login")
-         //   console.log('Feito Login')
+            //   console.log('Feito Login')
 
-            
-           // console.log(auth().currentUser) //Esse console.log mostra todos os dados de login do usuário, mesmo não configurado o displayName.
 
-          //  return result;
-          return console.log(result)
-            
+            // console.log(auth().currentUser) //Esse console.log mostra todos os dados de login do usuário, mesmo não configurado o displayName.
+
+            //  return result;
+            return console.log(result)
+            //na hora do login vai aparecer as informações de:
+            {/*  
+          {"additionalUserInfo": {"isNewUser": false}, "user": {"displayName": null, "email": "teste@faccat.br", "emailVerified": false,
+         "isAnonymous": false, "metadata": [Object], "multiFactor": [Object], "phoneNumber": null, "photoURL": null, "providerData": [Array], 
+         "providerId": "firebase", "tenantId": null, "uid": "_______"}}
+        */}
+
         } catch (error) {
             //console.log(error.code) //error.code mostra se o endereço de e-mail ou a senha foi digitado errado, e mostra através do log
             Alert.alert("Algo está errado", "Digite novamente")
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
     }
 
+
+    //=================================================================
+    {/* EXEMPLO DE Cadastrar/Login usuario:
+// Nome do vídeo no youtube: #6 Signup & login to Firebase | WhatsApp Clone using React Native & Firebase in Hindi
+// Link do youtube: https://www.youtube.com/watch?v=WsOCNkA8SpM&list=PLB97yPrFwo5ihgCoWXlEDHrAPQNshsfzP&index=10
+// Canal do youtube: CODERS NEVER QUIT
+*/}
+
+    //=================================================================
 
     return (
         <View style={{ flex: 1, backgroundColor: "white" }}>
@@ -71,7 +128,7 @@ export default function Login() {
 
                 <View style={styles.bordaEmail_e_Senha}>
                     <Text style={styles.txtEmail_e_Senha}>E-mail:</Text>
-                    
+
                     <View style={styles.botaoAdicionarMargem}>
                         <View style={styles.inputAreaEmail}>
                             <TextInput
@@ -112,9 +169,14 @@ export default function Login() {
                 </View>
 
                 <View style={styles.bordaAreaBotoes}>
-                    <TouchableOpacity onPress={() => navigation.navigate("EsqueciMinhaSenha")}>
+                    {/* <TouchableOpacity onPress={() => navigation.navigate("EsqueciMinhaSenha")}>
+                        <Text style={styles.textoEsqueciSenha}>Esqueci minha senha</Text>
+                    </TouchableOpacity> */}
+
+                    <TouchableOpacity onPress={recuperarSenha}>
                         <Text style={styles.textoEsqueciSenha}>Esqueci minha senha</Text>
                     </TouchableOpacity>
+
 
                     <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={() => userLogin()}>
                         {/* onPress={() => navigation.navigate("ScreenNavigator")}> */}

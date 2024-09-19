@@ -26,6 +26,7 @@ export const styles = StyleSheet.create({
     },
     bordaEmail_e_Senha_e_outros_dados: {
         width: "100%",
+        paddingTop: 20,
     },
     txtEmail_e_Senha: {
         fontFamily: "Roboto",

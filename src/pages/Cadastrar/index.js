@@ -40,6 +40,7 @@ export default function Cadastrar() {
             Alert.alert("Por favor preencha todos os dados")
             return
         }
+       // modificar nome de "result" para "credencial"
         try { //Criar usuário com email e senha no firebase
             const result = await auth().createUserWithEmailAndPassword(email, senha)
             firestore().collection('users').doc(result.user.uid).set({
@@ -47,16 +48,62 @@ export default function Cadastrar() {
                 nomeCompleto: nomeCompleto,
                 email: result.user.email,
                 uid: result.user.uid,
+                //pic: image, //para incluir imagem do usuario
             })
         }
-
-        catch (err) {
+            catch (err) {
             Alert("algo deu errado")
         }
+
+
+            //=========== 
+            /* O e-mail precisa estar cadastrado com o projeto para validar, 
+            mas usei o mesmo e-mail (que tenho no Console.log do firebase), 
+            porém não deu certo. Feito teste dia 18/09/2024 */
+            //=========== 
+            // await firebase.auth().createUserWithEmailAndPassword(email, senha)
+            // .then(() => { //verifica se o e-mail é verdadeiro
+            //     firebase.auth().currentUser.sendEmailVerification({
+            //         handleCodeInApp: true,
+            //         url: 'https://console.firebase.google.com/u/0/project/meus-pertences/firestore/data?hl=pt-br'
+            //     })
+            //     .then(() => {
+            //         Alert.alert("Verificação de e-mail enviado")
+            //     })
+            //     .catch((error) => {
+            //         Alert.alert("Algo deu errado: ", error.message)
+            //     })
+            //     .then(() => { //depois que o e-mail foi enviado, quero armazenar os dados dos usuários, como nome...
+            //         firebase.firestore().collection('users')
+            //         .doc(firebase.auth().currentUser.uid)
+            //         .set({
+            //             nomeCompleto,
+            //             email,
+            //         })
+            //     })
+            //     .catch((error) => {
+            //         Alert.alert("O erro é: ", error.message)
+            //     })
+            // })
+            // .catch((error) => {
+            //     Alert.alert("O erro é: ", error.message)
+            // })
+        
+        
+       
     }
 
-    //Falta formatar a data dd/mm/aaaa (dia, mês, ano) no cadastro do TextInput
+//=================================================================
+/* EXEMPLO DE Cadastrar/Login usuario:
+// Nome do vídeo no youtube: #6 Signup & login to Firebase | WhatsApp Clone using React Native & Firebase in Hindi
+// Link do youtube: https://www.youtube.com/watch?v=WsOCNkA8SpM&list=PLB97yPrFwo5ihgCoWXlEDHrAPQNshsfzP&index=10
+// Canal do youtube: CODERS NEVER QUIT
+*/
 
+//=================================================================
+
+
+    //Falta formatar a data dd/mm/aaaa (dia, mês, ano) no cadastro do TextInput
 
     // Outro exemplo de tela de cadastro com data de nascimento (porém um pouco incompleto) no Link a seguir:
     // https://pt.stackoverflow.com/questions/493069/como-pegar-id-dos-dados-criados-em-firebase
@@ -66,7 +113,7 @@ export default function Cadastrar() {
     return (
         <View style={styles.container}>
 
-            <KeyboardAvoidingView behavior='position' style={{ flex: 1, width: "100%" }}>
+            <KeyboardAvoidingView behavior='position' style={{ flex: 1, width: "100%"}}>
 
                 <View style={styles.bordaTxtLogo}>
                     <Text style={styles.txtCadastro}>Cadastro</Text>

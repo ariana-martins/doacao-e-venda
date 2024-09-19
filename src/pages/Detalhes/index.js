@@ -141,20 +141,22 @@ export default function Detalhes({ userDono, item }) {
                             onPress={() => { 
 
                                 setRegistrarInteresse(!registrarInteresse)
-                                {
+                             {
                                     registrarInteresse ?
                                         Alert.alert("Registrado!", "Interesse registrado com sucesso.")
                                         :
                                         Alert.alert("Cancelado!", "Interesse cancelado com sucesso.")
                                 }
 
-                                
+                            
                                {/* isInteresse ? removeDataInteresse : addDataInteresse() */}
                                 
 
                             }}>
                             <Text style={styles.textoBotao}>
-                                {registrarInteresse ? 'Registrar Interesse' : 'Cancelar Interesse'}
+    
+                                {registrarInteresse ? 'Registrar Interesse' : 'Cancelar Interesse'}                                  
+                                
                             </Text>                          
                         </TouchableOpacity>
                     </View>

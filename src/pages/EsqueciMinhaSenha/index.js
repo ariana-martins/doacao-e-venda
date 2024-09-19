@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, KeyboardAvoidingView, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+
+
+import auth from '@react-native-firebase/auth';
+import { firebase } from '@react-native-firebase/firestore';
+
 
 //import { TextInput } from 'react-native-paper';
 
@@ -12,10 +17,26 @@ import Icon from 'react-native-vector-icons/Ionicons';
 export default function EsqueciMinhaSenha({ navigation }) {
 
     const [email, setEmail] = useState('');
-    const [dataNascimento, setdataNascimento] = useState('');
+    // const [dataNascimento, setdataNascimento] = useState('');
     const [senha, setSenha] = useState('');
     const [confirmarSenha, setConfirmarSenha] = useState('');
     const [passwordVisibility, setPasswordVisibility] = useState(true);
+
+
+
+
+    function recuperarSenha() {
+        //return 
+        firebase.auth().sendPasswordResetEmail(email).then(() => {
+            //          hideLoading();
+            Alert.alert('Email enviado com sucesso');
+        })
+            .catch(error => {
+              Alert.alert("O erro é: ", error.message);
+            })
+
+    }
+
 
     return (
 
@@ -47,7 +68,7 @@ export default function EsqueciMinhaSenha({ navigation }) {
                         </View>
 
 
-            {/*            <Text style={styles.txtEmail_e_Senha}>Data de Nascimento:</Text>
+                        {/*            <Text style={styles.txtEmail_e_Senha}>Data de Nascimento:</Text>
                         <View style={styles.botaoAdicionarMargem}>
                             <View style={styles.inputAreaEmail}>
                                 <TextInput
@@ -104,8 +125,11 @@ export default function EsqueciMinhaSenha({ navigation }) {
 
 
                         <View style={styles.bordaAreaBotoes}>
-                            <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={() => navigation.goBack()}>
-                                {/* navigation.goBack está retornando para o Login após clicar em Cadastrar */}
+                            {/* <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={() => navigation.goBack()}> */}
+                            {/* navigation.goBack está retornando para o Login após clicar em Cadastrar */}
+                            {/*      <Text style={styles.txtEntrar_e_Cadastrar}>CADASTRAR</Text>
+                            {/* </TouchableOpacity> */}
+                            <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={recuperarSenha}>
                                 <Text style={styles.txtEntrar_e_Cadastrar}>CADASTRAR</Text>
                             </TouchableOpacity>
                         </View>
@@ -143,6 +167,7 @@ const styles = StyleSheet.create({
     },
     bordaEmail_e_Senha_e_outros_dados: {
         width: "100%",
+        paddingTop: 20,
     },
     txtEmail_e_Senha: {
         fontFamily: "Roboto",

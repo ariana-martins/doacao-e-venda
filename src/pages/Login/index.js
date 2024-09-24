@@ -52,7 +52,7 @@ export default function Login() {
 
         if (email === "") {
             return (
-                Alert.alert("Erro", "Digite o email para recuperar a senha")
+                Alert.alert("Digite o email para recuperar a senha")
             )
         }
 

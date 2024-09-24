@@ -48,8 +48,8 @@ export default function Login() {
     //    function recuperarSenha() {
 
     const recuperarSenha = () => {
-          setEsqueciMinhaSenha(false)
-          
+        setEsqueciMinhaSenha(false)
+
         if (email === "") {
             return (
                 Alert.alert("Erro", "Digite o email para recuperar a senha")
@@ -59,9 +59,9 @@ export default function Login() {
 
         //return 
         firebase.auth().sendPasswordResetEmail(email)
-           
-        .then(() => {
-             setEsqueciMinhaSenha(true) 
+
+            .then(() => {
+                setEsqueciMinhaSenha(true)
                 Alert.alert('Email enviado com sucesso');
             })
 
@@ -145,29 +145,29 @@ export default function Login() {
                 </View>
 
 
-
-
-                <Text style={styles.txtEmail_e_Senha}>Senha:</Text>
-
                 {esqueciMinhaSenha ?
-                    <View style={styles.botaoAdicionarMargem}>
-                        <View style={styles.inputAreaSenha}>
-                            <TextInput
-                                style={styles.input}
-                                placeholder="************"
-                                value={senha}
-                                keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
-                                onChangeText={setSenha}
-                                secureTextEntry={passwordVisibility}
-                            />
-                            <TouchableOpacity onPress={() => setPasswordVisibility(!passwordVisibility)} >
-                                {/* (Observação: o ícone está abaixo do TextInput, então ele aparece na extrema direita, se estivesse acima do TextInput, ele apareceria à esquerda.) */}
-                                {/* Exemplo de mostrar e ocultar senha no TextInput no react native: https://stackoverflow.com/questions/74760150/hide-and-show-password-in-react-native-with-vector-icon */}
-                                <Icon style={styles.iconEmailEsenha} name={passwordVisibility ? "eye-off-outline" : "eye-outline"} size={20} color="#000000" />
-                            </TouchableOpacity>
-                        </View>
-                    </View>
+                    <>
+                        <Text style={styles.txtEmail_e_Senha}>Senha:</Text>
 
+
+                        <View style={styles.botaoAdicionarMargem}>
+                            <View style={styles.inputAreaSenha}>
+                                <TextInput
+                                    style={styles.input}
+                                    placeholder="************"
+                                    value={senha}
+                                    keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
+                                    onChangeText={setSenha}
+                                    secureTextEntry={passwordVisibility}
+                                />
+                                <TouchableOpacity onPress={() => setPasswordVisibility(!passwordVisibility)} >
+                                    {/* (Observação: o ícone está abaixo do TextInput, então ele aparece na extrema direita, se estivesse acima do TextInput, ele apareceria à esquerda.) */}
+                                    {/* Exemplo de mostrar e ocultar senha no TextInput no react native: https://stackoverflow.com/questions/74760150/hide-and-show-password-in-react-native-with-vector-icon */}
+                                    <Icon style={styles.iconEmailEsenha} name={passwordVisibility ? "eye-off-outline" : "eye-outline"} size={20} color="#000000" />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </>
                     : null}
 
 
@@ -182,26 +182,31 @@ export default function Login() {
                     </TouchableOpacity> */}
 
 
-            {esqueciMinhaSenha ?
-                <TouchableOpacity onPress={recuperarSenha}>
-                      <Text style={styles.textoEsqueciSenha}>Esqueci minha senha</Text> 
-                </TouchableOpacity>
-                :
-                <TouchableOpacity onPress={recuperarSenha}>
-                      <Text style={styles.textoEsqueciSenha}>Enviar senha</Text> 
-                </TouchableOpacity>
+                {esqueciMinhaSenha ?
+                    <TouchableOpacity onPress={recuperarSenha}>
+                        <Text style={styles.textoEsqueciSenha}>Esqueci minha senha</Text>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity onPress={recuperarSenha}>
+                        <Text style={styles.textoEsqueciSenha}>Enviar e-mail de recuperação de senha</Text>
+                    </TouchableOpacity>
                 }
 
 
 
-                <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={() => userLogin()}>
-                    {/* onPress={() => navigation.navigate("ScreenNavigator")}> */}
-                    <Text style={styles.txtEntrar_e_Cadastrar}>ENTRAR</Text>
-                </TouchableOpacity>
+                {esqueciMinhaSenha ?
+                    <>
+                        <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={() => userLogin()}>
+                            {/* onPress={() => navigation.navigate("ScreenNavigator")}> */}
+                            <Text style={styles.txtEntrar_e_Cadastrar}>ENTRAR</Text>
+                        </TouchableOpacity>
 
-                <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={() => navigation.navigate("Cadastrar")}>
-                    <Text style={styles.txtEntrar_e_Cadastrar}>CADASTRAR</Text>
-                </TouchableOpacity>
+                        <TouchableOpacity style={styles.btnEntrar_e_Cadastrar} onPress={() => navigation.navigate("Cadastrar")}>
+                            <Text style={styles.txtEntrar_e_Cadastrar}>CADASTRAR</Text>
+                        </TouchableOpacity>
+                    </>
+                    : null}
+
             </View>
         </View>
 

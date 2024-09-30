@@ -119,7 +119,6 @@ export default function ItemListaChat({ navigation }) {
 
     //array "Chat"
     const Chat = [
-        /*
          {
              id: '1',
              image: require('../../../src/assets/img/img1.png'),
@@ -140,7 +139,7 @@ export default function ItemListaChat({ navigation }) {
              imagemUserDono: require('../../assets/imgUserDono/logoFaccatColor.png'),
              messageUser: 'Usuário 2',
          },
-         */
+         
         {
             id: '3',
             image: require('../../../src/assets/img/img3.png'),
@@ -148,7 +147,8 @@ export default function ItemListaChat({ navigation }) {
             valor: 'R$0,00',
             messageTime: '2 dias atrás',
             messageText: 'Maria - dono do produto', // {userDono: data.user_id} porém tem que ser o "nomeCompleto"
-            imagemUserDono: source={uri: 'https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT.png'},
+            imagemUserDono: require('../../assets/imgUserDono/logoFACCAT.png'),
+          //  imagemUserDono: source={uri: 'https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT.png'},
             messageUser: 'Usuário 3',
         },
 

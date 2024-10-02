@@ -111,7 +111,13 @@ export default function ChatMensagens() {
             <View style={{ display: 'flex', flexDirection: 'column', flex: 1, }}>
 
                 <View style={styles.containerStyloDetalhesDoProduto}>
+                   { image ?
                     <Image style={styles.imagemMaisDetalhesDoProduto} source={{ uri: image }} />
+                    :
+                    null
+                   }
+                    
+                   
                     <View style={{ flex: 1, flexDirection: 'column' }} >
                         <Text style={{ paddingRight: 10 }}>{name}</Text>
                         <Text style={{ marginVertical: 5 }}>{valor}</Text>

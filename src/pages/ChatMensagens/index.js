@@ -103,21 +103,29 @@ export default function ChatMensagens() {
                     {/*ImageUserDono vem da página "Detalhes" */}
                     {/* <Image style={styles.headerImgDetalhesPerfil}
                         source={imageUserDono} /> */}
-                    <Image style={styles.headerImgDetalhesPerfil}
-                        source={require('../../assets/logo/logo_novo.jpg')} />
+
+                    {imageUserDono ?
+
+                        <Image style={styles.headerImgDetalhesPerfil}
+                            source={imageUserDono} />
+                        :
+                        <Image style={styles.headerImgDetalhesPerfil}
+                            source={require('../../assets/logo/logo_novo.jpg')} />
+                    }
+
                 </View>
             </View>
 
             <View style={{ display: 'flex', flexDirection: 'column', flex: 1, }}>
 
                 <View style={styles.containerStyloDetalhesDoProduto}>
-                   { image ?
-                    <Image style={styles.imagemMaisDetalhesDoProduto} source={{ uri: image }} />
-                    :
-                    null
-                   }
-                    
-                   
+                    {image ?
+                        <Image style={styles.imagemMaisDetalhesDoProduto} source={{ uri: image }} />
+                        :
+                        null
+                    }
+
+
                     <View style={{ flex: 1, flexDirection: 'column' }} >
                         <Text style={{ paddingRight: 10 }}>{name}</Text>
                         <Text style={{ marginVertical: 5 }}>{valor}</Text>
@@ -132,7 +140,7 @@ export default function ChatMensagens() {
                     renderItem={({ item }) => (
                         <View style={{ marginTop: 8, display: 'flex', flex: 1, overflow: 'scroll' }}>
 
-                                <View style={{ width: 180, margin: 10, display: 'flex', alignSelf: 'flex-end' }}>
+                            <View style={{ width: 180, margin: 10, display: 'flex', alignSelf: 'flex-end' }}>
                                 <View style={{ backgroundColor: '#afeeee', borderRadius: 8 }}>
                                     <Text style={{ padding: 8, color: 'black' }}>{item.enviadoPara}:{"\n"}{item.text}</Text>
                                     <View style={{ flexDirection: 'row', alignSelf: 'flex-end' }}>

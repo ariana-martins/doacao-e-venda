@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, SafeAreaView, SectionList, Alert, FlatList, ScrollView, Image } from 'react-native';
+import { styles } from './styles';
+
 import { Searchbar } from 'react-native-paper';
+
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import { firebase } from '@react-native-firebase/firestore';
-
-import BotaoVoltar from '../../components/componentesGerais/BotaoVoltar';
 
 import SearchForm from '../../components/SearchForm';
 import testeFiltros from '../../data/testeFiltros';
@@ -33,42 +34,29 @@ export default function Pesquisar() {
 
     const ref = firebase.firestore().collection('produtos');
     useEffect(() => {
-        ref.onSnapshot(querySnapshot => {
-            const data = []
+        const unsubscribe = ref.onSnapshot(querySnapshot => {
+            const data = [];
             querySnapshot.forEach(doc => {
                 data.push({
                     ...doc.data(),
                     key: doc.id
-                })
-            })
-            setData(data)
-        })
-        //  return () => ref()
+                });
+            });
 
 
-        if (searchText === '') {
-            setData(data);
-        } else {
-            setData(
-                data.filter(item => (item.titulo.toLocaleLowerCase().indexOf(searchText.toLocaleLowerCase()) > -1)
-                    /*
-                    //Mostra o mesmo resultado, porém vai o if e return do teste.   
-                       {
-                       if (item.title.toLocaleLowerCase().indexOf(searchText.toLocaleLowerCase()) > -1)
-                       {
-                           return true;
-                       } else {
-                           return false;
-                       }
-                   }
-                   //Exemplo completo no vídeo: "Como FILTRAR e ORDENAR um FlatList no React Native"
-                   // Link do canal do Youtube: https://www.youtube.com/watch?v=Rv2eJK1iOTo
-                   // Canal do Youtube: Bonieky Lacerda.
-                   */
-                )
-            );
-        }
+            if (searchText === '') {
+                setData(data);
+            } else {
+                setData(
+                    data.filter(item =>
+                        item.titulo.toLowerCase().includes(searchText.toLowerCase())
+                    )
+                );
+            }
+        });
 
+        // Limpa o listener quando o componente é desmontado
+        return () => unsubscribe();
 
     }, [searchText])
 
@@ -76,52 +64,29 @@ export default function Pesquisar() {
 
 
 
-    //Lista produtos do banco de dados
-    const RenderItemList = ({ data }) => {
-        return (
-            <View style={styles.containerItemLista}>
-                <View style={styles.adicionarMargem}>
-                    <View>
-                        <Image style={styles.prodImg}
-                            //source={item.image}
-                            // quando buscar os produtos do firestores/storage, 
-                            //utilizar imagem com "uri", pois busca imagem da internet (firestores/storage)
-                            source={{ uri: data.imagem }}
-                        />
-                        <Text style={styles.txt}>{data.titulo}</Text>
-                        <Text style={styles.vlr}>R$ {data.valor}</Text>
-                    </View>
-
-                </View>
-            </View>
-        );
-    };
-
-
-
     //.toLowerCase() => Transforma o nome em minusculo, para poder pesquisar por palavra chave qualquer tamanho de letra...
     //tanto o nome aparecendo na lista, tanto o nome onde vai pesquisar, "vai transformar letras em minusculas".
-/*
-    useEffect(() => {
-        if (searchText === '') {
-            setList(testeProdutos);
-        } else {
-            setList(
-                testeProdutos.filter(item => (item.title.toLocaleLowerCase().indexOf(searchText.toLocaleLowerCase()) > -1)
-                    /*
-                    //Mostra o mesmo resultado, porém vai o if e return do teste.   
-                       {
-                       if (item.title.toLocaleLowerCase().indexOf(searchText.toLocaleLowerCase()) > -1)
-                       {
-                           return true;
-                       } else {
-                           return false;
+    /*
+        useEffect(() => {
+            if (searchText === '') {
+                setList(testeProdutos);
+            } else {
+                setList(
+                    testeProdutos.filter(item => (item.title.toLocaleLowerCase().indexOf(searchText.toLocaleLowerCase()) > -1)
+                        /*
+                        //Mostra o mesmo resultado, porém vai o if e return do teste.   
+                           {
+                           if (item.title.toLocaleLowerCase().indexOf(searchText.toLocaleLowerCase()) > -1)
+                           {
+                               return true;
+                           } else {
+                               return false;
+                           }
                        }
-                   }
-                   //Exemplo completo no vídeo: "Como FILTRAR e ORDENAR um FlatList no React Native"
-                   // Link do canal do Youtube: https://www.youtube.com/watch?v=Rv2eJK1iOTo
-                   // Canal do Youtube: Bonieky Lacerda.
-                   */
+                       //Exemplo completo no vídeo: "Como FILTRAR e ORDENAR um FlatList no React Native"
+                       // Link do canal do Youtube: https://www.youtube.com/watch?v=Rv2eJK1iOTo
+                       // Canal do Youtube: Bonieky Lacerda.
+                       */
     //             )
     //         );
     //     }
@@ -178,59 +143,34 @@ export default function Pesquisar() {
 
         <View style={styles.container}>
 
-            {/* //Formulário de pesquisa "SearchForm" é renderizado dentro da visualização da área segura "SafeAreaView"*/}
+            <HeaderPesquisar />
 
-                <HeaderPesquisar />
+            <View style={styles.botaoFiltrar}>
+                <View style={styles.filtrarArea}>
 
-                <View style={styles.botaoFiltrar}>
-                    <View style={styles.filtrarArea}>
-
-                        <TouchableOpacity>
-                            <Icon name="funnel-outline" size={20} color="#000000" />
-                        </TouchableOpacity>
-                        <Text style={styles.txtFiltrar}>Filtrar por categoria</Text>
-                    </View>
+                    <TouchableOpacity>
+                        <Icon name="funnel-outline" size={20} color="#000000" />
+                    </TouchableOpacity>
+                    <Text style={styles.txtFiltrar}>Filtrar por categoria</Text>
                 </View>
+            </View>
 
-{/*
-                <View style={styles.botaoPesquisar}>
-                    <View style={styles.inputArea}>
-                        <Icon name="search" size={20} color="#000000" />
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Pesquisar / Pesquise aqui..."
-                            placeholderTextColor="#000000"
-                            value={searchText}
-                            onChangeText={(t) => setSearchText(t)}
-                            keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
-                        />
+      
+            <Searchbar
+                //  style={styles.input}
+                style={{ marginHorizontal: 15, backgroundColor: '#C4C4C4' }}
+                placeholder="Pesquisar / Pesquise aqui..."
+                placeholderTextColor="#000000"
+                value={searchText}
+                onChangeText={(t) => setSearchText(t)}
+                keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
+            />
 
-                    </View>
-                </View>
-    */}
-   
 
-                        <Searchbar
-                          //  style={styles.input}
-                           style={{marginHorizontal: 15, backgroundColor: '#C4C4C4' }}
-                            placeholder="Pesquisar / Pesquise aqui..."
-                            placeholderTextColor="#000000"
-                            value={searchText}
-                            onChangeText={(t) => setSearchText(t)}
-                            keyboardType="default" // Define esse teclado básico quando deseja manipular dados de um TextInput.
-                        />
+            <View>
             
 
-                <View>
                     {/*
-                    <Text style={{ marginBottom: 10, paddingHorizontal: 20, }}>
-                        Aqui vai os produtos pesquisados e filtrados...
-                    </Text>
-                 */}
-
-                    <View>
-
-                        {/*
                         <FlatList
                             data={list}
                             //  style={styles.list}
@@ -238,21 +178,39 @@ export default function Pesquisar() {
                             keyExtractor={(item) => item.id}
                         />
                         */}
-                        <FlatList
-                            showsHorizontalScrollIndicator={false}
-                            columnWrapperStyle={{ justifyContent: 'space-around', padding: 10 }}
-                            // data={testeProdutos}
-                            data={data} //data, da onde eu vou pegar os dados desta lista (nesse caso é o card/lista de "produtos")
-                            //keyExtractor={item=>item.id} //keyEstractor define uma chave para cada um dos elementos, aqui é um tipo que vou querer retornar um "item.id" 
-                            keyExtractor={(item) => String(item.key)}
-                            numColumns={3}
-                            renderItem={({ item }) => <RenderItemList data={item} />}
-                        />
+                    <FlatList
+                        showsHorizontalScrollIndicator={false}
+                        columnWrapperStyle={{ justifyContent: 'space-around', padding: 10 }}
+                        // data={testeProdutos}
+                        data={data} //data, da onde eu vou pegar os dados desta lista (nesse caso é o card/lista de "produtos")
+                        //keyExtractor={item=>item.id} //keyEstractor define uma chave para cada um dos elementos, aqui é um tipo que vou querer retornar um "item.id" 
+                        keyExtractor={(item) => String(item.key)}
+                        numColumns={3}
+                        renderItem={({ item }) => {
+                            return (
+                                <View style={styles.containerItemLista}>
+                                    <View style={styles.adicionarMargem}>
+                                        <View>
+                                            <Image style={styles.prodImg}
+                                                //source={item.image}
+                                                // quando buscar os produtos do firestores/storage, 
+                                                //utilizar imagem com "uri", pois busca imagem da internet (firestores/storage)
+                                                source={{ uri: item.imagem }}
+                                            />
+                                            <Text style={styles.txt}>{item.titulo}</Text>
+                                            <Text style={styles.vlr}>R$ {item.valor}</Text>
+                                        </View>
 
-                    </View>
+                                    </View>
+                                </View>
+                            );
+                        }}
 
-                </View>
-                {/*
+
+                    />
+
+            </View>
+            {/*
     // =========== Exemplo de Pesquisar, ==========================
     //==========="value" funcionando certinho com console.log conforme preenchido ================
               <SearchForm/> 
@@ -260,7 +218,7 @@ export default function Pesquisar() {
  */}
 
 
-                {/* ============== Exemplo de lista com seção, de "SectionList" ================
+            {/* ============== Exemplo de lista com seção, de "SectionList" ================
                 <SectionList
                     sections={testeFiltros}
                     keyExtractor={(item, index) => item + index}
@@ -276,110 +234,110 @@ export default function Pesquisar() {
     );
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1, //para ficar tudo no meio da tela
-        backgroundColor: '#FFFFFF',
-    },
+// const styles = StyleSheet.create({
+//     container: {
+//         flex: 1, //para ficar tudo no meio da tela
+//         backgroundColor: '#FFFFFF',
+//     },
 
-    item: {
-        backgroundColor: "#f9c2ff",
-        padding: 20,
-        marginVertical: 8
-    },
-    header: {
-        fontSize: 32,
-        backgroundColor: "#fff"
-    },
-    title: {
-        fontSize: 24
-    },
-
-
-    inputAreaVoltar: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
-        backgroundColor: '#C4C4C4',
-        elevation: 2,
-        width: 40,
-        height: 37,
-        borderRadius: 10,
-        marginLeft: 15,
-        marginTop: 15,
-    },
-    botaoFiltrar: {
-        paddingHorizontal: 10,
-        flexDirection: 'row',
-        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
-        width: '100%',
-        marginVertical: 5,
-    },
-    filtrarArea: {
-        paddingHorizontal: 15,
-        flexDirection: 'row',
-        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
-    },
-    txtFiltrar: {
-        fontFamily: 'Roboto',
-        paddingHorizontal: 10,
-        fontSize: 20,
-        color: 'black',
-    },
-    botaoPesquisar: {
-        paddingHorizontal: 15,
-        flexDirection: 'row',
-        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
-        justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
-        width: '100%',
-        marginVertical: 20,
-    },
-    inputArea: {
-        paddingHorizontal: 15,
-        flexDirection: 'row',
-        alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
-        width: '98%',
-        backgroundColor: '#C4C4C4',
-        elevation: 2,
-        paddingHorizontal: 10,
-        height: 37,
-        borderRadius: 10,
-    },
-    input: {
-        fontFamily: 'Roboto',
-        paddingHorizontal: 10,
-        fontSize: 15,
-        width: '98%'
-    },
+//     item: {
+//         backgroundColor: "#f9c2ff",
+//         padding: 20,
+//         marginVertical: 8
+//     },
+//     header: {
+//         fontSize: 32,
+//         backgroundColor: "#fff"
+//     },
+//     title: {
+//         fontSize: 24
+//     },
 
 
-    containerItemLista: {
-        flex: 1,
-        backgroundColor: '#FFFFFF',
-    },
-    adicionarMargem: {
-        margin: 10,
-    },
-    prodImg: {
-        width: 96,
-        height: 118,
-        resizeMode: "cover",
-    },
-    txt: {
-        width: 96,
-        fontFamily: "Inter",
-        fontStyle: "normal",
-        fontSize: 15,
-        lineHeight: 20,
-        color: "#000000",
-        fontWeight: 'bold',
-    },
-    vlr: {
-        width: 96,
-        fontFamily: "Inter",
-        fontStyle: "normal",
-        fontSize: 15,
-        lineHeight: 20,
-        color: "#000000",
-    }
-});
+//     inputAreaVoltar: {
+//         flexDirection: 'row',
+//         justifyContent: 'center',
+//         alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
+//         backgroundColor: '#C4C4C4',
+//         elevation: 2,
+//         width: 40,
+//         height: 37,
+//         borderRadius: 10,
+//         marginLeft: 15,
+//         marginTop: 15,
+//     },
+//     botaoFiltrar: {
+//         paddingHorizontal: 10,
+//         flexDirection: 'row',
+//         alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
+//         width: '100%',
+//         marginVertical: 5,
+//     },
+//     filtrarArea: {
+//         paddingHorizontal: 15,
+//         flexDirection: 'row',
+//         alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
+//     },
+//     txtFiltrar: {
+//         fontFamily: 'Roboto',
+//         paddingHorizontal: 10,
+//         fontSize: 20,
+//         color: 'black',
+//     },
+//     botaoPesquisar: {
+//         paddingHorizontal: 15,
+//         flexDirection: 'row',
+//         alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
+//         justifyContent: 'center', //se utilizar "center" //justifica todos os textos e imagens ao centro da tela (exemplo: centralizado na lateral esquerda da tela)
+//         width: '100%',
+//         marginVertical: 20,
+//     },
+//     inputArea: {
+//         paddingHorizontal: 15,
+//         flexDirection: 'row',
+//         alignItems: 'center', //centralizando todos os textos e imagens ao centro da tela (no meio da tela em geral)
+//         width: '98%',
+//         backgroundColor: '#C4C4C4',
+//         elevation: 2,
+//         paddingHorizontal: 10,
+//         height: 37,
+//         borderRadius: 10,
+//     },
+//     input: {
+//         fontFamily: 'Roboto',
+//         paddingHorizontal: 10,
+//         fontSize: 15,
+//         width: '98%'
+//     },
+
+
+//     containerItemLista: {
+//         flex: 1,
+//         backgroundColor: '#FFFFFF',
+//     },
+//     adicionarMargem: {
+//         margin: 10,
+//     },
+//     prodImg: {
+//         width: 96,
+//         height: 118,
+//         resizeMode: "cover",
+//     },
+//     txt: {
+//         width: 96,
+//         fontFamily: "Inter",
+//         fontStyle: "normal",
+//         fontSize: 15,
+//         lineHeight: 20,
+//         color: "#000000",
+//         fontWeight: 'bold',
+//     },
+//     vlr: {
+//         width: 96,
+//         fontFamily: "Inter",
+//         fontStyle: "normal",
+//         fontSize: 15,
+//         lineHeight: 20,
+//         color: "#000000",
+//     }
+// });

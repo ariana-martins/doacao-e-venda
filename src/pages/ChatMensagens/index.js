@@ -199,82 +199,82 @@ export default function ChatMensagens() {
 
 
 
-/*
-import React, { useState, useEffect } from 'react';
-import { View, Text, ScrollView, Button } from 'react-native';
-import { GiftedChat } from 'react-native-gifted-chat';
 
-import firestore from '@react-native-firebase/firestore';
+// import React, { useState, useEffect } from 'react';
+// import { View, Text, ScrollView, Button } from 'react-native';
+// import { GiftedChat } from 'react-native-gifted-chat';
 
-import EnviarReceberMensagens from '../../components/EnviarReceberMensagens';
-import { Input } from '@rneui/base';
+// import firestore from '@react-native-firebase/firestore';
 
-
-//Exemplo de React Native ChatScreen UI.
-// Link do gitHub: https://github.com/itzpradip/react-native-firebase-social-app/blob/master/screens/ChatScreen.js
-// Título do Youtube: React Native Chat App UI Tutorial
-// Link do Youtube: https://www.youtube.com/watch?v=bGGeD5RkdzQ&list=PLQWFhX-gwJbmrCwksjn77tdl36dIWPFAt&index=10
+// import EnviarReceberMensagens from '../../components/EnviarReceberMensagens';
+// import { Input } from '@rneui/base';
 
 
-//Continuar olhando e testando o vídeo
-// Título do video do Canal do Youtube: #8 Gifted chat UI & one to one chat using firestore | React Native & Firebase tutorial in Hindi
-// Link do video do Canal do Youtube: https://www.youtube.com/watch?v=flAFZC-xNwk&list=PLB97yPrFwo5ihgCoWXlEDHrAPQNshsfzP&index=21
-
-export default function ChatMensagens() {
-    const [messages, setMessages] = useState([]);
-
-    useEffect(() => {
-
-        setMessages([
-            {
-                _id: 1,
-                text: 'Olá Mundo',
-                createdAt: new Date(),
-                user: {
-                    _id: 2,
-                    name: 'React Native',
-                    avatar: 'https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT.png',
-                },
-            },
-            {
-                _id: 2,
-                text: 'Hello world',
-                createdAt: new Date(),
-                user: {
-                    _id: 1,
-                    name: 'React Native',
-                    avatar: 'https://placeimg.com/140/140/any',
-                },
-            },
-        ])
-    }, [])
+// //Exemplo de React Native ChatScreen UI.
+// // Link do gitHub: https://github.com/itzpradip/react-native-firebase-social-app/blob/master/screens/ChatScreen.js
+// // Título do Youtube: React Native Chat App UI Tutorial
+// // Link do Youtube: https://www.youtube.com/watch?v=bGGeD5RkdzQ&list=PLQWFhX-gwJbmrCwksjn77tdl36dIWPFAt&index=10
 
 
-    const onSend = (messages = []) => {
-        setMessages(previousMessages =>
-            GiftedChat.append(previousMessages, messages),
-        )
-    }
+// //Continuar olhando e testando o vídeo
+// // Título do video do Canal do Youtube: #8 Gifted chat UI & one to one chat using firestore | React Native & Firebase tutorial in Hindi
+// // Link do video do Canal do Youtube: https://www.youtube.com/watch?v=flAFZC-xNwk&list=PLB97yPrFwo5ihgCoWXlEDHrAPQNshsfzP&index=21
+
+// export default function ChatMensagens() {
+//     const [messages, setMessages] = useState([]);
+
+//     useEffect(() => {
+
+//         setMessages([
+//             {
+//                 _id: 1,
+//                 text: 'Olá Mundo',
+//                 createdAt: new Date(),
+//                 user: {
+//                     _id: 2,
+//                     name: 'React Native',
+//                     avatar: 'https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT.png',
+//                 },
+//             },
+//             {
+//                 _id: 2,
+//                 text: 'Hello world',
+//                 createdAt: new Date(),
+//                 user: {
+//                     _id: 1,
+//                     name: 'React Native',
+//                     avatar: 'https://placeimg.com/140/140/any',
+//                 },
+//             },
+//         ])
+//     }, [])
 
 
-    return (
-        <View style={{ flex: 1 }}>
-            <GiftedChat
-                messages={messages}
-                onSend={messages => onSend(messages)}
-                user={{
-                    _id: 1,
-                   // created_at: firestore.FieldValue.serverTimestamp()
-                   /*incluir essa linha "created_at: ..." para que seja criado e vinculado no firebase a data
-                   e horário que o usuário digitou no chat, como por exemplo, quando o usuário acrescentou um produto e aparece "nesse caso só no firebase" */
-    //            }}
-  //          />
-   //     </View>
-  //  )
+//     const onSend = (messages = []) => {
+//         setMessages(previousMessages =>
+//             GiftedChat.append(previousMessages, messages),
+//         )
+//     }
+
+
+//     return (
+//         <View style={{ flex: 1 }}>
+//             <GiftedChat
+//                 messages={messages}
+//                 onSend={messages => onSend(messages)}
+//                 user={{
+//                     _id: 1,
+//                    // created_at: firestore.FieldValue.serverTimestamp()
+//                    /*incluir essa linha "created_at: ..." para que seja criado e vinculado no firebase a data
+//                    e horário que o usuário digitou no chat, como por exemplo, quando o usuário acrescentou um produto e aparece "nesse caso só no firebase" */
+//                }}
+//            />
+//        </View>
+//    )
 
 
 
-//}
+// }
 
 
 //=============================================================

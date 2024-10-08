@@ -119,27 +119,26 @@ export default function ItemListaChat({ navigation }) {
 
     //array "Chat"
     const Chat = [
-         {
-             id: '1',
-             image: require('../../../src/assets/img/img1.png'),
-             title: 'Sapatênis',
-             valor: 'R$200,00',
-             messageTime: '4 mins atrás',
-             messageText: 'João - dono do produto',
-             imagemUserDono: require('../../assets/imgUserDono/logoTI.png'),
-             messageUser: 'Usuário 1',
-         },
-         {
-             id: '2',
-             image: require('../../../src/assets/img/img2.png'),
-             title: 'Blusa branca',
-             valor: 'R$0,00',
-             messageTime: '2 horas atrás',
-             messageText: 'Maria - dono do produto', // {userDono: data.user_id} porém tem que ser o "nomeCompleto"
-             imagemUserDono: require('../../assets/imgUserDono/logoFaccatColor.png'),
-             messageUser: 'Usuário 2',
-         },
-         
+        {
+            id: '1',
+            image: require('../../../src/assets/img/img1.png'),
+            title: 'Sapatênis',
+            valor: 'R$200,00',
+            messageTime: '4 mins atrás',
+            messageText: 'João - dono do produto',
+            imagemUserDono: require('../../assets/imgUserDono/logoTI.png'),
+            messageUser: 'Usuário 1',
+        },
+        {
+            id: '2',
+            image: require('../../../src/assets/img/img2.png'),
+            title: 'Blusa branca',
+            valor: 'R$0,00',
+            messageTime: '2 horas atrás',
+            messageText: 'Maria - dono do produto', // {userDono: data.user_id} porém tem que ser o "nomeCompleto"
+            imagemUserDono: require('../../assets/imgUserDono/logoFaccatColor.png'),
+            messageUser: 'Usuário 2',
+        },
         {
             id: '3',
             image: require('../../../src/assets/img/img3.png'),
@@ -148,7 +147,7 @@ export default function ItemListaChat({ navigation }) {
             messageTime: '2 dias atrás',
             messageText: 'Maria - dono do produto', // {userDono: data.user_id} porém tem que ser o "nomeCompleto"
             imagemUserDono: require('../../assets/imgUserDono/logoFACCAT.png'),
-          //  imagemUserDono: source={uri: 'https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT.png'},
+            //  imagemUserDono: source={uri: 'https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT.png'},
             messageUser: 'Usuário 3',
         },
 
@@ -211,11 +210,7 @@ export default function ItemListaChat({ navigation }) {
 
 
     // Falta fazer
-    {/*
-=> Identifcar o chat, que são dois usuários diferentes:
-    - Meu Id: tirando duvidas no chat de outro usuario
-    - Id de outro usuario: que está tirando dúvidas para meu usuário
-*/}
+  
     {/*
 => Add "Sala 1(item_enviado)" Chat (através da página "Detalhes") com:
     * imagem do produto,
@@ -281,7 +276,6 @@ export default function ItemListaChat({ navigation }) {
 
 
             {/*  <MessageCard /> */}
-
 
 
             <FlatList

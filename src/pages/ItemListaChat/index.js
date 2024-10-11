@@ -22,6 +22,7 @@ export default function ItemListaChat({ navigation }) {
     //const navigation = useNavigation();
 
     const [data, setData] = useState([]);
+    const [chatNovoItem, setChatNovoItem] = useState([]);
 
     //===================================
     //chatsNovo (no firebase firestore)
@@ -43,7 +44,20 @@ export default function ItemListaChat({ navigation }) {
     }, [])
     //===================================
 
-
+    const refChatNovoProdItem = firebase.firestore().collection('chatNovoItemProduto').orderBy('id', 'desc');
+    useEffect(() => {
+        refChatNovoProdItem.onSnapshot(querySnapshot => {
+            const chatNovoItem = []
+            querySnapshot.forEach(doc => {
+                chatNovoItem.push({
+                    ...doc.data(),
+                    key: doc.id
+                })
+            })
+            setChatNovoItem(chatNovoItem)
+        })
+        //  return () => ref()
+    }, [])
 
     //Exemplo de ChatScreen UI
     //Link do GitHub: https://github.com/itzpradip/react-native-firebase-social-app/blob/master/screens/ChatScreen.js
@@ -154,31 +168,35 @@ export default function ItemListaChat({ navigation }) {
     ];
 
 
-    //falta modificar para "data"
-    //const RenderItemListChat=({ data }) => {
-    const RenderItemListChat = ({ item }) => {
+    //[OK] falta modificar para "data"
+    //const RenderItemListChat=({ item }) => {
+    const RenderItemListChat = ({ data }) => {
         return (
 
 
             <View>
                 <TouchableOpacity onPress={() => navigation.navigate('ChatMensagens',
-                    { userDono: item.messageText })}>
+                  //{ userDono: item.messageText })}>
+                  { userDono: data.messageText })}>
 
                     <ListItem style={styles.card} bottomDivider>
                         {/*    <Avatar source={{ uri: l.avatar_url }} /> */}
-                        <Avatar style={styles.prodImg} source={item.image} />
+                        <Avatar style={styles.prodImg} source={{ uri: data.image }} />
                         {/*<Avatar rounded source={{ uri: l.avatar_url }} /> */}
-                        {<Avatar style={styles.userDonoImg} source={item.imagemUserDono} />}
+                        <Avatar style={styles.userDonoImg} source={data.imagemUserDono} />
                         <ListItem.Content>
-                            <ListItem.Title style={styles.userNameEvalor}>{item.title}</ListItem.Title>
-                            <ListItem.Title style={styles.userNameEvalor}>{item.valor}</ListItem.Title>
-                            <ListItem.Subtitle>{item.messageText}</ListItem.Subtitle>
-                            <ListItem.Subtitle>{item.messageUser}</ListItem.Subtitle>
+                        {/*<ListItem.Title style={styles.userNameEvalor}>{item.title}</ListItem.Title>*/}
+                            <ListItem.Title style={styles.userNameEvalor}>{data.titulo}</ListItem.Title>
+                            <ListItem.Title style={styles.userNameEvalor}>{data.valor}</ListItem.Title>
+                            <ListItem.Subtitle>{data.userDono}</ListItem.Subtitle>
+                            <ListItem.Subtitle>{data.messageUser}</ListItem.Subtitle> 
+    
                         </ListItem.Content>
-                        <ListItem.Content right>
-                            <ListItem.Subtitle right>{item.messageTime}</ListItem.Subtitle>
 
+                        <ListItem.Content right>
+                            <ListItem.Subtitle right>{data.messageTime.toDate().toDateString()}</ListItem.Subtitle>
                         </ListItem.Content>
+
                     </ListItem>
                 </TouchableOpacity>
 
@@ -280,11 +298,13 @@ export default function ItemListaChat({ navigation }) {
 
             <FlatList
                 showsHorizontalScrollIndicator={false}
-                data={Chat}
-                keyExtractor={item => item.id.toString()} //Mudar de item.id p/ item.key ( "key" do firebase), "toString()" transforma em String
-                //falta modificar para "data"
-                //renderItem={({ item }) => <RenderItemList data={item} />}
-                renderItem={({ item }) => <RenderItemListChat item={item} />}
+                //data={Chat}
+                //keyExtractor={item => item.id.toString()} //Mudar de item.id p/ item.key ( "key" do firebase), "toString()" transforma em String
+                data={chatNovoItem}
+                keyExtractor={item => String(item.key)} 
+                //[OK] falta modificar para "data"
+                //renderItem={({ item }) => <RenderItemListChat item={item} />}
+                renderItem={({ item }) => <RenderItemListChat data={item} />}
             />
 
             <FlatList

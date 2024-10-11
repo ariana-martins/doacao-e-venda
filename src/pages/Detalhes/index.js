@@ -3,6 +3,8 @@ import { View, Text, TouchableOpacity, Pressable, StyleSheet, ScrollView, Alert 
 import { Card } from 'react-native-paper';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
+import firestore from '@react-native-firebase/firestore';
+
 import HeaderDetalhes from '../../components/Header/HeaderDetalhes';
 
 
@@ -76,21 +78,47 @@ export default function Detalhes({ userDono, item }) {
 */}
 
     {/* {registrarInteresse ? true : false}  */ }
-    //=====================================================
 
+    
+    //=====================================================
+    const chatNovoItem = 
+        {
+            id: '1',
+            image: data.imagem, //require('../../../src/assets/img/img2.png'),
+            titulo: data.titulo,
+            valor: data.valor,
+            messageTime: firestore.Timestamp.fromDate(new Date()),
+            userDono: data.user_id, // 'João - dono do produto',
+            imagemUserDono: require('../../assets/imgUserDono/logoTI.png'),
+            messageUser: 'Usuário 1',
+        }
 
     //===================================
     //Função informações dos "Detalhes" no "ChatMensagens", dentro do novo "ItemListaChat" Message
     const abrirChatMessageChat = () => {
+        firestore()
+            .collection('chatNovoItemProduto')
+            .add(chatNovoItem)
+            .then(() => {
+               // navigation.navigate('ItemListaChat');
+               navigation.navigate('ChatMensagens', {
+                userDono: data.user_id, //'User Dono', //data.user_id,
+                imageUserDono: require('../../assets/imgUserDono/logoFACCAT.png'),
+                image: data.imagem,
+                name: data.titulo, //'Titulo do produto', 
+                valor: data.valor,
+            });
+            });
+        
         //navigation.navigate('Detalhes', { name: 'titulo vai aqui', detalhes: 'descricao aqui', preco: '0,01' });
         //  navigation.navigate('ChatMensagens', { data });
-        navigation.navigate('ChatMensagens', {
-            userDono: data.user_id, //'User Dono', //data.user_id,
-            imageUserDono: require('../../assets/imgUserDono/logoFACCAT.png'),
-            image: data.imagem,
-            name: data.titulo, //'Titulo do produto', 
-            valor: data.valor,
-        });
+        // navigation.navigate('ChatMensagens', {
+        //     userDono: data.user_id, //'User Dono', //data.user_id,
+        //     imageUserDono: require('../../assets/imgUserDono/logoFACCAT.png'),
+        //     image: data.imagem,
+        //     name: data.titulo, //'Titulo do produto', 
+        //     valor: data.valor,
+        // });
         // console.log('ChatMensagens', {userDono: data.titulo});
     };
 
@@ -102,6 +130,25 @@ export default function Detalhes({ userDono, item }) {
     // navigation.navigate('ChatMensagens', {data});
     // console.log('ChatMensagens', {userDono: data.titulo});
     // };
+
+
+    const [roomName, setRoomName] = useState('');
+
+
+    const handleButtonPress = () => {
+        if (roomName.length > 0) {
+          firestore()
+            .collection('THREADS')
+            .add({
+                name: roomName
+            })
+            .then(() => {
+                navigation.navigate('ItemListaChat');
+            });
+        }
+      }
+
+
 
 
     return (

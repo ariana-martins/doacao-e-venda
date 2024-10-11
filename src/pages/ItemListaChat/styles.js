@@ -74,12 +74,12 @@ export const styles = StyleSheet.create({
         resizeMode: 'cover',
     },
     userDonoImg: {
-        width: 40,
-        height: 40,
-        borderRadius: 20,
+        width: 30,
+        height: 30,
+        borderRadius: 15,
         position: 'absolute', //top: 0, bottom: 0, left: 0, right: 0
         bottom: 5,
-        left: 50,
+        left: 55,
         backgroundColor: '#FFFFFF',
     },
 

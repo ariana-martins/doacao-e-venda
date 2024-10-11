@@ -19,7 +19,7 @@ import firestore from '@react-native-firebase/firestore';
 
 export default function ChatMensagensNovo({ route }) {
     const { item, } = route.params
-   console.log("Room :", item)
+  // console.log("Room :", item)
   
 
     const [message, setMessage] = useState(""); //começa com uma string vazia
@@ -60,6 +60,7 @@ export default function ChatMensagensNovo({ route }) {
             .catch((error) => {
                 Alert.alert("Error: ", error)
             })
+            console.log(docRef)
     };
 
     /* useLayoutEffect(() => {

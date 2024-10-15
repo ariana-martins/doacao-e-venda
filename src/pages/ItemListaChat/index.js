@@ -133,7 +133,7 @@ export default function ItemListaChat({ navigation }) {
 
     //array "Chat"
     const Chat = [
-        {
+      /*  {
             id: '1',
             image: require('../../../src/assets/img/img1.png'),
             title: 'Sapatênis',
@@ -164,7 +164,7 @@ export default function ItemListaChat({ navigation }) {
             //  imagemUserDono: source={uri: 'https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT.png'},
             messageUser: 'Usuário 3',
         },
-
+*/
     ];
 
 
@@ -177,23 +177,32 @@ export default function ItemListaChat({ navigation }) {
             <View>
                 <TouchableOpacity onPress={() => navigation.navigate('ChatMensagens',
                   //{ userDono: item.messageText })}>
-                  { userDono: data.messageText })}>
+                  { userDono: data.userDono,
+                      image: data.imagem, //'Imagem do produto'
+                      name: data.titulo, //'Titulo do produto', 
+                      valor: data.valor, //'Valor do produto',
+                  })}>
 
                     <ListItem style={styles.card} bottomDivider>
                         {/*    <Avatar source={{ uri: l.avatar_url }} /> */}
+                        {/* Imagem produto - idimgproduto */}
                         <Avatar style={styles.prodImg} source={{ uri: data.image }} />
                         {/*<Avatar rounded source={{ uri: l.avatar_url }} /> */}
-                        <Avatar style={styles.userDonoImg} source={data.imagemUserDono} />
+                         {/* <Avatar style={styles.userDonoImg} source={data.imagemUserDono} /> */}
+                        {/* Imagem user dono do produto - idimgproprietario*/}
+                         <Avatar style={styles.userDonoImg} source={data.imageUserDono} />
                         <ListItem.Content>
                         {/*<ListItem.Title style={styles.userNameEvalor}>{item.title}</ListItem.Title>*/}
                             <ListItem.Title style={styles.userNameEvalor}>{data.titulo}</ListItem.Title>
                             <ListItem.Title style={styles.userNameEvalor}>{data.valor}</ListItem.Title>
+                            {/* Nome user dono do produto - idproprietario */}
                             <ListItem.Subtitle>{data.userDono}</ListItem.Subtitle>
-                            <ListItem.Subtitle>{data.messageUser}</ListItem.Subtitle> 
+                            <ListItem.Subtitle style={styles.styleMessageUserInteressedado}>{data.messageUser}</ListItem.Subtitle> 
     
                         </ListItem.Content>
 
                         <ListItem.Content right>
+                            {/* 20:10 */}
                             <ListItem.Subtitle right>{data.messageTime.toDate().toDateString()}</ListItem.Subtitle>
                         </ListItem.Content>
 
@@ -204,26 +213,6 @@ export default function ItemListaChat({ navigation }) {
         );
     };
 
-    const MessageCard = () => {
-        return (
-            <TouchableOpacity>
-                <ListItem style={styles.card} bottomDivider>
-                    <ListItem.Content>
-                        <ListItem.Title style={styles.userNameEvalor}>Imagem produto - idimgproduto</ListItem.Title>
-                        <ListItem.Title style={styles.userNameEvalor}>Titulo produto - idproduto</ListItem.Title>
-                        <ListItem.Title style={styles.userNameEvalor}>Valor produto - idproduto</ListItem.Title>
-                        <ListItem.Title style={styles.userNameEvalor}>Nome user dono do produto - idproprietario</ListItem.Title>
-                        <ListItem.Title style={styles.userNameEvalor}>Imagem user dono do produto - idimgproprietario</ListItem.Title>
-                        <ListItem.Subtitle>Nome user interessado - idinteressado</ListItem.Subtitle>
-                        <ListItem.Subtitle>Imagem user interessado - idimginteressado</ListItem.Subtitle>
-                    </ListItem.Content>
-                    <ListItem.Content right>
-                        <ListItem.Subtitle right>20:10</ListItem.Subtitle>
-                    </ListItem.Content>
-                </ListItem>
-            </TouchableOpacity>
-        )
-    }
 
 
 
@@ -291,9 +280,6 @@ export default function ItemListaChat({ navigation }) {
         <View style={styles.container}>
 
             <HeaderChat />
-
-
-            {/*  <MessageCard /> */}
 
 
             <FlatList

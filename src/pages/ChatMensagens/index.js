@@ -357,7 +357,7 @@ export default function ChatMensagens() {
                             source={imageUserDono} />
                         :
                         <Image style={styles.headerImgDetalhesPerfil}
-                            source={require('../../assets/logo/logo_novo.jpg')} />
+                            source={require('../../assets/imgUserDono/logoTI.png')} />
                     }
 
                 </View>
@@ -365,6 +365,7 @@ export default function ChatMensagens() {
 
 
             <View style={styles.containerStyloDetalhesDoProduto}>
+                     
                      {image ?
                         <Image style={styles.imagemMaisDetalhesDoProduto} source={{ uri: image }} />
                         :

@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Pressable, StyleSheet, ScrollView, Alert } from 'react-native';
 import { Card } from 'react-native-paper';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
+import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 
 import HeaderDetalhes from '../../components/Header/HeaderDetalhes';
@@ -25,6 +26,33 @@ export default function Detalhes({ userDono, item }) {
     const navigation = useNavigation();
 
     const [registrarInteresse, setRegistrarInteresse] = useState(true); //Registrar Interesse tem que começar com "false" que será "Interesse cancelado/desmarcado"
+
+
+
+
+
+    const [user, setUser] = useState();
+    const { uid } = auth().currentUser;
+
+    const getUser = async () => {
+        try {
+            const documentSnapshot = await firestore()
+                .collection('users')
+                .doc(uid)
+                .get();
+
+            const userData = documentSnapshot.data();
+            setUser(userData);
+        } catch {
+            //do whatever
+        }
+    };
+
+    // Get user on mount
+    useEffect(() => {
+        getUser();
+    }, []);
+
 
 
     //========================================================================================
@@ -89,8 +117,10 @@ export default function Detalhes({ userDono, item }) {
             valor: data.valor,
             messageTime: firestore.Timestamp.fromDate(new Date()),
             userDono: data.user_id, // 'João - dono do produto',
-            imagemUserDono: require('../../assets/imgUserDono/logoTI.png'),
-            messageUser: 'Usuário 1',
+            //imagemUserDono: require('../../assets/imgUserDono/logoTI.png'),
+            imageUserDono: require('../../assets/imgUserDono/logoTI.png'),
+           // messageUser: 'Usuário 1', //usuário com interesse no produto.
+            messageUser: user && user?.nomeCompleto,
         }
 
     //===================================

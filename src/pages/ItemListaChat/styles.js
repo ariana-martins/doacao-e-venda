@@ -78,7 +78,7 @@ export const styles = StyleSheet.create({
         height: 30,
         borderRadius: 15,
         position: 'absolute', //top: 0, bottom: 0, left: 0, right: 0
-        bottom: 5,
+        bottom: 15,
         left: 55,
         backgroundColor: '#FFFFFF',
     },
@@ -99,6 +99,11 @@ export const styles = StyleSheet.create({
         marginBottom: 5,
     },
     userNameEvalor: {
+        fontSize: 14,
+        fontWeight: 'bold',
+        fontFamily: 'roboto',
+    },
+    styleMessageUserInteressedado: {
         fontSize: 14,
         fontWeight: 'bold',
         fontFamily: 'roboto',

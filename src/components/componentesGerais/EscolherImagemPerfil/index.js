@@ -33,7 +33,7 @@ export default function EscolherImagemPerfil() {
             .collection('perfil')
             .add({
                 user_id: user_id,
-                imagem: imageUrl,
+                userImagem: imageUrl,
                 status: 'teste',
                 postPerfil: firestore.Timestamp.fromDate(new Date()),
             })

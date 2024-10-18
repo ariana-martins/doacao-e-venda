@@ -205,7 +205,8 @@ import { View, Text, Image } from 'react-native';
 import { styles } from './styles';
 import BotaoVoltar from '../../components/componentesGerais/BotaoVoltar';
 
-import { GiftedChat } from 'react-native-gifted-chat';
+import { GiftedChat, Send } from 'react-native-gifted-chat';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import auth from '@react-native-firebase/auth';
 import firestore, { firebase } from '@react-native-firebase/firestore';
@@ -298,6 +299,34 @@ export default function ChatMensagens() {
     //         return unsubscribe;
     //     };
 
+
+    //=================================================
+    {/* Função da estilização do Botão "Enviar" mensagem, troca do nome "send" da biblioteca GiftedChat para um "icone" */}
+    // Configurado no dia 18/10/2024.
+    
+    const renderSend = (props) => {
+        return (
+            <Send {...props}>
+
+                <View>
+                    <Icon name="send-outline" size={20} color="#000000" 
+                         style={{marginBottom: 12, marginRight: 5}} />
+                </View>
+
+            </Send>
+        )
+    }
+
+    // Exemplo de estilização do chat (GiftedChat) no canal do youtube:
+    // Nome do título no youtube: React Native Chat App UI Tutorial
+    // Link do youtube: https://www.youtube.com/watch?v=bGGeD5RkdzQ
+    // Canal do Youtube: Pradip Debnath
+    
+    //=================================================
+
+
+
+
     const collectionRef = firebase.firestore().collection('chatsN').orderBy('createdAt', 'desc')
     useEffect(() => {
         const unsubscribe = collectionRef.onSnapshot(querySnapshot => {
@@ -350,7 +379,7 @@ export default function ChatMensagens() {
                     {/*<Text style={styles.headerTxtTituloDetalhesPerfil}>Nome Completo Perfil + Img Perfil</Text>*/}
                     <Text style={styles.headerTxtTituloDetalhesPerfil}>{userDono}</Text>
                     {/*ImageUserDono vem da página "Detalhes" */}
-                   
+
                     {imageUserDono ?
 
                         <Image style={styles.headerImgDetalhesPerfil}
@@ -365,18 +394,18 @@ export default function ChatMensagens() {
 
 
             <View style={styles.containerStyloDetalhesDoProduto}>
-                     
-                     {image ?
-                        <Image style={styles.imagemMaisDetalhesDoProduto} source={{ uri: image }} />
-                        :
-                        null
-                    }
 
-                    <View style={{ flex: 1, flexDirection: 'column' }} >
-                        <Text style={{ paddingRight: 10 }}>{name}</Text>
-                        <Text style={{ marginVertical: 5 }}>{valor}</Text>
-                    </View>
+                {image ?
+                    <Image style={styles.imagemMaisDetalhesDoProduto} source={{ uri: image }} />
+                    :
+                    null
+                }
+
+                <View style={{ flex: 1, flexDirection: 'column' }} >
+                    <Text style={{ paddingRight: 10 }}>{name}</Text>
+                    <Text style={{ marginVertical: 5 }}>{valor}</Text>
                 </View>
+            </View>
 
 
 
@@ -398,6 +427,9 @@ export default function ChatMensagens() {
                     avatar: 'https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT.png',
                     //avatar: 'https://i.pravatar.cc/300'
                 }}
+                alwaysShowSend //ativa o botão enviar, deixa aparecendo fixo na tela
+                renderSend={renderSend} //renderSend prop, e entao chamarei a funcao renderSend (antes do igual), configura botao "Enviars"
+                placeholder="Escreva sua mensagem aqui..."
             />
         </View>
     );

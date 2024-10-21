@@ -133,38 +133,38 @@ export default function ItemListaChat({ navigation }) {
 
     //array "Chat"
     const Chat = [
-      /*  {
-            id: '1',
-            image: require('../../../src/assets/img/img1.png'),
-            title: 'Sapatênis',
-            valor: 'R$200,00',
-            messageTime: '4 mins atrás',
-            messageText: 'João - dono do produto',
-            imagemUserDono: require('../../assets/imgUserDono/logoTI.png'),
-            messageUser: 'Usuário 1',
-        },
-        {
-            id: '2',
-            image: require('../../../src/assets/img/img2.png'),
-            title: 'Blusa branca',
-            valor: 'R$0,00',
-            messageTime: '2 horas atrás',
-            messageText: 'Maria - dono do produto', // {userDono: data.user_id} porém tem que ser o "nomeCompleto"
-            imagemUserDono: require('../../assets/imgUserDono/logoFaccatColor.png'),
-            messageUser: 'Usuário 2',
-        },
-        {
-            id: '3',
-            image: require('../../../src/assets/img/img3.png'),
-            title: 'Tênis branco',
-            valor: 'R$0,00',
-            messageTime: '2 dias atrás',
-            messageText: 'Maria - dono do produto', // {userDono: data.user_id} porém tem que ser o "nomeCompleto"
-            imagemUserDono: require('../../assets/imgUserDono/logoFACCAT.png'),
-            //  imagemUserDono: source={uri: 'https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT.png'},
-            messageUser: 'Usuário 3',
-        },
-*/
+        /*  {
+              id: '1',
+              image: require('../../../src/assets/img/img1.png'),
+              title: 'Sapatênis',
+              valor: 'R$200,00',
+              messageTime: '4 mins atrás',
+              messageText: 'João - dono do produto',
+              imagemUserDono: require('../../assets/imgUserDono/logoTI.png'),
+              messageUser: 'Usuário 1',
+          },
+          {
+              id: '2',
+              image: require('../../../src/assets/img/img2.png'),
+              title: 'Blusa branca',
+              valor: 'R$0,00',
+              messageTime: '2 horas atrás',
+              messageText: 'Maria - dono do produto', // {userDono: data.user_id} porém tem que ser o "nomeCompleto"
+              imagemUserDono: require('../../assets/imgUserDono/logoFaccatColor.png'),
+              messageUser: 'Usuário 2',
+          },
+          {
+              id: '3',
+              image: require('../../../src/assets/img/img3.png'),
+              title: 'Tênis branco',
+              valor: 'R$0,00',
+              messageTime: '2 dias atrás',
+              messageText: 'Maria - dono do produto', // {userDono: data.user_id} porém tem que ser o "nomeCompleto"
+              imagemUserDono: require('../../assets/imgUserDono/logoFACCAT.png'),
+              //  imagemUserDono: source={uri: 'https://www2.faccat.br/portal/sites/default/files/ckeditorfiles/Logo%20FACCAT.png'},
+              messageUser: 'Usuário 3',
+          },
+  */
     ];
 
 
@@ -176,34 +176,37 @@ export default function ItemListaChat({ navigation }) {
 
             <View>
                 <TouchableOpacity onPress={() => navigation.navigate('ChatMensagens',
-                  //{ userDono: item.messageText })}>
-                  { userDono: data.userDono,
-                      image: data.imagem, //'Imagem do produto'
-                      name: data.titulo, //'Titulo do produto', 
-                      valor: data.valor, //'Valor do produto',
-                  })}>
+                    //{ userDono: item.messageText })}>
+                    {
+                        userDono: data.userDono,
+                        image: data.imagem, //'Imagem do produto'
+                        name: data.titulo, //'Titulo do produto', 
+                        valor: data.valor, //'Valor do produto',
+                    })}>
 
                     <ListItem style={styles.card} bottomDivider>
                         {/*    <Avatar source={{ uri: l.avatar_url }} /> */}
                         {/* Imagem produto - idimgproduto */}
                         <Avatar style={styles.prodImg} source={{ uri: data.image }} />
                         {/*<Avatar rounded source={{ uri: l.avatar_url }} /> */}
-                         {/* <Avatar style={styles.userDonoImg} source={data.imagemUserDono} /> */}
+                        {/* <Avatar style={styles.userDonoImg} source={data.imagemUserDono} /> */}
                         {/* Imagem user dono do produto - idimgproprietario*/}
-                         <Avatar style={styles.userDonoImg} source={data.imageUserDono} />
+                        <Avatar style={styles.userDonoImg} source={data.imageUserDono} />
                         <ListItem.Content>
-                        {/*<ListItem.Title style={styles.userNameEvalor}>{item.title}</ListItem.Title>*/}
+                            {/*<ListItem.Title style={styles.userNameEvalor}>{item.title}</ListItem.Title>*/}
                             <ListItem.Title style={styles.userNameEvalor}>{data.titulo}</ListItem.Title>
                             <ListItem.Title style={styles.userNameEvalor}>{data.valor}</ListItem.Title>
                             {/* Nome user dono do produto - idproprietario */}
                             <ListItem.Subtitle>{data.userDono}</ListItem.Subtitle>
-                            <ListItem.Subtitle style={styles.styleMessageUserInteressedado}>{data.messageUser}</ListItem.Subtitle> 
-    
+                            <ListItem.Subtitle style={styles.styleMessageUserInteressedado}>{data.messageUser}</ListItem.Subtitle>
+
                         </ListItem.Content>
 
                         <ListItem.Content right>
                             {/* 20:10 */}
-                            <ListItem.Subtitle right>{data.messageTime.toDate().toDateString()}</ListItem.Subtitle>
+                            <ListItem.Subtitle right style={styles.styleDataString}>{data.messageTime.toDate().toLocaleDateString("pt-Br")
+                            //  .toDateString()
+                            }</ListItem.Subtitle>
                         </ListItem.Content>
 
                     </ListItem>
@@ -217,7 +220,7 @@ export default function ItemListaChat({ navigation }) {
 
 
     // Falta fazer
-  
+
     {/*
 => Add "Sala 1(item_enviado)" Chat (através da página "Detalhes") com:
     * imagem do produto,
@@ -287,7 +290,7 @@ export default function ItemListaChat({ navigation }) {
                 //data={Chat}
                 //keyExtractor={item => item.id.toString()} //Mudar de item.id p/ item.key ( "key" do firebase), "toString()" transforma em String
                 data={chatNovoItem}
-                keyExtractor={item => String(item.key)} 
+                keyExtractor={item => String(item.key)}
                 //[OK] falta modificar para "data"
                 //renderItem={({ item }) => <RenderItemListChat item={item} />}
                 renderItem={({ item }) => <RenderItemListChat data={item} />}

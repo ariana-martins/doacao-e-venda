@@ -430,6 +430,7 @@ export default function ChatMensagens() {
                 alwaysShowSend //ativa o botão enviar, deixa aparecendo fixo na tela
                 renderSend={renderSend} //renderSend prop, e entao chamarei a funcao renderSend (antes do igual), configura botao "Enviars"
                 placeholder="Escreva sua mensagem aqui..."
+                //showUserAvatar //mostrar o avatar do usuário atual
             />
         </View>
     );

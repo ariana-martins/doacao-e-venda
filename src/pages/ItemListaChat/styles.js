@@ -108,6 +108,13 @@ export const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontFamily: 'roboto',
     },
+    styleDataString: {
+        fontSize: 13,
+        color: '#000000',
+        fontFamily: 'roboto',
+        //marginRight: 10,
+        //paddingRight: 10,
+    },
     /*
     userValor: {
         fontSize: 14,

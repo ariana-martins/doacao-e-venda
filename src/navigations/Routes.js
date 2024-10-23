@@ -6,7 +6,7 @@ import auth from '@react-native-firebase/auth';
 
 import AuthStack from '../components/componentesGerais/Auth/AuthStack';
 import HomeStack from './HomeStack';
-import { AuthContext } from '../components/componentesGerais/Auth/AuthProvider';
+import { AuthContext } from '../components/componentesGerais/Auth/AuthProvider'; //Deixar, pois está vinculado em todas as paginas, se tirar vai dar erro na hora de cadastrar user...
 import Loading from '../components/componentesGerais/Loading/Loading';
 
 //import AuthStack from './AuthStack';
@@ -17,7 +17,7 @@ import Loading from '../components/componentesGerais/Loading/Loading';
 
 export default function Routes() {
     const [initializing, setInitializing] = useState(true);        
-    const { user, setUser } = useContext(AuthContext);
+    const { user, setUser } = useContext(AuthContext); //Deixar, pois está vinculado em todas as paginas, se tirar vai dar erro na hora de cadastrar user...
     const [loading, setLoading] = useState(true);
     
 

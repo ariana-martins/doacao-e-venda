@@ -31,20 +31,20 @@ export const AuthProvider = ({ children }) => {
         value={{
             user,
             setUser,
-            // login: async (email, password) => {
-            //     try {
-            //         await auth().signInWithEmailAndPassword(email, password);
-            //     } catch (error) {
-            //         console.log(error);
-            //     }
-            // },
-            // register: async (email, password) => {
-            //     try {
-            //         await auth().createUserWithEmailAndPassword(email, password);
-            //     } catch (error) {
-            //         console.log(error);
-            //     }
-            // },
+            login: async (email, password) => {
+                try {
+                    await auth().signInWithEmailAndPassword(email, password);
+                } catch (error) {
+                    console.log(error);
+                }
+            },
+            register: async (email, password) => {
+                try {
+                    await auth().createUserWithEmailAndPassword(email, password);
+                } catch (error) {
+                    console.log(error);
+                }
+            },
             logout: async () => {
                 try {
                     await auth().signOut();

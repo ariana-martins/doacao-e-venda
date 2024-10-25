@@ -28,12 +28,10 @@ export default function Detalhes({ userDono, item }) {
     const [registrarInteresse, setRegistrarInteresse] = useState(true); //Registrar Interesse tem que começar com "false" que será "Interesse cancelado/desmarcado"
 
 
-
-
-
     const [user, setUser] = useState();
-    const { uid } = auth().currentUser;
+    const { uid } = auth().currentUser; //Obter o UID do usuário logado
 
+    //Função para buscar os dados do usuário atual no Firestore
     const getUser = async () => {
         try {
             const documentSnapshot = await firestore()
@@ -43,14 +41,15 @@ export default function Detalhes({ userDono, item }) {
 
             const userData = documentSnapshot.data();
             setUser(userData);
-        } catch {
+        } catch (error) {
+            console.log('Erro ao buscar os dados do usuário', error);
             //do whatever
         }
     };
 
     // Get user on mount
     useEffect(() => {
-        getUser();
+        getUser(); 
     }, []);
 
 
@@ -108,7 +107,9 @@ export default function Detalhes({ userDono, item }) {
     {/* {registrarInteresse ? true : false}  */ }
 
     
-    //=====================================================
+//=====================================================
+// Dados para a nova sala de chat
+
     const chatNovoItem = 
         {
             id: '1',

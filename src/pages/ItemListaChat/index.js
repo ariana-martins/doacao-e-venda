@@ -132,7 +132,7 @@ export default function ItemListaChat({ navigation }) {
 
 
     //array "Chat"
-    const Chat = [
+    // const Chat = [
         /*  {
               id: '1',
               image: require('../../../src/assets/img/img1.png'),
@@ -165,7 +165,7 @@ export default function ItemListaChat({ navigation }) {
               messageUser: 'Usuário 3',
           },
   */
-    ];
+    // ];
 
 
     //[OK] falta modificar para "data"
@@ -296,7 +296,7 @@ export default function ItemListaChat({ navigation }) {
                 renderItem={({ item }) => <RenderItemListChat data={item} />}
             />
 
-            <FlatList
+            {/* <FlatList
                 showsHorizontalScrollIndicator={false}
                 data={data}
                 keyExtractor={item => String(item.key)} //Mudar de item.id p/ item.key ( "key" do firebase)
@@ -312,10 +312,10 @@ export default function ItemListaChat({ navigation }) {
                         </View>
                     )
                 }}
-            />
+            /> */}
 
 
-            <View style={styles.containerAddLista}>
+            {/* <View style={styles.containerAddLista}> */}
                 {/*
                 <FlatList
                     showsVerticalScrollIndicator={false}
@@ -353,14 +353,14 @@ export default function ItemListaChat({ navigation }) {
                     }}
                 />
                 */}
-                <TouchableOpacity
+                {/* <TouchableOpacity
                     style={styles.buttonNovaTarefaAddLista}
                     onPress={() => navigation.navigate("ItemListaChatNovaTarefa")}
                 >
                     <Text style={styles.iconButtonAddLista}>+</Text>
                 </TouchableOpacity>
 
-            </View>
+            </View> */}
 
             {/*
                     ==>>> Dialog

@@ -209,7 +209,8 @@ import { GiftedChat, Send } from 'react-native-gifted-chat';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import auth from '@react-native-firebase/auth';
-import firestore, { firebase } from '@react-native-firebase/firestore';
+//import firestore, { firebase } from '@react-native-firebase/firestore';
+import firestore from '@react-native-firebase/firestore';
 import { useRoute } from '@react-navigation/native';
 
 
@@ -245,7 +246,8 @@ export default function ChatMensagens() {
 
             const userData = documentSnapshot.data();
             setUser(userData);
-        } catch {
+        } catch (error) {
+            console.log("Erro ao buscar dados do usuário", error);
             //do whatever
         }
     };
@@ -327,7 +329,8 @@ export default function ChatMensagens() {
 
 
 
-    const collectionRef = firebase.firestore().collection('chatsN').orderBy('createdAt', 'desc')
+    //const collectionRef = firebase.firestore().collection('chatsN').orderBy('createdAt', 'desc')
+    const collectionRef = firestore().collection('chatsN').orderBy('createdAt', 'desc')
     useEffect(() => {
         const unsubscribe = collectionRef.onSnapshot(querySnapshot => {
 
@@ -351,19 +354,35 @@ export default function ChatMensagens() {
     //     )
     // }
 
+
+    //Função para enviar mensagens
     const onSend = useCallback((messages = []) => {
         setMessages(previousMessages =>
             GiftedChat.append(previousMessages, messages)
-        );
+            );
         const { _id, createdAt, text, user } = messages[0]
-        firestore()
-            .collection('chatsN')
-            .add({
-                _id,
-                createdAt,
-                text,
-                user,
-            })
+
+        // Adicionando o console.log para depuração
+      //  console.log('Mensagem enviada:', { _id, createdAt, text, user });
+
+      //  if (text && user) {
+            firestore()
+                .collection('chatsN')
+                .add({
+                    _id,
+                    createdAt, //firestore.FieldValue.serverTimestamp(),
+                    text,
+                    user,
+                })
+                // .then(() => {
+                //     console.log('Mensagem enviada com sucesso');
+                // })
+                // .catch(error => {
+                //     console.error('Erro ao enviar mensagem:', error);
+                // });
+     //   } else {
+      //      console.warn('Mensagem ou usuário inválido', { text, user });
+      //  }
 
     }, []);
 

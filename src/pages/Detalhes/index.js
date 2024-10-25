@@ -60,27 +60,27 @@ export default function Detalhes({ userDono, item }) {
     //Título do Vídeo: Aula 4 | Integrando Axios com React Native no seu app
     //Canal do Youtube: Gabriel Rangel - Fala, Coders!
 
-    const addDataInteresse = async () => {
-        const result = await addInteresse(item) 
-        console.log({ result })
-    }
+//     const addDataInteresse = async () => {
+//         const result = await addInteresse(item) 
+//         console.log({ result })
+//     }
 
-    const removeDataInteresse = async () => {
-        const result = await removeInteresse(item) 
-        console.log({ result })
-    }
-    //========================================================================================
+//     const removeDataInteresse = async () => {
+//         const result = await removeInteresse(item) 
+//         console.log({ result })
+//     }
+//     //========================================================================================
 
 
-   // {registrarInteresse ? console.log('Acrescentou Interesse') : console.log('Cancelou Interesse') }
+//    // {registrarInteresse ? console.log('Acrescentou Interesse') : console.log('Cancelou Interesse') }
 
-   const Interesse = () => {
-   if (registrarInteresse === true) {
-        return console.log('Acrescentou Interesse')
-    }
-       else if (registrarInteresse === false)
-       return  console.log('Cancelou Interesse')
-    }
+//    const Interesse = () => {
+//    if (registrarInteresse === true) {
+//         return console.log('Acrescentou Interesse')
+//     }
+//        else if (registrarInteresse === false)
+//        return  console.log('Cancelou Interesse')
+//     }
     //====================================================
     //Funcao selecionar e desmarcar "Registrar Interesse" : "Cancelar Interesse"
     
@@ -163,21 +163,21 @@ export default function Detalhes({ userDono, item }) {
     // };
 
 
-    const [roomName, setRoomName] = useState('');
+    // const [roomName, setRoomName] = useState('');
 
 
-    const handleButtonPress = () => {
-        if (roomName.length > 0) {
-          firestore()
-            .collection('THREADS')
-            .add({
-                name: roomName
-            })
-            .then(() => {
-                navigation.navigate('ItemListaChat');
-            });
-        }
-      }
+    // const handleButtonPress = () => {
+    //     if (roomName.length > 0) {
+    //       firestore()
+    //         .collection('THREADS')
+    //         .add({
+    //             name: roomName
+    //         })
+    //         .then(() => {
+    //             navigation.navigate('ItemListaChat');
+    //         });
+    //     }
+    //   }
 
 
 

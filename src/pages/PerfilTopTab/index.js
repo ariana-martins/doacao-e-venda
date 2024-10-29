@@ -76,7 +76,7 @@ export default function PerfilTopTab() {
         <View style={styles.container}>
 
             <View style={{ alignItems: 'center', marginTop: 20 }}>
-                <EscolherImagemPerfil />
+                {/* <EscolherImagemPerfil /> */}
 
                 <View style={{ marginTop: 20 }} >
                     <View style={{ flexDirection: "row", fontWeight: 'bold' }}>

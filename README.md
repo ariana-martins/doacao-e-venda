@@ -30,7 +30,7 @@
     <img width="140" src="src/assets/telasAppDesenvolvido/DetalhesDoProdutoParte4.png"> 
 </p>
 
-Login> Chats
+> Chats
 <p>
     <img width="140" src="src/assets/telasAppDesenvolvido/Chats.png">
     <img width="137" src="src/assets/telasAppDesenvolvido/ChatTirandoDuvida.png">
